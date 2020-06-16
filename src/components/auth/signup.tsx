@@ -16,20 +16,23 @@ function App() {
 
   const onFinish = async (values: any) => {
     const api = new AuthService();
-
     const { username, email, password } = values;
+    const data = {username, email, password};
+    const res = await api.signup(data);
 
-    const data = JSON.stringify({username, email, password});
-
-    const res = await api.login(data);
-    const user = await res.json();
-
-    window.location.replace("http://localhost:3000");
-
+    if(res.status === 200) {
+        const user = await res.json();
+        localStorage.setItem('userID', user.id)
+        window.location.replace("http://localhost:3000");
+    } else {
+        const err = await res.json();
+        setDisplayError(err.message)
+    }
   };
 
   return (
       <div>
+          {displayError}
         <Form
             form={form}
             name="register"

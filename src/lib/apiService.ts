@@ -82,10 +82,9 @@ class ApiService{
         );
       }
 
-      public async getUser() {
-        // get user id from passport req.user object
+      public async getUser(id: string) {
         return await HttpClient.get(
-          `${this.apiEndpoint}/user`,
+          `${this.apiEndpoint}/user/${id}`,
           this.headers,
         );
       }     

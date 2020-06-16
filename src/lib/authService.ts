@@ -23,7 +23,7 @@ class AuthService {
         )
         return HttpClient.makeRequest(request)
     }
-
+    
     signup(credentials: any) {
         const request = new Request(`
             ${this.apiEndpoint}/signup`, 

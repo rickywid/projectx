@@ -6,15 +6,21 @@ import NavBar from './components/navbar';
 import Footer from './components/footer';
 import './App.css';
 
+interface IUser {
+  isAuthenticated: boolean;
+  username: string;
+}
+
 function App() {
 
-  const [user, setUser] = useState<{isAuthenticated: boolean}>({isAuthenticated: false})
+  const [user, setUser] = useState<IUser>({isAuthenticated: false, username: ''})
 
   useEffect(() => {
     const api = new ApiService();
+    const userID = localStorage.getItem('userID') || 0;
     
     const fetchData = async () => {
-        const res = await api.getUser()
+        const res = await api.getUser(userID as string)
         const json = await res.json();
         setUser(json.data);
     }
@@ -29,6 +35,7 @@ function App() {
         signup="signup"
         login="login"
         upload="upload"
+        username={user.username}
         isAuthenticated={user.isAuthenticated}
       />
       <Layout>
