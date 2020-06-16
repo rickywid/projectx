@@ -1,0 +1,51 @@
+.list-wrapper {
+    display: flex;
+    justify-content: space-between; 
+    flex-wrap: wrap;
+}
+
+.project-item {
+    flex-basis: 32%;
+    list-style: none;
+
+    .project-card {
+        display: flex;
+        background-size: cover;
+        height: 200px;        
+
+        .project-detail-wrapper {
+            display: flex;
+            justify-content: space-between;
+            flex: 1;
+            background: linear-gradient(0deg, #9b9494 0%, rgba(0, 212, 255, 0) 36%);
+            color: white;
+            padding: 10px;
+            position: relative;
+
+            .ant-tag {
+                align-self: flex-start;
+                position: absolute;
+                right: 0;
+            }
+
+            h2 {
+                color: white;
+                font-weight: bold;
+                margin: 0;
+            }
+
+            .project-title-wrapper {
+                align-self: end;
+            }
+        }
+    }
+
+    .project-icons {
+        display: flex;
+        justify-content: space-between;
+
+        .project-comments {
+            margin-right: 15px;
+        }
+    }
+}
