@@ -32,7 +32,7 @@ export class HttpClient {
 
     public static async delete(endpoint: string, headers={}, data: FormData): Promise<Response> {
         const request = new Request(endpoint, {
-            body: data,
+            body: formSerializer(data),
             headers,
             method: 'DELETE',
             mode: 'cors'

@@ -67,7 +67,7 @@ class ApiService{
       public async likeProject(id: string, like: FormData) {
         // this.headers['cookie'] = this.cookie;
         return await HttpClient.post(
-           `${this.apiEndpoint}/like/project/${id}`,
+           `${this.apiEndpoint}/project/like/${id}`,
           this.headers,
           like
         );
@@ -76,7 +76,7 @@ class ApiService{
       public async unlikeProject(id: string, like: FormData) {
         // this.headers['cookie'] = this.cookie;
         return await HttpClient.delete(
-           `${this.apiEndpoint}/like/project/${id}`,
+           `${this.apiEndpoint}/project/unlike/${id}`,
           this.headers,
           like
         );
