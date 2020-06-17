@@ -11,42 +11,30 @@ class AuthService {
         'Content-Type': 'application/json; charset=utf-8'
     }
 
-    login(credentials: any) {
-        const request = new Request(`
-            ${this.apiEndpoint}/login`, 
-            { 
-                headers: this.headers,
-                method: 'POST',
-                body: JSON.stringify(credentials),
-                credentials: 'include'
-            }
-        )
-        return HttpClient.makeRequest(request)
-    }
-    
-    signup(credentials: any) {
-        const request = new Request(`
-            ${this.apiEndpoint}/signup`, 
-            { 
-                headers: this.headers,
-                method: 'POST',
-                body: JSON.stringify(credentials)
-            }
-        )
-        return HttpClient.makeRequest(request)
-    }
 
-    signout() {
-        const request = new Request(`
-            ${this.apiEndpoint}/signout`, 
-            { 
-                headers: this.headers,
-                method: 'POST',
-                body: JSON.stringify({})
-            }
-        )
-        return HttpClient.makeRequest(request)
-    }
+    public async login(credentials: FormData) {
+        return await HttpClient.post(
+          `${this.apiEndpoint}/login`,
+          this.headers,
+          credentials
+        );
+      }
+
+      public async signup(credentials: FormData) {
+        return await HttpClient.post(
+          `${this.apiEndpoint}/signup`,
+          this.headers,
+          credentials
+        );
+      }
+
+      public async signout(credentials: FormData) {
+        return await HttpClient.post(
+          `${this.apiEndpoint}/signout`,
+          this.headers,
+          credentials
+        );
+      }      
 }
 
 export default AuthService;

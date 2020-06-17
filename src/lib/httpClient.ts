@@ -1,4 +1,4 @@
-// import FormSerialize from '../lib/formSerialize';
+import formSerializer from './formSerializer';
 
 export class HttpClient {
     public static async makeRequest(request: Request): Promise<Response> {
@@ -20,7 +20,7 @@ export class HttpClient {
 
     public static async post(endpoint: string, headers={}, data: FormData): Promise<Response> {
         const request = new Request(endpoint, {
-            body: data,
+            body: formSerializer(data),
             headers,
             method: 'POST',
             mode: 'cors',

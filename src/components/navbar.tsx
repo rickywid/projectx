@@ -3,7 +3,6 @@ import { Layout, Menu } from 'antd';
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import AuthService from '../lib/authService';
-import history from '../lib/history';
 const { Sider } = Layout;
 
 interface Props {
@@ -21,7 +20,8 @@ const NavBar = ({
   const api = new AuthService();
 
   const onSignout = async () => {
-    await api.signout();
+    await api.signout(new FormData());
+    localStorage.removeItem('userID');
     window.location.replace("http://localhost:3000");    
   }
 
@@ -36,7 +36,7 @@ const NavBar = ({
     </Menu.Item>
     <Menu.Item key="4">
       <UserOutlined />
-      <Link to={`/project/${upload}`}>
+      <Link to={`/${upload}`}>
         <span>{upload}</span>
       </Link>
     </Menu.Item>

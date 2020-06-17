@@ -6,7 +6,7 @@ import {
     Button,
     Checkbox, 
   } from 'antd';
-import { UserOutlined, LockOutlined, CodeSandboxCircleFilled } from '@ant-design/icons';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import AuthService from '../../lib/authService';
 
 
@@ -22,14 +22,22 @@ function App() {
 
   const onFinish = async (values:IFormValues) => {
     const api = new AuthService();
+    const form = new FormData();
     const { username, password }: IFormValues = values;
-    
-    const data = { username, password };
 
-    const res = await api.login(data);
-    await res.json();
+    form.append('username', username);
+    form.append('password', password);
+
+    const res = await api.login(form);
+
+    if(res.status === 200) {
+      const user = await res.json();
+      localStorage.setItem('userID', user.id);
+      window.location.replace('http://localhost:3000/');
+    }
     
-    window.location.replace('http://localhost:3000/')
+    setError(true);
+
   };
 
   return (
@@ -45,6 +53,7 @@ function App() {
             onFinish={onFinish as any}
           >
             <Form.Item
+              label="username"
               name="username"
               rules={[
                 {
@@ -56,6 +65,7 @@ function App() {
               <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
             </Form.Item>
             <Form.Item
+              label="password"
               name="password"
               rules={[
                 {

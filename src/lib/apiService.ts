@@ -24,7 +24,7 @@ class ApiService{
       public async createProject(project: FormData) {
         // this.headers['cookie'] = this.cookie;
         return await HttpClient.post(
-          `${this.apiEndpoint}/projects`,
+          `${this.apiEndpoint}/project/new`,
           this.headers,
           project
         );

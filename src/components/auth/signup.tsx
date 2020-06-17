@@ -16,9 +16,14 @@ function App() {
 
   const onFinish = async (values: any) => {
     const api = new AuthService();
+    const form = new FormData();
     const { username, email, password } = values;
-    const data = {username, email, password};
-    const res = await api.signup(data);
+
+    form.append('username', username);
+    form.append('password', password);
+    form.append('email', email);
+    
+    const res = await api.signup(form);
 
     if(res.status === 200) {
         const user = await res.json();
