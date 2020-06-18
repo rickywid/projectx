@@ -1,0 +1,66 @@
+@import './variables.scss';
+
+.login-wrapper {
+	min-height: calc(100vh - 70px);
+	display: flex;
+
+    .login-inner {
+        width: 100%;
+        margin: auto;
+        
+        small {
+            margin-top: 10px;
+            display: block;
+            text-align: center;
+        }
+
+        .login-form-button {
+            width: 100%;
+        }
+
+        .github-login-btn {
+            width: 100%;
+            background: #868ca0;
+            border: none;
+        
+            &:hover {
+                background: #666;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+@media only screen and (min-width: $medium) {
+    .login-wrapper {
+        .login-inner {
+            width: 400px;
+            text-align: initial;
+            
+            .helper-link {
+                margin-top: 10px;
+                display: block;
+                text-align: initial;
+            }
+        
+            .login-form-button {
+                width: 100px;
+                float: right;
+            }  
+
+            .github-login-btn {
+                width: 100%;
+                background: #868ca0;
+                border: none;
+            
+                &:hover {
+                    background: #666;
+                }
+            }  
+        }
+    }
+}

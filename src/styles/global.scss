@@ -1,6 +1,12 @@
 .ant-layout {
-    background: white;
+    background: #f7faff !important;
 }
+
 .ant-layout-content {
-    background: white;
+    padding: 0 20px;
+}
+
+.error-msg {
+    color: red;
+    font-weight: bold;
 }
