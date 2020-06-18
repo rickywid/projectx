@@ -5,6 +5,7 @@ import { CodeOutlined, HeartFilled, DesktopOutlined, TagFilled, CalendarFilled, 
 import { Form, Input, Button, Divider } from 'antd';
 import moment from 'moment';
 import history from '../lib/history';
+import '../styles/project.scss'
 
 const { TextArea } = Input;
 
@@ -99,7 +100,7 @@ const Project = () => {
         form.append('user_id', userID as string);
 
         const res = await api.createComment(form);
-
+        
         if(res.status === 200) {
           // do somethings
           setC([...c, {comment: comment, username: userID, created_on: comment.created_on}])
@@ -114,7 +115,7 @@ const Project = () => {
                     <div className="project-view-title">
                         <div className="project-view-title-info">
                             <h2>{project.name}</h2>
-                            <p>by <Link to={`/user/${project.username}`}><a>{project.username}</a></Link></p>
+                            <p>by <Link className="project-owner" to={`/user/${project.username}`}>{project.username}</Link></p>
                         </div>
                         <div className="button-wrap">
                             {isLiked ? <Button onClick={() => handleLike()} icon={<HeartFilled />}>Liked</Button> : <Button onClick={() => handleLike(true)} icon={<HeartFilled />}>Like</Button>}

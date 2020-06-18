@@ -33,17 +33,12 @@ const NavBar = ({
         <span>{username}</span>
       </Link>
     </Menu.Item>
-    <Menu.Item key="4">
+    <Menu.Item key="2">
       <Link to={`/${upload}`}>
         <span>{upload}</span>
       </Link>
     </Menu.Item>
-    <Menu.Item key="5">
-      <Link to={`/users`}>
-        <span>users</span>
-      </Link>
-    </Menu.Item>
-    <Menu.Item key="6">
+    <Menu.Item key="3">
       <button className="btn-signout" onClick={onSignout}>signout</button>
     </Menu.Item>
   </Menu>  
@@ -51,16 +46,18 @@ const NavBar = ({
   
   const unAuthMenu = () => (
     <Menu theme="light" mode="inline">
-      <Menu.Item key="2">
+      <Menu.Item key="4">
         <Link to={`/${signup}`}>
-          <span>{signup}</span>
+          <span>Sign Up</span>
         </Link>
       </Menu.Item>
-      <Menu.Item key="3">
+      <Menu.Item key="5">
         <Link to={`/${login}`}>
-          <span>{login}</span>
+          <span>Log In</span>
         </Link>
       </Menu.Item>
+      <Menu.Item key="6">
+    </Menu.Item>
     </Menu>  
   )
 

@@ -1,0 +1,124 @@
+@import './variables.scss';
+
+.project-view {
+    max-width: 850px;
+    margin: 0 auto;
+    background: white;
+    padding: 50px;
+
+    img.project-view-screenshot {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    ul {
+        padding: 0;
+
+        li {
+            list-style: none;
+
+            svg {
+                margin-right: 15px;
+            }
+        }
+    }
+
+    .project-view-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .project-owner {
+            color: $link;
+            font-weight: bold;
+        }
+
+        .button-wrap {
+            button:first-child {
+                margin-right: 15px;
+            }
+        }
+    }
+
+    .project-view-content {
+        .project-view-right-col {
+            button {
+                width: 100%;
+            }
+
+            button.website {
+                margin-bottom: 15px;
+            }
+
+            button.repo {
+                margin-bottom: 0;
+            }
+
+            .project-view-tags {
+                display: flex;
+                svg {
+                    margin-right: 15px;
+                }
+
+                ul {
+                    
+                    li {
+                        display: inline-block;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+        .project-view-left-col {
+            flex: 2;
+            margin-right: 50px;
+
+            .project-view-comments {
+                .project-view-comment {
+                    .project-view-comment-top-wrapper {
+
+                        img {
+                            margin-right: 11px;
+                            width: 30px;
+                            border-radius: 50%;
+                        }
+
+                        .project-view-comment-user {
+                            font-weight: bold;
+                        }
+
+                        display: flex;
+                        align-items: center;
+
+                    }
+
+                    .project-view-comment-body {
+                        margin-left: 40px;
+                        p {
+                            margin: 0;
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .project-view-right-col {
+            flex: 1;
+        }
+    }
+}
+
+
+
+@media only screen and (min-width: $medium) {
+    .project-view-content {
+        display: flex;
+    }    
+}

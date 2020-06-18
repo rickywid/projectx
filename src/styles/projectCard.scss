@@ -1,17 +1,21 @@
+@import './variables.scss';
+
 .list-wrapper {
     display: flex;
     justify-content: space-between; 
     flex-wrap: wrap;
-}
+    padding: 0;
+}   
 
 .project-item {
-    flex-basis: 32%;
+    flex-basis: 100%;
     list-style: none;
+    margin-bottom: 20px;
 
     .project-card {
         display: flex;
         background-size: cover;
-        height: 200px;        
+        height: 300px;        
 
         .project-detail-wrapper {
             display: flex;
@@ -40,6 +44,11 @@
         }
     }
 
+    .project-owner {
+        color: black;
+        font-size: 16px;
+    }
+
     .project-icons {
         display: flex;
         justify-content: space-between;
@@ -47,5 +56,27 @@
         .project-comments {
             margin-right: 15px;
         }
+    }
+}
+
+
+
+
+
+@media only screen and (min-width: $medium) {
+    .project-item {
+        flex-basis: 48%;
+    }
+}
+
+@media only screen and (min-width: $large) {
+    .project-item {
+        flex-basis: 31%;
+    }
+}
+
+@media only screen and (min-width: $xlarge) {
+    .project-item {
+        flex-basis: 24%;
     }
 }

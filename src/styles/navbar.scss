@@ -5,6 +5,7 @@
         background: none;
         border: none;
         padding: 0;
+        font-weight: 300;
     }
 
     .ant-menu-item-selected {
@@ -15,10 +16,13 @@
 
     .ant-menu-item .user-nav-link { 
         font-weight: bold;
-        color: #00d2dc;
+        color: $link;
     }
 }
 
+.ant-layout-sider .ant-menu .ant-menu-item {
+    font-weight: 300;
+}
 
 .ant-menu-inline .ant-menu-item::after {
     border-right: none;

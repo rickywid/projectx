@@ -1,8 +1,8 @@
 @import './variables.scss';
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
 
 body {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lato', sans-serif;
 }
   
 .ant-layout {
@@ -10,7 +10,7 @@ body {
 }
 
 .ant-layout-content {
-    padding: 0 20px;
+    padding: 20px;
 }
 
 .ant-layout-sider {
@@ -37,4 +37,10 @@ body {
 .error-msg {
     color: red;
     font-weight: bold;
+}
+
+@media only screen and (min-width: $medium) {
+    .ant-layout-content {
+        padding: 75px;
+    }
 }

@@ -25,7 +25,7 @@ const Root: React.FC = () => {
       };
     
     return (
-        <Layout>
+        
         <div className="root">
           <SearchBar />
           <Form
@@ -44,7 +44,7 @@ const Root: React.FC = () => {
           </Form>
           <ProjectsCard projects={projects}/>
         </div>
-    </Layout>
+    
     )
 };
 
