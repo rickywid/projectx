@@ -15,7 +15,7 @@ const ProjectCard = ({ projects }: IProps) => {
       <li key={index} className="project-item">
         <Link to={`/project/${project.id}`}>
 
-          <div className="project-card" key={index} style={{ backgroundImage: `url(${project.images[0]}`, backgroundSize: 'cover'}}>
+          <div className="project-card" key={index} style={{ backgroundImage: `url(${project.images[0]}`, backgroundPosition: 'center', backgroundSize: 'cover'}}>
             <div className="project-detail-wrapper">
               <div className="project-title-wrapper">
                 <h2>{project.name}</h2>

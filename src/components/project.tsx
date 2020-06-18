@@ -50,7 +50,7 @@ const Project = () => {
             if (project.status === 200) {
                 const data = await project.json();
                 const data2 = await user.json();
-                console.log(data2)
+                
                 setUser(data2.data);
                 setProject(data.project);
                 setC(data.comments);
@@ -73,7 +73,7 @@ const Project = () => {
     const api = new ApiService();
 
     const handleLike = async (like?: boolean) => {
-        // const user =  as string;
+        
         const id = window.location.pathname.split('/')[2];
         const form = new FormData();
         let data;

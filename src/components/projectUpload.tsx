@@ -12,6 +12,7 @@ import {
 import { PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import ApiService from '../lib/apiService';
 import history from '../lib/history';
+import placeholders from '../lib/placeholders';
 
 interface IFormLayoutChange {
     size: string;
@@ -119,7 +120,7 @@ const ProjectUpload = () => {
         const { name, description, tagline, url, collaboration } = values;
         const userID = localStorage.getItem('userID') as string;
         const form = new FormData();
-
+        console.log(fileListUpload)
         form.append('name', name);
         form.append('description', description);
         form.append('tagline', tagline);
@@ -127,7 +128,7 @@ const ProjectUpload = () => {
         form.append('technologies', technologiesSelect);
         form.append('tags', tagsSelect);
         form.append('collaboration', collaboration);
-        form.append('screenshots', fileListUpload);
+        form.append('screenshots', fileListUpload.length ? fileListUpload : JSON.stringify(placeholders()));
         form.append('user_id', userID);
         
         const res = await api.createProject(form);
