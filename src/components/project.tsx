@@ -30,7 +30,7 @@ interface IProjectPage {
 }
 
 interface IFields {
-    comment: string;
+    comment: {created_on: string};
 }
 
 const Project = () => {
@@ -92,18 +92,18 @@ const Project = () => {
 
     const onFinish = async (values: IFields) => {
 
-        // const { comment } = values;
-        // const form = new FormData();
-        // form.append('comment', comment);
-        // form.append('project_id', project.id);
-        // form.append('user_id', userID as string);
+        const { comment } = values;
+        const form = new FormData();
+        form.append('comment', JSON.stringify(comment));
+        form.append('project_id', project.id);
+        form.append('user_id', userID as string);
 
-        // const res = await api.createComment(form);
+        const res = await api.createComment(form);
 
-        // if(res.status === 200) {
-        //   // do somethings
-        //   setC([...c, {comment: comment, username: userID, created_on: comment.created_on}])
-        // }
+        if(res.status === 200) {
+          // do somethings
+          setC([...c, {comment: comment, username: userID, created_on: comment.created_on}])
+        }
     }
 
     return (
@@ -148,11 +148,11 @@ const Project = () => {
                                 : <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Please <Link to={`/login`}>Log In</Link> to write a comment</p>}
 
                             <div className="project-view-comments">
-
+                            <h3>{c.length} comments</h3>
                                 {c?.map((c: any) => (
                                     <div className="project-view-comment">
                                         <div className="project-view-comment-top-wrapper">
-                                            <img src="https://illlustrations.co/static/34b8b771e91097048a9494b382ec2fc2/118-macbook.png" alt={`${project.username}'s profile`} />
+                                            <img style={{width: '25px'}} src="https://illlustrations.co/static/34b8b771e91097048a9494b382ec2fc2/118-macbook.png" alt={`${project.username}'s profile`} />
                                             <span className="project-view-comment-user">{c.username}</span>
                                         </div>
                                         <div className="project-view-comment-body">

@@ -50,7 +50,7 @@ class ApiService{
       public async createComment(comment: FormData) {
         // this.headers['cookie'] = this.cookie;
         return await HttpClient.post(
-          `${this.apiEndpoint}/comment`,
+          `${this.apiEndpoint}/comment/new`,
           this.headers,
           comment
         );
