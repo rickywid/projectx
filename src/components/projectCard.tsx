@@ -26,9 +26,9 @@ const ProjectCard = ({ projects }: IProps) => {
 
         </Link>
         <div className="project-icons">
-          <Link className="project-owner" to={`/user/${project.username}`}>{project.username}</Link>
+          <Link className="project-owner" to={`/user/${project.username}`}><img style={{height: '20px', borderRadius: '100%'}} src={project.gh_avatar} alt="avatar"/> {project.username}</Link>
           <div>
-            <span className="project-comments"><CommentOutlined /> 20</span><span><HeartOutlined /> 20    </span>     
+            <span className="project-comments"><CommentOutlined /> {project.comment_count}</span><span><HeartOutlined /> {project.likes_count}    </span>     
           </div>
         </div>       
       </li>

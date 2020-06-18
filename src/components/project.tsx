@@ -100,7 +100,7 @@ const Project = () => {
 
         const { comment } = values;
         const form = new FormData();
-        form.append('comment', JSON.stringify(comment));
+        form.append('comment', comment.toString());
         form.append('project_id', project.id);
         form.append('user_id', user.id);
 
@@ -108,7 +108,7 @@ const Project = () => {
         
         if(res.status === 200) {
           // do somethings
-          setC([...c, {comment: comment, username: user.username, created_on: comment.created_on}])
+          setC([...c, {comment: comment, username: user.username, gh_avatar: user.gh_avatar, created_on: comment.created_on}])
         }
     }
 
@@ -116,11 +116,11 @@ const Project = () => {
         <div className="project-view">
 
             {isLoading ? <p>loading</p> :
-                <>
+                <>{console.log(project)}
                     <div className="project-view-title">
                         <div className="project-view-title-info">
                             <h2>{project.name}</h2>
-                            <p>by <Link className="project-owner" to={`/user/${project.username}`}>{project.username}</Link></p>
+                            <p>by <Link className="project-owner" to={`/user/${project.username}`}><img style={{height: '20px', borderRadius: '100%'}} src={project.gh_avatar} alt="avatar"/> {project.username}</Link></p>
                         </div>
                         <div className="button-wrap">
                             {isLiked ? <Button onClick={() => handleLike()} icon={<HeartFilled />}>Liked</Button> : <Button onClick={() => handleLike(true)} icon={<HeartFilled />}>Like</Button>}
@@ -158,7 +158,7 @@ const Project = () => {
                                 {c?.map((c: any) => (
                                     <div className="project-view-comment">
                                         <div className="project-view-comment-top-wrapper">
-                                            <img style={{width: '25px'}} src="https://illlustrations.co/static/34b8b771e91097048a9494b382ec2fc2/118-macbook.png" alt={`${project.username}'s profile`} />
+                                            <img style={{width: '25px'}} src={c.gh_avatar} alt={`${project.username}'s profile`} />
                                             <span className="project-view-comment-user">{c.username}</span>
                                         </div>
                                         <div className="project-view-comment-body">

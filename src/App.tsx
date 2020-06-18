@@ -41,7 +41,7 @@ function App() {
         signup="signup"
         login="login"
         upload="upload"
-        username={user.username}
+        user={user}
         isAuthenticated={user.isAuthenticated}
       />
       <Layout>

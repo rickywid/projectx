@@ -8,7 +8,7 @@ const { Sider } = Layout;
 
 interface Props {
   root: string;
-  username?: string;
+  user: {username: string};
   signup: string;
   login: string;
   upload: string;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const NavBar = ({
-  root, username, signup, login, upload, isAuthenticated
+  root, user, signup, login, upload, isAuthenticated
 }: Props) => {
   const api = new AuthService();
 
@@ -29,8 +29,10 @@ const NavBar = ({
   const authMenu = () => (
     <Menu theme="light" mode="inline">
     <Menu.Item key="1">
-      <Link className="user-nav-link" to={`/user/${username}`}>
-        <span>{username}</span>
+      <Link className="user-nav-link" to={`/user/${user.username}`}>
+        <span>
+          {user.username}
+        </span>
       </Link>
     </Menu.Item>
     <Menu.Item key="2">

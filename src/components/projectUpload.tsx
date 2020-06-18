@@ -12,7 +12,7 @@ import {
 import { PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import ApiService from '../lib/apiService';
 import history from '../lib/history';
-import placeholders from '../lib/placeholders';
+import Placeholder from '../lib/placeholders';
 
 interface IFormLayoutChange {
     size: string;
@@ -45,6 +45,7 @@ interface IFields {
 
 const ProjectUpload = () => {
     const api = new ApiService();
+    const placeholder = new Placeholder();
     const [componentSize, setComponentSize] = useState('medium');
     const [technologiesSelect, setTechnologiesSelect] = useState<any>([]);
     const [tagsSelect, setTagSelect] = useState<any>([]);
@@ -128,7 +129,7 @@ const ProjectUpload = () => {
         form.append('technologies', technologiesSelect);
         form.append('tags', tagsSelect);
         form.append('collaboration', collaboration);
-        form.append('screenshots', fileListUpload.length ? fileListUpload : JSON.stringify(placeholders()));
+        form.append('screenshots', fileListUpload.length ? fileListUpload : JSON.stringify(placeholder.project()));
         form.append('user_id', userID);
         
         const res = await api.createProject(form);

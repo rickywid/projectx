@@ -10,6 +10,7 @@ import {
 } from 'antd';
 import { QuestionCircleOutlined, GithubOutlined } from '@ant-design/icons';
 import AuthService from '../../lib/authService';
+import Placeholder from '../../lib/placeholders';
 import Logo from  '../../assets/monkey.png';
 
 function App() {
@@ -19,12 +20,14 @@ function App() {
 
     const onFinish = async (values: any) => {
         const api = new AuthService();
+        const placeholder = new Placeholder();
         const form = new FormData();
         const { username, email, password } = values;
 
         form.append('username', username);
         form.append('password', password);
         form.append('email', email);
+        form.append('profile_img', placeholder.user());
 
         const res = await api.signup(form);
 
