@@ -35,19 +35,23 @@ interface IFields {
 }
 
 const Project = () => {
-    const userID = localStorage.getItem('userID');
 
     useEffect(() => {
+        
         const api = new ApiService();
         const id = window.location.pathname.split('/')[2];
+        const userID = localStorage.getItem('userID');
 
         const fetch = async () => {
             setIsLoading(true);
             const project = await api.getProject(id);
+            const user = await api.getUser(userID as string);
 
             if (project.status === 200) {
                 const data = await project.json();
-                
+                const data2 = await user.json();
+                console.log(data2)
+                setUser(data2.data);
                 setProject(data.project);
                 setC(data.comments);
                 setLikeCount(data.likes.count);
@@ -60,6 +64,7 @@ const Project = () => {
 
     }, []);
 
+    const [user, setUser] = useState<any>({});
     const [project, setProject] = useState<any>({});
     const [c, setC] = useState<any>([]);
     const [isLiked, setisLiked] = useState<boolean>(false);
@@ -68,13 +73,13 @@ const Project = () => {
     const api = new ApiService();
 
     const handleLike = async (like?: boolean) => {
-        const user = userID as string;
+        // const user =  as string;
         const id = window.location.pathname.split('/')[2];
         const form = new FormData();
         let data;
 
         form.append('project_id', project.id);
-        form.append('user_id', user);
+        form.append('user_id', user.id);
 
         if(!user) {
             history.push('/login');
@@ -97,13 +102,13 @@ const Project = () => {
         const form = new FormData();
         form.append('comment', JSON.stringify(comment));
         form.append('project_id', project.id);
-        form.append('user_id', userID as string);
+        form.append('user_id', user.id);
 
         const res = await api.createComment(form);
         
         if(res.status === 200) {
           // do somethings
-          setC([...c, {comment: comment, username: userID, created_on: comment.created_on}])
+          setC([...c, {comment: comment, username: user.username, created_on: comment.created_on}])
         }
     }
 
@@ -130,7 +135,7 @@ const Project = () => {
                         <div className="project-view-left-col">
                             <p>{project.description}</p>
 
-                            {userID ?
+                            {user.isAuthenticated ?
                                 <>
                                     <Form
                                         layout="vertical"
