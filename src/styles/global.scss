@@ -1,9 +1,37 @@
+@import './variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+  
 .ant-layout {
-    background: #f7faff !important;
+    background:$bg;
 }
 
 .ant-layout-content {
     padding: 0 20px;
+}
+
+.ant-layout-sider {
+    background:$bg;
+
+    .logo {
+        padding: 24px;
+
+        img {
+            height: 70px;
+        }
+    }
+
+    .ant-menu {
+        background:$bg;
+        border-right: none;
+
+        .ant-menu-item {
+            font-size: 24px;
+        }
+    }
 }
 
 .error-msg {

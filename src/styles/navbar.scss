@@ -1,0 +1,25 @@
+@import './variables.scss';
+
+.ant-menu {
+    .btn-signout {
+        background: none;
+        border: none;
+        padding: 0;
+    }
+
+    .ant-menu-item-selected {
+        background-color: $bg !important;
+    }
+
+
+
+    .ant-menu-item .user-nav-link { 
+        font-weight: bold;
+        color: #00d2dc;
+    }
+}
+
+
+.ant-menu-inline .ant-menu-item::after {
+    border-right: none;
+}
