@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
-import { CodeOutlined, HeartFilled, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined } from '@ant-design/icons';
+import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined } from '@ant-design/icons';
 import { Form, Input, Button, Divider } from 'antd';
 import moment from 'moment';
 import history from '../lib/history';
@@ -37,7 +37,6 @@ interface IFields {
 const Project = () => {
 
     useEffect(() => {
-        
         const api = new ApiService();
         const id = window.location.pathname.split('/')[2];
         const userID = localStorage.getItem('userID');
@@ -92,18 +91,19 @@ const Project = () => {
             const res = await api.unlikeProject(id, form);
             data = await res.json();
         }
-        setisLiked(data.data.users.includes(parseInt(user)));
+
+        setisLiked(data.data.users.includes(parseInt(localStorage.getItem('userID') as string)));
         setLikeCount(data.data.count);
     }
 
-    const onFinish = async (values: IFields) => {
+    const submitComment = async (values: IFields) => {
 
         const { comment } = values;
         const form = new FormData();
         form.append('comment', comment.toString());
         form.append('project_id', project.id);
         form.append('user_id', user.id);
-
+        
         const res = await api.createComment(form);
         
         if(res.status === 200) {
@@ -116,14 +116,14 @@ const Project = () => {
         <div className="project-view">
 
             {isLoading ? <p>loading</p> :
-                <>{console.log(project)}
+                <>
                     <div className="project-view-title">
                         <div className="project-view-title-info">
                             <h2>{project.name}</h2>
                             <p>by <Link className="project-owner" to={`/user/${project.username}`}><img style={{height: '20px', borderRadius: '100%'}} src={project.gh_avatar} alt="avatar"/> {project.username}</Link></p>
                         </div>
                         <div className="button-wrap">
-                            {isLiked ? <Button onClick={() => handleLike()} icon={<HeartFilled />}>Liked</Button> : <Button onClick={() => handleLike(true)} icon={<HeartFilled />}>Like</Button>}
+                            {isLiked ? <Button onClick={() => handleLike()} icon={<HeartTwoTone twoToneColor="#eb2f96" />}>Liked</Button> : <Button onClick={() => handleLike(true)} icon={<HeartOutlined />}>Like</Button>}
 
                             <Button>Save</Button>
                         </div>
@@ -139,7 +139,7 @@ const Project = () => {
                                 <>
                                     <Form
                                         layout="vertical"
-                                        onFinish={onFinish as any}
+                                        onFinish={submitComment as any}
                                     >
                                         <Form.Item
                                             name="comment"
@@ -158,7 +158,7 @@ const Project = () => {
                                 {c?.map((c: any) => (
                                     <div className="project-view-comment">
                                         <div className="project-view-comment-top-wrapper">
-                                            <img style={{width: '25px'}} src={c.gh_avatar} alt={`${project.username}'s profile`} />
+                                            <img style={{width: '25px'}} src={c.gh_avatar} alt={`${c.username}'s profile`} />
                                             <span className="project-view-comment-user">{c.username}</span>
                                         </div>
                                         <div className="project-view-comment-body">
