@@ -94,7 +94,32 @@ class ApiService{
           `${this.apiEndpoint}/user/profile/${username}`,
           this.headers,
         );
-      }     
+      }    
+
+      
+      public async isProjectSaved(id: string) {
+        return await HttpClient.get(
+          `${this.apiEndpoint}/project/save/${id}`,
+          this.headers,
+        );
+      }    
+
+      public async saveProject(id: string, project: FormData) {
+        return await HttpClient.post(
+          `${this.apiEndpoint}/project/save/${id}`,
+          this.headers,
+          project
+        );
+      }    
+
+      public async unSaveProject(id: string, like: FormData) {
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.delete(
+           `${this.apiEndpoint}/project/unsave/${id}`,
+          this.headers,
+          like
+        );
+      }
 }
 
 export default ApiService;

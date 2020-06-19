@@ -45,11 +45,14 @@ const Project = () => {
             setIsLoading(true);
             const project = await api.getProject(id);
             const user = await api.getUser(userID as string);
+            const saved = await api.isProjectSaved(id);
 
             if (project.status === 200) {
                 const data = await project.json();
                 const data2 = await user.json();
+                const data3 = await saved.json();
                 
+                setisSaved(data3.data);
                 setUser(data2.data);
                 setProject(data.project);
                 setC(data.comments);
@@ -66,6 +69,7 @@ const Project = () => {
     const [user, setUser] = useState<any>({});
     const [project, setProject] = useState<any>({});
     const [c, setC] = useState<any>([]);
+    const [isSaved, setisSaved] = useState<boolean>(false);
     const [isLiked, setisLiked] = useState<boolean>(false);
     const [likeCount, setLikeCount] = useState<string>('0');
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -80,7 +84,7 @@ const Project = () => {
         form.append('project_id', project.id);
         form.append('user_id', user.id);
 
-        if(!user) {
+        if(!user.isAuthenticated) {
             history.push('/login');
             return;
         }
@@ -112,6 +116,32 @@ const Project = () => {
         }
     }
 
+    const handleSaveProject = async (saved: boolean) => {
+
+        const id = window.location.pathname.split('/')[2];
+        const form = new FormData();
+        let data;
+
+        form.append('project_id', project.id);
+        form.append('user_id', user.id);
+        
+        if(!user.isAuthenticated) {
+
+            history.push('/login');
+            return;
+        }
+        if(saved) {
+            const res = await api.saveProject(id, form);
+            data = await res.json();
+        } else {
+            const res = await api.unSaveProject(id, form);
+            data = await res.json();
+        }
+
+        setisSaved(data.data);
+        
+    }
+
     return (
         <div className="project-view">
 
@@ -123,9 +153,8 @@ const Project = () => {
                             <p>by <Link className="project-owner" to={`/user/${project.username}`}><img style={{height: '20px', borderRadius: '100%'}} src={project.gh_avatar} alt="avatar"/> {project.username}</Link></p>
                         </div>
                         <div className="button-wrap">
-                            {isLiked ? <Button onClick={() => handleLike()} icon={<HeartTwoTone twoToneColor="#eb2f96" />}>Liked</Button> : <Button onClick={() => handleLike(true)} icon={<HeartOutlined />}>Like</Button>}
-
-                            <Button>Save</Button>
+                            {isLiked ? <Button onClick={() => handleLike(false)} icon={<HeartTwoTone twoToneColor="#eb2f96" />}>Liked</Button> : <Button onClick={() => handleLike(true)} icon={<HeartOutlined />}>Like</Button>}
+                            {isSaved ? <Button onClick={() => handleSaveProject(false)}>Saved</Button> :<Button onClick={() => handleSaveProject(true)}>Save</Button>}
                         </div>
 
                     </div>
