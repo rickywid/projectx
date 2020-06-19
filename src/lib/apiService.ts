@@ -88,6 +88,13 @@ class ApiService{
           this.headers,
         );
       }     
+
+      public async getUserProfile(username: string) {
+        return await HttpClient.get(
+          `${this.apiEndpoint}/user/profile/${username}`,
+          this.headers,
+        );
+      }     
 }
 
 export default ApiService;
