@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Tabs } from 'antd';
 import ApiService from '../lib/apiService';
-import { useLocation } from 'react-router-dom'
 import ProjectsCard from '../components/projectCard';
 
 const { TabPane } = Tabs;
 
-const UserProfile = () => {
+
+interface IUserProfile {
+    children?: React.ReactNode;
+    match: any;
+  }
+
+const UserProfile = ({match}: IUserProfile) => {
     const api = new ApiService();
-    const location = useLocation();
     
     const [user, setUser] = useState<any>({});
     const [userProjects, setUserProjects] = useState([]);
@@ -16,9 +20,8 @@ const UserProfile = () => {
     const [savedProjects, setSavedProjects] = useState([]);
     
     useEffect(() => {
-        
         const fetch = async () => {
-            const username = location.pathname.split('/')[2];
+            const username = match.params.username;
             const user = await api.getUserProfile(username);
             const json = await user.json();
             

@@ -15,9 +15,10 @@ const Routes = (
     <Route exact path="/signup" component={Signup} />
     <Route exact path="/upload" component={ProjectUpload} />
     <Route exact path="/project/:id" component={Project} />
-    <Route exact path="/user/:username" component={UserProfile} />
+    <Route path="/user/:username" render={({ match }) => <UserProfile key={match.params.username} match={match} /> } />
     <Route component={NoMatch} />
   </Switch>
 );
 
 export default Routes;
+
