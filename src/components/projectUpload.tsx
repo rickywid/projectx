@@ -13,6 +13,7 @@ import { PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import ApiService from '../lib/apiService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
+import { technologies, tags } from '../lib/const';
 
 interface IFormLayoutChange {
     size: string;
@@ -57,20 +58,18 @@ const ProjectUpload = () => {
 
     const { Option } = Select;
 
-    const technologies = ['JQuery', 'React', 'Angular', 'ASP.NET', 'Node/Express', 'Vue', 'Django', 'Flask', 'Laravel', 'Ruby on Rails', 'Drupal'];
     const childrenTech = [];
-    for (let i = 0; i < technologies.length; i++) {
-        childrenTech.push(<Option key={i} value={`${technologies[i]}-${i+1}`}>{technologies[i]}</Option>);
-    }
-
-    // Potential Tags: Travel
-    const tags = ['Music', 'Sports', 'Productivity', 'Analytics', 'FinTech', 'Personal'];
     const childrenTags = [];
-    for (let i = 0; i < tags.length; i++) {
-        childrenTags.push(<Option key={i} value={`${tags[i]}-${i+1}`}>{tags[i]}</Option>);
+
+    for(let key in technologies) {
+        childrenTech.push(<Option key={key} value={`${technologies[key]}`}>{technologies[key]}</Option>);
     }
 
-    const onFormLayoutChange = ({ size }: IFormLayoutChange) => {
+    for(let key in tags) {
+        childrenTags.push(<Option key={key} value={`${tags[key]}`}>{tags[key]}</Option>);
+    }
+
+    const onFormLayoutChange = ({ size }: IFormLayoutChange) => { 
         setComponentSize(size);
     };
 
@@ -84,11 +83,11 @@ const ProjectUpload = () => {
     }
 
     const onSelectTechnologyChange = (value: string[]) => {
-        setTechnologiesSelect(value.map((v: string) => v.split('-')[1]));
+        setTechnologiesSelect(value);
     }
 
-    const onSelectTagChange = (value: string[]) => {
-        setTagSelect(value.map((v: string) => v.split('-')[1]));
+    const onSelectTagChange = (value: string) => {
+        setTagSelect([value]);
     }
 
     const handleCancel = () => setPreviewVisible(false);
@@ -121,13 +120,27 @@ const ProjectUpload = () => {
         const { name, description, tagline, url, collaboration } = values;
         const userID = localStorage.getItem('userID') as string;
         const form = new FormData();
-        
+        const techArray: any = [];
+        const tagArray: any = [];
+
+        for(let key in technologies) {
+            if(technologiesSelect.includes(technologies[key])) {
+                techArray.push(key);
+            }
+        }
+
+        for(let key in tags) {
+            if(tagsSelect.includes(tags[key])) {
+                tagArray.push(key);
+            }
+        }
+
         form.append('name', name);
         form.append('description', description);
         form.append('tagline', tagline);
         form.append('url', url);
-        form.append('technologies', technologiesSelect);
-        form.append('tags', tagsSelect);
+        form.append('technologies', techArray);
+        form.append('tags', tagArray);
         form.append('collaboration', collaboration);
         form.append('screenshots', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.project());
         form.append('user_id', userID);
@@ -237,7 +250,6 @@ const ProjectUpload = () => {
                     rules={[{ required: true, message: 'Must select at least one' }]}
                 >
                     <Select
-                        mode="multiple"
                         style={{ width: '100%' }}
                         placeholder="Please select"
                         onChange={onSelectTagChange as any}

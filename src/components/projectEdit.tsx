@@ -139,8 +139,8 @@ const ProjectEdit = () => {
         setTechnologiesSelect(value);
     }
 
-    const onSelectTagChange = (value: string[]) => {
-        setTagSelect(value);
+    const onSelectTagChange = (value: string) => {
+        setTagSelect([value]);
     }
 
     const handleCancel = () => setPreviewVisible(false);
@@ -327,7 +327,6 @@ const ProjectEdit = () => {
                     rules={[{ required: true, message: 'Must select at least one' }]}
                 >
                     <Select
-                        mode="multiple"
                         style={{ width: '100%' }}
                         placeholder="Please select"
                         onChange={onSelectTagChange as any}
