@@ -120,6 +120,15 @@ class ApiService{
           like
         );
       }
+
+      public async updateProject(id: string, project: FormData) {
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.put(
+          `${this.apiEndpoint}/project/update/${id}`,
+          this.headers,
+          project
+        );
+      }
 }
 
 export default ApiService;

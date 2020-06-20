@@ -1,14 +1,8 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import { Tag, Divider } from 'antd';
 import { CommentOutlined, HeartOutlined } from '@ant-design/icons';
 import '../styles/projectCard.scss';
-
-interface IProps {
-  children?: ReactNode;
-  projects: any;
-  isOwner?: boolean;
-}
 
 const ProjectCard = (props: any) => {
   const renderProjects = () => {

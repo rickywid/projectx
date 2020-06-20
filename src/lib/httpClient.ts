@@ -30,6 +30,18 @@ export class HttpClient {
         return await HttpClient.makeRequest(request);
     }
 
+    public static async put(endpoint: string, headers={}, data: FormData): Promise<Response> {
+        const request = new Request(endpoint, {
+            body: formSerializer(data),
+            headers,
+            method: 'PUT',
+            mode: 'cors',
+            credentials: 'include'
+        });
+
+        return await HttpClient.makeRequest(request);
+    }
+
     public static async delete(endpoint: string, headers={}, data: FormData): Promise<Response> {
         const request = new Request(endpoint, {
             body: formSerializer(data),

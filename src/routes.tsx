@@ -6,6 +6,8 @@ import Signup from './components/auth/signup';
 import ProjectUpload from './components/projectUpload';
 import Project from './components/project';
 import UserProfile from './components/userProfile';
+import ProjectEdit from './components/projectEdit';
+
 import NoMatch from './components/noMatch';
 
 const Routes = (
@@ -16,6 +18,7 @@ const Routes = (
     <Route exact path="/upload" component={ProjectUpload} />
     <Route exact path="/project/:id" component={Project} />
     <Route path="/user/:username" render={({ match }) => <UserProfile key={match.params.username} match={match} /> } />
+    <Route exact path="/project/edit/:id" component={ProjectEdit} />
     <Route component={NoMatch} />
   </Switch>
 );

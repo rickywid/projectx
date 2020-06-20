@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Form,
     Input,
@@ -13,6 +13,7 @@ import { PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import ApiService from '../lib/apiService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
+import { technologies, tags } from '../lib/const';
 
 interface IFormLayoutChange {
     size: string;
@@ -43,8 +44,54 @@ interface IFields {
     collaboration: string;
 }
 
-const ProjectUpload = () => {
-    const api = new ApiService();
+const ProjectEdit = () => {
+
+    useEffect(() => {
+        const api = new ApiService();
+        const id = window.location.pathname.split('/')[3];
+        const techArray: string[] = [];
+        const tagArray: string[] = [];
+        
+        if(localStorage.getItem('userID') === 'undefined') {
+            history.push('/');
+            return;
+        }
+
+        const fetch = async () => {
+            setIsLoading(true);
+            const project = await api.getProject(id);
+
+
+            if (project.status === 200) {
+                const data = await project.json();
+                setFileList([{
+                    uid: '-1',
+                    url: data.project.images[0]
+                }]);
+
+                for(let key in technologies) {
+                    if(data.project.technologies.includes(technologies[key])) {
+                        techArray.push(technologies[key]);
+                    }
+                }
+
+                for(let key in tags) {
+                    if(data.project.tags.includes(tags[key])) {
+                        tagArray.push(tags[key]);
+                    }
+                }
+
+                setTechnologiesSelect(techArray);
+                setTagSelect(tagArray);
+                setProject(data.project);
+                setIsLoading(false);
+            }
+        }
+
+        fetch();
+
+    }, [])
+
     const placeholder = new Placeholder();
     const [componentSize, setComponentSize] = useState('medium');
     const [technologiesSelect, setTechnologiesSelect] = useState<any>([]);
@@ -54,20 +101,19 @@ const ProjectUpload = () => {
     const [previewTitle, setPreviewTitle] = useState<string>('');
     const [fileList, setFileList] = useState<any[]>([]);              // list of files uploaded locally used by antd
     const [fileListUpload, setFileListUpload] = useState<any>([]);    // list of files uploaded to cloduinary
+    const [project, setProject] = useState<any>({});
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const { Option } = Select;
-
-    const technologies = ['JQuery', 'React', 'Angular', 'ASP.NET', 'Node/Express', 'Vue', 'Django', 'Flask', 'Laravel', 'Ruby on Rails', 'Drupal'];
     const childrenTech = [];
-    for (let i = 0; i < technologies.length; i++) {
-        childrenTech.push(<Option key={i} value={`${technologies[i]}-${i+1}`}>{technologies[i]}</Option>);
+    const childrenTags = [];
+
+    for(let key in technologies) {
+        childrenTech.push(<Option key={key} value={`${technologies[key]}`}>{technologies[key]}</Option>);
     }
 
-    // Potential Tags: Travel
-    const tags = ['Music', 'Sports', 'Productivity', 'Analytics', 'FinTech', 'Personal'];
-    const childrenTags = [];
-    for (let i = 0; i < tags.length; i++) {
-        childrenTags.push(<Option key={i} value={`${tags[i]}-${i+1}`}>{tags[i]}</Option>);
+    for(let key in tags) {
+        childrenTags.push(<Option key={key} value={`${tags[key]}`}>{tags[key]}</Option>);
     }
 
     const onFormLayoutChange = ({ size }: IFormLayoutChange) => {
@@ -84,11 +130,11 @@ const ProjectUpload = () => {
     }
 
     const onSelectTechnologyChange = (value: string[]) => {
-        setTechnologiesSelect(value.map((v: string) => v.split('-')[1]));
+        setTechnologiesSelect(value);
     }
 
     const onSelectTagChange = (value: string[]) => {
-        setTagSelect(value.map((v: string) => v.split('-')[1]));
+        setTagSelect(value);
     }
 
     const handleCancel = () => setPreviewVisible(false);
@@ -118,21 +164,37 @@ const ProjectUpload = () => {
     }
 
     const handleOnFinish = async (values: IFields) => {
+        const api = new ApiService();
         const { name, description, tagline, url, collaboration } = values;
         const userID = localStorage.getItem('userID') as string;
+        const id = window.location.pathname.split('/')[3];
+        const techArray: any = [];
+        const tagArray: any = [];
         const form = new FormData();
-        
+
+        for(let key in technologies) {
+            if(technologiesSelect.includes(technologies[key])) {
+                techArray.push(key);
+            }
+        }
+
+        for(let key in tags) {
+            if(tagsSelect.includes(tags[key])) {
+                tagArray.push(key);
+            }
+        }
+
         form.append('name', name);
         form.append('description', description);
         form.append('tagline', tagline);
         form.append('url', url);
-        form.append('technologies', technologiesSelect);
-        form.append('tags', tagsSelect);
+        form.append('technologies', techArray);
+        form.append('tags', tagArray);
         form.append('collaboration', collaboration);
         form.append('screenshots', fileListUpload.length ? fileListUpload : JSON.stringify(placeholder.project()));
         form.append('user_id', userID);
         
-        const res = await api.createProject(form);
+        const res = await api.updateProject(id, form);
         
         if (res.status === 200) {
             history.push('/');
@@ -172,6 +234,7 @@ const ProjectUpload = () => {
 
     return (
         <div>
+            {isLoading ? <p>loading</p> :
             <Form
                 labelCol={{
                     span: 28,
@@ -182,9 +245,13 @@ const ProjectUpload = () => {
                 layout="vertical"
                 initialValues={{
                     size: componentSize,
-                    collaboration: false,
-                    technologies: [],
-                    tags: []
+                    name: project.name,
+                    tagline: project.tagline,
+                    description: project.description,
+                    collaboration: project.collaboration,
+                    technologies: technologiesSelect,
+                    tags: tagsSelect,
+                    url: project.url
                 }}
                 onFinish={handleOnFinish as any}
                 onValuesChange={onFormLayoutChange as any}
@@ -280,9 +347,10 @@ const ProjectUpload = () => {
                 </Form.Item>
                 <Button type="primary" htmlType="submit">Submit</Button>
             </Form>
+            }
         </div>
     )
 };
 
-export default ProjectUpload;
+export default ProjectEdit;
 
