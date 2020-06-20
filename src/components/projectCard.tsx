@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import { Tag, Divider } from 'antd';
 import { CommentOutlined, HeartOutlined } from '@ant-design/icons';
 import '../styles/projectCard.scss';
+import api from '../lib/apiService';
+import ApiService from '../lib/apiService';
 
 const ProjectCard = (props: any) => {
+  const api = new ApiService();
+
+
   const renderProjects = () => {
-    console.log(props)
     return props.projects.map((project: any, index: number) => (
       <li key={index} className="project-item">
         <Link to={`/project/${project.id}`}>
@@ -23,7 +27,7 @@ const ProjectCard = (props: any) => {
         </Link>
         <div className="project-icons">
           <Link className="project-owner" to={`/user/${project.username}`}><img style={{height: '20px', borderRadius: '100%'}} src={project.gh_avatar} alt="avatar"/> {project.username}</Link>
-          {props.isOwner ? <small className="project-edit"><Link to={`/project/edit/${project.id}`}>edit</Link> <Divider type="vertical" /> <Link to={`/project/delete/${project.id}`}>delete</Link></small>: ''}
+          {props.isOwner ? <small className="project-edit"><Link to={`/project/edit/${project.id}`}>Edit</Link></small>: ''}
           <div>
             <span className="project-comments"><CommentOutlined /> {project.comment_count}</span><span><HeartOutlined /> {project.likes_count}    </span>     
           </div>

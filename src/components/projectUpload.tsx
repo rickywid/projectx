@@ -129,7 +129,7 @@ const ProjectUpload = () => {
         form.append('technologies', technologiesSelect);
         form.append('tags', tagsSelect);
         form.append('collaboration', collaboration);
-        form.append('screenshots', fileListUpload.length ? fileListUpload : JSON.stringify(placeholder.project()));
+        form.append('screenshots', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.project());
         form.append('user_id', userID);
         
         const res = await api.createProject(form);

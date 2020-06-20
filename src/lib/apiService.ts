@@ -129,6 +129,15 @@ class ApiService{
           project
         );
       }
+
+      public async deleteProject(id: string, project: FormData) {
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.delete(
+           `${this.apiEndpoint}/project/delete/${id}`,
+          this.headers,
+          project
+        );
+      }
 }
 
 export default ApiService;

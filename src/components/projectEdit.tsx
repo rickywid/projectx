@@ -7,7 +7,9 @@ import {
     Upload,
     Modal,
     Button,
-    Tooltip
+    Tooltip,
+    Divider,
+    Popconfirm
 } from 'antd';
 import { PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import ApiService from '../lib/apiService';
@@ -45,10 +47,10 @@ interface IFields {
 }
 
 const ProjectEdit = () => {
-
+    const api = new ApiService();
+    const id = window.location.pathname.split('/')[3];
     useEffect(() => {
-        const api = new ApiService();
-        const id = window.location.pathname.split('/')[3];
+        
         const techArray: string[] = [];
         const tagArray: string[] = [];
         
@@ -59,15 +61,19 @@ const ProjectEdit = () => {
 
         const fetch = async () => {
             setIsLoading(true);
+            
             const project = await api.getProject(id);
 
 
             if (project.status === 200) {
                 const data = await project.json();
+                
                 setFileList([{
                     uid: '-1',
                     url: data.project.images[0]
                 }]);
+
+                setFileListUpload([data.project.images[0]]);
 
                 for(let key in technologies) {
                     if(data.project.technologies.includes(technologies[key])) {
@@ -164,7 +170,7 @@ const ProjectEdit = () => {
     }
 
     const handleOnFinish = async (values: IFields) => {
-        const api = new ApiService();
+        
         const { name, description, tagline, url, collaboration } = values;
         const userID = localStorage.getItem('userID') as string;
         const id = window.location.pathname.split('/')[3];
@@ -191,7 +197,7 @@ const ProjectEdit = () => {
         form.append('technologies', techArray);
         form.append('tags', tagArray);
         form.append('collaboration', collaboration);
-        form.append('screenshots', fileListUpload.length ? fileListUpload : JSON.stringify(placeholder.project()));
+        form.append('screenshots', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.project());
         form.append('user_id', userID);
         
         const res = await api.updateProject(id, form);
@@ -231,6 +237,23 @@ const ProjectEdit = () => {
             <div className="ant-upload-text">Upload</div>
         </div>
     );
+
+    const confirm = (e: any, id: string) => {
+        handleOnDelete(id);
+      }
+      
+      const cancel = () => {
+        //console.log(e);
+      }
+
+    const handleOnDelete = async (id: string) => {
+        const form = new FormData();
+    
+        form.append('project_id', id);
+        const res = await api.deleteProject(id, form);
+    
+        history.push(`/user/${localStorage.getItem('username')}`)
+      }
 
     return (
         <div>
@@ -348,6 +371,20 @@ const ProjectEdit = () => {
                 <Button type="primary" htmlType="submit">Submit</Button>
             </Form>
             }
+
+            <Divider />
+            <h3>Delete this project</h3>
+            <p>Once you delete this project, there is no going back. Please be certain. </p>
+            <Popconfirm
+                title="Are you sure you want to delete this project?"
+                onConfirm={(e) => confirm(e, id)}
+                onCancel={cancel}
+                okText="Yes"
+                cancelText="No"
+                >
+                <Button type="primary" danger>Delete</Button>
+            </Popconfirm>
+            
         </div>
     )
 };

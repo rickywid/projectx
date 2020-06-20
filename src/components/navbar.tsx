@@ -23,6 +23,7 @@ const NavBar = ({
   const onSignout = async () => {
     await api.signout(new FormData());
     localStorage.removeItem('userID');
+    localStorage.removeItem('username');
     window.location.replace("http://localhost:3000");    
   }
 
