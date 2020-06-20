@@ -1,17 +1,19 @@
 import React, { ReactNode } from 'react';
 import { Link } from "react-router-dom";
-import { Tag } from 'antd';
+import { Tag, Divider } from 'antd';
 import { CommentOutlined, HeartOutlined } from '@ant-design/icons';
 import '../styles/projectCard.scss';
 
 interface IProps {
-  children?: ReactNode,
-  projects?: any
+  children?: ReactNode;
+  projects: any;
+  isOwner?: boolean;
 }
 
-const ProjectCard = ({ projects }: IProps) => {
+const ProjectCard = (props: any) => {
   const renderProjects = () => {
-    return projects.map((project: any, index: number) => (
+    console.log(props)
+    return props.projects.map((project: any, index: number) => (
       <li key={index} className="project-item">
         <Link to={`/project/${project.id}`}>
 
@@ -27,6 +29,7 @@ const ProjectCard = ({ projects }: IProps) => {
         </Link>
         <div className="project-icons">
           <Link className="project-owner" to={`/user/${project.username}`}><img style={{height: '20px', borderRadius: '100%'}} src={project.gh_avatar} alt="avatar"/> {project.username}</Link>
+          {props.isOwner ? <small className="project-edit"><Link to={`/project/edit/${project.id}`}>edit</Link> <Divider type="vertical" /> <Link to={`/project/delete/${project.id}`}>delete</Link></small>: ''}
           <div>
             <span className="project-comments"><CommentOutlined /> {project.comment_count}</span><span><HeartOutlined /> {project.likes_count}    </span>     
           </div>

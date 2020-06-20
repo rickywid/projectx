@@ -12,6 +12,16 @@
     list-style: none;
     margin-bottom: 20px;
 
+    &:hover {
+        .project-edit {
+            display: block;
+        }
+    }
+    
+    .project-edit {
+        display: none;
+    }
+    
     .project-card {
         display: flex;
         background-size: cover;
@@ -52,6 +62,7 @@
     .project-icons {
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         .project-comments {
             margin-right: 15px;

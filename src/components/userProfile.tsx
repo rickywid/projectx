@@ -45,7 +45,8 @@ const UserProfile = ({match}: IUserProfile) => {
             <Tabs defaultActiveKey="1" onChange={callback}>
                 <TabPane tab={<span> My Projects <span style={{color: 'grey'}}>{userProjects.length}</span></span>} key="1">
                 My Projects
-                <ProjectsCard projects={userProjects}/>
+                <ProjectsCard isOwner={user.selfProfile} projects={userProjects}/>
+                Edit Delete
                 </TabPane>
                 <TabPane tab={<span> Liked Projects <span style={{color: 'grey'}}>{likedProjects.length}</span></span>} key="2">
                 Liked Projects
