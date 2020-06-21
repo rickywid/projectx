@@ -188,7 +188,7 @@ const Project = () => {
                                     <div className="project-view-comment">
                                         <div className="project-view-comment-top-wrapper">
                                             <img style={{width: '25px'}} src={c.gh_avatar} alt={`${c.username}'s profile`} />
-                                            <span className="project-view-comment-user">{c.username}</span>
+                                            <Link to={`/user/${c.username}`} className="project-view-comment-user">{c.username}</Link>
                                         </div>
                                         <div className="project-view-comment-body">
                                             <p>{c.comment}</p>

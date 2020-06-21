@@ -38,7 +38,6 @@ class ApiService{
         );
       }
 
-
       public async getProject(id: string) {
         // this.headers['cookie'] = this.cookie;
         return await HttpClient.get(
@@ -136,6 +135,14 @@ class ApiService{
            `${this.apiEndpoint}/project/delete/${id}`,
           this.headers,
           project
+        );
+      }
+
+      public async search(value: string) {  
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.get(
+          `${this.apiEndpoint}/search?project=${value}`,
+          this.headers,
         );
       }
 }

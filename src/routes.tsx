@@ -7,6 +7,7 @@ import ProjectUpload from './components/projectUpload';
 import Project from './components/project';
 import UserProfile from './components/userProfile';
 import ProjectEdit from './components/projectEdit';
+import SearchResults from './components/searchResults';
 
 import NoMatch from './components/noMatch';
 
@@ -19,6 +20,7 @@ const Routes = (
     <Route exact path="/project/:id" component={Project} />
     <Route path="/user/:username" render={({ match }) => <UserProfile key={match.params.username} match={match} /> } />
     <Route exact path="/project/edit/:id" component={ProjectEdit} />
+    <Route exact path ="/search"  render={({ location }) => <SearchResults key={location.search} /> } />
     <Route component={NoMatch} />
   </Switch>
 );
