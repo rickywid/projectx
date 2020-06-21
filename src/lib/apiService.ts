@@ -145,6 +145,33 @@ class ApiService{
           this.headers,
         );
       }
+
+      public async updateUser(id: string, user: FormData) {
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.put(
+          `${this.apiEndpoint}/user/edit/${id}`,
+          this.headers,
+          user
+        );
+      }
+
+      public async updatePassword(password: FormData) {
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.put(
+          `${this.apiEndpoint}/password/update`,
+          this.headers,
+          password
+        );
+      }
+
+      public async deleteUser(id: string, user: FormData) {
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.delete(
+          `${this.apiEndpoint}/user/delete/${id}`,
+          this.headers,
+          user
+        );
+      }      
 }
 
 export default ApiService;

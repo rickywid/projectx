@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Tabs } from 'antd';
+import { Link } from 'react-router-dom';
+import { Tabs, Button } from 'antd';
 import ApiService from '../lib/apiService';
 import ProjectsCard from '../components/projectCard';
 
@@ -42,6 +43,8 @@ const UserProfile = ({match}: IUserProfile) => {
         <div>
             <img style={{height: '100px', borderRadius: '100%'}} src={user.gh_avatar} alt=""/>
             <span>{user.username}</span>
+            <Link 
+                to={`/user/edit/${user.id}`}><Button size="small" type="dashed">edit</Button></Link>
             <Tabs defaultActiveKey="1" onChange={callback}>
                 <TabPane tab={<span> My Projects <span style={{color: 'grey'}}>{userProjects.length}</span></span>} key="1">
                 My Projects
