@@ -1,74 +1,88 @@
 @import './variables.scss';
 
 .list-wrapper {
-    display: flex;
-    justify-content: space-between; 
-    flex-wrap: wrap;
     padding: 0;
-}   
-
-.project-item {
-    flex-basis: 100%;
+    display: grid;
     list-style: none;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+    grid-gap: 36px;
 
-    &:hover {
-        .project-edit {
-            display: block;
+    .project-item {
+        display: inline-block;
+    
+        flex-basis: 100%;
+        list-style: none;
+        margin-bottom: 20px;
+    
+        &:hover {
+            .project-edit {
+                display: block;
+            }
         }
-    }
+        
+        .project-edit {
+            display: none;
+        }
+        
+        .project-card { 
+            background-size: cover;
+            height: 220px;        
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
     
-    .project-edit {
-        display: none;
-    }
+            .project-tag {
+                text-align: right;
+                padding-top: 8px;
+                padding-right: 2px;    
+                position: absolute;
+            }
+            
+            p, .project-tag {            
+                width: 100%;
+            }
     
-    .project-card {
-        display: flex;
-        background-size: cover;
-        height: 300px;        
+            .project-name-wrapper {
+                position: absolute;
+                width: 100%;
+                height: 30%;
+                bottom: 0;
+                display: flex;
+                align-items: center;
+    
+                .project-name {
+                    color: white;
+                    padding: 20px;
+                    font-weight: bold;
+                    font-size: 18px;
+                    margin: 0;
+                }
+            }
+        }
 
-        .project-detail-wrapper {
+        .project-owner {
+            color: black;
+            font-size: 16px;
+
+            .project-user-avatar {
+                height: 20px;
+                border-radius: 100%;
+            }
+        }
+    
+        .project-icons {
             display: flex;
             justify-content: space-between;
-            flex: 1;
-            background: linear-gradient(0deg, #9b9494 0%, rgba(0, 212, 255, 0) 36%);
-            color: white;
-            padding: 10px;
-            position: relative;
-
-            .ant-tag {
-                align-self: flex-start;
-                position: absolute;
-                right: 0;
-            }
-
-            h2 {
-                color: white;
-                font-weight: bold;
-                margin: 0;
-            }
-
-            .project-title-wrapper {
-                align-self: end;
+            align-items: center;
+    
+            .project-comments {
+                margin-right: 15px;
             }
         }
     }
+}   
 
-    .project-owner {
-        color: black;
-        font-size: 16px;
-    }
 
-    .project-icons {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .project-comments {
-            margin-right: 15px;
-        }
-    }
-}
 
 
 
