@@ -2,7 +2,7 @@ import { HttpClient } from './httpClient';
 
 class AuthService {
     constructor() {
-        this.apiEndpoint = 'http://localhost:5000/api'
+        this.apiEndpoint = `${process.env.REACT_APP_SERVER}`
     }
 
     apiEndpoint: string;
