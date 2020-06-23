@@ -34,7 +34,7 @@ function App() {
     if (res.status === 200) {
       const user = await res.json();
       localStorage.setItem('userID', user.id);
-      window.location.replace('http://localhost:3000/');
+      window.location.replace(process.env.REACT_APP_HOSTNAME as string);
 
       return;
     }
@@ -100,7 +100,7 @@ function App() {
           type="primary"
           icon={<GithubOutlined />}
           className="github-login-btn"
-          onClick={() => window.open(`http://localhost:5000/api/auth/github`, '_self')}
+          onClick={() => window.open(`${process.env.REACT_APP_SERVER}/auth/github`, '_self')}
         >
           Log In with Github
             </Button>

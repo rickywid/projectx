@@ -170,7 +170,7 @@ const UserEdit: React.FC = (props: any) => {
             body: data
         }
 
-        fetch('http://localhost:3000/api/image/upload', config).then((res: any) => {
+        fetch(`${process.env.REACT_APP_SERVER}/api/image/upload`, config).then((res: any) => {
             return res.json();
         }).then(data => {
             file.onProgress(e => console.log(e));
@@ -205,7 +205,7 @@ const UserEdit: React.FC = (props: any) => {
         await api.deleteUser(user.id, form);
         localStorage.removeItem('userID');
         localStorage.removeItem('username');
-        window.location.replace("http://localhost:3000"); 
+        window.location.replace(process.env.REACT_APP_HOSTNAME as string); 
     }
 
     return (

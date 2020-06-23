@@ -4,8 +4,9 @@ import { Router } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import './styles/global.scss';
 import App from './App';
-// import * as serviceWorker from './serviceWorker';
 import history from './lib/history';
+
+// dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>

@@ -164,7 +164,7 @@ const ProjectUpload = () => {
             body: data
         }
 
-        fetch('http://localhost:3000/api/image/upload', config).then((res: any) => {
+        fetch(`${process.env.REACT_APP_SERVER}/api/image/upload`, config).then((res: any) => {
             return res.json();
         }).then(data => {
             file.onProgress(e => console.log(e));
