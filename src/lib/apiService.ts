@@ -3,7 +3,7 @@ import { HttpClient } from './httpClient';
 class ApiService{
     constructor(cookie?: string) {
         // this.cookie = cookie as string;
-        this.apiEndpoint = `http://localhost:5000/api` as string;
+        this.apiEndpoint = `${process.env.REACT_APP_SERVER}` as string;
     }
     // private cookie: string;
     private apiEndpoint: string;
