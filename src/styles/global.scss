@@ -5,6 +5,9 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+h1 {
+    font-weight: bold;
+}
 
 
 // ant-d override
@@ -44,8 +47,18 @@ body {
 
 .comment-btn,
 .website-btn,
-.repo-btn {
+.repo-btn,
+.upload-btn {
     width: 100%;
+}
+
+.ant-layout-sider-zero-width-trigger {
+    top: 218px;
+    background: #414c5e;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    right: -54px;
 }
 
 
@@ -59,7 +72,8 @@ body {
         padding: 26px;
     }
 
-    .comment-btn {
+    .comment-btn,
+    .upload-btn {
         width: auto;
     }
 }

@@ -14,6 +14,7 @@ import ApiService from '../lib/apiService';
 import AuthService from '../lib/authService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
+import '../styles/form.scss';
 
 const { TextArea } = Input;
 
@@ -205,132 +206,141 @@ const UserEdit: React.FC = (props: any) => {
         await api.deleteUser(user.id, form);
         localStorage.removeItem('userID');
         localStorage.removeItem('username');
-        window.location.replace(process.env.REACT_APP_HOSTNAME as string); 
+        window.location.replace(process.env.REACT_APP_HOSTNAME as string);
     }
 
     return (
         <div>
             {isLoading ? <p>loading</p> :
                 <div>
-                    <Form
-                        labelCol={{
-                            span: 28,
-                        }}
-                        wrapperCol={{
-                            span: 14,
-                        }}
-                        layout="vertical"
-                        onFinish={handleChangePassword as any}
-                        onValuesChange={onFormLayoutChange as any}
-                    >
-                        <Form.Item
-                            label="Current Password"
-                            name="currentPassword"
+                    <h1>Change Password</h1>
+                    <div className="form-wrapper">
+                        <Form
+                            layout="vertical"
+                            onFinish={handleChangePassword as any}
+                            onValuesChange={onFormLayoutChange as any}
                         >
-                            <Input
-                                type="password"
-                                placeholder="Password"
-                            />
-                        </Form.Item>
-                        <Form.Item
-                            name="newPassword"
-                            label="New Password"
-                            rules={[
-                                {
-                                    message: 'Required',
-                                },
-                            ]}
-                            hasFeedback
-                        >
-                            <Input.Password />
-                        </Form.Item>
-
-                        <Form.Item
-                            name="confirmPassword"
-                            label="Confirm Password"
-                            dependencies={['password']}
-                            hasFeedback
-                            rules={[
-                                {
-                                    message: 'Required',
-                                },
-                                ({ getFieldValue }) => ({
-                                    validator(rule, value) {
-                                        if (!value || getFieldValue('newPassword') === value) {
-                                            return Promise.resolve();
-                                        }
-
-                                        return Promise.reject(new Error('Passwords do not match'));
+                            <Form.Item
+                                label={<span><strong>Current Password</strong></span>}
+                                name="currentPassword"
+                            >
+                                <Input
+                                    type="password"
+                                    placeholder="Password"
+                                />
+                            </Form.Item>
+                            <Form.Item
+                                name="newPassword"
+                                label={<span><strong>New Password</strong></span>}
+                                rules={[
+                                    {
+                                        message: 'Required',
                                     },
-                                }),
-                            ]}
-                        >
-                            <Input.Password />
-                        </Form.Item>
-                        <p className="error-msg">{error ? 'Password is incorrect' : ''}</p>
-                        <Button type="primary" htmlType="submit">Change Password</Button>
-                    </Form>
+                                ]}
+                                hasFeedback
+                            >
+                                <Input.Password />
+                            </Form.Item>
 
-                    <Form
-                        labelCol={{
-                            span: 28,
-                        }}
-                        wrapperCol={{
-                            span: 14,
-                        }}
-                        layout="vertical"
-                        onFinish={handleOnFinish as any}
-                        onValuesChange={onFormLayoutChange as any}
-                        initialValues={{
-                            description: user.description,
-                        }}
-                    >
-                        <Form.Item
-                            label="Description"
-                            name="description"
-                        >
-                            <TextArea rows={2} />
-                        </Form.Item>
-                        <Form.Item label="Profile Picture">
-                            <div className="clearfix">
-                                <Upload
-                                    listType="picture-card"
-                                    fileList={fileList as any[]}
-                                    onPreview={handlePreview as any}
-                                    onChange={handleUploadChange as any}
-                                    onRemove={handleOnRemove as any}
-                                    customRequest={customRequest as any}
-                                >
-                                    {fileList.length >= 1 ? null : uploadButton}
-                                </Upload>
-                                <Modal
-                                    visible={previewVisible}
-                                    title={previewTitle}
-                                    footer={null}
-                                    onCancel={handleCancel}
-                                >
-                                    <img alt="example" style={{ width: '100%' }} src={previewImage} />
-                                </Modal>
+                            <Form.Item
+                                name="confirmPassword"
+                                label={<span><strong>Confirm Password</strong></span>}
+                                dependencies={['password']}
+                                hasFeedback
+                                rules={[
+                                    {
+                                        message: 'Required',
+                                    },
+                                    ({ getFieldValue }) => ({
+                                        validator(rule, value) {
+                                            if (!value || getFieldValue('newPassword') === value) {
+                                                return Promise.resolve();
+                                            }
+
+                                            return Promise.reject(new Error('Passwords do not match'));
+                                        },
+                                    }),
+                                ]}
+                            >
+                                <Input.Password />
+                            </Form.Item>
+                            <p className="error-msg">{error ? 'Password is incorrect' : ''}</p>
+
+                            <div className="form-btn-wrap">
+                                <Button type="primary" htmlType="submit">Change Password</Button>
                             </div>
-                        </Form.Item>
-                        <Button type="primary" htmlType="submit">Update</Button>
-                    </Form>
+                        </Form>
+                        </div>
+                        <Divider />
+                        <div>
+                        <h1>Update Profile</h1>
+                        <div className="form-wrapper">
+                            <Form
+                                layout="vertical"
+                                onFinish={handleOnFinish as any}
+                                onValuesChange={onFormLayoutChange as any}
+                                initialValues={{
+                                    description: user.description,
+                                }}
+                            >
+                                <Form.Item
+                                    label={<span><strong>Description</strong></span>}
+                                    name="description"
+                                >
+                                    <TextArea rows={2} />
+                                </Form.Item>
+                                <Form.Item 
+                                    label={<span><strong>Profile Picture</strong></span>}
+                                >
+                                    <div className="clearfix">
+                                        <Upload
+                                            listType="picture-card"
+                                            fileList={fileList as any[]}
+                                            onPreview={handlePreview as any}
+                                            onChange={handleUploadChange as any}
+                                            onRemove={handleOnRemove as any}
+                                            customRequest={customRequest as any}
+                                        >
+                                            {fileList.length >= 1 ? null : uploadButton}
+                                        </Upload>
+                                        <Modal
+                                            visible={previewVisible}
+                                            title={previewTitle}
+                                            footer={null}
+                                            onCancel={handleCancel}
+                                        >
+                                            <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                                        </Modal>
+                                    </div>
+                                </Form.Item>
+                                <div className="form-btn-wrap">
+                                    <Button type="primary" htmlType="submit">Update</Button>
+                                </div>
+
+                            </Form>
+                        </div>
+                        </div>
                 </div>
             }
 
             <Divider />
-            <h3>Delete Account</h3>
-            <p>Once you delete this account, there is no going back. Please be certain. </p>
-            <Popconfirm
-                title="Are you sure you want to delete this account?"
-                onConfirm={(e) => confirm()}
-                onCancel={cancel}
-                okText="Yes"
-                cancelText="No"
-            >
-                <Button type="primary" danger>Delete</Button>
-            </Popconfirm>
-
+            <div>
+            <h1>Delete Account</h1>
+            <div className="form-wrapper">
+                <p>Once you delete this account, there is no going back. Please be certain. </p>
+                <Popconfirm
+                    title="Are you sure you want to delete this account?"
+                    onConfirm={(e) => confirm()}
+                    onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
+                >
+                    <div className="form-btn-wrap">
+                        <Button type="primary" danger>Delete</Button>
+                    </div>
+                </Popconfirm>
+            </div>
+            </div>
         </div>
 
     )

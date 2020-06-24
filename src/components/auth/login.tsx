@@ -67,7 +67,6 @@ function App() {
           >
             <Input
               size="large"
-              prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Username"
             />
           </Form.Item>
@@ -81,7 +80,6 @@ function App() {
             ]}
           >
             <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
               placeholder="Password"
               size="large"

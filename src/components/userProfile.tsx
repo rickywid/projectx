@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Tabs, Button } from 'antd';
 import ApiService from '../lib/apiService';
 import ProjectsCard from '../components/projectCard';
+import '../styles/userProfile.scss';
+import CodeImg from '../assets/code.png';
 
 const { TabPane } = Tabs;
 
@@ -40,24 +42,34 @@ const UserProfile = ({match}: IUserProfile) => {
     }
 
     return (
-        <div>
-            <img style={{height: '100px', borderRadius: '100%'}} src={user.gh_avatar} alt=""/>
-            <span>{user.username}</span>
-            <Link 
-                to={`/user/edit/${user.id}`}><Button size="small" type="dashed">edit</Button></Link>
-            <Tabs defaultActiveKey="1" onChange={callback}>
-                <TabPane tab={<span> My Projects <span style={{color: 'grey'}}>{userProjects.length}</span></span>} key="1">
-                My Projects
-                <ProjectsCard isOwner={user.selfProfile} projects={userProjects}/>
-                Edit Delete
+        <div className="user-profile-wrapper">
+            <img className="user-avatar" src={user.gh_avatar} alt=""/>
+            <div className="user-profile-detail">
+                <h1 className="user-name">{user.username}</h1>
+                <p>{user.description}</p>
+                <Link to={`/user/edit/${user.id}`}
+                    ><Button size="small" type="dashed">edit</Button>
+                </Link>                
+            </div>
+            <Tabs className="user-tabs" defaultActiveKey="1" onChange={callback}>
+                <TabPane tab={<span><strong>My Projects </strong><span style={{color: 'grey'}}>{userProjects.length}</span></span>} key="1">
+                    {userProjects.length ? 
+                    <ProjectsCard isOwner={user.selfProfile} projects={userProjects}/> : (
+                        <div className="user-msg-no-projects">
+                            <img style={{width: 100, marginBottom: 20}} src={CodeImg} alt="folder-image" /> 
+                            <p>You haven't uploaded any projects yet.</p>
+                            <Link to="/upload">
+                                <Button type="primary">Upload your first project</Button>
+                            </Link>
+                        </div>
+                    )
+                    }
                 </TabPane>
-                <TabPane tab={<span> Liked Projects <span style={{color: 'grey'}}>{likedProjects.length}</span></span>} key="2">
-                Liked Projects
-                <ProjectsCard projects={likedProjects}/>
+                <TabPane tab={<span><strong> Liked Projects </strong><span style={{color: 'grey'}}>{likedProjects.length}</span></span>} key="2">
+                    <ProjectsCard projects={likedProjects}/>
                 </TabPane>
-                <TabPane tab={<span> Saved Projects <span style={{color: 'grey'}}>{savedProjects.length}</span></span>} key="3">
-                Saved Projects
-                <ProjectsCard projects={savedProjects}/>
+                <TabPane tab={<span><strong> Saved Projects </strong><span style={{color: 'grey'}}>{savedProjects.length}</span></span>} key="3">
+                    <ProjectsCard projects={savedProjects}/>
                 </TabPane>
             </Tabs>
         </div>

@@ -46,6 +46,8 @@
         }
 
         .button-wrap {
+            margin-bottom: 20px;
+
             button:first-child {
                 margin-right: 15px;
             }
@@ -142,6 +144,10 @@
         .project-view-title {
             .project-view-title-info {
                 flex-basis: auto;
+            }
+
+            .button-wrap {
+                margin-bottom: 0;
             }
         }
     }

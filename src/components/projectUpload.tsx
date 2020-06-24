@@ -14,6 +14,7 @@ import ApiService from '../lib/apiService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
 import { technologies, tags } from '../lib/const';
+import '../styles/form.scss';
 
 interface IFormLayoutChange {
     size: string;
@@ -185,13 +186,11 @@ const ProjectUpload = () => {
 
     return (
         <div>
+                        <h1>Share Your Project</h1>
+
+<div className="form-wrapper">
             <Form
-                labelCol={{
-                    span: 28,
-                }}
-                wrapperCol={{
-                    span: 14,
-                }}
+
                 layout="vertical"
                 initialValues={{
                     size: componentSize,
@@ -203,35 +202,54 @@ const ProjectUpload = () => {
                 onValuesChange={onFormLayoutChange as any}
             >
                 <Form.Item
-                    label="Project Name"
+                    label={<span><strong>Title</strong></span>}
                     name="name"
                     rules={[{ required: true, message: 'Required' }]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    label="Tagline"
                     name="tagline"
                     rules={[{ required: true, message: 'Required' }]}
+                    label={<span><strong>
+                        Tagline&nbsp;
+                <Tooltip title="A short description about your project">
+                            <QuestionCircleOutlined />
+                        </Tooltip>
+                        </strong></span>}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
                     name="description"
-                    label="Tell us about your project (features, tech stack, motivation)"
+                    label={<span><strong>
+                        Description&nbsp;
+                <Tooltip title="Share your motivation, tech stack, challenges, experience">
+                            <QuestionCircleOutlined />
+                        </Tooltip>
+                        </strong></span>}
                     rules={[{ required: true, message: 'Required' }]}
                 >
-                    <Input.TextArea />
+                    <Input.TextArea 
+                        placeholder="Tell us about your project..."
+                    />
                 </Form.Item>
                 <Form.Item
-                    label="Website"
+                    label={<span><strong>Website</strong></span>}
                     name="url"
                     rules={[{ required: true, message: 'Required' }]}
                 >
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    label="Technologies"
+                    label={<span><strong>Repository Url</strong></span>}
+                    name="repo-url"
+                    rules={[{ required: false, message: 'Required' }]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label={<span><strong>Technologies</strong></span>}
                     name="technologies"
                     rules={[{ required: true, message: 'Must select at least one' }]}
                 >
@@ -245,7 +263,7 @@ const ProjectUpload = () => {
                     </Select>
                 </Form.Item>
                 <Form.Item
-                    label="Tags"
+                    label={<span><strong>Tags</strong></span>}
                     name="tags"
                     rules={[{ required: true, message: 'Must select at least one' }]}
                 >
@@ -257,18 +275,18 @@ const ProjectUpload = () => {
                         {childrenTags}
                     </Select>
                 </Form.Item>
-                <Form.Item label={<span>
+                <Form.Item label={<span><strong>
                     Collaboration&nbsp;
             <Tooltip title="Are you interested in collaborating with other developers?">
                         <QuestionCircleOutlined />
                     </Tooltip>
-                </span>}
+                </strong></span>}
                     name="collaboration"
                 >
                     <Switch checkedChildren="Yes" unCheckedChildren="No" />
                 </Form.Item>
-                <Form.Item label="Add Thumbnail">
-                    <p>Add a thumbnail(250x250) and a screenshot of your project.</p>
+                <Form.Item label={<span><strong>Add Image</strong></span>}>
+                    <p>Include a screenshot or logo of your application.</p>
                     <div className="clearfix">
                         <Upload
                             listType="picture-card"
@@ -290,8 +308,12 @@ const ProjectUpload = () => {
                         </Modal>
                     </div>
                 </Form.Item>
-                <Button type="primary" htmlType="submit">Submit</Button>
+                <div className="form-btn-wrap">
+                    <Button className="upload-btn" type="primary" htmlType="submit">Update</Button>
+                </div>
+                
             </Form>
+        </div>
         </div>
     )
 };
