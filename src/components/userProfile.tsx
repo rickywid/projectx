@@ -16,7 +16,7 @@ interface IUserProfile {
 
 const UserProfile = ({match}: IUserProfile) => {
     const api = new ApiService();
-    
+    const username = match.params.username;
     const [user, setUser] = useState<any>({});
     const [userProjects, setUserProjects] = useState([]);
     const [likedProjects, setLikedProjects] = useState([]);
@@ -24,7 +24,6 @@ const UserProfile = ({match}: IUserProfile) => {
     
     useEffect(() => {
         const fetch = async () => {
-            const username = match.params.username;
             const user = await api.getUserProfile(username);
             const json = await user.json();
             
@@ -47,9 +46,12 @@ const UserProfile = ({match}: IUserProfile) => {
             <div className="user-profile-detail">
                 <h1 className="user-name">{user.username}</h1>
                 <p>{user.description}</p>
-                <Link to={`/user/edit/${user.id}`}
-                    ><Button size="small" type="dashed">edit</Button>
-                </Link>                
+                {localStorage.getItem('username') === username ?
+                    <Link to={`/user/edit/${user.username}`}>
+                        <Button size="small" type="dashed">edit</Button>
+                    </Link> :
+                    ""
+                }
             </div>
             <Tabs className="user-tabs" defaultActiveKey="1" onChange={callback}>
                 <TabPane tab={<span><strong>My Projects </strong><span style={{color: 'grey'}}>{userProjects.length}</span></span>} key="1">

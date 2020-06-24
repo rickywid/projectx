@@ -21,7 +21,7 @@ const Routes = (
     <Route exact path="/project/:id" component={Project} />
     <Route exact path="/user/:username" render={({ match }) => <UserProfile key={match.params.username} match={match} /> } />
     <Route exact path="/user/edit/:username" component={UserEdit} />
-    <Route exact path="/project/edit/:username" component={ProjectEdit} />
+    <Route exact path="/project/edit/:username" render={({ match }) => <UserEdit key={match.params.username} match={match} />} />
     <Route exact path ="/search"  render={({ location }) => <SearchResults key={location.search} /> } />
     <Route component={NoMatch} />
   </Switch>

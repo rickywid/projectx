@@ -47,14 +47,20 @@ interface IFields {
     collaboration: string;
 }
 
-const UserEdit: React.FC = (props: any) => {
+interface IUserProfile {
+    children?: React.ReactNode;
+    match: any;
+}
+
+const UserEdit = ({match}: IUserProfile) => {
     const api = new ApiService();
     const auth = new AuthService();
     const username = localStorage.getItem('username') as string;
+    const params = match.params.username;
 
     useEffect(() => {
 
-        if (username === 'undefined') {
+        if (username === 'undefined' || username !== params) {
             history.push('/');
             return;
         }
