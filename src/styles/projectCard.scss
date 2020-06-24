@@ -4,7 +4,7 @@
     padding: 0;
     display: grid;
     list-style: none;
-    grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
     grid-gap: 36px;
 
     .project-item {
@@ -29,7 +29,6 @@
             height: 220px;        
             position: relative;
             overflow: hidden;
-            border-radius: 5px;
     
             .project-tag {
                 text-align: right;

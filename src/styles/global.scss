@@ -6,6 +6,7 @@ body {
 }
 
 
+
 // ant-d override
 .ant-layout {
     background:$bg;
@@ -40,6 +41,14 @@ body {
     border-left: 1px solid #d8d6d6;
 }
 
+
+.comment-btn,
+.website-btn,
+.repo-btn {
+    width: 100%;
+}
+
+
 .error-msg {
     color: red;
     font-weight: bold;
@@ -47,6 +56,10 @@ body {
 
 @media only screen and (min-width: $medium) {
     .ant-layout-content {
-        padding: 75px;
+        padding: 26px;
+    }
+
+    .comment-btn {
+        width: auto;
     }
 }

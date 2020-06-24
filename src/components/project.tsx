@@ -158,7 +158,7 @@ const Project = () => {
                         </div>
 
                     </div>
-                    <img style={{ width: '800px' }} className="project-view-screenshot" src={project.images[0]} alt="screenshot" />
+                    <img className="project-view-screenshot" src={project.images[0]} alt="screenshot" />
                     <Divider />
                     <div className="project-view-content">
                         <div className="project-view-left-col">
@@ -174,9 +174,9 @@ const Project = () => {
                                             name="comment"
                                             rules={[{ required: true, message: 'Required' }]}
                                         >
-                                            <TextArea rows={2} />
+                                            <TextArea placeholder="What do you think of this project?" rows={2} />
                                         </Form.Item>
-                                        <Button type="primary" htmlType="submit">Send</Button>
+                                        <Button className="comment-btn" type="primary" htmlType="submit">Send</Button>
                                     </Form>
                                     <Divider />
                                 </>
@@ -201,8 +201,8 @@ const Project = () => {
 
                         </div>
                         <div className="project-view-right-col">
-                            <a href={project.url}><Button className="website" icon={<DesktopOutlined />} type="primary">Website</Button></a>
-                            <a href={project.url}><Button className="repo" icon={<CodeOutlined />} type="primary">Repository</Button></a>
+                            <a href={project.url}><Button className="website-btn" icon={<DesktopOutlined />} type="primary">Website</Button></a>
+                            <a href={project.url}><Button className="repo-btn" icon={<CodeOutlined />} type="primary">Repository</Button></a>
                             <Divider />
                             <div className="project-view-tags">
                                 <TagFilled />

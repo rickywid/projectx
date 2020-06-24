@@ -1,6 +1,8 @@
 import React from 'react';
 import { Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import history from '../lib/history';
+import '../styles/searchBar.scss';
 const { Search } = Input;
 
 const SearchBar = () => {
@@ -10,13 +12,19 @@ const SearchBar = () => {
   }
 
   return (
-    <div>
+    <div className="search-wrapper">
+      <div className="search-input">
         <Search
-            placeholder="input search text"
-            enterButton="Search"
-            size="large"
-            onSearch={onSearch}
-        />
+              enterButton="Search"
+              onSearch={onSearch}
+              prefix={  <SearchOutlined
+                style={{
+                  fontSize: 16,
+                  color: '#ccc',
+                }}
+              />}
+          />
+      </div>
     </div>
   );
 };

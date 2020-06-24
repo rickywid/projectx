@@ -4,11 +4,13 @@
     max-width: 850px;
     margin: 0 auto;
     background: white;
-    padding: 50px;
+    padding: 10px;
 
     img.project-view-screenshot {
-        max-width: 100%;
+        height: auto;
+        width: 100%;
         margin: 0 auto;
+        display: block;
     }
     
     ul {
@@ -27,6 +29,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+
+        .project-view-title-info {
+            flex-basis: 100%;
+        }
 
         h2 {
             margin: 0;
@@ -47,15 +54,12 @@
 
     .project-view-content {
         .project-view-right-col {
-            button {
-                width: 100%;
-            }
 
-            button.website {
+            button.website-btn {
                 margin-bottom: 15px;
             }
 
-            button.repo {
+            button.repo-btn {
                 margin-bottom: 0;
             }
 
@@ -77,7 +81,7 @@
 
         .project-view-left-col {
             flex: 2;
-            margin-right: 50px;
+            margin-right: 0;
 
             .project-view-comments {
                 .project-view-comment {
@@ -118,7 +122,28 @@
 
 
 @media only screen and (min-width: $medium) {
-    .project-view-content {
-        display: flex;
-    }    
+    .project-view {
+        padding: 50px;
+    
+        img.project-view-screenshot {
+            height: 300px;
+            width: auto;
+            margin: 0 auto;
+        }
+    
+        .project-view-content {
+            display: flex;
+
+            .project-view-left-col {
+                margin-right: 50px;
+            }
+        }
+        
+        .project-view-title {
+            .project-view-title-info {
+                flex-basis: auto;
+            }
+        }
+    }
 }
+
