@@ -9,6 +9,10 @@ h1 {
     font-weight: bold;
 }
 
+a {
+    color: $link;
+}
+
 
 // ant-d override
 .ant-layout {
@@ -53,12 +57,18 @@ h1 {
 }
 
 .ant-layout-sider-zero-width-trigger {
-    top: 218px;
-    background: #414c5e;
-    border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    right: -54px;
+    top: 0;
+    background: white;
+
+    &:hover {
+        background: #ccc;
+    }
+    // width: 42px;
+    // height: 42px;
+}
+
+.anticon.anticon-bars svg {
+    fill: black;
 }
 
 

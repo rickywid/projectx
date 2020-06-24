@@ -4,7 +4,7 @@ import { Tabs, Button } from 'antd';
 import ApiService from '../lib/apiService';
 import ProjectsCard from '../components/projectCard';
 import '../styles/userProfile.scss';
-import CodeImg from '../assets/code.png';
+import { ReactComponent as CodeSVG } from '../assets/code.svg';
 
 const { TabPane } = Tabs;
 
@@ -56,7 +56,7 @@ const UserProfile = ({match}: IUserProfile) => {
                     {userProjects.length ? 
                     <ProjectsCard isOwner={user.selfProfile} projects={userProjects}/> : (
                         <div className="user-msg-no-projects">
-                            <img style={{width: 100, marginBottom: 20}} src={CodeImg} alt="folder-image" /> 
+                            <CodeSVG style={{width: 150, marginBottom: 20, fill: '#b3b3b3'}} />
                             <p>You haven't uploaded any projects yet.</p>
                             <Link to="/upload">
                                 <Button type="primary">Upload your first project</Button>

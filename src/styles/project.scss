@@ -4,7 +4,7 @@
     max-width: 850px;
     margin: 0 auto;
     background: white;
-    padding: 10px;
+    padding: 20px;
 
     img.project-view-screenshot {
         height: auto;
@@ -30,6 +30,7 @@
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
+        margin-bottom: 0;
 
         .project-view-title-info {
             flex-basis: 100%;
@@ -142,6 +143,8 @@
         }
         
         .project-view-title {
+            margin-bottom: 30px;
+            
             .project-view-title-info {
                 flex-basis: auto;
             }
