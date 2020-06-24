@@ -40,6 +40,7 @@ interface IFields {
     description: string;
     tagline: string;
     url: string;
+    repourl: string;
     technologies: string;
     tags: string;
     collaboration: string;
@@ -118,7 +119,7 @@ const ProjectUpload = () => {
     }
 
     const handleOnFinish = async (values: IFields) => {
-        const { name, description, tagline, url, collaboration } = values;
+        const { name, description, tagline, url, repourl, collaboration } = values;
         const userID = localStorage.getItem('userID') as string;
         const form = new FormData();
         const techArray: any = [];
@@ -140,6 +141,7 @@ const ProjectUpload = () => {
         form.append('description', description);
         form.append('tagline', tagline);
         form.append('url', url);
+        form.append('repourl', repourl);
         form.append('technologies', techArray);
         form.append('tags', tagArray);
         form.append('collaboration', collaboration);
@@ -165,7 +167,7 @@ const ProjectUpload = () => {
             body: data
         }
 
-        fetch(`${process.env.REACT_APP_SERVER}/api/image/upload`, config).then((res: any) => {
+        fetch(`${process.env.REACT_APP_SERVER}/image/upload`, config).then((res: any) => {
             return res.json();
         }).then(data => {
             file.onProgress(e => console.log(e));
@@ -243,7 +245,7 @@ const ProjectUpload = () => {
                 </Form.Item>
                 <Form.Item
                     label={<span><strong>Repository Url</strong></span>}
-                    name="repo-url"
+                    name="repourl"
                     rules={[{ required: false, message: 'Required' }]}
                 >
                     <Input />
@@ -309,7 +311,7 @@ const ProjectUpload = () => {
                     </div>
                 </Form.Item>
                 <div className="form-btn-wrap">
-                    <Button className="upload-btn" type="primary" htmlType="submit">Update</Button>
+                    <Button className="upload-btn" type="primary" htmlType="submit">Submit</Button>
                 </div>
                 
             </Form>

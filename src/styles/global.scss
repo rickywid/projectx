@@ -20,7 +20,7 @@ a {
 }
 
 .ant-layout-content {
-    padding: 20px;
+    padding: 50px 20px;
 }
 
 .ant-layout-sider {
@@ -59,12 +59,11 @@ a {
 .ant-layout-sider-zero-width-trigger {
     top: 0;
     background: white;
+    box-shadow: -3px 3px 5px 0px rgba(0, 0, 0, 0.17);
 
     &:hover {
         background: #ccc;
     }
-    // width: 42px;
-    // height: 42px;
 }
 
 .anticon.anticon-bars svg {

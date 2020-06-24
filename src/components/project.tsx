@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
-import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined } from '@ant-design/icons';
+import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, ConsoleSqlOutlined } from '@ant-design/icons';
 import { Form, Input, Button, Divider } from 'antd';
 import moment from 'moment';
 import history from '../lib/history';
@@ -202,7 +202,7 @@ const Project = () => {
                         </div>
                         <div className="project-view-right-col">
                             <a href={project.url}><Button className="website-btn" icon={<DesktopOutlined />} type="primary">Website</Button></a>
-                            <a href={project.url}><Button className="repo-btn" icon={<CodeOutlined />} type="primary">Repository</Button></a>
+                            {project.repo ?<a href={project.repo}><Button className="repo-btn" icon={<CodeOutlined />} type="primary">Repository</Button></a> : '' }
                             <Divider />
                             <div className="project-view-tags">
                                 <TagFilled />

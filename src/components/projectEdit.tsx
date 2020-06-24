@@ -16,6 +16,7 @@ import ApiService from '../lib/apiService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
 import { technologies, tags } from '../lib/const';
+import '../styles/form.scss';
 
 interface IFormLayoutChange {
     size: string;
@@ -41,6 +42,7 @@ interface IFields {
     description: string;
     tagline: string;
     url: string;
+    repourl: string;
     technologies: string;
     tags: string;
     collaboration: string;
@@ -50,24 +52,24 @@ const ProjectEdit = () => {
     const api = new ApiService();
     const id = window.location.pathname.split('/')[3];
     useEffect(() => {
-        
+
         const techArray: string[] = [];
         const tagArray: string[] = [];
-        
-        if(localStorage.getItem('userID') === 'undefined') {
+
+        if (localStorage.getItem('userID') === 'undefined') {
             history.push('/');
             return;
         }
 
         const fetch = async () => {
             setIsLoading(true);
-            
+
             const project = await api.getProject(id);
 
 
             if (project.status === 200) {
                 const data = await project.json();
-                
+
                 setFileList([{
                     uid: '-1',
                     url: data.project.images[0]
@@ -75,14 +77,14 @@ const ProjectEdit = () => {
 
                 setFileListUpload([data.project.images[0]]);
 
-                for(let key in technologies) {
-                    if(data.project.technologies.includes(technologies[key])) {
+                for (let key in technologies) {
+                    if (data.project.technologies.includes(technologies[key])) {
                         techArray.push(technologies[key]);
                     }
                 }
 
-                for(let key in tags) {
-                    if(data.project.tags.includes(tags[key])) {
+                for (let key in tags) {
+                    if (data.project.tags.includes(tags[key])) {
                         tagArray.push(tags[key]);
                     }
                 }
@@ -114,11 +116,11 @@ const ProjectEdit = () => {
     const childrenTech = [];
     const childrenTags = [];
 
-    for(let key in technologies) {
+    for (let key in technologies) {
         childrenTech.push(<Option key={key} value={`${technologies[key]}`}>{technologies[key]}</Option>);
     }
 
-    for(let key in tags) {
+    for (let key in tags) {
         childrenTags.push(<Option key={key} value={`${tags[key]}`}>{tags[key]}</Option>);
     }
 
@@ -170,22 +172,22 @@ const ProjectEdit = () => {
     }
 
     const handleOnFinish = async (values: IFields) => {
-        
-        const { name, description, tagline, url, collaboration } = values;
+
+        const { name, description, tagline, url, repourl, collaboration } = values;
         const userID = localStorage.getItem('userID') as string;
         const id = window.location.pathname.split('/')[3];
         const techArray: any = [];
         const tagArray: any = [];
         const form = new FormData();
 
-        for(let key in technologies) {
-            if(technologiesSelect.includes(technologies[key])) {
+        for (let key in technologies) {
+            if (technologiesSelect.includes(technologies[key])) {
                 techArray.push(key);
             }
         }
 
-        for(let key in tags) {
-            if(tagsSelect.includes(tags[key])) {
+        for (let key in tags) {
+            if (tagsSelect.includes(tags[key])) {
                 tagArray.push(key);
             }
         }
@@ -194,14 +196,15 @@ const ProjectEdit = () => {
         form.append('description', description);
         form.append('tagline', tagline);
         form.append('url', url);
+        form.append('repourl', repourl);
         form.append('technologies', techArray);
         form.append('tags', tagArray);
         form.append('collaboration', collaboration);
         form.append('screenshots', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.project());
         form.append('user_id', userID);
-        
+
         const res = await api.updateProject(id, form);
-        
+
         if (res.status === 200) {
             history.push('/');
         }
@@ -224,7 +227,7 @@ const ProjectEdit = () => {
         }).then(data => {
             file.onProgress(e => console.log(e));
             file.onSuccess(e => console.log(e));
-            
+
             setFileListUpload([...fileListUpload, data.secure_url]);
         }).catch((err: Error) => {
             console.log(err)
@@ -240,150 +243,164 @@ const ProjectEdit = () => {
 
     const confirm = (e: any, id: string) => {
         handleOnDelete(id);
-      }
-      
-      const cancel = () => {
+    }
+
+    const cancel = () => {
         //console.log(e);
-      }
+    }
 
     const handleOnDelete = async (id: string) => {
         const form = new FormData();
-    
+
         form.append('project_id', id);
         const res = await api.deleteProject(id, form);
-    
+
         history.push(`/user/${localStorage.getItem('username')}`)
-      }
+    }
 
     return (
         <div>
             {isLoading ? <p>loading</p> :
-            <Form
-                labelCol={{
-                    span: 28,
-                }}
-                wrapperCol={{
-                    span: 14,
-                }}
-                layout="vertical"
-                initialValues={{
-                    size: componentSize,
-                    name: project.name,
-                    tagline: project.tagline,
-                    description: project.description,
-                    collaboration: project.collaboration,
-                    technologies: technologiesSelect,
-                    tags: tagsSelect,
-                    url: project.url
-                }}
-                onFinish={handleOnFinish as any}
-                onValuesChange={onFormLayoutChange as any}
-            >
-                <Form.Item
-                    label="Project Name"
-                    name="name"
-                    rules={[{ required: true, message: 'Required' }]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label="Tagline"
-                    name="tagline"
-                    rules={[{ required: true, message: 'Required' }]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    name="description"
-                    label="Tell us about your project (features, tech stack, motivation)"
-                    rules={[{ required: true, message: 'Required' }]}
-                >
-                    <Input.TextArea />
-                </Form.Item>
-                <Form.Item
-                    label="Website"
-                    name="url"
-                    rules={[{ required: true, message: 'Required' }]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    label="Technologies"
-                    name="technologies"
-                    rules={[{ required: true, message: 'Must select at least one' }]}
-                >
-                    <Select
-                        mode="multiple"
-                        style={{ width: '100%' }}
-                        placeholder="Please select"
-                        onChange={onSelectTechnologyChange as any}
-                    >
-                        {childrenTech}
-                    </Select>
-                </Form.Item>
-                <Form.Item
-                    label="Tags"
-                    name="tags"
-                    rules={[{ required: true, message: 'Must select at least one' }]}
-                >
-                    <Select
-                        style={{ width: '100%' }}
-                        placeholder="Please select"
-                        onChange={onSelectTagChange as any}
-                    >
-                        {childrenTags}
-                    </Select>
-                </Form.Item>
-                <Form.Item label={<span>
-                    Collaboration&nbsp;
+                <div>
+                    <h1>Update Project</h1>
+                    <div className="form-wrapper">
+                        <Form
+                            layout="vertical"
+                            initialValues={{
+                                size: componentSize,
+                                name: project.name,
+                                tagline: project.tagline,
+                                description: project.description,
+                                collaboration: project.collaboration,
+                                technologies: technologiesSelect,
+                                tags: tagsSelect,
+                                url: project.url,
+                                repourl: project.repo
+                            }}
+                            onFinish={handleOnFinish as any}
+                            onValuesChange={onFormLayoutChange as any}
+                        >
+                            <Form.Item
+                                label="Project Name"
+                                name="name"
+                                rules={[{ required: true, message: 'Required' }]}
+                            >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item
+                                label="Tagline"
+                                name="tagline"
+                                rules={[{ required: true, message: 'Required' }]}
+                            >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item
+                                name="description"
+                                label="Tell us about your project (features, tech stack, motivation)"
+                                rules={[{ required: true, message: 'Required' }]}
+                            >
+                                <Input.TextArea />
+                            </Form.Item>
+                            <Form.Item
+                                label="Website"
+                                name="url"
+                                rules={[{ required: true, message: 'Required' }]}
+                            >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item
+                                label="Repository Url"
+                                name="repourl"
+                            >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item
+                                label="Technologies"
+                                name="technologies"
+                                rules={[{ required: true, message: 'Must select at least one' }]}
+                            >
+                                <Select
+                                    mode="multiple"
+                                    style={{ width: '100%' }}
+                                    placeholder="Please select"
+                                    onChange={onSelectTechnologyChange as any}
+                                >
+                                    {childrenTech}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item
+                                label="Tags"
+                                name="tags"
+                                rules={[{ required: true, message: 'Must select at least one' }]}
+                            >
+                                <Select
+                                    style={{ width: '100%' }}
+                                    placeholder="Please select"
+                                    onChange={onSelectTagChange as any}
+                                >
+                                    {childrenTags}
+                                </Select>
+                            </Form.Item>
+                            <Form.Item label={<span>
+                                Collaboration&nbsp;
             <Tooltip title="Are you interested in collaborating with other developers?">
-                        <QuestionCircleOutlined />
-                    </Tooltip>
-                </span>}
-                    name="collaboration"
-                >
-                    <Switch checkedChildren="Yes" unCheckedChildren="No" />
-                </Form.Item>
-                <Form.Item label="Add Thumbnail">
-                    <p>Add a thumbnail(250x250) and a screenshot of your project.</p>
-                    <div className="clearfix">
-                        <Upload
-                            listType="picture-card"
-                            fileList={fileList as any[]}
-                            onPreview={handlePreview as any}
-                            onChange={handleUploadChange as any}
-                            onRemove={handleOnRemove as any}
-                            customRequest={customRequest as any}
-                        >
-                            {fileList.length >= 1 ? null : uploadButton}
-                        </Upload>
-                        <Modal
-                            visible={previewVisible}
-                            title={previewTitle}
-                            footer={null}
-                            onCancel={handleCancel}
-                        >
-                            <img alt="example" style={{ width: '100%' }} src={previewImage} />
-                        </Modal>
+                                    <QuestionCircleOutlined />
+                                </Tooltip>
+                            </span>}
+                                name="collaboration"
+                            >
+                                <Switch checkedChildren="Yes" unCheckedChildren="No" />
+                            </Form.Item>
+                            <Form.Item label="Add Thumbnail">
+                                <p>Add a thumbnail(250x250) and a screenshot of your project.</p>
+                                <div className="clearfix">
+                                    <Upload
+                                        listType="picture-card"
+                                        fileList={fileList as any[]}
+                                        onPreview={handlePreview as any}
+                                        onChange={handleUploadChange as any}
+                                        onRemove={handleOnRemove as any}
+                                        customRequest={customRequest as any}
+                                    >
+                                        {fileList.length >= 1 ? null : uploadButton}
+                                    </Upload>
+                                    <Modal
+                                        visible={previewVisible}
+                                        title={previewTitle}
+                                        footer={null}
+                                        onCancel={handleCancel}
+                                    >
+                                        <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                                    </Modal>
+                                </div>
+                            </Form.Item>
+                            <div className="form-btn-wrap">
+                                <Button type="primary" htmlType="submit">Submit</Button>
+                            </div>
+
+                        </Form>
                     </div>
-                </Form.Item>
-                <Button type="primary" htmlType="submit">Submit</Button>
-            </Form>
+                </div>
             }
 
             <Divider />
-            <h3>Delete this project</h3>
-            <p>Once you delete this project, there is no going back. Please be certain. </p>
-            <Popconfirm
-                title="Are you sure you want to delete this project?"
-                onConfirm={(e) => confirm(e, id)}
-                onCancel={cancel}
-                okText="Yes"
-                cancelText="No"
-                >
-                <Button type="primary" danger>Delete</Button>
-            </Popconfirm>
-            
+            <div>
+                <h1>Delete Account</h1>
+                <div className="form-wrapper">
+                    <p>Once you delete this project, there is no going back. Please be certain. </p>
+                    <Popconfirm
+                        title="Are you sure you want to delete this project?"
+                        onConfirm={(e) => confirm(e, id)}
+                        onCancel={cancel}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <div className="form-btn-wrap">
+                            <Button type="primary" danger>Delete</Button>
+                        </div>
+                    </Popconfirm>
+                </div>
+            </div>
         </div>
     )
 };
