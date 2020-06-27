@@ -4,6 +4,7 @@ import ApiService from './lib/apiService';
 import Routes from './routes';
 import NavBar from './components/navbar';
 import Footer from './components/footer';
+import SearchBar from './components/searchBar';
 import './App.css';
 
 interface IUser {
@@ -43,11 +44,13 @@ function App() {
         signup="signup"
         login="login"
         upload="upload"
+        technology="technology"
         user={user}
         isAuthenticated={user.isAuthenticated}
       />
       <Layout>
         <Layout.Content>
+        <SearchBar />
           {Routes}
         </Layout.Content>
         <Footer />

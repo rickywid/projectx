@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import SearchBar from './searchBar';
 import ProjectsCard from './projectCard';
 import ApiService from '../lib/apiService';
 
@@ -22,7 +21,6 @@ const Root: React.FC = () => {
     return (
         
         <div className="root">
-          <SearchBar />
           <ProjectsCard projects={projects}/>
         </div>
     

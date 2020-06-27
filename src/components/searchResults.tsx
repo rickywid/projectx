@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ProjectsCard from './projectCard';
-import SearchBar from './searchBar';
 import ApiService from '../lib/apiService';
 
 const SearchResults: React.FC = () => {
@@ -33,7 +32,6 @@ const SearchResults: React.FC = () => {
         <div>
             {loading ? <p>Loading</p> : 
             <>
-                <SearchBar />
                 {resultHeader}
                 <ProjectsCard projects={projects}/>
             </>
