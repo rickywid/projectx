@@ -78,8 +78,8 @@ const ProjectEdit = () => {
                 setFileListUpload([data.project.images[0]]);
 
                 for (let key in technologies) {
-                    if (data.project.technologies.includes(technologies[key])) {
-                        techArray.push(technologies[key]);
+                    if (data.project.technologies.includes(technologies[key].slug)) {
+                        techArray.push(technologies[key].slug);
                     }
                 }
 
@@ -116,8 +116,8 @@ const ProjectEdit = () => {
     const childrenTech = [];
     const childrenTags = [];
 
-    for (let key in technologies) {
-        childrenTech.push(<Option key={key} value={`${technologies[key]}`}>{technologies[key]}</Option>);
+    for(let key in technologies) {
+        childrenTech.push(<Option key={key} value={`${technologies[key].slug}`}>{technologies[key].name}</Option>);
     }
 
     for (let key in tags) {
@@ -181,7 +181,7 @@ const ProjectEdit = () => {
         const form = new FormData();
 
         for (let key in technologies) {
-            if (technologiesSelect.includes(technologies[key])) {
+            if (technologiesSelect.includes(technologies[key].slug)) {
                 techArray.push(key);
             }
         }

@@ -206,7 +206,7 @@ const Project = () => {
                             <Divider />
                             <div className="project-view-tags">
                                 <TagFilled />
-                                <ul>{project.technologies.map((tag: string) => <li style={{ listStyle: 'none' }}>{tag}</li>)}</ul>
+                                <ul>{project.technologies.map((technology: string) => <Link to={`/technology/${technology}`}><li style={{ listStyle: 'none' }}>{technology}</li></Link>)}</ul>
                             </div>
                             <Divider />
                             <div className="project-view-details">

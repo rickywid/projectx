@@ -12,11 +12,12 @@ interface Props {
   signup: string;
   login: string;
   upload: string;
+  technology: string;
   isAuthenticated: boolean;
 }
 
 const NavBar = ({
-  root, user, signup, login, upload, isAuthenticated
+  root, user, signup, login, upload, isAuthenticated, technology
 }: Props) => {
   const api = new AuthService();
 
@@ -43,6 +44,11 @@ const NavBar = ({
       </Link>
     </Menu.Item>
     <Menu.Item key="3">
+      <Link to={`/${technology}`}>
+          <span>Tags</span>
+        </Link>
+    </Menu.Item>
+    <Menu.Item key="4">
       <button className="btn-signout" onClick={onSignout}>signout</button>
     </Menu.Item>
   </Menu>  
@@ -50,17 +56,20 @@ const NavBar = ({
   
   const unAuthMenu = () => (
     <Menu theme="light" mode="inline">
-      <Menu.Item key="4">
+      <Menu.Item key="5">
         <Link to={`/${signup}`}>
           <span>Sign Up</span>
         </Link>
       </Menu.Item>
-      <Menu.Item key="5">
+      <Menu.Item key="6">
         <Link to={`/${login}`}>
           <span>Log In</span>
         </Link>
       </Menu.Item>
-      <Menu.Item key="6">
+      <Menu.Item key="7">
+      <Link to={`/${technology}`}>
+          <span>Tags</span>
+        </Link>
     </Menu.Item>
     </Menu>  
   )

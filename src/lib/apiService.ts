@@ -172,6 +172,14 @@ class ApiService{
           user
         );
       }      
+
+      public async filterTechnology(value: string) {  
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.get(
+          `${this.apiEndpoint}/technology/${value}`,
+          this.headers,
+        );
+      }
 }
 
 export default ApiService;
