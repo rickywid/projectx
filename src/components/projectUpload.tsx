@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Form,
     Input,
@@ -47,6 +47,14 @@ interface IFields {
 }
 
 const ProjectUpload = () => {
+
+    useEffect(() => {
+        if (localStorage.getItem('userID') === 'undefined') {
+            history.push('/');
+            return;
+        }
+    });
+
     const api = new ApiService();
     const placeholder = new Placeholder();
     const [componentSize, setComponentSize] = useState('medium');
