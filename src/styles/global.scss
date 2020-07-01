@@ -13,6 +13,9 @@ a {
     color: $link;
 }
 
+.pb-20 {
+    padding-bottom: 20px;
+}
 
 // ant-d override
 .ant-layout {
@@ -42,6 +45,10 @@ a {
             font-size: 24px;
         }
     }
+}
+
+.ant-divider {
+    border-top: 1px solid #dedede;
 }
 
 .ant-divider-vertical {

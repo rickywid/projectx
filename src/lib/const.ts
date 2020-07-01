@@ -55,6 +55,102 @@ export let technologies: technologies = {
         slug: 'drupal',
         name: 'Drupal'
     },
+    13: {
+        slug: 'javascript',
+        name: 'JavaScript'
+    },
+    14: {
+        slug: 'html',
+        name: 'HTML'
+    },
+    15: {
+        slug: 'css',
+        name: 'CSS'
+    },
+    16: {
+        slug: 'typescript',
+        name: 'TypeScript'
+    },
+    17: {
+        slug: 'electron',
+        name: 'Electron'
+    },
+    18: {
+        slug: 'graphql',
+        name: 'GraphQL'
+    },
+    19: {
+        slug: 'symfony',
+        name: 'Symfony'
+    },
+    20: {
+        slug: 'mysql',
+        name: 'MySQL'
+    },
+    21: {
+        slug: 'rethink',
+        name: 'RethinkDB'
+    },
+    22: {
+        slug: 'mongo',
+        name: 'MongoDB'
+    },
+    23: {
+        slug: 'postgresql',
+        name: 'Postgreql'
+    },
+    24: {
+        slug: 'firebase',
+        name: 'Firebase'
+    },
+    25: {
+        slug: 'aws',
+        name: 'AWS'
+    },
+    26: {
+        slug: 'azure',
+        name: 'Azure'
+    },
+    27: {
+        slug: 'circleci',
+        name: 'CircleCI'
+    },
+    28: {
+        slug: 'docker',
+        name: 'Docker'
+    },
+    29: {
+        slug: 'travisci',
+        name: 'TravisCI'
+    },
+    30: {
+        slug: 'gitlab',
+        name: 'GitLab'
+    },
+    31: {
+        slug: 'googlecloud',
+        name: 'Google Cloud'
+    },    
+    32: {
+        slug: 'jenkins',
+        name: 'Jenkins'
+    },
+    33: {
+        slug: 'heroku',
+        name: 'Heroku'
+    },
+    34: {
+        slug: 'nextjs',
+        name: 'NextJS'
+    },
+    35: {
+        slug: 'nuxtjs',
+        name: 'NuxtJS'
+    },
+    36: {
+        slug: 'gatsbyjs',
+        name: 'GatsbyJS'
+    }
 }
 
 // tags mapping must be exactly the same as tags table

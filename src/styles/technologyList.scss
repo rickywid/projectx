@@ -1,0 +1,28 @@
+.technology-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+
+    section {
+        padding-bottom: 50px;
+
+        a {
+            display: block;
+            text-align: center;
+
+            svg {
+                width: 65px;
+                height: auto;
+            }
+        
+            .lg-svg {
+                width: 115px;
+            }
+        }
+    }
+
+    .ant-row {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+    }
+}
