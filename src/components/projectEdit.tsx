@@ -271,7 +271,6 @@ const ProjectEdit = () => {
                                 name: project.name,
                                 tagline: project.tagline,
                                 description: project.description,
-                                collaboration: project.collaboration,
                                 technologies: technologiesSelect,
                                 tags: tagsSelect,
                                 url: project.url,
@@ -349,7 +348,7 @@ const ProjectEdit = () => {
                             </span>}
                                 name="collaboration"
                             >
-                                <Switch checkedChildren="Yes" unCheckedChildren="No" />
+                                <Switch checkedChildren="Yes" unCheckedChildren="No" defaultChecked={project.collaboration} />
                             </Form.Item>
                             <Form.Item label="Add Thumbnail">
                                 <p>Add a thumbnail(250x250) and a screenshot of your project.</p>

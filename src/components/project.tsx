@@ -162,6 +162,7 @@ const Project = () => {
                     <Divider />
                     <div className="project-view-content">
                         <div className="project-view-left-col">
+                            <p>{project.tagline}</p>
                             <p>{project.description}</p>
 
                             {user.isAuthenticated ?
@@ -210,9 +211,9 @@ const Project = () => {
                             </div>
                             <Divider />
                             <div className="project-view-details">
-                                <ul>
+                                <ul>{console.log(project.collaboration)}
                                     <li><HeartFilled /> {likeCount} likes</li>
-                                    <li><TeamOutlined /> Interested in collaborating</li>
+                                    {project.collaboration && <li><TeamOutlined /> Looking for contributors</li>}
                                     <li><CalendarFilled /> Created June 4, 2020</li>
                                 </ul>
                             </div>
