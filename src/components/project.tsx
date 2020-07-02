@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
 import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, ConsoleSqlOutlined } from '@ant-design/icons';
-import { Form, Input, Button, Divider } from 'antd';
+import { Form, Input, Button, Divider, message } from 'antd';
 import moment from 'moment';
 import history from '../lib/history';
 import '../styles/project.scss'
@@ -33,6 +33,7 @@ interface IProjectPage {
 interface IFields {
     comment: {created_on: string};
 }
+
 
 const Project = () => {
 
@@ -85,6 +86,7 @@ const Project = () => {
         form.append('user_id', user.id);
 
         if(!user.isAuthenticated) {
+            message.info('You must be logged in');
             history.push('/login');
             return;
         }
