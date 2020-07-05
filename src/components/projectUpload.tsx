@@ -14,6 +14,7 @@ import ApiService from '../lib/apiService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
 import { technologies, tags } from '../lib/const';
+import UrlValidation from '../lib/urlValidation';
 import '../styles/form.scss';
 
 interface IFormLayoutChange {
@@ -245,18 +246,52 @@ const ProjectUpload = () => {
                     />
                 </Form.Item>
                 <Form.Item
-                    label={<span><strong>Website</strong></span>}
+                    label={<span><strong>
+                        Website&nbsp;
+                        <Tooltip title="Url of your website">
+                            <QuestionCircleOutlined />
+                        </Tooltip>
+                        </strong></span>}
                     name="url"
-                    rules={[{ required: true, message: 'Required' }]}
+                    rules={[{ required: true, message: 'Required' },
+                        ({ getFieldValue }) => ({
+                            validator(rule, value) {
+                                if (UrlValidation(value)) {
+                                    return Promise.resolve();
+                                }
+
+                                return Promise.reject(new Error('Invalid Url'));
+                            },
+                        }),
+                    ]}
                 >
-                    <Input />
+                    <Input 
+                        placeholder="https://mysite.com"
+                    />
                 </Form.Item>
                 <Form.Item
-                    label={<span><strong>Repository Url</strong></span>}
+                    label={<span><strong>
+                        Repository Url&nbsp;
+                        <Tooltip title="Url of your project repository">
+                            <QuestionCircleOutlined />
+                        </Tooltip>
+                        </strong></span>}
                     name="repourl"
-                    rules={[{ required: false, message: 'Required' }]}
+                    rules={[{ required: false, message: 'Required' },
+                        ({ getFieldValue }) => ({
+                            validator(rule, value) {
+                                if (UrlValidation(value) || value === '') {
+                                    return Promise.resolve();
+                                }
+
+                                return Promise.reject(new Error('Invalid Url'));
+                            },
+                        }),
+                    ]}
                 >
-                    <Input />
+                    <Input 
+                        placeholder="https://mysite.com"
+                    />
                 </Form.Item>
                 <Form.Item
                     label={<span><strong>Technologies</strong></span>}

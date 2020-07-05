@@ -8,7 +8,13 @@ const { Search } = Input;
 const SearchBar = () => {
 
   const onSearch = (v:string) => {
-      history.push(`/search?q=${v}`)
+
+    if(v === '') {
+      history.push(`/`);
+      return;
+    }
+    
+      history.push(`/search?q=${v}`);
   }
 
   return (
