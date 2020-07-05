@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
-import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, ConsoleSqlOutlined } from '@ant-design/icons';
-import { Form, Input, Button, Divider, message } from 'antd';
+import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, FlagFilled } from '@ant-design/icons';
+import { Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
 import moment from 'moment';
 import history from '../lib/history';
 import '../styles/project.scss'
@@ -36,10 +36,10 @@ interface IFields {
 
 
 const Project = () => {
+    const api = new ApiService();
+    const id = window.location.pathname.split('/')[2];
 
     useEffect(() => {
-        const api = new ApiService();
-        const id = window.location.pathname.split('/')[2];
         const userID = localStorage.getItem('userID');
 
         const fetch = async () => {
@@ -74,7 +74,8 @@ const Project = () => {
     const [isLiked, setisLiked] = useState<boolean>(false);
     const [likeCount, setLikeCount] = useState<string>('0');
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const api = new ApiService();
+    const [visible, setVisible] = useState<boolean>(false);
+    const [value, setValue] = useState<string>('1');
 
     const handleLike = async (like?: boolean) => {
         
@@ -143,6 +144,26 @@ const Project = () => {
         setisSaved(data.data);
         
     }
+
+    const onChange = (e: any) => setValue(e.target.value);
+
+    const radioStyle = {
+        display: 'block',
+        height: '30px',
+        lineHeight: '30px',
+    };
+
+    const showModal = () => setVisible(true);
+    const handleOk = async () => {
+        const form = new FormData();
+
+        form.append('project_id', id);
+        form.append('comment', value);
+        await api.reportProject(form);
+        message.success('Project has been reported');
+        setVisible(false);
+    }
+    const handleCancel = () => setVisible(false);
 
     return (
         <div className="project-view">
@@ -213,16 +234,39 @@ const Project = () => {
                             </div>
                             <Divider />
                             <div className="project-view-details">
-                                <ul>{console.log(project.collaboration)}
+                                <ul>
                                     <li><HeartFilled /> {likeCount} likes</li>
                                     {project.collaboration && <li><TeamOutlined /> Looking for contributors</li>}
                                     <li><CalendarFilled /> Created June 4, 2020</li>
+                                    <li><FlagFilled /> <button style={{background: 'none', border: 'none', padding: 0}} onClick={showModal}>Report</button></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </>
             }
+            <Modal
+                title="Report Project"
+                visible={visible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                okText="Submit"
+                >
+                <Radio.Group onChange={onChange} value={value}>
+                    <Radio style={radioStyle} value={'1'}>
+                        This is offensive or inappropriate content.
+                    </Radio>
+                    <Radio style={radioStyle} value={'2'}>
+                        This is sexual or suggestive content.
+                    </Radio>
+                    <Radio style={radioStyle} value={'3'}>
+                        This is illegal content.
+                    </Radio>
+                    <Radio style={radioStyle} value={'4'}>
+                        This is spam.
+                    </Radio>
+                </Radio.Group>
+            </Modal>
         </div>
     )
 }

@@ -180,6 +180,15 @@ class ApiService{
           this.headers,
         );
       }
+
+      public async reportProject(value: FormData) {  
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.post(
+          `${this.apiEndpoint}/report/project`,
+          this.headers,
+          value
+        );
+      }
 }
 
 export default ApiService;
