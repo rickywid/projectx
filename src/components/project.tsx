@@ -41,6 +41,7 @@ const Project = () => {
     const id = window.location.pathname.split('/')[2];
 
     useEffect(() => {
+        
         const userID = localStorage.getItem('userID');
 
         const fetch = async () => {
@@ -61,6 +62,8 @@ const Project = () => {
                 setLikeCount(data.likes.count);
                 setisLiked(data.likes.users.includes(parseInt(userID as string)))
                 setIsLoading(false);
+
+                document.title = data.project.name;
             }
         }
 
@@ -183,7 +186,7 @@ const Project = () => {
 
                     </div>
                     <img className="project-view-screenshot" src={project.images[0]} alt="screenshot" />
-                    <FacebookShareButton url={process.env.REACT_APP_HOSTNAME as string} quote={project.tagline}>
+                    <FacebookShareButton url={process.env.REACT_APP_HOSTNAME as string}>
                         <FacebookIcon size={32} />
                     </FacebookShareButton>
                     &nbsp;
