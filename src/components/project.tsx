@@ -183,11 +183,11 @@ const Project = () => {
 
                     </div>
                     <img className="project-view-screenshot" src={project.images[0]} alt="screenshot" />
-                    <FacebookShareButton url={process.env.REACT_APP_HOSTNAME as string}>
+                    <FacebookShareButton url={process.env.REACT_APP_HOSTNAME as string} quote={project.tagline}>
                         <FacebookIcon size={32} />
                     </FacebookShareButton>
                     &nbsp;
-                    <TwitterShareButton url={process.env.REACT_APP_HOSTNAME as string}>
+                    <TwitterShareButton url={process.env.REACT_APP_HOSTNAME as string} title={project.name}>
                         <TwitterIcon size={32} />
                     </TwitterShareButton>
                     <Divider />
