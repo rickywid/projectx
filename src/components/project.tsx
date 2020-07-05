@@ -3,6 +3,7 @@ import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
 import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, FlagFilled } from '@ant-design/icons';
 import { Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
+import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import moment from 'moment';
 import history from '../lib/history';
 import '../styles/project.scss'
@@ -182,6 +183,13 @@ const Project = () => {
 
                     </div>
                     <img className="project-view-screenshot" src={project.images[0]} alt="screenshot" />
+                    <FacebookShareButton url={process.env.REACT_APP_HOSTNAME as string}>
+                        <FacebookIcon size={32} />
+                    </FacebookShareButton>
+                    &nbsp;
+                    <TwitterShareButton url={process.env.REACT_APP_HOSTNAME as string}>
+                        <TwitterIcon size={32} />
+                    </TwitterShareButton>
                     <Divider />
                     <div className="project-view-content">
                         <div className="project-view-left-col">
