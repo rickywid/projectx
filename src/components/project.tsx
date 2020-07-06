@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, FlagFilled } from '@ant-design/icons';
 import { Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
+import Spinner from './spinner';
 import moment from 'moment';
 import history from '../lib/history';
 import '../styles/project.scss'
@@ -183,7 +184,7 @@ const Project = () => {
     return (
         <div className="project-view">
 
-            {isLoading ? <p>loading</p> :
+            {isLoading ? <Spinner /> :
                 <>
                     <div className="project-view-title">
                         <div className="project-view-title-info">

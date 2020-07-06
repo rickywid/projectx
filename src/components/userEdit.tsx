@@ -10,6 +10,7 @@ import {
     Popconfirm,
 } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import Spinner from './spinner';
 import ApiService from '../lib/apiService';
 import AuthService from '../lib/authService';
 import history from '../lib/history';
@@ -217,7 +218,7 @@ const UserEdit = ({match}: IUserProfile) => {
 
     return (
         <div>
-            {isLoading ? <p>loading</p> :
+            {isLoading ? <Spinner /> :
                 <div>
                     <h1>Change Password</h1>
                     <div className="form-wrapper">

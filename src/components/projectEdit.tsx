@@ -12,6 +12,7 @@ import {
     Popconfirm
 } from 'antd';
 import { PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import Spinner from './spinner';
 import ApiService from '../lib/apiService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
@@ -262,7 +263,7 @@ const ProjectEdit = () => {
 
     return (
         <div>
-            {isLoading ? <p>loading</p> :
+            {isLoading ? <Spinner /> :
                 <div>
                     <h1>Update Project</h1>
                     <div className="form-wrapper">

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Spinner from './spinner';
 import ProjectsCard from './projectCard';
 import ApiService from '../lib/apiService';
 
@@ -30,7 +31,7 @@ const SearchResults: React.FC = () => {
     return (
         
         <div>
-            {loading ? <p>Loading</p> : 
+            {loading ? <Spinner />  : 
             <>
                 {resultHeader}
                 <ProjectsCard projects={projects}/>
