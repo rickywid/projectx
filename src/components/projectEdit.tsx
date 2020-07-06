@@ -17,6 +17,7 @@ import ApiService from '../lib/apiService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
 import { technologies, tags } from '../lib/const';
+import { siteName } from '../lib/const';
 import UrlValidation from '../lib/urlValidation';
 
 import '../styles/form.scss';
@@ -96,6 +97,8 @@ const ProjectEdit = () => {
                 setTagSelect(tagArray);
                 setProject(data.project);
                 setIsLoading(false);
+
+                document.title = `${data.project.name} Edit | ${siteName}`
             }
         }
 
@@ -232,6 +235,8 @@ const ProjectEdit = () => {
             file.onSuccess(e => console.log(e));
 
             setFileListUpload([...fileListUpload, data.secure_url]);
+
+            document.title = `Project Settings | ${siteName}`;
         }).catch((err: Error) => {
             console.log(err)
         })

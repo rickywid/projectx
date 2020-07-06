@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ProjectsCard from './projectCard';
 import ApiService from '../lib/apiService';
+import { pageTitle } from '../lib/const';
 
 const Root: React.FC = () => {
     const api = new ApiService();
@@ -12,6 +13,8 @@ const Root: React.FC = () => {
             const json = await res.json();
             
             setProjects(json.data);
+
+            document.title = pageTitle;
         }
         
         fetchData();

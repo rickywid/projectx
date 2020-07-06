@@ -64,7 +64,7 @@ const Project = () => {
                 setisLiked(data.likes.users.includes(parseInt(userID as string)))
                 setIsLoading(false);
 
-                document.title = data.project.name;
+                document.title = `${data.project.name} - ${data.project.tagline}`;
             }
         }
 

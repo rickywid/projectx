@@ -21,6 +21,7 @@ const SearchBar = () => {
     <div className="search-wrapper">
       <div className="search-input">
         <Search
+              placeholder="Find a project"
               enterButton="Search"
               onSearch={onSearch}
               prefix={  <SearchOutlined

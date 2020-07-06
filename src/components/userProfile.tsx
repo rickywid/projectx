@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Tabs, Button } from 'antd';
 import ApiService from '../lib/apiService';
+import { siteName } from '../lib/const';
 import ProjectsCard from '../components/projectCard';
 import '../styles/userProfile.scss';
 import { ReactComponent as CodeSVG } from '../assets/code.svg';
@@ -31,6 +32,8 @@ const UserProfile = ({match}: IUserProfile) => {
             setUserProjects(json.data.userProjects);
             setLikedProjects(json.data.likedProjects);
             setSavedProjects(json.data.savedProjects);
+
+            document.title = `${json.data.user.username} Profile | ${siteName}`;
         }
 
         fetch();

@@ -15,6 +15,7 @@ import ApiService from '../lib/apiService';
 import AuthService from '../lib/authService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
+import { siteName } from '../lib/const';
 import '../styles/form.scss';
 
 const { TextArea } = Input;
@@ -79,6 +80,8 @@ const UserEdit = ({match}: IUserProfile) => {
             setFileListUpload([json.data.user.gh_avatar]);
             setUser(json.data.user);
             setIsLoading(false);
+
+            document.title = `Settings | ${siteName}`;
         }
 
         fetch();

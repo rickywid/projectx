@@ -14,6 +14,7 @@ import ApiService from '../lib/apiService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
 import { technologies, tags } from '../lib/const';
+import { siteName } from '../lib/const';
 import UrlValidation from '../lib/urlValidation';
 import '../styles/form.scss';
 
@@ -54,6 +55,8 @@ const ProjectUpload = () => {
             history.push('/');
             return;
         }
+
+        document.title = `Share Your Project | ${siteName}`
     });
 
     const api = new ApiService();

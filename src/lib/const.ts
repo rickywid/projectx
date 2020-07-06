@@ -163,3 +163,5 @@ export let tags: {[name: string]: string} = {
     6: 'Personal'
 }
 
+export const siteName = 'Hacker Valley';
+export const pageTitle = `${siteName} - Discover new and exciting creative side projects`
