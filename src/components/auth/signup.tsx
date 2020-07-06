@@ -158,7 +158,7 @@ function App() {
           type="primary"
           icon={<GithubOutlined />}
           className="github-login-btn"
-          onClick={() => window.open(`${process.env.REACT_APP_SERVER}/api/auth/github`, '_self')}
+          onClick={() => window.open(`${process.env.REACT_APP_SERVER}/auth/github`, '_self')}
         >
           Sign Up with Github
             </Button>
