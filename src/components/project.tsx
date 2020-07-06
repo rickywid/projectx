@@ -169,6 +169,17 @@ const Project = () => {
     }
     const handleCancel = () => setVisible(false);
 
+    const copyUrl = () => {
+        navigator.clipboard.writeText(document.location.href)
+        .then(() => {
+          message.info('Copied');
+        })
+        .catch(err => {
+          // This can happen if the user denies clipboard permissions:
+          console.error('Could not copy text: ', err);
+        });
+    }
+
     return (
         <div className="project-view">
 
@@ -186,13 +197,15 @@ const Project = () => {
 
                     </div>
                     <img className="project-view-screenshot" src={project.images[0]} alt="screenshot" />
-                    <FacebookShareButton url={process.env.REACT_APP_HOSTNAME as string}>
-                        <FacebookIcon size={32} />
-                    </FacebookShareButton>
-                    &nbsp;
-                    <TwitterShareButton url={process.env.REACT_APP_HOSTNAME as string} title={project.name}>
-                        <TwitterIcon size={32} />
-                    </TwitterShareButton>
+                    <div  className="project-share-wrapper">
+                        <FacebookShareButton url={process.env.REACT_APP_HOSTNAME as string}>
+                            <FacebookIcon size={32} />
+                        </FacebookShareButton>
+                        <TwitterShareButton url={process.env.REACT_APP_HOSTNAME as string} title={project.name}>
+                            <TwitterIcon size={32} />
+                        </TwitterShareButton>
+                        <Button onClick={copyUrl}>Copy Url</Button>
+                    </div>
                     <Divider />
                     <div className="project-view-content">
                         <div className="project-view-left-col">
