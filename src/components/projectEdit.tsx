@@ -9,7 +9,8 @@ import {
     Button,
     Tooltip,
     Divider,
-    Popconfirm
+    Popconfirm,
+    message
 } from 'antd';
 import { PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import Spinner from './spinner';
@@ -205,15 +206,17 @@ const ProjectEdit = () => {
         form.append('repourl', repourl);
         form.append('technologies', techArray);
         form.append('tags', tagArray);
-        form.append('collaboration', collaboration);
+        form.append('collaboration', collaboration || project.collaboration);
         form.append('screenshots', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.project());
         form.append('user_id', userID);
-
+        
         const res = await api.updateProject(id, form);
 
         if (res.status === 200) {
             history.push('/');
         }
+
+        message.success('Project successfully updated');
     }
 
     const handleUploadChange = ({ fileList }: IUploadChange) => {
