@@ -40,11 +40,6 @@ function App() {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <NavBar
-        root="/"
-        signup="signup"
-        login="login"
-        upload="upload"
-        technology="technology"
         user={user}
         isAuthenticated={user.isAuthenticated}
       />
