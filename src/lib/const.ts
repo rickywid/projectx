@@ -154,13 +154,67 @@ export let technologies: technologies = {
 }
 
 // tags mapping must be exactly the same as tags table
-export let tags: {[name: string]: string} = {
-    1: 'Music',
-    2: 'Sports',
-    3: 'Productivity',
-    4: 'Analytics',
-    5: 'FinTech',
-    6: 'Personal'
+export let tags: technologies = {
+    1: {
+        slug: 'analytics',
+        name: 'Analytics'
+    },
+    2: {
+        slug: 'art-design',
+        name: 'Art/Design'
+    },
+    3: {
+        slug: 'ecommerce',
+        name: 'Ecommerce'
+    },
+    4: {
+        slug: 'framework',
+        name: 'Framework'
+    },
+    5: {
+        slug: 'finance',
+        name: 'Finance'
+    },
+    6: {
+        slug: 'gaming',
+        name: 'Gaming'
+    },
+    7: {
+        slug: 'music',
+        name: 'Music'
+    },
+    8: {
+        slug: 'productivity',
+        name: 'Productivity'
+    },
+    9: {
+        slug: 'portfolio',
+        name: 'Portfolio'
+    },
+    10: {
+        slug: 'real-time',
+        name: 'Real Time'
+    },
+    11: {
+        slug: 'sports',
+        name: 'Sports'
+    },
+    12: {
+        slug: 'travel',
+        name: 'Travel'
+    },
+    13: {
+        slug: 'ui-ux',
+        name: 'UI/UX'
+    },
+    14: {
+        slug: 'visualization',
+        name: 'Visualization'
+    },
+    15: {
+        slug: 'uncategorized',
+        name: 'Uncategorized'
+    },
 }
 
 export const siteName = 'Hacker Valley';

@@ -26,27 +26,6 @@ a {
     padding: 50px 20px;
 }
 
-.ant-layout-sider {
-    background:$bg;
-
-    .logo {
-        padding: 24px;
-
-        img {
-            height: 70px;
-        }
-    }
-
-    .ant-menu {
-        background:$bg;
-        border-right: none;
-
-        .ant-menu-item {
-            font-size: 24px;
-        }
-    }
-}
-
 .ant-divider {
     border-top: 1px solid #dedede;
 }

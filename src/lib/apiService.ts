@@ -181,6 +181,14 @@ class ApiService{
         );
       }
 
+      public async filterCategory(value: string) {  
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.get(
+          `${this.apiEndpoint}/category/${value}`,
+          this.headers,
+        );
+      }
+
       public async reportProject(value: FormData) {  
         // this.headers['cookie'] = this.cookie;
         return await HttpClient.post(

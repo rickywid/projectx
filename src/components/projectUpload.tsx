@@ -80,7 +80,7 @@ const ProjectUpload = () => {
     }
 
     for(let key in tags) {
-        childrenTags.push(<Option key={key} value={`${tags[key]}`}>{tags[key]}</Option>);
+        childrenTags.push(<Option key={key} value={`${tags[key].slug}`}>{tags[key].name}</Option>);
     }
 
     const onFormLayoutChange = ({ size }: IFormLayoutChange) => { 
@@ -100,8 +100,8 @@ const ProjectUpload = () => {
         setTechnologiesSelect(value);
     }
 
-    const onSelectTagChange = (value: string) => {
-        setTagSelect([value]);
+    const onSelectTagChange = (value: string[]) => {
+        setTagSelect(value);
     }
 
     const handleCancel = () => setPreviewVisible(false);
@@ -144,7 +144,7 @@ const ProjectUpload = () => {
         }
 
         for(let key in tags) {
-            if(tagsSelect.includes(tags[key])) {
+            if(tagsSelect.includes(tags[key].slug)) {
                 tagArray.push(key);
             }
         }
@@ -316,6 +316,7 @@ const ProjectUpload = () => {
                     rules={[{ required: true, message: 'Must select at least one' }]}
                 >
                     <Select
+                        mode="multiple"
                         style={{ width: '100%' }}
                         placeholder="Please select"
                         onChange={onSelectTagChange as any}

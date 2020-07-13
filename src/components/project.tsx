@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
-import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, FlagFilled } from '@ant-design/icons';
+import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, FlagFilled, BlockOutlined } from '@ant-design/icons';
 import { Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Spinner from './spinner';
@@ -173,7 +173,7 @@ const Project = () => {
     const copyUrl = () => {
         navigator.clipboard.writeText(document.location.href)
         .then(() => {
-          message.info('Copied');
+          message.info('Url has been copied');
         })
         .catch(err => {
           // This can happen if the user denies clipboard permissions:
@@ -205,7 +205,7 @@ const Project = () => {
                         <TwitterShareButton url={process.env.REACT_APP_HOSTNAME as string} title={project.name}>
                             <TwitterIcon size={32} />
                         </TwitterShareButton>
-                        <Button onClick={copyUrl}>Copy Url</Button>
+                        <Button className="btn-copy" icon={<BlockOutlined />} onClick={copyUrl}>Copy</Button>
                     </div>
                     <Divider />
                     <div className="project-view-content">
@@ -255,7 +255,11 @@ const Project = () => {
                             <Divider />
                             <div className="project-view-tags">
                                 <TagFilled />
-                                <ul>{project.technologies.map((technology: string) => <Link to={`/technology/${technology}`}><li style={{ listStyle: 'none' }}>{technology}</li></Link>)}</ul>
+                                <ul>{project.technologies.map((technology: string) => <Link to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}>{technology}</li></Link>)}</ul>
+                            </div>
+                            <div className="project-view-tags">
+                                <TagFilled />
+                                <ul>{project.tags.map((category: string) => <Link to={`/tag/category/${category}`}><li style={{ listStyle: 'none' }}>{category}</li></Link>)}</ul>
                             </div>
                             <Divider />
                             <div className="project-view-details">

@@ -9,8 +9,10 @@ import UserProfile from './components/userProfile';
 import ProjectEdit from './components/projectEdit';
 import SearchResults from './components/searchResults';
 import UserEdit from './components/userEdit';
-import Tags from './components/technology';
-import Technology from './components/technologyFilter';
+import Technology from './components/technology';
+import Category from './components/category';
+import TechnologyFilter from './components/technologyFilter';
+import CategoryFilter from './components/categoryFilter';
 
 import NoMatch from './components/noMatch';
 
@@ -20,8 +22,10 @@ const Routes = (
     <Route exact path="/login" component={Login} />
     <Route exact path="/signup" component={Signup} />
     <Route exact path="/upload" component={ProjectUpload} />
-    <Route exact path="/technology" component={Tags} />
-    <Route exact path="/technology/:technology"  render={({ match }) => <Technology key={match.params.username} match={match} />}  />
+    <Route exact path="/tag/technology" component={Technology} />
+    <Route exact path="/tag/tech/:technology"  render={({ match }) => <TechnologyFilter key={match.params.username} match={match} />}  />
+    <Route exact path="/tag/category" component={Category} />
+    <Route exact path="/tag/category/:category"  render={({ match }) => <CategoryFilter key={match.params.username} match={match} />}  />
     <Route exact path="/project/:id" component={Project} />
     <Route exact path="/user/:username" render={({ match }) => <UserProfile key={match.params.username} match={match} /> } />
     <Route exact path="/user/edit/:username" component={UserEdit} />

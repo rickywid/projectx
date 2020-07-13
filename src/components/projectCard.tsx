@@ -56,7 +56,14 @@ const ProjectCard = (props: any) => {
               className="project-tag"
               variants={animate2}
             >
-              <Tag onClick={() => console.log('tag clicked')}>{project.tags[0]}</Tag>
+              {project.tags.length > 1 ? 
+                <span>
+                  <Tag>{project.tags[0]}</Tag>
+                  <Tag>+{project.tags.slice(1).length}</Tag>
+                </span> 
+                : 
+                <Tag>{project.tags[0]}</Tag>
+              }
             </motion.div>
             <motion.div className="project-name-wrapper" variants={animate3}>
               <motion.p 

@@ -89,11 +89,11 @@ const ProjectEdit = () => {
                 }
 
                 for (let key in tags) {
-                    if (data.project.tags.includes(tags[key])) {
-                        tagArray.push(tags[key]);
+                    if (data.project.tags.includes(tags[key].slug)) {
+                        tagArray.push(tags[key].slug);
                     }
                 }
-
+                console.log(tagArray);
                 setTechnologiesSelect(techArray);
                 setTagSelect(tagArray);
                 setProject(data.project);
@@ -128,7 +128,7 @@ const ProjectEdit = () => {
     }
 
     for (let key in tags) {
-        childrenTags.push(<Option key={key} value={`${tags[key]}`}>{tags[key]}</Option>);
+        childrenTags.push(<Option key={key} value={`${tags[key].slug}`}>{tags[key].name}</Option>);
     }
 
     const onFormLayoutChange = ({ size }: IFormLayoutChange) => {
@@ -148,8 +148,8 @@ const ProjectEdit = () => {
         setTechnologiesSelect(value);
     }
 
-    const onSelectTagChange = (value: string) => {
-        setTagSelect([value]);
+    const onSelectTagChange = (value: string[]) => {
+        setTagSelect(value);
     }
 
     const handleCancel = () => setPreviewVisible(false);
@@ -194,7 +194,7 @@ const ProjectEdit = () => {
         }
 
         for (let key in tags) {
-            if (tagsSelect.includes(tags[key])) {
+            if (tagsSelect.includes(tags[key].slug)) {
                 tagArray.push(key);
             }
         }
@@ -379,6 +379,7 @@ const ProjectEdit = () => {
                                 rules={[{ required: true, message: 'Must select at least one' }]}
                             >
                                 <Select
+                                    mode="multiple"
                                     style={{ width: '100%' }}
                                     placeholder="Please select"
                                     onChange={onSelectTagChange as any}
