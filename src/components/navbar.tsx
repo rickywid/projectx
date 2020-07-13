@@ -1,23 +1,20 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
+import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import AuthService from '../lib/authService';
 import '../styles/navbar.scss';
 import Logo from '../assets/monkey.png';
 const { Sider } = Layout;
+const { SubMenu } = Menu;
 
 interface Props {
-  root: string;
   user: {username: string};
-  signup: string;
-  login: string;
-  upload: string;
-  technology: string;
   isAuthenticated: boolean;
 }
 
 const NavBar = ({
-  root, user, signup, login, upload, isAuthenticated, technology
+  user, isAuthenticated
 }: Props) => {
   const api = new AuthService();
 
@@ -39,17 +36,24 @@ const NavBar = ({
       </Link>
     </Menu.Item>
     <Menu.Item key="2">
-      <Link to={`/${upload}`}>
-        <span>{upload}</span>
+      <Link to={`/upload`}>
+        <span>Upload</span>
       </Link>
     </Menu.Item>
-    <Menu.Item key="3">
-      <Link to={`/${technology}`}>
-          <span>Tags</span>
-        </Link>
-    </Menu.Item>
-    <Menu.Item key="4">
-      <button className="btn-signout" onClick={onSignout}>signout</button>
+    <SubMenu key="sub1" title="Tags">
+      <Menu.Item key="34">
+        <Link to={`/tag/technology`}>
+            <span>Technology</span>
+          </Link>
+      </Menu.Item>
+      <Menu.Item key="64">
+        <Link to={`/tag/category`}>
+              <span>Category</span>
+            </Link>
+      </Menu.Item>
+    </SubMenu>
+    <Menu.Item key="11">
+      <button className="btn-signout" onClick={onSignout}>Signout</button>
     </Menu.Item>
   </Menu>  
   )
@@ -57,20 +61,27 @@ const NavBar = ({
   const unAuthMenu = () => (
     <Menu theme="light" mode="inline">
       <Menu.Item key="5">
-        <Link to={`/${signup}`}>
+        <Link to={`/signup`}>
           <span>Sign Up</span>
         </Link>
       </Menu.Item>
       <Menu.Item key="6">
-        <Link to={`/${login}`}>
+        <Link to={`/login`}>
           <span>Log In</span>
         </Link>
       </Menu.Item>
-      <Menu.Item key="7">
-      <Link to={`/${technology}`}>
-          <span>Tags</span>
-        </Link>
-    </Menu.Item>
+    <SubMenu key="sub1" title="Tags">
+      <Menu.Item key="76">
+        <Link to={`/technology`}>
+            <span>Technology</span>
+          </Link>
+      </Menu.Item>
+      <Menu.Item key="57">
+        <Link to={`/category`}>
+              <span>Category</span>
+            </Link>
+      </Menu.Item>
+    </SubMenu>
     </Menu>  
   )
 
@@ -86,7 +97,7 @@ const NavBar = ({
     }}
     >
     <div className="logo">
-      <Link to={root}>
+      <Link to="/">
         <img src={Logo} alt="logo"/>
       </Link>
     </div>
