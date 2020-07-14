@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ProjectsCard from './projectCard';
+import ResultsHeader from './resultsHeader';
+import Spinner from './spinner';
 import ApiService from '../lib/apiService';
 import { technologies } from '../lib/const';
 
@@ -14,6 +16,8 @@ const TechnologyFilter = ({ match }: ITechnologyFilter) => {
     let value: string;
 
     const [projects, setProjects] = useState<[]>([]);
+    const [resultsCount, setResultsCount] = useState<number>(0);
+    const [loading, isLoading] = useState<boolean>(true);
 
     useEffect(() => {
         for(let key in technologies) {
@@ -25,21 +29,28 @@ const TechnologyFilter = ({ match }: ITechnologyFilter) => {
         const fetch = async () => {
             const res = await api.filterTechnology(value);
             const projects = await res.json();
-            console.log(projects)
+            
             setProjects(projects.data);
+            setResultsCount(projects.data.length);
+            isLoading(false);
         }
 
-        fetch();
+        fetch(); 
         
     }, []);
 
   return (
-    <div className="tags-wrapper">
-        <ProjectsCard projects={projects}/>
+    <div>
+        {loading ? <Spinner />  : 
+        <>
+            <div className="tags-wrapper">
+                <ResultsHeader count={resultsCount} name={params} />
+                <ProjectsCard projects={projects}/>
+            </div>
+        </>
+        }
     </div>
   );
 };
 
 export default TechnologyFilter;
-
-

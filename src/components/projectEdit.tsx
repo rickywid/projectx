@@ -93,7 +93,7 @@ const ProjectEdit = () => {
                         tagArray.push(tags[key].slug);
                     }
                 }
-                console.log(tagArray);
+                
                 setTechnologiesSelect(techArray);
                 setTagSelect(tagArray);
                 setProject(data.project);

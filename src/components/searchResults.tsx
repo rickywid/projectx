@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Spinner from './spinner';
 import ProjectsCard from './projectCard';
+import ResultsHeader from './resultsHeader';
 import ApiService from '../lib/apiService';
 
 const SearchResults: React.FC = () => {
@@ -26,14 +27,14 @@ const SearchResults: React.FC = () => {
 
     }, []);
 
-    const resultHeader = <p><strong>{resultsCount} {resultsCount > 1 ? 'results' : 'result'} found for {query}</strong></p>
+    // const resultHeader = <p><strong>{resultsCount} {resultsCount > 1 ? 'results' : 'result'} found for {query}</strong></p>
 
     return (
         
         <div>
             {loading ? <Spinner />  : 
             <>
-                {resultHeader}
+                <ResultsHeader count={resultsCount} name={query} />
                 <ProjectsCard projects={projects}/>
             </>
             }
