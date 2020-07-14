@@ -59,9 +59,7 @@ const NavBar = ({
             </Link>
       </Menu.Item>
       <Menu.Item key="89">
-        <Link to={`/subscribe`}>
-              <span>Subscribe</span>
-            </Link>
+        <a href="https://cdn.forms-content.sg-form.com/78813c67-c591-11ea-a395-12612d9b4aa6" target="__blank">Subscribe</a>
       </Menu.Item>
       <Menu.Item key="86">
         <Link to={`/feedback`}>
