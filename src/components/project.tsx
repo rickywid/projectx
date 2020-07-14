@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
-import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, FlagFilled, BlockOutlined } from '@ant-design/icons';
+import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, FlagFilled, BlockOutlined, StarOutlined, StarTwoTone } from '@ant-design/icons';
 import { Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Spinner from './spinner';
@@ -193,7 +193,7 @@ const Project = () => {
                         </div>
                         <div className="button-wrap">
                             {isLiked ? <Button onClick={() => handleLike(false)} icon={<HeartTwoTone twoToneColor="#eb2f96" />}>Liked</Button> : <Button onClick={() => handleLike(true)} icon={<HeartOutlined />}>Like</Button>}
-                            {isSaved ? <Button onClick={() => handleSaveProject(false)}>Saved</Button> :<Button onClick={() => handleSaveProject(true)}>Save</Button>}
+            {isSaved ? <Button onClick={() => handleSaveProject(false)} icon={<StarTwoTone twoToneColor="#ffab40" />}>Saved</Button> :<Button onClick={() => handleSaveProject(true)} icon={<StarOutlined />}>Save</Button>}
                         </div>
 
                     </div>
