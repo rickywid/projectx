@@ -86,12 +86,12 @@ const NavBar = ({
       </Menu.Item>
     <SubMenu key="sub1" title="Tags">
       <Menu.Item key="76">
-        <Link to={`/technology`}>
+        <Link to={`/tag/technology`}>
             <span>Technology</span>
           </Link>
       </Menu.Item>
       <Menu.Item key="57">
-        <Link to={`/category`}>
+        <Link to={`/tag/category`}>
               <span>Category</span>
             </Link>
       </Menu.Item>
