@@ -85,7 +85,7 @@ const ProjectCard = (props: any) => {
                 src={project.gh_avatar} 
                 alt="avatar" /> {project.username}
           </Link>
-          {props.isOwner ? <small className="project-edit"><Link to={`/project/edit/${project.id}`}>Edit</Link></small> : ''}
+          {props.isOwner ? <small className="project-edit"><Link to={`/project/edit/${project.id}`}>EDIT</Link></small> : ''}
           <div>
             <span className="project-comments">
               <CommentOutlined /> {project.comment_count}
