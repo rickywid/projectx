@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Divider } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import AuthService from '../lib/authService';
@@ -52,6 +52,22 @@ const NavBar = ({
             </Link>
       </Menu.Item>
     </SubMenu>
+    <Divider />
+      <Menu.Item key="23">
+        <Link to={`/guidelines`}>
+              <span>Guidelines</span>
+            </Link>
+      </Menu.Item>
+      <Menu.Item key="89">
+        <Link to={`/subscribe`}>
+              <span>Subscribe</span>
+            </Link>
+      </Menu.Item>
+      <Menu.Item key="86">
+        <Link to={`/feedback`}>
+              <span>Feedback</span>
+            </Link>
+      </Menu.Item>
     <Menu.Item key="11">
       <button className="btn-signout" onClick={onSignout}>Signout</button>
     </Menu.Item>

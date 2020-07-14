@@ -35,7 +35,7 @@ const Category = () => {
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
-            <Link to={`/tag/category/design`}>
+            <Link to={`/tag/category/art-design`}>
                 <Design />
                 <p>Art/Design</p>    
             </Link>
@@ -87,7 +87,7 @@ const Category = () => {
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
-            <Link to={`/tag/category/realtime`}>
+            <Link to={`/tag/category/real-time`}>
                 <Realtime />
                 <p>Real Time</p>
             </Link>
@@ -106,7 +106,7 @@ const Category = () => {
           </Col>
         
           <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
-            <Link to={`/tag/category/ui`}>
+            <Link to={`/tag/category/ui-ux`}>
                 <Ui />
                 <p>UI/UX</p>
             </Link>
