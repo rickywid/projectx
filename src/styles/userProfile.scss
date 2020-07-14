@@ -2,12 +2,8 @@
 
 .user-profile-wrapper {
     .user-profile-detail {       
-        display: inline-flex;
-        align-items: center;
-        height: 100px;
-        width: 100px;
-        flex-wrap: wrap;
-        align-content: center;
+        display: flex;
+        flex-direction: column;
     }
 
     .user-avatar {
@@ -24,7 +20,7 @@
     }
 
     .user-tabs {
-        margin-top: 20px;
+        margin-top: 50px;
         clear: both;
 
         .user-msg-no-projects {
