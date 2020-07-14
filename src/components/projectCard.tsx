@@ -4,6 +4,7 @@ import { Tag } from 'antd';
 import { CommentOutlined, HeartOutlined } from '@ant-design/icons';
 import '../styles/projectCard.scss';
 import ApiService from '../lib/apiService';
+import truncate from '../lib/truncate';
 import { motion } from "framer-motion"
 
 const animate1 = {
@@ -70,7 +71,7 @@ const ProjectCard = (props: any) => {
                 className="project-name"
                 variants={animate1}
               >
-                {project.name}
+                {project.name.length > 30 ? truncate(project.name, 23) : project.name}
               </motion.p>
             </motion.div>
           </motion.div>
