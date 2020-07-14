@@ -13,6 +13,7 @@ import Technology from './components/technology';
 import Category from './components/category';
 import TechnologyFilter from './components/technologyFilter';
 import CategoryFilter from './components/categoryFilter';
+import Guidelines from './components/guidelines';
 
 import NoMatch from './components/noMatch';
 
@@ -30,7 +31,8 @@ const Routes = (
     <Route exact path="/user/:username" render={({ match }) => <UserProfile key={match.params.username} match={match} /> } />
     <Route exact path="/user/edit/:username" component={UserEdit} />
     <Route exact path="/project/edit/:username" render={({ match }) => <ProjectEdit key={match.params.username} />} />
-    <Route exact path ="/search"  render={({ location }) => <SearchResults key={location.search} /> } />
+    <Route exact path="/search"  render={({ location }) => <SearchResults key={location.search} /> } />
+    <Route exact path="/guidelines" component={Guidelines} />
     <Route component={NoMatch} />
   </Switch>
 );

@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 
 const Footer: React.FC = () => (
   <Layout.Footer style={{background: 'none'}}>
-    footer
+    &nbsp;
   </Layout.Footer>
 );
 

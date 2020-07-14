@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Form,
@@ -11,9 +11,14 @@ import {
 import { QuestionCircleOutlined, GithubOutlined } from '@ant-design/icons';
 import AuthService from '../../lib/authService';
 import Placeholder from '../../lib/placeholders';
+import { siteName } from '../../lib/const';
 import Logo from  '../../assets/monkey.png';
 
 function App() {
+
+    useEffect(() => {
+        document.title = `${siteName} - Sign Up`;
+    });
 
     const [form] = Form.useForm();
     const [displayError, setDisplayError] = useState(false);
@@ -142,7 +147,7 @@ function App() {
                     >
                         <Checkbox>
                             I have read and understand the
-                <a href="/terms"> rules</a>
+                <Link to="/guidelines"> rules</Link>
                         </Checkbox>
                     </Form.Item>
                     <Form.Item>

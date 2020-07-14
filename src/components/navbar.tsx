@@ -67,7 +67,7 @@ const NavBar = ({
             </Link>
       </Menu.Item>
     <Menu.Item key="11">
-      <button className="btn-signout" onClick={onSignout}>Signout</button>
+      <button className="btn-signout" onClick={onSignout}>Sign Out</button>
     </Menu.Item>
   </Menu>  
   )
@@ -96,6 +96,20 @@ const NavBar = ({
             </Link>
       </Menu.Item>
     </SubMenu>
+    <Divider />
+      <Menu.Item key="23">
+        <Link to={`/guidelines`}>
+              <span>Guidelines</span>
+            </Link>
+      </Menu.Item>
+      <Menu.Item key="89">
+        <a href="https://cdn.forms-content.sg-form.com/78813c67-c591-11ea-a395-12612d9b4aa6" target="__blank">Subscribe</a>
+      </Menu.Item>
+      <Menu.Item key="86">
+        <Link to={`/feedback`}>
+              <span>Feedback</span>
+            </Link>
+      </Menu.Item>
     </Menu>  
   )
 

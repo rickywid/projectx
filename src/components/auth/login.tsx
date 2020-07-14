@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Form,
@@ -8,6 +8,7 @@ import {
 } from 'antd';
 import { UserOutlined, LockOutlined, GithubOutlined } from '@ant-design/icons';
 import AuthService from '../../lib/authService';
+import { siteName } from '../../lib/const';
 import '../../styles/login.scss';
 import Logo from  '../../assets/monkey.png';
 
@@ -17,6 +18,10 @@ interface IFormValues {
 }
 
 function App() {
+
+  useEffect(() => {
+    document.title = `${siteName} - Log In`;
+  });
 
   const [form] = Form.useForm();
   const [error, setError] = useState<boolean>(false)
@@ -47,7 +52,7 @@ function App() {
     <div className="login-wrapper">
       <div className="login-inner">
         <img style={{height: '50px', marginBottom: '20px'}} src={Logo} alt="logo"/>
-        <h2>Log in</h2>
+        <h2>Log In</h2>
         <Form
           name="normal_login"
           className="login-form"
