@@ -40,7 +40,7 @@ interface IFields {
 const Project = () => {
     const api = new ApiService();
     const id = window.location.pathname.split('/')[2];
-
+    
     useEffect(() => {
         
         const userID = localStorage.getItem('userID');
@@ -113,7 +113,7 @@ const Project = () => {
         const { comment } = values;
         const form = new FormData();
         form.append('comment', comment.toString());
-        form.append('project_id', project.id);
+        form.append('project_id', project.uuid);
         form.append('user_id', user.id);
         
         const res = await api.createComment(form);

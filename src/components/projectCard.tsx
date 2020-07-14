@@ -41,7 +41,7 @@ const ProjectCard = (props: any) => {
 
     return props.projects.map((project: any, index: number) => (
       <li key={index} className="project-item">
-        <Link to={`/project/${project.id}`}>
+        <Link to={`/project/${project.uuid}`}>
           <motion.div
             initial="rest"
             animate="rest"
@@ -85,7 +85,7 @@ const ProjectCard = (props: any) => {
                 src={project.gh_avatar} 
                 alt="avatar" /> {project.username}
           </Link>
-          {props.isOwner ? <small className="project-edit"><Link to={`/project/edit/${project.id}`}>EDIT</Link></small> : ''}
+          {props.isOwner ? <small className="project-edit"><Link to={`/project/edit/${project.uuid}`}>EDIT</Link></small> : ''}
           <div>
             <span className="project-comments">
               <CommentOutlined /> {project.comment_count}
