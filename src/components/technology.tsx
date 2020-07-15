@@ -183,14 +183,14 @@ const Technology = () => {
         <Divider />
         <Row>
           <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
-            <Link to={`/tag/tech/next`}><Next className="lg-svg" /></Link>
+            <Link to={`/tag/tech/nextjs`}><Next className="lg-svg" /></Link>
           </Col>
 
           <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
-            <Link to={`/tag/tech/nuxt`}><Nuxt className="lg-svg" /></Link>
+            <Link to={`/tag/tech/nuxtjs`}><Nuxt className="lg-svg" /></Link>
           </Col>
           <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
-            <Link to={`/tag/tech/gatsby`}><Gatsby className="lg-svg" /></Link>
+            <Link to={`/tag/tech/gatsbyjs`}><Gatsby className="lg-svg" /></Link>
           </Col>
           <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/electron`}><Electron className="lg-svg" /></Link>
