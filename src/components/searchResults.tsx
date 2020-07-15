@@ -27,8 +27,6 @@ const SearchResults: React.FC = () => {
 
     }, []);
 
-    // const resultHeader = <p><strong>{resultsCount} {resultsCount > 1 ? 'results' : 'result'} found for {query}</strong></p>
-
     return (
         
         <div>

@@ -1,8 +1,8 @@
 @import './variables.scss';
 
-.form-wrapper {
-    max-width: 500px;
-}
+// .form-wrapper {
+//     // max-width: 500px;
+// }
 
 .bg {
     max-width: 800px;
@@ -11,9 +11,9 @@
 
 .bg,
 .form-wrapper {
-    box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.17);
+    // box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.17);
     background: white;
-    padding: 20px;
+    padding: 40px;
 
     .form-btn-wrap {
         text-align: right;

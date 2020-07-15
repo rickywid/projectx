@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Tag } from 'antd';
-import { CommentOutlined, HeartOutlined } from '@ant-design/icons';
-import '../styles/projectCard.scss';
+import { MessageFilled, FireFilled } from '@ant-design/icons';
 import ApiService from '../lib/apiService';
 import truncate from '../lib/truncate';
 import { motion } from "framer-motion"
+import '../styles/projectCard.scss';
+import '../styles/global.scss';
 
 const animate1 = {
   rest: {
@@ -88,10 +89,10 @@ const ProjectCard = (props: any) => {
           {props.isOwner ? <small className="project-edit"><Link to={`/project/edit/${project.uuid}`}>EDIT</Link></small> : ''}
           <div>
             <span className="project-comments">
-              <CommentOutlined /> {project.comment_count}
+              <MessageFilled className="svg-filled" /> {project.comment_count}
             </span>
             <span>
-                <HeartOutlined /> {project.likes_count}    
+                <FireFilled className="svg-filled" /> {project.likes_count}    
             </span>
           </div>
         </div>

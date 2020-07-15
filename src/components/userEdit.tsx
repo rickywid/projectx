@@ -17,6 +17,7 @@ import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
 import { siteName } from '../lib/const';
 import '../styles/form.scss';
+import '../styles/global.scss';
 
 const { TextArea } = Input;
 
@@ -54,7 +55,7 @@ interface IUserProfile {
     match: any;
 }
 
-const UserEdit = ({match}: IUserProfile) => {
+const UserEdit = ({ match }: IUserProfile) => {
     const api = new ApiService();
     const auth = new AuthService();
     const username = localStorage.getItem('username') as string;
@@ -222,7 +223,7 @@ const UserEdit = ({match}: IUserProfile) => {
     return (
         <div>
             {isLoading ? <Spinner /> :
-                <div>
+                <div className="container">
                     <h1>Change Password</h1>
                     <div className="form-wrapper">
                         <Form
@@ -280,9 +281,9 @@ const UserEdit = ({match}: IUserProfile) => {
                                 <Button type="primary" htmlType="submit">Change Password</Button>
                             </div>
                         </Form>
-                        </div>
-                        <Divider />
-                        <div>
+                    </div>
+                    <Divider />
+                    <div>
                         <h1>Update Profile</h1>
                         <div className="form-wrapper">
                             <Form
@@ -299,7 +300,7 @@ const UserEdit = ({match}: IUserProfile) => {
                                 >
                                     <TextArea rows={2} />
                                 </Form.Item>
-                                <Form.Item 
+                                <Form.Item
                                     label={<span><strong>Profile Picture</strong></span>}
                                 >
                                     <div className="clearfix">
@@ -329,28 +330,27 @@ const UserEdit = ({match}: IUserProfile) => {
 
                             </Form>
                         </div>
+                    </div>
+                    <Divider />
+                    <div>
+                        <h1>Delete Account</h1>
+                        <div className="form-wrapper">
+                            <p>Once you delete this account, there is no going back. Please be certain. </p>
+                            <Popconfirm
+                                title="Are you sure you want to delete this account?"
+                                onConfirm={(e) => confirm()}
+                                onCancel={cancel}
+                                okText="Yes"
+                                cancelText="No"
+                            >
+                                <div className="form-btn-wrap">
+                                    <Button type="primary" danger>Delete</Button>
+                                </div>
+                            </Popconfirm>
                         </div>
+                    </div>
                 </div>
             }
-
-            <Divider />
-            <div>
-            <h1>Delete Account</h1>
-            <div className="form-wrapper">
-                <p>Once you delete this account, there is no going back. Please be certain. </p>
-                <Popconfirm
-                    title="Are you sure you want to delete this account?"
-                    onConfirm={(e) => confirm()}
-                    onCancel={cancel}
-                    okText="Yes"
-                    cancelText="No"
-                >
-                    <div className="form-btn-wrap">
-                        <Button type="primary" danger>Delete</Button>
-                    </div>
-                </Popconfirm>
-            </div>
-            </div>
         </div>
 
     )

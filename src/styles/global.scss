@@ -13,9 +13,33 @@ a {
     color: $link;
 }
 
+.container {
+    max-width: 500px;
+}
+
 .pb-20 {
     padding-bottom: 20px;
 }
+
+.svg-filled {
+    color: #9e9e9e;
+}
+
+.comment-btn,
+.website-btn,
+.repo-btn,
+.upload-btn {
+    width: 100%;
+}
+
+.error-msg {
+    color: red;
+    font-weight: bold;
+}
+
+
+
+
 
 // ant-d override
 .ant-layout {
@@ -23,7 +47,7 @@ a {
 }
 
 .ant-layout-content {
-    padding: 50px 20px;
+    padding: 80px 20px;
 }
 
 .ant-divider {
@@ -32,14 +56,6 @@ a {
 
 .ant-divider-vertical {
     border-left: 1px solid #d8d6d6;
-}
-
-
-.comment-btn,
-.website-btn,
-.repo-btn,
-.upload-btn {
-    width: 100%;
 }
 
 .ant-layout-sider-zero-width-trigger {
@@ -57,14 +73,11 @@ a {
 }
 
 
-.error-msg {
-    color: red;
-    font-weight: bold;
-}
+
 
 @media only screen and (min-width: $medium) {
     .ant-layout-content {
-        padding: 26px;
+        padding: 50px;
     }
 
     .comment-btn,
