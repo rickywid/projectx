@@ -21,16 +21,10 @@ const SearchBar = () => {
     <div className="search-wrapper">
       <div className="search-input">
         <Search
-              placeholder="Find a project"
-              enterButton="Search"
-              onSearch={onSearch}
-              prefix={  <SearchOutlined
-                style={{
-                  fontSize: 16,
-                  color: '#ccc',
-                }}
-              />}
-          />
+          placeholder="Find a project"
+          onSearch={onSearch}
+          style={{ width: 300 }}
+        />
       </div>
     </div>
   );
