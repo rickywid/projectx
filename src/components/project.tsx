@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
-import { CodeOutlined, HeartFilled, HeartTwoTone, HeartOutlined, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, FlagFilled, BlockOutlined, StarOutlined, StarTwoTone } from '@ant-design/icons';
+import { CodeOutlined, HeartFilled, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, FlagFilled, BlockOutlined, StarFilled, StarTwoTone, FireTwoTone, FireFilled } from '@ant-design/icons';
 import { Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Spinner from './spinner';
 import moment from 'moment';
 import history from '../lib/history';
+import '../styles/global.scss'
 import '../styles/project.scss'
 
 const { TextArea } = Input;
@@ -192,8 +193,8 @@ const Project = () => {
                             <p>by <Link className="project-owner" to={`/user/${project.username}`}><img style={{height: '20px', borderRadius: '100%'}} src={project.gh_avatar} alt="avatar"/> {project.username}</Link></p>
                         </div>
                         <div className="button-wrap">
-                            {isLiked ? <Button onClick={() => handleLike(false)} icon={<HeartTwoTone twoToneColor="#eb2f96" />}>Liked</Button> : <Button onClick={() => handleLike(true)} icon={<HeartOutlined />}>Like</Button>}
-            {isSaved ? <Button onClick={() => handleSaveProject(false)} icon={<StarTwoTone twoToneColor="#ffab40" />}>Saved</Button> :<Button onClick={() => handleSaveProject(true)} icon={<StarOutlined />}>Save</Button>}
+                            {isLiked ? <Button onClick={() => handleLike(false)} icon={<FireTwoTone twoToneColor="#f00" />}><strong style={{marginLeft: '7px'}}>Hot</strong></Button> : <Button onClick={() => handleLike(true)} icon={<FireFilled />}><strong style={{marginLeft: '7px'}}>Hot</strong></Button>}
+                            {isSaved ? <Button onClick={() => handleSaveProject(false)} icon={<StarTwoTone twoToneColor="#dea703" />}><strong style={{marginLeft: '7px'}}>Saved</strong></Button> :<Button onClick={() => handleSaveProject(true)} icon={<StarFilled />}><strong style={{marginLeft: '7px'}}>Save</strong></Button>}
                         </div>
 
                     </div>
@@ -205,7 +206,7 @@ const Project = () => {
                         <TwitterShareButton url={process.env.REACT_APP_HOSTNAME as string} title={project.name}>
                             <TwitterIcon size={32} />
                         </TwitterShareButton>
-                        <Button className="btn-copy" icon={<BlockOutlined />} onClick={copyUrl}>Copy</Button>
+                        <Button className="btn-copy" icon={<BlockOutlined />} onClick={copyUrl}><strong>Copy</strong></Button>
                     </div>
                     <Divider />
                     <div className="project-view-content">
@@ -254,20 +255,20 @@ const Project = () => {
                             {project.repo ?<a href={project.repo}><Button className="repo-btn" icon={<CodeOutlined />} type="primary">Repository</Button></a> : '' }
                             <Divider />
                             <div className="project-view-tags">
-                                <TagFilled />
+                                <TagFilled className="svg-filled" />
                                 <ul>{project.technologies.map((technology: string) => <Link to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}>{technology}</li></Link>)}</ul>
                             </div>
                             <div className="project-view-tags">
-                                <TagFilled />
+                                <TagFilled className="svg-filled"  />
                                 <ul>{project.tags.map((category: string) => <Link to={`/tag/category/${category}`}><li style={{ listStyle: 'none' }}>{category}</li></Link>)}</ul>
                             </div>
                             <Divider />
                             <div className="project-view-details">
                                 <ul>
-                                    <li><HeartFilled /> {likeCount} likes</li>
+                                    <li><HeartFilled className="svg-filled" /> {likeCount} likes</li>
                                     {project.collaboration && <li><TeamOutlined /> Looking for contributors</li>}
-                                    <li><CalendarFilled /> Created June 4, 2020</li>
-                                    <li><FlagFilled /> <button style={{background: 'none', border: 'none', padding: 0}} onClick={showModal}>Report</button></li>
+                                    <li><CalendarFilled className="svg-filled" /> Created June 4, 2020</li>
+                                    <li><FlagFilled className="svg-filled" /> <button style={{background: 'none', border: 'none', padding: 0}} onClick={showModal}>Report</button></li>
                                 </ul>
                             </div>
                         </div>
