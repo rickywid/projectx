@@ -29,15 +29,3 @@
         }
     }
 }
-
-
-@media only screen and (min-width: $medium) {
-    .ant-layout-content {
-        padding: 26px;
-    }
-
-    .comment-btn,
-    .upload-btn {
-        width: auto;
-    }
-}

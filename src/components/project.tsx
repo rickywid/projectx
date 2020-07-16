@@ -7,8 +7,10 @@ import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } fr
 import Spinner from './spinner';
 import moment from 'moment';
 import history from '../lib/history';
+import ParseDOM from '../lib/domParser';
 import '../styles/global.scss'
 import '../styles/project.scss'
+import ParseDom from '../lib/domParser';
 
 const { TextArea } = Input;
 
@@ -113,7 +115,7 @@ const Project = () => {
 
         const { comment } = values;
         const form = new FormData();
-        form.append('comment', comment.toString());
+        form.append('comment', ParseDom(comment.toString()));
         form.append('project_id', project.uuid);
         form.append('user_id', user.id);
         
@@ -121,7 +123,7 @@ const Project = () => {
         
         if(res.status === 200) {
           // do somethings
-          setC([...c, {comment: comment, username: user.username, gh_avatar: user.gh_avatar, created_on: comment.created_on}])
+          setC([...c, {comment: ParseDom(comment.toString()), username: user.username, gh_avatar: user.gh_avatar, created_on: comment.created_on}])
         }
     }
 
@@ -241,7 +243,7 @@ const Project = () => {
                                             <Link to={`/user/${c.username}`} className="project-view-comment-user">{c.username}</Link>
                                         </div>
                                         <div className="project-view-comment-body">
-                                            <p>{c.comment}</p>
+                                            <div dangerouslySetInnerHTML={{__html: `<p>${c.comment}</p>`}}></div>
                                             <small>{moment(c.created_on).fromNow()}</small>
                                         </div>
                                         <Divider />
