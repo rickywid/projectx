@@ -17,20 +17,22 @@ function App() {
 
   useEffect(() => {
     const api = new ApiService();
-
-    // userID if user logged in via username/password
-    // this can also be userID of a new user account (signup)
-    const userID = localStorage.getItem('userID') || 0;
     
     const fetchData = async () => {
+        // userID if user logged in via username/password
+        // this can also be userID of a new user account (signup)
+        const userID = localStorage.getItem('userID') || 0;
+        
         const res = await api.getUser(userID as string)
         const json = await res.json();
 
-        // update userID if user logged in via github
-        localStorage.setItem('userID', json.data.id);
-        localStorage.setItem('username', json.data.username);
+        if(json.data.isAuthenticated) {
+          // update userID if user logged in via github
+          localStorage.setItem('userID', json.data.id);
+          localStorage.setItem('username', json.data.username);
 
-        setUser(json.data);
+          setUser(json.data);
+        }
     }
     
     fetchData();
