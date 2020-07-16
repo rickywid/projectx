@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Divider } from 'antd';
 import { ReactComponent as Analytics } from '../assets/category/analytics.svg';
@@ -16,12 +16,16 @@ import { ReactComponent as Travel } from '../assets/category/travel.svg';
 import { ReactComponent as Ui } from '../assets/category/ui.svg';
 import { ReactComponent as Uncategorized } from '../assets/category/uncategorized.svg';
 import { ReactComponent as Visualization } from '../assets/category/visualization.svg';
-
+import { siteName } from '../lib/const';
 
 import '../styles/technologyList.scss';
 
 const Category = () => {
 
+  useEffect(() => {
+    document.title = `${siteName} - Categories`;  
+  });
+  
   return (
     <div className="technology-wrapper">
       <section className="categories">

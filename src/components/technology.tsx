@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col, Divider } from 'antd';
 import { ReactComponent as Angular } from '../assets/tech/angular.svg';
@@ -37,10 +37,15 @@ import { ReactComponent as Symfony } from '../assets/tech/symfony.svg';
 import { ReactComponent as Travisci } from '../assets/tech/travisci.svg';
 import { ReactComponent as Typescript } from '../assets/tech/typescript.svg';
 import { ReactComponent as Vue } from '../assets/tech/vue.svg';
+import { siteName } from '../lib/const';
 
 import '../styles/technologyList.scss';
 
 const Technology = () => {
+
+  useEffect(() => {
+    document.title = `${siteName} - Technologies`;  
+  });
 
   return (
     <div className="technology-wrapper">

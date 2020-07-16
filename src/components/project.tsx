@@ -145,6 +145,8 @@ const Project = () => {
         if(!user.isAuthenticated) {
 
             history.push('/login');
+            message.info('You must be logged in');
+
             return;
         }
         if(saved) {
