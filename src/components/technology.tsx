@@ -48,30 +48,30 @@ const Technology = () => {
         <h1>Front end</h1>
         <Divider />
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/react`}><ReactI /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/vue`}><Vue /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/angular`}><Angular /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/javascript`}><Javascript /></Link>
           </Col>
         </Row>
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/html`}><HTML /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/css`}><CSS /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/typescript`}><Typescript /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/jquery`}><Jquery className="lg-svg" /></Link>
           </Col>
         </Row>
@@ -81,35 +81,35 @@ const Technology = () => {
         <h1>Back end</h1>
         <Divider />
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/django`}><Django className="lg-svg" /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/dotnet`}><DotNet /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/flask`}><Flask /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/graphql`}><GraphQL /></Link>
           </Col>
         </Row>
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/laravel`}><Laravel /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/node`}><Node className="lg-svg" /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/rails`}><Rails className="lg-svg" /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/spring`}><Spring /></Link>
           </Col>
         </Row>
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/symfony`}><Symfony /></Link>
           </Col>
         </Row>
@@ -119,22 +119,22 @@ const Technology = () => {
         <h1>Databases</h1>
         <Divider />
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/mysql`}><Mysql className="lg-svg" /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/rethink`}><Rethink className="lg-svg" /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/mongo`}><Mongo className="lg-svg" /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/postgresql`}><Postgresql /></Link>
           </Col>
         </Row>
 
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/firebase`}><Firebase /></Link>
           </Col>
         </Row>
@@ -144,35 +144,35 @@ const Technology = () => {
         <h1>DevOps</h1>
         <Divider />
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/aws`}><AWS /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/azure`}><Azure /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/circleci`}><Circleci /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/docker`}><Docker /></Link>
           </Col>
         </Row>
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/travisci`}><Travisci /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/gitlab`}><Gitlab /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/googlecloud`}><Googlecloud /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/Jenkins`}><Jenkins /></Link>
           </Col>
         </Row>
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/heroku`}><Heroku /></Link>
           </Col>
         </Row>
@@ -182,22 +182,22 @@ const Technology = () => {
         <h2>Frameworks</h2>
         <Divider />
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/nextjs`}><Next className="lg-svg" /></Link>
           </Col>
 
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/nuxtjs`}><Nuxt className="lg-svg" /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/gatsbyjs`}><Gatsby className="lg-svg" /></Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/electron`}><Electron className="lg-svg" /></Link>
           </Col>
         </Row>
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/drupal`}><Drupal /></Link>
           </Col>
         </Row>

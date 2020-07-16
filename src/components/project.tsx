@@ -82,8 +82,10 @@ const Project = () => {
     const [isLiked, setisLiked] = useState<boolean>(false);
     const [likeCount, setLikeCount] = useState<string>('0');
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isCommentSubmitting, setIsCommentSubmitting] = useState<boolean>(false);
     const [visible, setVisible] = useState<boolean>(false);
     const [value, setValue] = useState<string>('1');
+    const [form] = Form.useForm();
 
     const handleLike = async (like?: boolean) => {
         
@@ -114,16 +116,20 @@ const Project = () => {
     const submitComment = async (values: IFields) => {
 
         const { comment } = values;
-        const form = new FormData();
-        form.append('comment', ParseDom(comment.toString()));
-        form.append('project_id', project.uuid);
-        form.append('user_id', user.id);
+        const formComment = new FormData();
+        setIsCommentSubmitting(true);
         
-        const res = await api.createComment(form);
+        formComment.append('comment', ParseDom(comment.toString()));
+        formComment.append('project_id', project.uuid);
+        formComment.append('user_id', user.id);
+        
+        const res = await api.createComment(formComment);
         
         if(res.status === 200) {
           // do somethings
           setC([...c, {comment: ParseDom(comment.toString()), username: user.username, gh_avatar: user.gh_avatar, created_on: comment.created_on}])
+          setIsCommentSubmitting(false);
+          form.resetFields();
         }
     }
 
@@ -219,6 +225,7 @@ const Project = () => {
                             {user.isAuthenticated ?
                                 <>
                                     <Form
+                                        form={form}
                                         layout="vertical"
                                         onFinish={submitComment as any}
                                     >
@@ -228,7 +235,7 @@ const Project = () => {
                                         >
                                             <TextArea placeholder="What do you think of this project?" rows={2} />
                                         </Form.Item>
-                                        <Button className="comment-btn" type="primary" htmlType="submit">Send</Button>
+                                        <div>{isCommentSubmitting ? <Button type="primary" disabled>Send</Button> : <Button className="comment-btn" type="primary" htmlType="submit">Send</Button>}</div>
                                     </Form>
                                     <Divider />
                                 </>

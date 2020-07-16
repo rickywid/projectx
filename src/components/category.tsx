@@ -28,25 +28,25 @@ const Category = () => {
         <h1>Categories</h1>
         <Divider />
         <Row>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/analytics`}>
                 <Analytics />
                 <p>Analytics</p>
             </Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/art-design`}>
                 <Design />
                 <p>Art/Design</p>    
             </Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/ecommerce`}>
                 <Ecommerce />
                 <p>E-Commerce</p>
                 </Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/finance`}>
                 <Finance />
                 <p>Finance</p>
@@ -54,25 +54,25 @@ const Category = () => {
           </Col>
 
         
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/framework`}>
                 <Framework />
                 <p>Framework</p>
             </Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/gaming`}>
                 <Gaming />
                 <p>Gaming</p>
             </Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/music`}>
                 <Music />
                 <p>Music</p>
             </Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/personal`}>
                 <Personal />
                 <p>Personal</p>
@@ -80,44 +80,44 @@ const Category = () => {
           </Col>
         
         
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/productivity`}>
                 <Productivity />
                 <p>Productivity</p>
             </Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/real-time`}>
                 <Realtime />
                 <p>Real Time</p>
             </Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/sports`}>
                 <Sports />
                 <p>Sports</p>
             </Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/travel`}>
                 <Travel />
                 <p>Travel</p>
             </Link>
           </Col>
         
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/ui-ux`}>
                 <Ui />
                 <p>UI/UX</p>
             </Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/visualization`}>
                 <Visualization />
                 <p>Visualization</p>
             </Link>
           </Col>
-          <Col className="pb-20" xs={{ span: 24 }} sm={{ span: 8 }} lg={{ span: 6 }}>
+          <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/uncategorized`}>
                 <Uncategorized />
                 <p>Uncategorized</p>
