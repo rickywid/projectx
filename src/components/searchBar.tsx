@@ -23,7 +23,6 @@ const SearchBar = () => {
         <Search
           placeholder="Find a project"
           onSearch={onSearch}
-          style={{ width: 300 }}
         />
       </div>
     </div>

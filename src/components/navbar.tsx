@@ -1,7 +1,8 @@
 import React from 'react';
-import { Layout, Menu, Button } from 'antd';
+import { Layout, Menu, Button, Divider } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
+import Search from './searchBar'
 import AuthService from '../lib/authService';
 import '../styles/navbar.scss';
 import Logo from '../assets/logo.png';
@@ -27,10 +28,14 @@ const NavBar = ({
   }
 
   const authMenu = () => (
-    <Menu theme="light" mode="inline">
-    <Menu.Item key="2">
+    <Menu theme="light" mode="inline">    
+    <Menu.Item key="49">
+        <Search />
+      </Menu.Item>  
+      <Divider style={{margin: 0}} />
+      <Menu.Item key="2" style={{marginTop: '8px'}}>
       <Link to={`/upload`}>
-        <Button>Upload</Button>
+        <Button className="upload-btn" type="primary">Upload</Button>
       </Link>
     </Menu.Item>
     <Menu.Item key="1">
@@ -73,9 +78,13 @@ const NavBar = ({
   
   const unAuthMenu = () => (
     <Menu theme="light" mode="inline">
-    <Menu.Item key="2">
+            <Menu.Item key="45">
+        <Search />
+      </Menu.Item>
+      <Divider style={{margin: 0}} />
+      <Menu.Item key="2" style={{marginTop: '8px'}}>
       <Link to={`/upload`}>
-      <Button type="primary">Upload</Button>
+        <Button className="upload-btn" type="primary">Upload</Button>
       </Link>
     </Menu.Item>
       <Menu.Item key="5">

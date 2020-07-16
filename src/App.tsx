@@ -4,7 +4,6 @@ import ApiService from './lib/apiService';
 import Routes from './routes';
 import NavBar from './components/navbar';
 import Footer from './components/footer';
-import SearchBar from './components/searchBar';
 import './App.css';
 
 interface IUser {
@@ -45,7 +44,6 @@ function App() {
       />
       <Layout>
         <Layout.Content>
-        <SearchBar />
           {Routes}
         </Layout.Content>
         <Footer />

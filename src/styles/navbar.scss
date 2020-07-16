@@ -54,9 +54,19 @@
                 }
             }
 
-            .nav-upload {
-                font-weight: 700;
-                color: $link;
+            .anticon {
+                margin-right: 0;
+            }
+
+            .upload-btn {
+                width: 100%;
+                background: rgb(65,164,169);
+                background: linear-gradient(43deg, rgba(65,164,169,1) 0%, rgba(174,234,237,1) 100%); 
+
+                &:hover {
+                    background: #2f7d81;
+                    background: linear-gradient(43deg, #2f7d81 0%, #aeeaed 100%);
+                }
             }
         }
 

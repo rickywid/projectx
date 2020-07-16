@@ -1,22 +1,22 @@
-@import './variables.scss';
+// @import './variables.scss';
 
-.search-wrapper {
-    margin-bottom: 20px;
+// .search-wrapper {
+//     margin-bottom: 20px;
 
-    .search-input {
-        width: 100%;   
-    }
-}
+//     .search-input {
+//         width: 100%;   
+//     }
+// }
 
 
-@media only screen and (min-width: $medium) {
-    .search-wrapper {
-        margin-bottom: 20px;
-        text-align: right;
+// @media only screen and (min-width: $medium) {
+//     .search-wrapper {
+//         margin-bottom: 20px;
+//         text-align: right;
     
-        .search-input {
-            width: 300px;   
-            display: inline-block;
-        }
-    }
-}
+//         .search-input {
+//             width: 300px;   
+//             display: inline-block;
+//         }
+//     }
+// }
