@@ -54,7 +54,7 @@ interface IFields {
 const ProjectUpload = () => {
 
     useEffect(() => {
-        if (localStorage.getItem('userID') === 'undefined') {
+        if (!localStorage.getItem('userID')) {
             history.push('/login');
             message.info('You must be logged in')
             return;

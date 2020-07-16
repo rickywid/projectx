@@ -277,7 +277,7 @@ const Project = () => {
                             <Divider />
                             <div className="project-view-details">
                                 <ul>
-                                <li><FireFilled className="svg-filled" /> {likeCount} {parseInt(likeCount) > 1 ? 'likes': 'like'}</li>
+                                <li><FireFilled className="svg-filled" /> {likeCount}</li>
                                     {project.collaboration && <li><CheckCircleFilled className="svg-filled" /> Interested in collaborating</li>}
                                     <li><CalendarFilled className="svg-filled" /> Created June 4, 2020</li>
                                     <li><FlagFilled className="svg-filled" /> <button style={{background: 'none', border: 'none', padding: 0}} onClick={showModal}>Report</button></li>
