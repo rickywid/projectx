@@ -16,6 +16,7 @@ import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
 import { technologies, tags } from '../lib/const';
 import { siteName } from '../lib/const';
+import ParseDOM from '../lib/domParser';
 import UrlValidation from '../lib/urlValidation';
 import '../styles/form.scss';
 import '../styles/global.scss';
@@ -152,7 +153,7 @@ const ProjectUpload = () => {
         }
 
         form.append('name', name);
-        form.append('description', description);
+        form.append('description', ParseDOM(description));
         form.append('tagline', tagline);
         form.append('url', url);
         form.append('repourl', repourl);

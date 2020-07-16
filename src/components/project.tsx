@@ -213,8 +213,8 @@ const Project = () => {
                     <Divider />
                     <div className="project-view-content">
                         <div className="project-view-left-col">
-                            <p>{project.tagline}</p>
-                            <p>{project.description}</p>
+                            <p className="project-tagline">{project.tagline}</p>
+                            <p className="project-description" dangerouslySetInnerHTML={{__html: `${project.description}`}}></p>
 
                             {user.isAuthenticated ?
                                 <>
@@ -243,7 +243,7 @@ const Project = () => {
                                             <Link to={`/user/${c.username}`} className="project-view-comment-user">{c.username}</Link>
                                         </div>
                                         <div className="project-view-comment-body">
-                                            <div dangerouslySetInnerHTML={{__html: `<p>${c.comment}</p>`}}></div>
+                                            <p dangerouslySetInnerHTML={{__html: `${c.comment}`}}></p>
                                             <small>{moment(c.created_on).fromNow()}</small>
                                         </div>
                                         <Divider />
