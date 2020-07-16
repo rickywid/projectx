@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Divider } from 'antd';
+import { Layout, Menu, Button } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 import AuthService from '../lib/authService';
@@ -30,7 +30,7 @@ const NavBar = ({
     <Menu theme="light" mode="inline">
     <Menu.Item key="2">
       <Link to={`/upload`}>
-        <span className="nav-upload">Upload</span>
+        <Button>Upload</Button>
       </Link>
     </Menu.Item>
     <Menu.Item key="1">
@@ -75,7 +75,7 @@ const NavBar = ({
     <Menu theme="light" mode="inline">
     <Menu.Item key="2">
       <Link to={`/upload`}>
-        <span className="nav-upload">Upload</span>
+      <Button type="primary">Upload</Button>
       </Link>
     </Menu.Item>
       <Menu.Item key="5">

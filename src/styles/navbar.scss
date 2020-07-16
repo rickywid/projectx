@@ -23,16 +23,20 @@
 
             &:hover {
                 cursor: pointer;
-                color: $blue;
+                color: $primaryDark;
             }
         }
 
-        .ant-menu-inline .ant-menu-item::after {
+        .ant-menu-inline {
             border-right: none;
         }
     
         .ant-menu-item-selected {
             background-color: $bg !important;
+            
+            a {
+                color: $primary;
+            }
         }
 
         .ant-menu-submenu-title,
@@ -40,9 +44,28 @@
             font-weight: 300;
             color: $navLinks;
 
+            &:after {
+                border-right: none;
+            }
+
+            a {
+                &:hover {
+                    color: $primary;
+                }
+            }
+
             .nav-upload {
                 font-weight: 700;
                 color: $link;
+            }
+        }
+
+        .ant-menu-submenu-title {
+            &:hover {
+                .ant-menu-submenu-arrow::before,
+                .ant-menu-submenu-arrow::after {
+                    background: linear-gradient(to right, $primary, $primary);
+                }   
             }
         }
     }

@@ -79,6 +79,11 @@ a {
 .ant-btn-primary {
     background: $primary;
     border: $primaryDark;
+
+    &:hover,
+    &:focus {
+        background: $primaryDark;
+    }
 }
 
 
