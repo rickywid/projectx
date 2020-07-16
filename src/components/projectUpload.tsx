@@ -55,7 +55,8 @@ const ProjectUpload = () => {
 
     useEffect(() => {
         if (localStorage.getItem('userID') === 'undefined') {
-            history.push('/');
+            history.push('/login');
+            message.info('You must be logged in')
             return;
         }
 

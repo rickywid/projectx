@@ -1,9 +1,9 @@
 @import './variables.scss';
 
 .project-view {
-    max-width: 850px;
+    max-width: 950px;
     margin: 0 auto;
-    background: white;
+    // background: white;
     padding: 20px;
 
     img.project-view-screenshot {
@@ -102,12 +102,22 @@
         .project-view-left-col {
             flex: 2;
             margin-right: 0;
+            padding: 50px;
+            background: white;
+
+            .project-tagline {
+                font-weight: bold;
+            }
 
             .project-description {
                 white-space: pre-line;
             }
 
             .project-view-comments {
+                .project-view-comments-header {
+                    margin-bottom: 50px;
+                }
+
                 .project-view-comment {
                     .project-view-comment-top-wrapper {
 
@@ -149,7 +159,7 @@
 
 @media only screen and (min-width: $medium) {
     .project-view {
-        padding: 50px;
+        padding: 0;
     
         img.project-view-screenshot {
             height: 300px;

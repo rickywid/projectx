@@ -10,7 +10,7 @@ import { UserOutlined, LockOutlined, GithubOutlined } from '@ant-design/icons';
 import AuthService from '../../lib/authService';
 import { siteName } from '../../lib/const';
 import '../../styles/login.scss';
-import Logo from  '../../assets/monkey.png';
+import Logo from  '../../assets/logo.png';
 
 interface IFormValues {
   username: string;

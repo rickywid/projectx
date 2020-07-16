@@ -217,5 +217,5 @@ export let tags: technologies = {
     },
 }
 
-export const siteName = 'Code Complex';
+export const siteName = 'CodeComplex';
 export const pageTitle = `${siteName} - Discover new and exciting creative side projects`

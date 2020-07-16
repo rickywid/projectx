@@ -399,8 +399,8 @@ const ProjectEdit = () => {
                             >
                                 <Switch checkedChildren="Yes" unCheckedChildren="No" defaultChecked={project.collaboration} />
                             </Form.Item>
-                            <Form.Item label="Add Thumbnail">
-                                <p>Add a thumbnail(250x250) and a screenshot of your project.</p>
+                            <Form.Item label={<span><strong>Add Image</strong></span>}>
+                                <p>Include a screenshot or logo of your application.</p>
                                 <div className="clearfix">
                                     <Upload
                                         listType="picture-card"
@@ -428,27 +428,26 @@ const ProjectEdit = () => {
 
                         </Form>
                     </div>
+                    <Divider />
+                    <div>
+                        <h1>Delete Account</h1>
+                        <div className="form-wrapper">
+                            <p>Once you delete this project, there is no going back. Please be certain. </p>
+                            <Popconfirm
+                                title="Are you sure you want to delete this project?"
+                                onConfirm={(e) => confirm(e, id)}
+                                onCancel={cancel}
+                                okText="Yes"
+                                cancelText="No"
+                            >
+                                <div className="form-btn-wrap">
+                                    <Button type="primary" danger>Delete</Button>
+                                </div>
+                            </Popconfirm>
+                        </div>
+                    </div>
                 </div>
             }
-
-            <Divider />
-            <div>
-                <h1>Delete Account</h1>
-                <div className="form-wrapper">
-                    <p>Once you delete this project, there is no going back. Please be certain. </p>
-                    <Popconfirm
-                        title="Are you sure you want to delete this project?"
-                        onConfirm={(e) => confirm(e, id)}
-                        onCancel={cancel}
-                        okText="Yes"
-                        cancelText="No"
-                    >
-                        <div className="form-btn-wrap">
-                            <Button type="primary" danger>Delete</Button>
-                        </div>
-                    </Popconfirm>
-                </div>
-            </div>
         </div>
     )
 };

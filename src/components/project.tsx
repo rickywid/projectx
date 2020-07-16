@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
-import { CodeOutlined, HeartFilled, DesktopOutlined, TagFilled, CalendarFilled, TeamOutlined, FlagFilled, BlockOutlined, StarFilled, StarTwoTone, FireTwoTone, FireFilled } from '@ant-design/icons';
+import { CodeOutlined, DesktopOutlined, TagFilled, TagsFilled, CalendarFilled, CheckCircleFilled, FlagFilled, BlockOutlined, StarFilled, StarTwoTone, FireTwoTone, FireFilled } from '@ant-design/icons';
 import { Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Spinner from './spinner';
@@ -200,7 +200,7 @@ const Project = () => {
                     <div className="project-view-title">
                         <div className="project-view-title-info">
                             <h2>{project.name}</h2>
-                            <p>by <Link className="project-owner" to={`/user/${project.username}`}><img style={{height: '20px', borderRadius: '100%'}} src={project.gh_avatar} alt="avatar"/> {project.username}</Link></p>
+                            <p>by <Link className="project-owner" to={`/user/${project.username}`}><img style={{height: '20px', borderRadius: '100%', margin: '0 3px'}} src={project.gh_avatar} alt="avatar"/> {project.username}</Link></p>
                         </div>
                         <div className="button-wrap">
                             {isLiked ? <Button onClick={() => handleLike(false)} icon={<FireTwoTone twoToneColor="#f00" />}><strong style={{marginLeft: '7px'}}>Hot</strong></Button> : <Button onClick={() => handleLike(true)} icon={<FireFilled />}><strong style={{marginLeft: '7px'}}>Hot</strong></Button>}
@@ -223,9 +223,10 @@ const Project = () => {
                         <div className="project-view-left-col">
                             <p className="project-tagline">{project.tagline}</p>
                             <p className="project-description" dangerouslySetInnerHTML={{__html: `${project.description}`}}></p>
-
+                            <Divider />
                             {user.isAuthenticated ?
                                 <>
+                                    <p><strong>Leave a comment</strong></p>
                                     <Form
                                         form={form}
                                         layout="vertical"
@@ -244,7 +245,7 @@ const Project = () => {
                                 : <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Please <Link to={`/login`}>Log In</Link> to write a comment</p>}
 
                             <div className="project-view-comments">
-                            <h3>{c.length} comments</h3>
+                            <h3 className="project-view-comments-header">{c.length} comments</h3>
                                 {c?.map((c: any) => (
                                     <div className="project-view-comment">
                                         <div className="project-view-comment-top-wrapper">
@@ -270,14 +271,14 @@ const Project = () => {
                                 <ul>{project.technologies.map((technology: string) => <Link to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}>{technology}</li></Link>)}</ul>
                             </div>
                             <div className="project-view-tags">
-                                <TagFilled className="svg-filled"  />
+                                <TagsFilled className="svg-filled"  />
                                 <ul>{project.tags.map((category: string) => <Link to={`/tag/category/${category}`}><li style={{ listStyle: 'none' }}>{category}</li></Link>)}</ul>
                             </div>
                             <Divider />
                             <div className="project-view-details">
                                 <ul>
-                                    <li><HeartFilled className="svg-filled" /> {likeCount} likes</li>
-                                    {project.collaboration && <li><TeamOutlined /> Looking for contributors</li>}
+                                <li><FireFilled className="svg-filled" /> {likeCount} {parseInt(likeCount) > 1 ? 'likes': 'like'}</li>
+                                    {project.collaboration && <li><CheckCircleFilled className="svg-filled" /> Looking for contributors</li>}
                                     <li><CalendarFilled className="svg-filled" /> Created June 4, 2020</li>
                                     <li><FlagFilled className="svg-filled" /> <button style={{background: 'none', border: 'none', padding: 0}} onClick={showModal}>Report</button></li>
                                 </ul>

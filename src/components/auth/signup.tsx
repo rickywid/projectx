@@ -12,7 +12,7 @@ import { QuestionCircleOutlined, GithubOutlined } from '@ant-design/icons';
 import AuthService from '../../lib/authService';
 import Placeholder from '../../lib/placeholders';
 import { siteName } from '../../lib/const';
-import Logo from  '../../assets/monkey.png';
+import Logo from  '../../assets/logo.png';
 
 function App() {
 

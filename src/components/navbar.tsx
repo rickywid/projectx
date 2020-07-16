@@ -4,7 +4,7 @@ import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/
 import { Link } from "react-router-dom";
 import AuthService from '../lib/authService';
 import '../styles/navbar.scss';
-import Logo from '../assets/monkey.png';
+import Logo from '../assets/logo.png';
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -28,16 +28,16 @@ const NavBar = ({
 
   const authMenu = () => (
     <Menu theme="light" mode="inline">
+    <Menu.Item key="2">
+      <Link to={`/upload`}>
+        <span className="nav-upload">Upload</span>
+      </Link>
+    </Menu.Item>
     <Menu.Item key="1">
       <Link className="user-nav-link" to={`/user/${user.username}`}>
         <span>
           {user.username}
         </span>
-      </Link>
-    </Menu.Item>
-    <Menu.Item key="2">
-      <Link to={`/upload`}>
-        <span>Upload</span>
       </Link>
     </Menu.Item>
     <SubMenu key="sub1" title="Tags">
@@ -52,7 +52,6 @@ const NavBar = ({
             </Link>
       </Menu.Item>
     </SubMenu>
-    <Divider />
       <Menu.Item key="23">
         <Link to={`/guidelines`}>
               <span>Guidelines</span>
@@ -74,6 +73,11 @@ const NavBar = ({
   
   const unAuthMenu = () => (
     <Menu theme="light" mode="inline">
+    <Menu.Item key="2">
+      <Link to={`/upload`}>
+        <span className="nav-upload">Upload</span>
+      </Link>
+    </Menu.Item>
       <Menu.Item key="5">
         <Link to={`/signup`}>
           <span>Sign Up</span>
@@ -96,7 +100,6 @@ const NavBar = ({
             </Link>
       </Menu.Item>
     </SubMenu>
-    <Divider />
       <Menu.Item key="23">
         <Link to={`/guidelines`}>
               <span>Guidelines</span>

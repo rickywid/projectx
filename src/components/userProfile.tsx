@@ -36,7 +36,7 @@ const UserProfile = ({ match }: IUserProfile) => {
             setSavedProjects(json.data.savedProjects);
             setIsLoading(false);
 
-            document.title = `${json.data.user.username} Profile | ${siteName}`;
+            document.title = `${json.data.user.username}'s Profile - ${siteName}`;
         }
 
         fetch();
