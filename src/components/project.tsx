@@ -80,6 +80,7 @@ const Project = () => {
     const [isLiked, setisLiked] = useState<boolean>(false);
     const [likeCount, setLikeCount] = useState<string>('0');
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isCommentEditing, setIsCommentEditing] = useState<boolean>(false);
     const [isCommentSubmitting, setIsCommentSubmitting] = useState<boolean>(false);
     const [visible, setVisible] = useState<boolean>(false);
     const [visible2, setVisible2] = useState<boolean>(false);
@@ -88,11 +89,14 @@ const Project = () => {
     const [commentID, setCommentID] = useState<number | null>(null);
 
     const [form] = Form.useForm();
+    const [form2] = Form.useForm();
 
     const handleLike = async (like?: boolean) => {
         
         const id = window.location.pathname.split('/')[2];
         const form = new FormData();
+        const form2 = new FormData();
+        
         let data;
 
         form.append('project_id', project.id);
@@ -217,7 +221,23 @@ const Project = () => {
     }
 
     const editComment = () => {
-        console.log('edit comment')
+        setIsCommentEditing(true);
+    }
+
+    const handleCommentEditCancel = () => {
+        setIsCommentEditing(false);
+    }
+
+    const handleUpdateComment = async (values: any, commentID: number) => {
+        
+        const form = new FormData();
+        form.append('comment_id', commentID!.toString());
+        form.append('comment', values.updateComment);
+        await api.updateComment(commentID, form);
+        setIsCommentEditing(false)
+
+        // const comments = c.filter((comm:any) => comm.comment_id !== commentID);
+        // setC([...comments])
     }
 
     const deleteComment = async (commentID: number) => {
@@ -289,24 +309,51 @@ const Project = () => {
                                             <img style={{width: '25px'}} src={c.gh_avatar} alt={`${c.username}'s profile`} />
                                             <Link to={`/user/${c.username}`} className="project-view-comment-user">{c.username}</Link>
                                         </div>
-                                        <div className="project-view-comment-body">
-                                            <p dangerouslySetInnerHTML={{__html: `${c.comment}`}}></p>
-                                            <small style={{marginRight: '20px'}}>{moment(c.created_on).fromNow()}</small>
-                                            <Popover content={
-                                                <div>
-                                                    <p onClick={() => showReportCommentModal(c.comment_id)}>Report</p>
-                                                    {c.user_id && c.user_id.toString() === userID ? 
-                                                    <>
-                                                        <p onClick={editComment}>Edit</p>
-                                                        <p onClick={() => deleteComment(c.comment_id)}>Delete</p>                                                    
-                                                    </>
-                                                    : <></>}
-
-                                                </div>
-                                            } trigger="click">
-                                                <EllipsisOutlined style={{fontSize: '20px'}} />
-                                            </Popover>
+                                        {isCommentEditing ? 
+                                    <Form
+                                    form={form2}
+                                    layout="vertical"
+                                    onFinish={(values) => handleUpdateComment(values, c.comment_id) as any}
+                                    initialValues={{updateComment: c.comment}}
+                                >
+                                    <Form.Item
+                                        name="updateComment"
+                                        rules={[{ required: true, message: 'Required' }]}
+                                    >
+                                        <TextArea placeholder="What do you think of this project?" rows={2} />
+                                    </Form.Item>
+                                    <div>
+                                        {isCommentSubmitting ? 
+                                        <Button type="primary" disabled>Send</Button> : 
+                                        <div>
+                                            <Button className="comment-btn" type="primary" htmlType="submit">Send</Button>
+                                            <Button onClick={handleCommentEditCancel} className="comment-btn">Cancel</Button>
                                         </div>
+                                        }
+                                    </div>
+                                </Form>
+                                        : 
+
+                                        <div className="project-view-comment-body">
+                                        <p dangerouslySetInnerHTML={{__html: `${c.comment}`}}></p>
+                                        <small style={{marginRight: '20px'}}>{moment(c.created_on).fromNow()}</small>
+                                        <Popover content={
+                                            <div>
+                                                <p onClick={() => showReportCommentModal(c.comment_id)}>Report</p>
+                                                {c.user_id && c.user_id.toString() === userID ? 
+                                                <>
+                                                    <p onClick={editComment}>Edit</p>
+                                                    <p onClick={() => deleteComment(c.comment_id)}>Delete</p>                                                    
+                                                </>
+                                                : <></>}
+
+                                            </div>
+                                        } trigger="click">
+                                            <EllipsisOutlined style={{fontSize: '20px'}} />
+                                        </Popover>
+                                    </div>
+                                        }
+
                                         <Divider />
                                     </div>
                                 ))}

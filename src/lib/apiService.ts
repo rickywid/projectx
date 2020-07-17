@@ -215,6 +215,15 @@ class ApiService{
           comment
         );
       }   
+
+      public async updateComment(id: number, comment: FormData) {
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.put(
+          `${this.apiEndpoint}/comment/edit/${id}`,
+          this.headers,
+          comment
+        );
+      }   
 }
 
 export default ApiService;
