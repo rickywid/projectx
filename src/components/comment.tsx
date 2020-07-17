@@ -37,6 +37,7 @@ const Comment = ({comment, handleUpdateComment, handleDeleteComment}: Props) => 
     const handleSubmit = (values: any, id: any) => {
         handleUpdateComment(values, id);
         setIsCommentEditing(false);
+        form.resetFields();
     }
 
     const handleCommentEditCancel = () => {
@@ -77,6 +78,7 @@ const Comment = ({comment, handleUpdateComment, handleDeleteComment}: Props) => 
             </div>
             {isCommentEditing ?
                 <Form
+                    className="form-update-comment"
                     form={form}
                     layout="vertical"
                     onFinish={(values) => handleSubmit(values, comment.comment_id) as any}
@@ -92,7 +94,7 @@ const Comment = ({comment, handleUpdateComment, handleDeleteComment}: Props) => 
                         {isCommentSubmitting ?
                             <Button type="primary" disabled>Send</Button> :
                             <div>
-                                <Button className="comment-btn" type="primary" htmlType="submit">Send</Button>
+                                <Button className="comment-btn comment-edit-btn" type="primary" htmlType="submit">Send</Button>
                                 <Button onClick={handleCommentEditCancel} className="comment-btn">Cancel</Button>
                             </div>
                         }
@@ -102,21 +104,23 @@ const Comment = ({comment, handleUpdateComment, handleDeleteComment}: Props) => 
 
                 <div className="project-view-comment-body">
                     <p dangerouslySetInnerHTML={{ __html: `${comment.comment}` }}></p>
-                    <small style={{ marginRight: '20px' }}>{moment(comment.created_on).fromNow()}</small>
-                    <Popover content={
-                        <div>
-                            <p onClick={() => showReportCommentModal(comment.comment_id)}>Report</p>
-                            {comment.user_id && comment.user_id.toString() === userID ?
-                                <>
-                                    <p onClick={editComment}>Edit</p>
-                                    <p onClick={() => handleDelete(comment.comment_id)}>Delete</p>
-                                </>
-                                : <></>}
+                    <div className="project-comment-below">
+                        <small style={{ marginRight: '20px' }}>{moment(comment.created_on).fromNow()}</small>
+                        <Popover content={
+                            <div>
+                                <p className="popover-btn" onClick={() => showReportCommentModal(comment.comment_id)}>Report</p>
+                                {comment.user_id && comment.user_id.toString() === userID ?
+                                    <>
+                                        <p className="popover-btn" onClick={editComment}>Edit</p>
+                                        <p className="popover-btn" onClick={() => handleDelete(comment.comment_id)}>Delete</p>
+                                    </>
+                                    : <></>}
 
-                        </div>
-                    } trigger="click">
-                        <EllipsisOutlined style={{ fontSize: '20px' }} />
-                    </Popover>
+                            </div>
+                        } trigger="click">
+                            <EllipsisOutlined style={{ fontSize: '20px' }} />
+                        </Popover>
+                    </div>
                 </div>
             }
 

@@ -104,15 +104,10 @@ const Project = () => {
         formComment.append('user_id', user.id);
         
         const res = await api.createComment(formComment);
-        const data = await res.json();
-        
-        if(res.status === 200) {
-          // do somethings
-          setC([...c, {comment_id: data.comment.comment_id, comment: ParseDom(comment.toString()), user_id: data.comment.user_id, username: user.username, gh_avatar: user.gh_avatar}]);
-          
-          setIsCommentSubmitting(false);
-          form.resetFields();
-        }
+        const comments = await res.json();
+        setC([...comments.data])  ;
+        setIsCommentSubmitting(false);
+        form.resetFields();
     }
 
     const handleSaveProject = async (saved: boolean) => {
@@ -227,12 +222,12 @@ const Project = () => {
                     <Divider />
                     <div className="project-view-content">
                         <div className="project-view-left-col">
-                            <p className="project-tagline">{project.tagline}</p>
+                            <h3 className="project-tagline">{project.tagline}</h3>
                             <p className="project-description" dangerouslySetInnerHTML={{__html: `${project.description}`}}></p>
                             <Divider />
                             {user.isAuthenticated ?
                                 <>
-                                    <p><strong>Comment</strong></p>
+                                    <h4>Comment</h4>
                                     <Form
                                         form={form}
                                         layout="vertical"
@@ -252,7 +247,7 @@ const Project = () => {
                             }
 
                             <div className="project-view-comments">
-                            <h3 className="project-view-comments-header">{c.length} {c.length > 1 || c.length === 0 ? 'comments' : 'comment'} </h3>
+                            <h4 className="project-view-comments-header">{c.length} {c.length > 1 || c.length === 0 ? 'comments' : 'comment'} </h4>
                                 {c?.map((c: any, i: number) => (
                                     <Comment 
                                         key={i} 
@@ -281,8 +276,8 @@ const Project = () => {
                                 <ul>
                                 <li><FireFilled className="svg-filled" /> {likeCount}</li>
                                     {project.collaboration && <li><CheckCircleFilled className="svg-filled" /> Interested in collaborating</li>}
-                                    <li><CalendarFilled className="svg-filled" /> Created June 4, 2020</li>
-                                    <li><FlagFilled className="svg-filled" /> <button style={{background: 'none', border: 'none', padding: 0}} onClick={showReportProjectModal}>Report</button></li>
+                                    <li><CalendarFilled className="svg-filled" /> {moment(project.created_on).format('MMM Do YYYY')}</li>
+                                    <li><FlagFilled className="svg-filled" /> <button className="project-report-btn" onClick={showReportProjectModal}>Report</button></li>
                                 </ul>
                             </div>
                         </div>

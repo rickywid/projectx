@@ -73,8 +73,10 @@
     }
 
     .project-view-content {
-        .project-view-right-col {
+        display: flex;
+        flex-direction: column;
 
+        .project-view-right-col {
             button.website-btn {
                 margin-bottom: 15px;
             }
@@ -102,8 +104,10 @@
         .project-view-left-col {
             flex: 2;
             margin-right: 0;
-            padding: 20px;
+            margin-bottom: 20px;
+            padding: 40px 20px 20px 20px;
             background: white;
+            order: 2;
 
             .project-tagline {
                 font-weight: bold;
@@ -139,11 +143,21 @@
 
                     .project-view-comment-body {
                         margin-left: 40px;
+
+                        .project-comment-below {
+                            display: flex;
+                            margin: 5px 0;
+                        }
+
                         p {
                             margin: 0;
                             font-size: 16px;
                             white-space: pre-line;
                         }
+                    }
+
+                    .form-update-comment {
+                        margin-top: 15px;
                     }
                 }
             }
@@ -168,10 +182,12 @@
         }
     
         .project-view-content {
-            display: flex;
+            flex-direction: row;
 
             .project-view-left-col {
                 margin-right: 50px;
+                margin-bottom: 0;
+                order: initial;
             }
         }
         
