@@ -35,7 +35,7 @@ const Guidelines = () => {
                 </li>
                 <li
                     >Please do not post any NSFW content including sexually explicit media, violence or anything else that may offend others. 
-                    This can be related to your project’s name, description or the project itself.
+                    This includes your project’s name, description and the application itself.
                 </li>
                 <li>
                     Any kind of illegal related content is not allowed.
