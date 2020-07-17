@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
 import { CodeOutlined, DesktopOutlined, TagFilled, TagsFilled, CalendarFilled, CheckCircleFilled, FlagFilled, BlockOutlined, StarFilled, StarTwoTone, FireTwoTone, FireFilled, EllipsisOutlined } from '@ant-design/icons';
-import { Radio, Modal, Form, Input, Button, Divider, message, Popover } from 'antd';
+import { Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Spinner from './spinner';
+import Comment from './comment';
 import moment from 'moment';
 import history from '../lib/history';
 import '../styles/global.scss'
@@ -12,27 +13,6 @@ import '../styles/project.scss'
 import ParseDom from '../lib/domParser';
 
 const { TextArea } = Input;
-
-interface IProjectPage {
-    children?: React.ReactNode;
-    project?: {
-        id: string;
-        name: string;
-        owner: string;
-        images: string;
-        url: {
-            id: number;
-            user_id: number;
-            comment: string;
-            project_id: number;
-            created_on: string;
-        }[];
-    };
-    comments?: any[];
-    userID?: string | null;
-    username?: string;
-    likes?: any[];
-}
 
 interface IFields {
     comment: {created_on: string};
@@ -80,22 +60,16 @@ const Project = () => {
     const [isLiked, setisLiked] = useState<boolean>(false);
     const [likeCount, setLikeCount] = useState<string>('0');
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [isCommentEditing, setIsCommentEditing] = useState<boolean>(false);
     const [isCommentSubmitting, setIsCommentSubmitting] = useState<boolean>(false);
     const [visible, setVisible] = useState<boolean>(false);
-    const [visible2, setVisible2] = useState<boolean>(false);
     const [value, setValue] = useState<string>('1');
-    const [value2, setValue2] = useState<string>('1');
-    const [commentID, setCommentID] = useState<number | null>(null);
 
     const [form] = Form.useForm();
-    const [form2] = Form.useForm();
 
     const handleLike = async (like?: boolean) => {
         
         const id = window.location.pathname.split('/')[2];
         const form = new FormData();
-        const form2 = new FormData();
         
         let data;
 
@@ -170,7 +144,6 @@ const Project = () => {
     }
 
     const onChange = (e: any) => setValue(e.target.value);
-    const onChange2 = (e: any) => setValue2(e.target.value);
 
     const radioStyle = {
         display: 'block',
@@ -190,15 +163,6 @@ const Project = () => {
         setVisible(false);
     }
 
-    const handleReportComment = async () => {
-        const form = new FormData();
-        form.append('comment_id', commentID!.toString());
-        form.append('comment', value2);
-        await api.reportComment(form);
-        message.success('Comment has been reported');
-        setVisible2(false);
-    }
-
     const copyUrl = () => {
         navigator.clipboard.writeText(document.location.href)
         .then(() => {
@@ -210,43 +174,28 @@ const Project = () => {
         });
     }
 
-    const showReportCommentModal = (commentID: number) => {
-        setVisible2(true);
-        setCommentID(commentID);
-    }
-
-    const handleCancel2 = () => {
-        setVisible2(false);
-        setCommentID(null);
-    }
-
-    const editComment = () => {
-        setIsCommentEditing(true);
-    }
-
-    const handleCommentEditCancel = () => {
-        setIsCommentEditing(false);
-    }
-
     const handleUpdateComment = async (values: any, commentID: number) => {
         
         const form = new FormData();
         form.append('comment_id', commentID!.toString());
         form.append('comment', values.updateComment);
-        await api.updateComment(commentID, form);
-        setIsCommentEditing(false)
+        form.append('project_id', id);
+        const res = await api.updateComment(commentID, form);
+        const comments = await res.json();
 
-        // const comments = c.filter((comm:any) => comm.comment_id !== commentID);
-        // setC([...comments])
+        setC([...comments.data])
     }
 
-    const deleteComment = async (commentID: number) => {
+    const handleDeleteComment = async (commentID: number) => {
         const form = new FormData();
         form.append('comment_id', commentID!.toString());
+        form.append('project_id', id);
         await api.deleteComment(commentID, form);
 
-        const comments = c.filter((comm:any) => comm.comment_id !== commentID);
-        setC([...comments])
+        const res = await api.updateComment(commentID, form);
+        const comments = await res.json();
+
+        setC([...comments.data]);
     }
 
     return (
@@ -299,63 +248,18 @@ const Project = () => {
                                     </Form>
                                     <Divider />
                                 </>
-                                : <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Please <Link to={`/login`}>Log In</Link> to write a comment</p>}
+                                : <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Please <Link to={`/login`}>Log In</Link> to write a comment</p>
+                            }
 
                             <div className="project-view-comments">
                             <h3 className="project-view-comments-header">{c.length} {c.length > 1 || c.length === 0 ? 'comments' : 'comment'} </h3>
-                                {c?.map((c: any) => (
-                                    <div className="project-view-comment" key={c.comment_id}>
-                                        <div className="project-view-comment-top-wrapper">
-                                            <img style={{width: '25px'}} src={c.gh_avatar} alt={`${c.username}'s profile`} />
-                                            <Link to={`/user/${c.username}`} className="project-view-comment-user">{c.username}</Link>
-                                        </div>
-                                        {isCommentEditing ? 
-                                    <Form
-                                    form={form2}
-                                    layout="vertical"
-                                    onFinish={(values) => handleUpdateComment(values, c.comment_id) as any}
-                                    initialValues={{updateComment: c.comment}}
-                                >
-                                    <Form.Item
-                                        name="updateComment"
-                                        rules={[{ required: true, message: 'Required' }]}
-                                    >
-                                        <TextArea placeholder="What do you think of this project?" rows={2} />
-                                    </Form.Item>
-                                    <div>
-                                        {isCommentSubmitting ? 
-                                        <Button type="primary" disabled>Send</Button> : 
-                                        <div>
-                                            <Button className="comment-btn" type="primary" htmlType="submit">Send</Button>
-                                            <Button onClick={handleCommentEditCancel} className="comment-btn">Cancel</Button>
-                                        </div>
-                                        }
-                                    </div>
-                                </Form>
-                                        : 
-
-                                        <div className="project-view-comment-body">
-                                        <p dangerouslySetInnerHTML={{__html: `${c.comment}`}}></p>
-                                        <small style={{marginRight: '20px'}}>{moment(c.created_on).fromNow()}</small>
-                                        <Popover content={
-                                            <div>
-                                                <p onClick={() => showReportCommentModal(c.comment_id)}>Report</p>
-                                                {c.user_id && c.user_id.toString() === userID ? 
-                                                <>
-                                                    <p onClick={editComment}>Edit</p>
-                                                    <p onClick={() => deleteComment(c.comment_id)}>Delete</p>                                                    
-                                                </>
-                                                : <></>}
-
-                                            </div>
-                                        } trigger="click">
-                                            <EllipsisOutlined style={{fontSize: '20px'}} />
-                                        </Popover>
-                                    </div>
-                                        }
-
-                                        <Divider />
-                                    </div>
+                                {c?.map((c: any, i: number) => (
+                                    <Comment 
+                                        key={i} 
+                                        comment={c} 
+                                        handleUpdateComment={handleUpdateComment}
+                                        handleDeleteComment={handleDeleteComment}
+                                    />
                                 ))}
                             </div>
 
@@ -366,7 +270,7 @@ const Project = () => {
                             <Divider />
                             <div className="project-view-tags">
                                 <TagFilled className="svg-filled" />
-                                <ul>{project.technologies.map((technology: string) => <Link to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}>{technology}</li></Link>)}</ul>
+                                <ul>{project.technologies.map((technology: string, i: number) => <Link key={i} to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}>{technology}</li></Link>)}</ul>
                             </div>
                             <div className="project-view-tags">
                                 <TagsFilled className="svg-filled"  />
@@ -401,29 +305,6 @@ const Project = () => {
                     </Radio>
                     <Radio style={radioStyle} value={'3'}>
                         Illegal
-                    </Radio>
-                    <Radio style={radioStyle} value={'4'}>
-                        Spam
-                    </Radio>
-                </Radio.Group>
-            </Modal>
-
-            <Modal
-                title="Report Comment"
-                visible={visible2}
-                onOk={handleReportComment}
-                onCancel={handleCancel2}
-                okText="Submit"
-                >
-                <Radio.Group onChange={onChange2} value={value2}>
-                    <Radio style={radioStyle} value={'1'}>
-                        Offensive
-                    </Radio>
-                    <Radio style={radioStyle} value={'2'}>
-                        Duplicate
-                    </Radio>
-                    <Radio style={radioStyle} value={'3'}>
-                        Not working
                     </Radio>
                     <Radio style={radioStyle} value={'4'}>
                         Spam
