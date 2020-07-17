@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
-import { CodeOutlined, DesktopOutlined, TagFilled, TagsFilled, CalendarFilled, CheckCircleFilled, FlagFilled, BlockOutlined, StarFilled, StarTwoTone, FireTwoTone, FireFilled } from '@ant-design/icons';
-import { Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
+import { CodeOutlined, DesktopOutlined, TagFilled, TagsFilled, CalendarFilled, CheckCircleFilled, FlagFilled, BlockOutlined, StarFilled, StarTwoTone, FireTwoTone, FireFilled, EllipsisOutlined } from '@ant-design/icons';
+import { Radio, Modal, Form, Input, Button, Divider, message, Popover } from 'antd';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Spinner from './spinner';
 import moment from 'moment';
 import history from '../lib/history';
-import ParseDOM from '../lib/domParser';
 import '../styles/global.scss'
 import '../styles/project.scss'
 import ParseDom from '../lib/domParser';
@@ -43,11 +42,10 @@ interface IFields {
 const Project = () => {
     const api = new ApiService();
     const id = window.location.pathname.split('/')[2];
-    
+    const userID = localStorage.getItem('userID');
+
     useEffect(() => {
         
-        const userID = localStorage.getItem('userID');
-
         const fetch = async () => {
             setIsLoading(true);
             const project = await api.getProject(id);
@@ -66,7 +64,7 @@ const Project = () => {
                 setLikeCount(data.likes.count);
                 setisLiked(data.likes.users.includes(parseInt(userID as string)))
                 setIsLoading(false);
-
+                
                 document.title = `${data.project.name} - ${data.project.tagline}`;
             }
         }
@@ -84,7 +82,11 @@ const Project = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isCommentSubmitting, setIsCommentSubmitting] = useState<boolean>(false);
     const [visible, setVisible] = useState<boolean>(false);
+    const [visible2, setVisible2] = useState<boolean>(false);
     const [value, setValue] = useState<string>('1');
+    const [value2, setValue2] = useState<string>('1');
+    const [commentID, setCommentID] = useState<number | null>(null);
+
     const [form] = Form.useForm();
 
     const handleLike = async (like?: boolean) => {
@@ -124,10 +126,12 @@ const Project = () => {
         formComment.append('user_id', user.id);
         
         const res = await api.createComment(formComment);
+        const data = await res.json();
         
         if(res.status === 200) {
           // do somethings
-          setC([...c, {comment: ParseDom(comment.toString()), username: user.username, gh_avatar: user.gh_avatar, created_on: comment.created_on}])
+          setC([...c, {comment_id: data.comment.comment_id, comment: ParseDom(comment.toString()), user_id: data.comment.user_id, username: user.username, gh_avatar: user.gh_avatar}]);
+          
           setIsCommentSubmitting(false);
           form.resetFields();
         }
@@ -162,6 +166,7 @@ const Project = () => {
     }
 
     const onChange = (e: any) => setValue(e.target.value);
+    const onChange2 = (e: any) => setValue2(e.target.value);
 
     const radioStyle = {
         display: 'block',
@@ -169,17 +174,26 @@ const Project = () => {
         lineHeight: '30px',
     };
 
-    const showModal = () => setVisible(true);
-    const handleOk = async () => {
+    const showReportProjectModal = () => setVisible(true);
+    const handleCancel = () => setVisible(false);
+    
+    const handleReportProject = async () => {
         const form = new FormData();
-
         form.append('project_id', id);
         form.append('comment', value);
         await api.reportProject(form);
         message.success('Project has been reported');
         setVisible(false);
     }
-    const handleCancel = () => setVisible(false);
+
+    const handleReportComment = async () => {
+        const form = new FormData();
+        form.append('comment_id', commentID!.toString());
+        form.append('comment', value2);
+        await api.reportComment(form);
+        message.success('Comment has been reported');
+        setVisible2(false);
+    }
 
     const copyUrl = () => {
         navigator.clipboard.writeText(document.location.href)
@@ -190,6 +204,29 @@ const Project = () => {
           // This can happen if the user denies clipboard permissions:
           console.error('Could not copy text: ', err);
         });
+    }
+
+    const showReportCommentModal = (commentID: number) => {
+        setVisible2(true);
+        setCommentID(commentID);
+    }
+
+    const handleCancel2 = () => {
+        setVisible2(false);
+        setCommentID(null);
+    }
+
+    const editComment = () => {
+        console.log('edit comment')
+    }
+
+    const deleteComment = async (commentID: number) => {
+        const form = new FormData();
+        form.append('comment_id', commentID!.toString());
+        await api.deleteComment(commentID, form);
+
+        const comments = c.filter((comm:any) => comm.comment_id !== commentID);
+        setC([...comments])
     }
 
     return (
@@ -226,7 +263,7 @@ const Project = () => {
                             <Divider />
                             {user.isAuthenticated ?
                                 <>
-                                    <p><strong>Leave a comment</strong></p>
+                                    <p><strong>Comment</strong></p>
                                     <Form
                                         form={form}
                                         layout="vertical"
@@ -245,16 +282,30 @@ const Project = () => {
                                 : <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Please <Link to={`/login`}>Log In</Link> to write a comment</p>}
 
                             <div className="project-view-comments">
-                            <h3 className="project-view-comments-header">{c.length} comments</h3>
+                            <h3 className="project-view-comments-header">{c.length} {c.length > 1 || c.length === 0 ? 'comments' : 'comment'} </h3>
                                 {c?.map((c: any) => (
-                                    <div className="project-view-comment">
+                                    <div className="project-view-comment" key={c.comment_id}>
                                         <div className="project-view-comment-top-wrapper">
                                             <img style={{width: '25px'}} src={c.gh_avatar} alt={`${c.username}'s profile`} />
                                             <Link to={`/user/${c.username}`} className="project-view-comment-user">{c.username}</Link>
                                         </div>
                                         <div className="project-view-comment-body">
                                             <p dangerouslySetInnerHTML={{__html: `${c.comment}`}}></p>
-                                            <small>{moment(c.created_on).fromNow()}</small>
+                                            <small style={{marginRight: '20px'}}>{moment(c.created_on).fromNow()}</small>
+                                            <Popover content={
+                                                <div>
+                                                    <p onClick={() => showReportCommentModal(c.comment_id)}>Report</p>
+                                                    {c.user_id && c.user_id.toString() === userID ? 
+                                                    <>
+                                                        <p onClick={editComment}>Edit</p>
+                                                        <p onClick={() => deleteComment(c.comment_id)}>Delete</p>                                                    
+                                                    </>
+                                                    : <></>}
+
+                                                </div>
+                                            } trigger="click">
+                                                <EllipsisOutlined style={{fontSize: '20px'}} />
+                                            </Popover>
                                         </div>
                                         <Divider />
                                     </div>
@@ -280,7 +331,7 @@ const Project = () => {
                                 <li><FireFilled className="svg-filled" /> {likeCount}</li>
                                     {project.collaboration && <li><CheckCircleFilled className="svg-filled" /> Interested in collaborating</li>}
                                     <li><CalendarFilled className="svg-filled" /> Created June 4, 2020</li>
-                                    <li><FlagFilled className="svg-filled" /> <button style={{background: 'none', border: 'none', padding: 0}} onClick={showModal}>Report</button></li>
+                                    <li><FlagFilled className="svg-filled" /> <button style={{background: 'none', border: 'none', padding: 0}} onClick={showReportProjectModal}>Report</button></li>
                                 </ul>
                             </div>
                         </div>
@@ -290,22 +341,45 @@ const Project = () => {
             <Modal
                 title="Report Project"
                 visible={visible}
-                onOk={handleOk}
+                onOk={handleReportProject}
                 onCancel={handleCancel}
                 okText="Submit"
                 >
                 <Radio.Group onChange={onChange} value={value}>
                     <Radio style={radioStyle} value={'1'}>
-                        This is offensive or inappropriate content.
+                        Offensive
                     </Radio>
                     <Radio style={radioStyle} value={'2'}>
-                        This is sexual or suggestive content.
+                        Sexual/NSFW
                     </Radio>
                     <Radio style={radioStyle} value={'3'}>
-                        This is illegal content.
+                        Illegal
                     </Radio>
                     <Radio style={radioStyle} value={'4'}>
-                        This is spam.
+                        Spam
+                    </Radio>
+                </Radio.Group>
+            </Modal>
+
+            <Modal
+                title="Report Comment"
+                visible={visible2}
+                onOk={handleReportComment}
+                onCancel={handleCancel2}
+                okText="Submit"
+                >
+                <Radio.Group onChange={onChange2} value={value2}>
+                    <Radio style={radioStyle} value={'1'}>
+                        Offensive
+                    </Radio>
+                    <Radio style={radioStyle} value={'2'}>
+                        Duplicate
+                    </Radio>
+                    <Radio style={radioStyle} value={'3'}>
+                        Not working
+                    </Radio>
+                    <Radio style={radioStyle} value={'4'}>
+                        Spam
                     </Radio>
                 </Radio.Group>
             </Modal>

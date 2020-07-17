@@ -197,6 +197,24 @@ class ApiService{
           value
         );
       }
+
+      public async reportComment(value: FormData) {  
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.post(
+          `${this.apiEndpoint}/report/comment`,
+          this.headers,
+          value
+        );
+      }
+
+      public async deleteComment(id: number, comment: FormData) {
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.delete(
+          `${this.apiEndpoint}/comment/delete/${id}`,
+          this.headers,
+          comment
+        );
+      }   
 }
 
 export default ApiService;
