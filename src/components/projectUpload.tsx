@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Redirect} from 'react-router-dom';
 import {
     Form,
     Input,
@@ -11,6 +12,7 @@ import {
     message
 } from 'antd';
 import { PlusOutlined, QuestionCircleOutlined, RocketTwoTone } from '@ant-design/icons';
+import Spinner from './spinner';
 import ApiService from '../lib/apiService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
@@ -53,17 +55,8 @@ interface IFields {
 
 const ProjectUpload = () => {
 
-    useEffect(() => {
-        if (!localStorage.getItem('userID')) {
-            history.push('/login');
-            message.info('You must be logged in')
-            return;
-        }
-
-        document.title = `Share Your Project | ${siteName}`
-    });
-
     const api = new ApiService();
+    const [user, setUser] = useState<any>({});
     const placeholder = new Placeholder();
     const [componentSize, setComponentSize] = useState('medium');
     const [technologiesSelect, setTechnologiesSelect] = useState<any>([]);
@@ -73,11 +66,34 @@ const ProjectUpload = () => {
     const [previewTitle, setPreviewTitle] = useState<string>('');
     const [fileList, setFileList] = useState<any[]>([]);              // list of files uploaded locally used by antd
     const [fileListUpload, setFileListUpload] = useState<any>([]);    // list of files uploaded to cloduinary
+    const [redirect, setRedirect] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
 
     const { Option } = Select;
 
     const childrenTech = [];
     const childrenTags = [];
+
+    useEffect(() => {
+        const fetch = async () => {
+            setIsLoading(true);
+            const userFetch = await api.userAuth();
+            if(userFetch.status === 401) {
+                setRedirect(true);
+                return;
+            }
+
+            const user = await userFetch.json();
+            
+            setUser(user);
+            setIsLoading(false);
+        }
+
+        fetch()
+
+        document.title = `Share Your Project | ${siteName}`;
+    },[]);
 
     for (let key in technologies) {
         childrenTech.push(<Option key={key} value={`${technologies[key].slug}`}>{technologies[key].name}</Option>);
@@ -136,7 +152,6 @@ const ProjectUpload = () => {
 
     const handleOnFinish = async (values: IFields) => {
         const { name, description, tagline, url, repourl, collaboration } = values;
-        const userID = localStorage.getItem('userID') as string;
         const form = new FormData();
         const techArray: any = [];
         const tagArray: any = [];
@@ -162,7 +177,7 @@ const ProjectUpload = () => {
         form.append('tags', tagArray);
         form.append('collaboration', collaboration);
         form.append('screenshots', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.project());
-        form.append('user_id', userID);
+        form.append('user_id', user.id);
 
         const res = await api.createProject(form);
 
@@ -207,7 +222,9 @@ const ProjectUpload = () => {
         </div>
     );
 
-    return (
+    return redirect ? <Redirect to="/login" />: (
+        <div>
+            {isLoading ? <Spinner /> :
         <div className="container">
             <h1>Share Your Project</h1>
 
@@ -372,6 +389,7 @@ const ProjectUpload = () => {
 
                 </Form>
             </div>
+        </div>}
         </div>
     )
 };

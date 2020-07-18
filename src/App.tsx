@@ -27,10 +27,6 @@ function App() {
         const json = await res.json();
 
         if(json.data.isAuthenticated) {
-          // update userID if user logged in via github
-          localStorage.setItem('userID', json.data.id);
-          localStorage.setItem('username', json.data.username);
-
           setUser(json.data);
         }
     }

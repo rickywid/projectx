@@ -224,6 +224,14 @@ class ApiService{
           comment
         );
       }   
+
+      public async userAuth() {
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.get(
+          `${this.apiEndpoint}/userAuth`,
+          this.headers,
+        );
+      }
 }
 
 export default ApiService;

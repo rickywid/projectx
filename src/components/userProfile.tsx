@@ -7,6 +7,7 @@ import ProjectsCard from '../components/projectCard';
 import Spinner from './spinner';
 import '../styles/userProfile.scss';
 import { ReactComponent as CodeSVG } from '../assets/code.svg';
+import { Redirect } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 
@@ -24,19 +25,30 @@ const UserProfile = ({ match }: IUserProfile) => {
     const [likedProjects, setLikedProjects] = useState([]);
     const [savedProjects, setSavedProjects] = useState([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [redirect, setRedirect] = useState<boolean>(false);
 
     useEffect(() => {
         const fetch = async () => {
-            const user = await api.getUserProfile(username);
-            const json = await user.json();
 
-            setUser(json.data.user);
-            setUserProjects(json.data.userProjects);
-            setLikedProjects(json.data.likedProjects);
-            setSavedProjects(json.data.savedProjects);
+            const userFetch = await api.userAuth();
+
+            if(userFetch.status === 401) { 
+                setRedirect(true);
+                return;
+            };
+
+            const userData = await userFetch.json();
+            const userProfileFetch = await api.getUserProfile(userData.username);
+            const userProfile = await userProfileFetch.json();
+
+
+            setUser(userProfile.data.user);
+            setUserProjects(userProfile.data.userProjects);
+            setLikedProjects(userProfile.data.likedProjects);
+            setSavedProjects(userProfile.data.savedProjects);
             setIsLoading(false);
 
-            document.title = `${json.data.user.username}'s Profile - ${siteName}`;
+            document.title = `${userProfile.data.user.username}'s Profile - ${siteName}`;
         }
 
         fetch();
@@ -46,7 +58,7 @@ const UserProfile = ({ match }: IUserProfile) => {
         console.log(key);
     }
 
-    return (
+    return redirect ? <Redirect to="/login" /> : (
         <div>
             {isLoading ? <Spinner /> :
                 <div className="user-profile-wrapper">
@@ -54,7 +66,7 @@ const UserProfile = ({ match }: IUserProfile) => {
                     <div className="user-profile-detail">
                         <h1 className="user-name">{user.username}</h1>
                         <p>{user.description}</p>
-                        {localStorage.getItem('username') === username ?
+                        {user.username === username ?
                             <Link to={`/user/edit/${user.username}`}>
                                 <Button size="small" type="dashed">edit</Button>
                             </Link> :

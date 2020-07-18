@@ -11,13 +11,13 @@ interface Props {
     comment: any;
     handleUpdateComment: any;
     handleDeleteComment: any;
+    userId: any;
 }
 
-const Comment = ({comment, handleUpdateComment, handleDeleteComment}: Props) => {
+const Comment = ({comment, handleUpdateComment, handleDeleteComment, userId}: Props) => {
     const api = new ApiService();
     const [form] = Form.useForm();
     const { TextArea } = Input;
-    const userID = localStorage.getItem('userID');
     const radioStyle = {
         display: 'block',
         height: '30px',
@@ -109,7 +109,7 @@ const Comment = ({comment, handleUpdateComment, handleDeleteComment}: Props) => 
                         <Popover content={
                             <div>
                                 <p className="popover-btn" onClick={() => showReportCommentModal(comment.comment_id)}>Report</p>
-                                {comment.user_id && comment.user_id.toString() === userID ?
+                                {comment.user_id && comment.user_id === userId ?
                                     <>
                                         <p className="popover-btn" onClick={editComment}>Edit</p>
                                         <p className="popover-btn" onClick={() => handleDelete(comment.comment_id)}>Delete</p>

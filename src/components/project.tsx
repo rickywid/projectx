@@ -22,31 +22,30 @@ interface IFields {
 const Project = () => {
     const api = new ApiService();
     const id = window.location.pathname.split('/')[2];
-    const userID = localStorage.getItem('userID');
 
     useEffect(() => {
         
         const fetch = async () => {
             setIsLoading(true);
-            const project = await api.getProject(id);
-            const user = await api.getUser(userID as string);
-            const saved = await api.isProjectSaved(id);
 
-            if (project.status === 200) {
-                const data = await project.json();
-                const data2 = await user.json();
-                const data3 = await saved.json();
-                
-                setisSaved(data3.data);
-                setUser(data2.data);
-                setProject(data.project);
-                setC(data.comments);
-                setLikeCount(data.likes.count);
-                setisLiked(data.likes.users.includes(parseInt(userID as string)))
-                setIsLoading(false);
-                
-                document.title = `${data.project.name} - ${data.project.tagline}`;
-            }
+            const projectFetch = await api.getProject(id);
+            const userFetch = await api.userAuth();
+            const savedProjectsFetch = await api.isProjectSaved(id);
+
+            const project = await projectFetch.json();
+            const user = await userFetch.json();
+            const savedProjects = await savedProjectsFetch.json();
+            
+            setisSaved(savedProjects.data);
+            setUser(user);
+            setProject(project.project);
+            setC(project.comments);
+            setLikeCount(project.likes.count);
+            setisLiked(project.likes.users.includes(parseInt(user.id as string)))
+            setIsLoading(false);
+            
+            document.title = `${project.project.name} - ${project.project.tagline}`;
+        
         }
 
         fetch();
@@ -92,7 +91,7 @@ const Project = () => {
             data = await res.json();
         }
 
-        setisLiked(data.data.users.includes(parseInt(localStorage.getItem('userID') as string)));
+        setisLiked(data.data.users.includes(user.id));
         setLikeCount(data.data.count);
     }
 
@@ -199,6 +198,7 @@ const Project = () => {
     const redirect = () => {
         message.info('You must be logged in');
         history.push('/login');
+        return;
     }
 
     return (
@@ -249,6 +249,7 @@ const Project = () => {
                                 {c?.map((c: any, i: number) => (
                                     <Comment 
                                         key={i} 
+                                        userId={user.id}
                                         comment={c} 
                                         handleUpdateComment={handleUpdateComment}
                                         handleDeleteComment={handleDeleteComment}

@@ -18,6 +18,7 @@ import Placeholder from '../lib/placeholders';
 import { siteName } from '../lib/const';
 import '../styles/form.scss';
 import '../styles/global.scss';
+import { Redirect } from 'react-router-dom';
 
 const { TextArea } = Input;
 
@@ -58,28 +59,30 @@ interface IUserProfile {
 const UserEdit = ({ match }: IUserProfile) => {
     const api = new ApiService();
     const auth = new AuthService();
-    const username = localStorage.getItem('username') as string;
     const params = match.params.username;
 
     useEffect(() => {
 
-        if (username === 'undefined' || username !== params) {
-            history.push('/');
-            return;
-        }
-
-
         const fetch = async () => {
-            const user = await api.getUserProfile(username);
-            const json = await user.json();
+
+            const userFetch = await api.userAuth();
+
+            if(userFetch.status === 401) { 
+                setRedirect(true);
+                return;
+            };
+
+            const userData = await userFetch.json();
+            const userProfileFetch = await api.getUserProfile(userData.username);
+            const userProfile = await userProfileFetch.json();
 
             setFileList([{
                 uid: '-1',
-                url: json.data.user.gh_avatar
+                url: userProfile.data.user.gh_avatar
             }]);
 
-            setFileListUpload([json.data.user.gh_avatar]);
-            setUser(json.data.user);
+            setFileListUpload([userProfile.data.user.gh_avatar]);
+            setUser(userProfile.data.user);
             setIsLoading(false);
 
             document.title = `Settings | ${siteName}`;
@@ -98,6 +101,7 @@ const UserEdit = ({ match }: IUserProfile) => {
     const [componentSize, setComponentSize] = useState('medium');
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false)
+    const [redirect, setRedirect] = useState<boolean>(false);
 
     const onFormLayoutChange = ({ size }: IFormLayoutChange) => {
         setComponentSize(size);
@@ -149,7 +153,7 @@ const UserEdit = ({ match }: IUserProfile) => {
         const res = await api.updateUser(user.id, form);
 
         if (res.status === 200) {
-            history.push(`/user/${username}`);
+            history.push(`/user/${user.username}`);
         }
     }
 
@@ -164,7 +168,7 @@ const UserEdit = ({ match }: IUserProfile) => {
         const res = await api.updatePassword(form);
 
         if (res.status === 200) {
-            history.push(`/user/${username}`);
+            history.push(`/user/${user.username}`);
         }
 
         setError(true);
@@ -182,7 +186,7 @@ const UserEdit = ({ match }: IUserProfile) => {
             body: data
         }
 
-        fetch(`${process.env.REACT_APP_SERVER}/api/image/upload`, config).then((res: any) => {
+        fetch(`${process.env.REACT_APP_SERVER}/image/upload`, config).then((res: any) => {
             return res.json();
         }).then(data => {
             file.onProgress(e => console.log(e));
@@ -215,12 +219,10 @@ const UserEdit = ({ match }: IUserProfile) => {
         form.append('user_id', user.id);
         await auth.signout(new FormData());
         await api.deleteUser(user.id, form);
-        localStorage.removeItem('userID');
-        localStorage.removeItem('username');
         window.location.replace(process.env.REACT_APP_HOSTNAME as string);
     }
 
-    return (
+    return ( redirect ? <Redirect to="/login" /> :
         <div>
             {isLoading ? <Spinner /> :
                 <div className="container">

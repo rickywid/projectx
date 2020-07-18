@@ -21,6 +21,7 @@ import { technologies, tags } from '../lib/const';
 import { siteName } from '../lib/const';
 import ParseDOM from '../lib/domParser';
 import UrlValidation from '../lib/urlValidation';
+import { Redirect } from 'react-router-dom';
 
 import '../styles/form.scss';
 import '../styles/global.scss';
@@ -63,46 +64,47 @@ const ProjectEdit = () => {
         const techArray: string[] = [];
         const tagArray: string[] = [];
 
-        if (localStorage.getItem('userID') === 'undefined') {
-            history.push('/');
-            return;
-        }
-
         const fetch = async () => {
+            const userFetch = await api.userAuth();
+
+            if(userFetch.status === 401) { 
+                setRedirect(true);
+                return;
+            };
+            
             setIsLoading(true);
 
+            const user = userFetch.json();
+
             const project = await api.getProject(id);
+            const data = await project.json();
 
+            setFileList([{
+                uid: '-1',
+                url: data.project.images[0]
+            }]);
 
-            if (project.status === 200) {
-                const data = await project.json();
+            setFileListUpload([data.project.images[0]]);
 
-                setFileList([{
-                    uid: '-1',
-                    url: data.project.images[0]
-                }]);
-
-                setFileListUpload([data.project.images[0]]);
-
-                for (let key in technologies) {
-                    if (data.project.technologies.includes(technologies[key].slug)) {
-                        techArray.push(technologies[key].slug);
-                    }
+            for (let key in technologies) {
+                if (data.project.technologies.includes(technologies[key].slug)) {
+                    techArray.push(technologies[key].slug);
                 }
-
-                for (let key in tags) {
-                    if (data.project.tags.includes(tags[key].slug)) {
-                        tagArray.push(tags[key].slug);
-                    }
-                }
-                
-                setTechnologiesSelect(techArray);
-                setTagSelect(tagArray);
-                setProject(data.project);
-                setIsLoading(false);
-
-                document.title = `${data.project.name} Edit | ${siteName}`
             }
+
+            for (let key in tags) {
+                if (data.project.tags.includes(tags[key].slug)) {
+                    tagArray.push(tags[key].slug);
+                }
+            }
+            
+            setUser(user);
+            setTechnologiesSelect(techArray);
+            setTagSelect(tagArray);
+            setProject(data.project);
+            setIsLoading(false);
+
+            document.title = `${data.project.name} Edit | ${siteName}`
         }
 
         fetch();
@@ -110,6 +112,8 @@ const ProjectEdit = () => {
     }, [])
 
     const placeholder = new Placeholder();
+
+    const [user, setUser] = useState<any>({});
     const [componentSize, setComponentSize] = useState('medium');
     const [technologiesSelect, setTechnologiesSelect] = useState<any>([]);
     const [tagsSelect, setTagSelect] = useState<any>([]);
@@ -120,6 +124,7 @@ const ProjectEdit = () => {
     const [fileListUpload, setFileListUpload] = useState<any>([]);    // list of files uploaded to cloduinary
     const [project, setProject] = useState<any>({});
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [redirect, setRedirect] = useState<boolean>(false);
 
     const { Option } = Select;
     const childrenTech = [];
@@ -183,7 +188,6 @@ const ProjectEdit = () => {
     const handleOnFinish = async (values: IFields) => {
 
         const { name, description, tagline, url, repourl, collaboration } = values;
-        const userID = localStorage.getItem('userID') as string;
         const id = window.location.pathname.split('/')[3];
         const techArray: any = [];
         const tagArray: any = [];
@@ -210,7 +214,7 @@ const ProjectEdit = () => {
         form.append('tags', tagArray);
         form.append('collaboration', collaboration || project.collaboration);
         form.append('screenshots', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.project());
-        form.append('user_id', userID);
+        form.append('user_id', user.id);
         
         const res = await api.updateProject(id, form);
 
@@ -233,7 +237,7 @@ const ProjectEdit = () => {
             body: data
         }
 
-        fetch(`${process.env.REACT_APP_SERVER}/api/image/upload`, config).then((res: any) => {
+        fetch(`${process.env.REACT_APP_SERVER}/image/upload`, config).then((res: any) => {
             return res.json();
         }).then(data => {
             file.onProgress(e => console.log(e));
@@ -266,12 +270,12 @@ const ProjectEdit = () => {
         const form = new FormData();
 
         form.append('project_id', id);
-        const res = await api.deleteProject(id, form);
+        await api.deleteProject(id, form);
 
-        history.push(`/user/${localStorage.getItem('username')}`)
+        history.push(`/user/${user.id}`)
     }
 
-    return (
+    return redirect ? <Redirect to="/login" /> : (
         <div>
             {isLoading ? <Spinner /> :
                 <div className="container">

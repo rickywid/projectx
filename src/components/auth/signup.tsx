@@ -38,7 +38,6 @@ function App() {
 
         if (res.status === 200) {
             const user = await res.json();
-            localStorage.setItem('userID', user.id)
             window.location.replace(process.env.REACT_APP_HOSTNAME as string);
         } else {
             const err = await res.json();
