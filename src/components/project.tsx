@@ -76,16 +76,19 @@ const Project = () => {
         form.append('project_id', project.id);
         form.append('user_id', user.id);
 
-        if(!user.isAuthenticated) {
-            message.info('You must be logged in');
-            history.push('/login');
-            return;
-        }
         if(like) {
             const res = await api.likeProject(id, form);
+            if(res.status === 401) {
+                redirect();
+            }
+
             data = await res.json();
         } else {
             const res = await api.unlikeProject(id, form);
+            if(res.status === 401) {
+                redirect();
+            }
+
             data = await res.json();
         }
 
@@ -193,6 +196,11 @@ const Project = () => {
         setC([...comments.data]);
     }
 
+    const redirect = () => {
+        message.info('You must be logged in');
+        history.push('/login');
+    }
+
     return (
         <div className="project-view">
 
@@ -247,11 +255,11 @@ const Project = () => {
                                     />
                                 ))}
                             </div>
-
+ 
                         </div>
                         <div className="project-view-right-col">
                             <div style={{marginBottom: '20px'}}>
-                                {isLiked ? <Button className="like-project-btn-default" onClick={() => handleLike(false)} icon={<LikeTwoTone twoToneColor="#5fc2c7" />}><strong style={{marginLeft: '7px'}}>YOU LIKED THIS PROJECT</strong></Button> : <Button className="like-project-btn"  onClick={() => handleLike(true)} icon={<LikeOutlined />}><strong style={{marginLeft: '7px'}}>LIKE</strong></Button>}
+                                {isLiked ? <Button className="like-project-btn-default" onClick={() => handleLike(false)} icon={<LikeTwoTone twoToneColor="#5fc2c7" />}><strong style={{marginLeft: '7px'}}>YOU LIKED THIS PROJECT</strong></Button> : <Button className="like-project-btn"  onClick={() => handleLike(true)} icon={<LikeFilled />}><strong style={{marginLeft: '7px'}}>LIKE</strong></Button>}
                             </div>
                             <div className="project-share-wrapper">
                                 <FacebookShareButton url={process.env.REACT_APP_HOSTNAME as string}>
