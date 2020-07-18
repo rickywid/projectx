@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
-import { CodeOutlined, DesktopOutlined, TagFilled, TagsFilled, CalendarFilled, CheckCircleFilled, FlagFilled, BlockOutlined, StarFilled, StarTwoTone, FireTwoTone, FireFilled, EllipsisOutlined } from '@ant-design/icons';
+import { CodeOutlined, DesktopOutlined, TagFilled, TagsFilled, CalendarFilled, CheckCircleFilled, FlagFilled, BlockOutlined, StarOutlined, StarTwoTone, LikeTwoTone, LikeOutlined, LikeFilled } from '@ant-design/icons';
 import { Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Spinner from './spinner';
@@ -203,23 +203,13 @@ const Project = () => {
                             <h2>{project.name}</h2>
                             <p>by <Link className="project-owner" to={`/user/${project.username}`}><img style={{height: '20px', borderRadius: '100%', margin: '0 3px'}} src={project.gh_avatar} alt="avatar"/> {project.username}</Link></p>
                         </div>
-                        <div className="button-wrap">
-                            {isLiked ? <Button onClick={() => handleLike(false)} icon={<FireTwoTone twoToneColor="#f00" />}><strong style={{marginLeft: '7px'}}>Hot</strong></Button> : <Button onClick={() => handleLike(true)} icon={<FireFilled />}><strong style={{marginLeft: '7px'}}>Hot</strong></Button>}
-                            {isSaved ? <Button onClick={() => handleSaveProject(false)} icon={<StarTwoTone twoToneColor="#dea703" />}><strong style={{marginLeft: '7px'}}>Saved</strong></Button> :<Button onClick={() => handleSaveProject(true)} icon={<StarFilled />}><strong style={{marginLeft: '7px'}}>Save</strong></Button>}
-                        </div>
-
                     </div>
                     <img className="project-view-screenshot" src={project.images[0]} alt="screenshot" />
-                    <div  className="project-share-wrapper">
-                        <FacebookShareButton url={process.env.REACT_APP_HOSTNAME as string}>
-                            <FacebookIcon size={32} />
-                        </FacebookShareButton>
-                        <TwitterShareButton url={process.env.REACT_APP_HOSTNAME as string} title={project.name}>
-                            <TwitterIcon size={32} />
-                        </TwitterShareButton>
-                        <Button className="btn-copy" icon={<BlockOutlined />} onClick={copyUrl}><strong>Copy</strong></Button>
+                    <div  className="project-actions-wrapper">
+                        <a className="project-links-btn" href={project.url}><DesktopOutlined /> WEBSITE</a>
+                        {project.repo ? <a className="project-links-btn" href={project.repo}><CodeOutlined /> REPOSITORY</a> : '' }
+                        {isSaved ? <a className="save-project-btn" style={{border: 'none', background: 'none'}} onClick={() => handleSaveProject(false)}><strong style={{marginLeft: '7px'}}><StarTwoTone twoToneColor="#dea703" /> ADDED TO FAVOURITES</strong></a> :<a style={{border: 'none', background: 'none'}} onClick={() => handleSaveProject(true)}><strong><StarOutlined /> ADD TO FAVOURITES</strong></a>}
                     </div>
-                    <Divider />
                     <div className="project-view-content">
                         <div className="project-view-left-col">
                             <h3 className="project-tagline">{project.tagline}</h3>
@@ -260,25 +250,35 @@ const Project = () => {
 
                         </div>
                         <div className="project-view-right-col">
-                            <a href={project.url}><Button className="website-btn" icon={<DesktopOutlined />} type="primary">Website</Button></a>
-                            {project.repo ?<a href={project.repo}><Button className="repo-btn" icon={<CodeOutlined />} type="primary">Repository</Button></a> : '' }
-                            <Divider />
-                            <div className="project-view-tags">
-                                <TagFilled className="svg-filled" />
-                                <ul>{project.technologies.map((technology: string, i: number) => <Link key={i} to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}>{technology}</li></Link>)}</ul>
+                            <div style={{marginBottom: '20px'}}>
+                                {isLiked ? <Button className="like-project-btn-default" onClick={() => handleLike(false)} icon={<LikeTwoTone twoToneColor="#5fc2c7" />}><strong style={{marginLeft: '7px'}}>YOU LIKED THIS PROJECT</strong></Button> : <Button className="like-project-btn"  onClick={() => handleLike(true)} icon={<LikeOutlined />}><strong style={{marginLeft: '7px'}}>LIKE</strong></Button>}
                             </div>
-                            <div className="project-view-tags">
-                                <TagsFilled className="svg-filled"  />
-                                <ul>{project.tags.map((category: string) => <Link to={`/tag/category/${category}`}><li style={{ listStyle: 'none' }}>{category}</li></Link>)}</ul>
+                            <div className="project-share-wrapper">
+                                <FacebookShareButton url={process.env.REACT_APP_HOSTNAME as string}>
+                                    <FacebookIcon size={32} />
+                                </FacebookShareButton>
+                                <TwitterShareButton url={process.env.REACT_APP_HOSTNAME as string} title={project.name}>
+                                    <TwitterIcon size={32} />
+                                </TwitterShareButton>
+                                <Button className="btn-copy" icon={<BlockOutlined />} onClick={copyUrl}><strong>Copy</strong></Button>
                             </div>
-                            <Divider />
-                            <div className="project-view-details">
-                                <ul>
-                                <li><FireFilled className="svg-filled" /> {likeCount}</li>
-                                    {project.collaboration && <li><CheckCircleFilled className="svg-filled" /> Interested in collaborating</li>}
-                                    <li><CalendarFilled className="svg-filled" /> {moment(project.created_on).format('MMM Do YYYY')}</li>
-                                    <li><FlagFilled className="svg-filled" /> <button className="project-report-btn" onClick={showReportProjectModal}>Report</button></li>
-                                </ul>
+                            <div className="project-info">
+                                <div className="project-view-tags">
+                                    <TagFilled className="svg-filled" />
+                                    <ul>{project.technologies.map((technology: string, i: number) => <Link key={i} to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}>{technology}</li></Link>)}</ul>
+                                </div>
+                                <div className="project-view-tags">
+                                    <TagsFilled className="svg-filled"  />
+                                    <ul>{project.tags.map((category: string) => <Link to={`/tag/category/${category}`}><li style={{ listStyle: 'none' }}>{category}</li></Link>)}</ul>
+                                </div>
+                                <div className="project-view-details">
+                                    <ul>
+                                    <li><LikeFilled className="svg-filled" /> {likeCount}</li>
+                                        {project.collaboration && <li><CheckCircleFilled className="svg-filled" /> Interested in collaborating</li>}
+                                        <li><CalendarFilled className="svg-filled" /> {moment(project.created_on).format('MMM Do YYYY')}</li>
+                                        <li><FlagFilled className="svg-filled" /> <button className="project-report-btn" onClick={showReportProjectModal}>Report</button></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
