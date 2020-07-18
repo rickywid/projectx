@@ -7,7 +7,6 @@ import ProjectsCard from '../components/projectCard';
 import Spinner from './spinner';
 import '../styles/userProfile.scss';
 import { ReactComponent as CodeSVG } from '../assets/code.svg';
-import { Redirect } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 
@@ -25,22 +24,12 @@ const UserProfile = ({ match }: IUserProfile) => {
     const [likedProjects, setLikedProjects] = useState([]);
     const [savedProjects, setSavedProjects] = useState([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [redirect, setRedirect] = useState<boolean>(false);
 
     useEffect(() => {
         const fetch = async () => {
 
-            const userFetch = await api.userAuth();
-
-            if(userFetch.status === 401) { 
-                setRedirect(true);
-                return;
-            };
-
-            const userData = await userFetch.json();
-            const userProfileFetch = await api.getUserProfile(userData.username);
+            const userProfileFetch = await api.getUserProfile(username);
             const userProfile = await userProfileFetch.json();
-
 
             setUser(userProfile.data.user);
             setUserProjects(userProfile.data.userProjects);
@@ -58,7 +47,7 @@ const UserProfile = ({ match }: IUserProfile) => {
         console.log(key);
     }
 
-    return redirect ? <Redirect to="/login" /> : (
+    return (
         <div>
             {isLoading ? <Spinner /> :
                 <div className="user-profile-wrapper">
