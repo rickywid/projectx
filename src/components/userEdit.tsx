@@ -5,7 +5,6 @@ import {
     Upload,
     Modal,
     Button,
-    Tooltip,
     Divider,
     Popconfirm,
 } from 'antd';

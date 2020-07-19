@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
+import Linkify from 'react-linkify';
 import { CodeOutlined, DesktopOutlined, TagFilled, TagsFilled, CalendarFilled, CheckCircleFilled, FlagFilled, BlockOutlined, StarOutlined, StarTwoTone, LikeTwoTone, LikeOutlined, LikeFilled } from '@ant-design/icons';
 import { Select, Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
@@ -228,7 +229,7 @@ const Project = () => {
                     <div className="project-view-content">
                         <div className="project-view-left-col">
                             <h3 className="project-tagline">{project.tagline}</h3>
-                            <p className="project-description" dangerouslySetInnerHTML={{__html: `${project.description}`}}></p>
+                            <Linkify><p className="project-description">{project.description}</p></Linkify>
                             <Divider />
                             {user.isAuthenticated ?
                                 <>

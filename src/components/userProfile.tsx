@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Linkify from 'react-linkify';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Input, Modal, Button, Tabs, message, Popover } from 'antd';
 import ApiService from '../lib/apiService';
@@ -88,7 +89,7 @@ const UserProfile = ({ match }: IUserProfile) => {
                     <img className="user-avatar" src={user.gh_avatar} alt="" />
                     <div className="user-profile-detail">
                         <h1 className="user-name">{user.username}</h1>
-                        <p dangerouslySetInnerHTML={{ __html: `${user.description}` }}></p>
+                        <Linkify><p style={{whiteSpace: "pre-line"}}>{user.description}</p></Linkify>
                         {user.username === username ?
                             <div className="user-profile-options">
                                 <Link to={`/user/edit/${user.username}`}>

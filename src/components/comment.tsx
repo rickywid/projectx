@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
+import Linkify from 'react-linkify';
 import { EllipsisOutlined } from '@ant-design/icons';
 import { Radio, Modal, Form, Input, Button, Divider, message, Popover } from 'antd';
 import moment from 'moment';
@@ -103,7 +104,7 @@ const Comment = ({comment, handleUpdateComment, handleDeleteComment, userId}: Pr
                 :
 
                 <div className="project-view-comment-body">
-                    <p dangerouslySetInnerHTML={{ __html: `${comment.comment}` }}></p>
+                    <Linkify><p>{comment.comment}</p></Linkify>
                     <div className="project-comment-below">
                         <small style={{ marginRight: '20px' }}>{moment(comment.created_on).fromNow()}</small>
                         <Popover content={
