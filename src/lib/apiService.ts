@@ -207,6 +207,15 @@ class ApiService{
         );
       }
 
+      public async reportUser(value: FormData) {  
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.post(
+          `${this.apiEndpoint}/report/user`,
+          this.headers,
+          value
+        );
+      }
+
       public async deleteComment(id: number, comment: FormData) {
         // this.headers['cookie'] = this.cookie;
         return await HttpClient.delete(

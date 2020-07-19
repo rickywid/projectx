@@ -4,6 +4,14 @@
     .user-profile-detail {       
         display: flex;
         flex-direction: column;
+
+        .user-profile-options {
+            display: flex;
+
+            a {
+                margin-right: 20px;
+            }
+        }
     }
 
     .user-avatar {

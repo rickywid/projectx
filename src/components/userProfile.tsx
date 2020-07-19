@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Tabs, Button } from 'antd';
+import { EllipsisOutlined } from '@ant-design/icons';
+import { Input, Modal, Button, Tabs, message, Popover } from 'antd';
 import ApiService from '../lib/apiService';
 import { siteName } from '../lib/const';
 import ProjectsCard from '../components/projectCard';
@@ -10,7 +11,6 @@ import { ReactComponent as CodeSVG } from '../assets/code.svg';
 
 const { TabPane } = Tabs;
 
-
 interface IUserProfile {
     children?: React.ReactNode;
     match: any;
@@ -19,11 +19,16 @@ interface IUserProfile {
 const UserProfile = ({ match }: IUserProfile) => {
     const api = new ApiService();
     const username = match.params.username;
+
     const [user, setUser] = useState<any>({});
     const [userProjects, setUserProjects] = useState([]);
     const [likedProjects, setLikedProjects] = useState([]);
     const [savedProjects, setSavedProjects] = useState([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [visible2, setVisible2] = useState<boolean>(false);
+    const [value2, setValue2] = useState('');
+    const [error, showError] = useState(false);
+
 
     useEffect(() => {
         const fetch = async () => {
@@ -44,7 +49,36 @@ const UserProfile = ({ match }: IUserProfile) => {
     }, [])
 
     const callback = (key: string) => {
-        console.log(key);
+        // console.log(key);
+    }
+
+    const showModal = () => {
+        setVisible2(true);
+    }
+
+    const handleReport = async () => {
+        const form = new FormData();
+        form.append('user_id', user.id);
+        form.append('reason', value2);
+        const res = await api.reportUser(form);
+        
+        if(res.status === 200) {
+            message.success('User has been reported');
+            setValue2('');
+            setVisible2(false);
+            showError(false);
+        } else {
+            showError(true);
+        }
+    }
+
+    const onChange2 = (e: any) => {
+        setValue2(e.target.value);
+        console.log('asdf')
+    };
+
+    const handleCancel2 = () => {
+        setVisible2(false);
     }
 
     return (
@@ -56,9 +90,18 @@ const UserProfile = ({ match }: IUserProfile) => {
                         <h1 className="user-name">{user.username}</h1>
                         <p>{user.description}</p>
                         {user.username === username ?
-                            <Link to={`/user/edit/${user.username}`}>
-                                <Button size="small" type="dashed">edit</Button>
-                            </Link> :
+                            <div className="user-profile-options">
+                                <Link to={`/user/edit/${user.username}`}>
+                                    <Button size="small" type="dashed">edit</Button>
+                                </Link>
+                                <Popover content={
+                                    <div>
+                                        <p className="popover-btn" onClick={() => showModal()}>Report</p>
+                                    </div>
+                                } trigger="click">
+                                    <EllipsisOutlined style={{ fontSize: '20px' }} />
+                                </Popover>
+                            </div> : 
                             ""
                         }
                     </div>
@@ -85,6 +128,18 @@ const UserProfile = ({ match }: IUserProfile) => {
                     </Tabs>
                 </div>
             }
+
+            <Modal
+                title="Report User"
+                visible={visible2}
+                onOk={handleReport}
+                onCancel={handleCancel2}
+                okText="Submit"
+                >
+                <p><strong>Why are you reporting {username}?</strong></p>
+                <Input.TextArea onChange={onChange2} value={value2} rows={4} />
+                {error ? <p className="error-msg">Cannot be blank</p> : ''}
+            </Modal>
         </div>
     )
 }
