@@ -29,18 +29,19 @@
             display: inline-block;
             margin-right: 20px;
             margin-bottom: 0;
+            font-size: 36px;
         }
 
         .user-profile-social-wrapper {
             float: right;
 
             a {
-                color: $primaryDark;
-                margin-left: 5px;
-                font-size: 25px;
+                color: $primary;
+                margin-left: 8px;
+                font-size: 20px;
 
                 &:hover {
-                    color: #555;
+                    color: $primaryDark;
                 }
             }
         }

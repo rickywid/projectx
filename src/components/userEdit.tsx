@@ -145,12 +145,13 @@ const UserEdit = ({ match }: IUserProfile) => {
 
     const handleOnFinish = async (values: any) => {
 
-        const { description, github, twitter } = values;
+        const { description, github, twitter, portfolio } = values;
         const form = new FormData();
 
         form.append('description', ParseDom(description));
         form.append('githubUrl', github);
         form.append('twitterUrl', twitter);
+        form.append('userProfileUrl', portfolio);
         form.append('profilePic', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.user());
 
         const res = await api.updateUser(user.id, form);
@@ -298,7 +299,8 @@ const UserEdit = ({ match }: IUserProfile) => {
                                 initialValues={{
                                     description: user.description,
                                     github: user.gh_profile_url,
-                                    twitter: user.twitter_profile_url
+                                    twitter: user.twitter_profile_url,
+                                    portfolio: user.user_profile_url
                                 }}
                             >
                                 <Form.Item
@@ -306,6 +308,25 @@ const UserEdit = ({ match }: IUserProfile) => {
                                     name="description"
                                 >
                                     <TextArea rows={2} />
+                                </Form.Item>
+                                <Form.Item
+                                    label={<span><strong>
+                                        Portfolio Url
+                                    </strong></span>}
+                                    name="portfolio"
+                                    rules={[{ required: false, message: 'Required' },
+                                    ({ getFieldValue }) => ({
+                                        validator(rule, value) {
+                                            if (UrlValidation(value) || value === '') {
+                                                return Promise.resolve();
+                                            }
+
+                                            return Promise.reject(new Error('Invalid Url'));
+                                        },
+                                    }),
+                                    ]}
+                                >
+                                    <Input />
                                 </Form.Item>
                                 <Form.Item
                                     label={<span><strong>

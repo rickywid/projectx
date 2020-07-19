@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Linkify from 'react-linkify';
-import { EllipsisOutlined, GithubOutlined, TwitterCircleFilled } from '@ant-design/icons';
+import { EllipsisOutlined, GithubOutlined, TwitterCircleFilled, HomeFilled } from '@ant-design/icons';
 import { Input, Modal, Button, Tabs, message, Popover } from 'antd';
 import ApiService from '../lib/apiService';
 import { siteName } from '../lib/const';
@@ -108,6 +108,7 @@ const UserProfile = ({ match }: IUserProfile) => {
                             }
                         </div>
                         <div className="user-profile-social-wrapper">
+                            {user.user_profile_url ? <a href={user.user_profile_url} target="__blank"><HomeFilled /></a> : <></>}
                             {user.gh_profile_url ? <a href={user.gh_profile_url} target="__blank"><GithubOutlined /></a> : <></>}
                             {user.twitter_profile_url ? <a href={user.twitter_profile_url} target="__blank"><TwitterCircleFilled /></a> : <></>}
                         </div>
