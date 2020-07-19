@@ -123,10 +123,18 @@
 
             .project-view-comments {
                 .project-view-comments-header {
+                    float: left;
                     margin-bottom: 50px;
                 }
 
+                .project-view-comments-select {
+                    float: right;
+                    width: 120px;
+                }
+
                 .project-view-comment {
+                    clear: both;
+                    
                     .project-view-comment-top-wrapper {
 
                         img {

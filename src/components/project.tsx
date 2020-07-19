@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
 import { CodeOutlined, DesktopOutlined, TagFilled, TagsFilled, CalendarFilled, CheckCircleFilled, FlagFilled, BlockOutlined, StarOutlined, StarTwoTone, LikeTwoTone, LikeOutlined, LikeFilled } from '@ant-design/icons';
-import { Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
+import { Select, Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Spinner from './spinner';
 import Comment from './comment';
@@ -13,6 +13,7 @@ import '../styles/project.scss'
 import ParseDom from '../lib/domParser';
 
 const { TextArea } = Input;
+const { Option } = Select;
 
 interface IFields {
     comment: {created_on: string};
@@ -201,6 +202,12 @@ const Project = () => {
         return;
     }
 
+    const handleCommentSort = async (value: string) => {
+        const commentsFetch = await api.commentSort(id, value);
+        const comments = await commentsFetch.json();
+        setC(comments.data);
+    }
+
     return (
         <div className="project-view">
 
@@ -245,7 +252,11 @@ const Project = () => {
                             }
 
                             <div className="project-view-comments">
-                            <h4 className="project-view-comments-header">{c.length} {c.length > 1 || c.length === 0 ? 'comments' : 'comment'} </h4>
+                                <h4 className="project-view-comments-header">{c.length} {c.length > 1 || c.length === 0 ? 'comments' : 'comment'} </h4>
+                                <Select className="project-view-comments-select" defaultValue="oldest" onChange={handleCommentSort}>
+                                    <Option value="oldest">Oldest</Option>
+                                    <Option value="newest">Newest</Option>
+                                </Select>
                                 {c?.map((c: any, i: number) => (
                                     <Comment 
                                         key={i} 

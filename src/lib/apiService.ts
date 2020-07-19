@@ -249,6 +249,14 @@ class ApiService{
           this.headers,
         );
       }
+
+      public async commentSort(projectId: string, type: string) {
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.get(
+          `${this.apiEndpoint}/project/${projectId}/comments?comments_sort=${type}`,
+          this.headers,
+        );
+      }
 }
 
 export default ApiService;
