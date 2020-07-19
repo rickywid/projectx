@@ -88,7 +88,7 @@ const UserProfile = ({ match }: IUserProfile) => {
                     <img className="user-avatar" src={user.gh_avatar} alt="" />
                     <div className="user-profile-detail">
                         <h1 className="user-name">{user.username}</h1>
-                        <p>{user.description}</p>
+                        <p dangerouslySetInnerHTML={{ __html: `${user.description}` }}></p>
                         {user.username === username ?
                             <div className="user-profile-options">
                                 <Link to={`/user/edit/${user.username}`}>

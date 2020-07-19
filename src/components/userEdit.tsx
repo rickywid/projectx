@@ -19,6 +19,7 @@ import { siteName } from '../lib/const';
 import '../styles/form.scss';
 import '../styles/global.scss';
 import { Redirect } from 'react-router-dom';
+import ParseDom from '../lib/domParser';
 
 const { TextArea } = Input;
 
@@ -147,7 +148,7 @@ const UserEdit = ({ match }: IUserProfile) => {
         const { description } = values;
         const form = new FormData();
 
-        form.append('description', description);
+        form.append('description', ParseDom(description));
         form.append('profilePic', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.user());
 
         const res = await api.updateUser(user.id, form);
