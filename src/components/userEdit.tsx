@@ -15,6 +15,7 @@ import AuthService from '../lib/authService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
 import { siteName } from '../lib/const';
+import UrlValidation from '../lib/urlValidation';
 import '../styles/form.scss';
 import '../styles/global.scss';
 import { Redirect } from 'react-router-dom';
@@ -144,10 +145,12 @@ const UserEdit = ({ match }: IUserProfile) => {
 
     const handleOnFinish = async (values: any) => {
 
-        const { description } = values;
+        const { description, github, twitter } = values;
         const form = new FormData();
 
         form.append('description', ParseDom(description));
+        form.append('githubUrl', github);
+        form.append('twitterUrl', twitter);
         form.append('profilePic', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.user());
 
         const res = await api.updateUser(user.id, form);
@@ -294,6 +297,8 @@ const UserEdit = ({ match }: IUserProfile) => {
                                 onValuesChange={onFormLayoutChange as any}
                                 initialValues={{
                                     description: user.description,
+                                    github: user.gh_profile_url,
+                                    twitter: user.twitter_profile_url
                                 }}
                             >
                                 <Form.Item
@@ -301,6 +306,44 @@ const UserEdit = ({ match }: IUserProfile) => {
                                     name="description"
                                 >
                                     <TextArea rows={2} />
+                                </Form.Item>
+                                <Form.Item
+                                    label={<span><strong>
+                                        Github Url
+                                    </strong></span>}
+                                    name="github"
+                                    rules={[{ required: false, message: 'Required' },
+                                    ({ getFieldValue }) => ({
+                                        validator(rule, value) {
+                                            if (UrlValidation(value) || value === '') {
+                                                return Promise.resolve();
+                                            }
+
+                                            return Promise.reject(new Error('Invalid Url'));
+                                        },
+                                    }),
+                                    ]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    label={<span><strong>
+                                        Twitter Url
+                                    </strong></span>}
+                                    name="twitter"
+                                    rules={[{ required: false, message: 'Required' },
+                                    ({ getFieldValue }) => ({
+                                        validator(rule, value) {
+                                            if (UrlValidation(value) || value === '') {
+                                                return Promise.resolve();
+                                            }
+
+                                            return Promise.reject(new Error('Invalid Url'));
+                                        },
+                                    }),
+                                    ]}
+                                >
+                                    <Input />
                                 </Form.Item>
                                 <Form.Item
                                     label={<span><strong>Profile Picture</strong></span>}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Linkify from 'react-linkify';
-import { EllipsisOutlined } from '@ant-design/icons';
+import { EllipsisOutlined, GithubOutlined, TwitterCircleFilled } from '@ant-design/icons';
 import { Input, Modal, Button, Tabs, message, Popover } from 'antd';
 import ApiService from '../lib/apiService';
 import { siteName } from '../lib/const';
@@ -86,25 +86,31 @@ const UserProfile = ({ match }: IUserProfile) => {
         <div>
             {isLoading ? <Spinner /> :
                 <div className="user-profile-wrapper">
-                    <img className="user-avatar" src={user.gh_avatar} alt="" />
-                    <div className="user-profile-detail">
-                        <h1 className="user-name">{user.username}</h1>
-                        <Linkify><p style={{whiteSpace: "pre-line"}}>{user.description}</p></Linkify>
-                        {user.username === username ?
-                            <div className="user-profile-options">
-                                <Link to={`/user/edit/${user.username}`}>
-                                    <Button size="small" type="dashed">edit</Button>
-                                </Link>
-                                <Popover content={
-                                    <div>
-                                        <p className="popover-btn" onClick={() => showModal()}>Report</p>
-                                    </div>
-                                } trigger="click">
-                                    <EllipsisOutlined style={{ fontSize: '20px' }} />
-                                </Popover>
-                            </div> : 
-                            ""
-                        }
+                    <div className="user-profile-info">
+                        <img className="user-avatar" src={user.gh_avatar} alt="" />
+                        <div className="user-profile-detail">
+                            <h1 className="user-name">{user.username}</h1>
+                            <Linkify><p style={{whiteSpace: "pre-line"}}>{user.description}</p></Linkify>
+                            {user.username === username ?
+                                <div className="user-profile-options">
+                                    <Link to={`/user/edit/${user.username}`}>
+                                        <Button size="small" type="dashed">edit</Button>
+                                    </Link>
+                                    <Popover content={
+                                        <div>
+                                            <p className="popover-btn" onClick={() => showModal()}>Report</p>
+                                        </div>
+                                    } trigger="click">
+                                        <EllipsisOutlined style={{ fontSize: '20px' }} />
+                                    </Popover>
+                                </div> : 
+                                ""
+                            }
+                        </div>
+                        <div className="user-profile-social-wrapper">
+                            {user.gh_profile_url ? <a href={user.gh_profile_url} target="__blank"><GithubOutlined /></a> : <></>}
+                            {user.twitter_profile_url ? <a href={user.twitter_profile_url} target="__blank"><TwitterCircleFilled /></a> : <></>}
+                        </div>
                     </div>
                     <Tabs className="user-tabs" defaultActiveKey="1" onChange={callback}>
                         <TabPane tab={<span><strong>My Projects </strong><span style={{ color: 'grey' }}>{userProjects.length}</span></span>} key="1">
