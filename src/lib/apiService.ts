@@ -232,6 +232,14 @@ class ApiService{
           this.headers,
         );
       }
+
+      public async getProjectsByType(filterName: string) {
+        // this.headers['cookie'] = this.cookie;
+        return await HttpClient.get(
+          `${this.apiEndpoint}/projects/${filterName}`,
+          this.headers,
+        );
+      }
 }
 
 export default ApiService;

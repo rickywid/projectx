@@ -16,6 +16,11 @@ import CategoryFilter from './components/categoryFilter';
 import Guidelines from './components/guidelines';
 import Feedback from './components/feedback';
 
+import ProjectsPopular from './components/projectsPopular';
+import ProjectsFullstack from './components/projectsFullstack';
+import ProjectsFrontend from './components/projectsFrontend';
+import ProjectsCollaboration from './components/projectsCollaboration';
+
 import NoMatch from './components/noMatch';
 
 const Routes = (
@@ -24,6 +29,12 @@ const Routes = (
     <Route exact path="/login" component={Login} />
     <Route exact path="/signup" component={Signup} />
     <Route exact path="/upload" component={ProjectUpload} />
+
+    <Route exact path="/popular" component={ProjectsPopular} />
+    <Route exact path="/frontend" component={ProjectsFrontend} />
+    <Route exact path="/fullstack" component={ProjectsFullstack} />
+    <Route exact path="/collaboration" component={ProjectsCollaboration} />
+
     <Route exact path="/tag/technology" component={Technology} />
     <Route exact path="/tag/tech/:technology"  render={({ match }) => <TechnologyFilter key={match.params.username} match={match} />}  />
     <Route exact path="/tag/category" component={Category} />

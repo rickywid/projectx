@@ -51,6 +51,7 @@ interface IFields {
     technologies: string;
     tags: string;
     collaboration: string;
+    type: string;
 }
 
 const ProjectUpload = () => {
@@ -151,7 +152,7 @@ const ProjectUpload = () => {
     }
 
     const handleOnFinish = async (values: IFields) => {
-        const { name, description, tagline, url, repourl, collaboration } = values;
+        const { name, description, tagline, url, repourl, collaboration, type } = values;
         const form = new FormData();
         const techArray: any = [];
         const tagArray: any = [];
@@ -175,10 +176,11 @@ const ProjectUpload = () => {
         form.append('repourl', repourl);
         form.append('technologies', techArray);
         form.append('tags', tagArray);
+        form.append('type', type);
         form.append('collaboration', collaboration);
         form.append('screenshots', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.project());
         form.append('user_id', user.id);
-
+        
         const res = await api.createProject(form);
 
         if (res.status === 200) {
@@ -221,6 +223,10 @@ const ProjectUpload = () => {
             <div className="ant-upload-text">Upload</div>
         </div>
     );
+
+    const handleChange = (value: string) => {
+        // console.log(`selected ${value}`);
+      }
 
     return redirect ? <Redirect to="/login" />: (
         <div>
@@ -321,6 +327,16 @@ const ProjectUpload = () => {
                         <Input
                             placeholder="https://mysite.com"
                         />
+                    </Form.Item>
+                    <Form.Item
+                        label={<span><strong>Project Type</strong></span>}
+                        name="type"
+                        rules={[{ required: true, message: 'Must select at least one' }]}
+                    >
+                        <Select onChange={handleChange}>
+                            <Option value="frontend">Front End</Option>
+                            <Option value="fullstack">Full Stack</Option>
+                        </Select>
                     </Form.Item>
                     <Form.Item
                         label={<span><strong>Technologies</strong></span>}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProjectsCard from './projectCard';
+import ProjectFilters from './projectFilters';
 import Spinner from './spinner';
 import ApiService from '../lib/apiService';
 import { pageTitle } from '../lib/const';
@@ -28,6 +29,7 @@ const Root: React.FC = () => {
         <div>
         {isLoading ? <Spinner /> : 
             <div className="root">
+                <ProjectFilters />
                 <ProjectsCard projects={projects}/>
              </div>
         }

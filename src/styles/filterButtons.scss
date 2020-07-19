@@ -1,0 +1,17 @@
+.filter-wrapper {
+    text-align: center;
+    margin-bottom: 50px;
+
+    a {
+        padding: 0 10px;
+        color: #727272;
+    }
+
+    .active {
+        color: #4d4c4c;
+        font-weight: bold;
+        background: #ededed;
+        padding: 10px;
+        border-radius: 5px;
+    }
+}

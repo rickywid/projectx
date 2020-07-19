@@ -54,6 +54,7 @@ interface IFields {
     technologies: string;
     tags: string;
     collaboration: string;
+    type: string;
 }
 
 const ProjectEdit = () => {
@@ -187,7 +188,7 @@ const ProjectEdit = () => {
 
     const handleOnFinish = async (values: IFields) => {
 
-        const { name, description, tagline, url, repourl, collaboration } = values;
+        const { name, description, tagline, url, repourl, collaboration, type } = values;
         const id = window.location.pathname.split('/')[3];
         const techArray: any = [];
         const tagArray: any = [];
@@ -212,6 +213,7 @@ const ProjectEdit = () => {
         form.append('repourl', repourl);
         form.append('technologies', techArray);
         form.append('tags', tagArray);
+        form.append('type', type);
         form.append('collaboration', collaboration || project.collaboration);
         form.append('screenshots', fileListUpload.length ? fileListUpload[fileListUpload.length - 1] : placeholder.project());
         form.append('user_id', user.id);
@@ -275,6 +277,10 @@ const ProjectEdit = () => {
         history.push(`/user/${user.id}`)
     }
 
+    const handleChange = (value: string) => {
+        // console.log(`selected ${value}`);
+      }
+
     return redirect ? <Redirect to="/login" /> : (
         <div>
             {isLoading ? <Spinner /> :
@@ -291,7 +297,8 @@ const ProjectEdit = () => {
                                 technologies: technologiesSelect,
                                 tags: tagsSelect,
                                 url: project.url,
-                                repourl: project.repo
+                                repourl: project.repo,
+                                type: project.type
                             }}
                             onFinish={handleOnFinish as any}
                             onValuesChange={onFormLayoutChange as any}
@@ -365,6 +372,16 @@ const ProjectEdit = () => {
                         placeholder="https://mysite.com"
                     />
                 </Form.Item>
+                <Form.Item
+                        label={<span><strong>Project Type</strong></span>}
+                        name="type"
+                        rules={[{ required: true, message: 'Must select at least one' }]}
+                    >
+                        <Select onChange={handleChange}>
+                            <Option value="frontend">Front End</Option>
+                            <Option value="fullstack">Full Stack</Option>
+                        </Select>
+                    </Form.Item>
                             <Form.Item
                                 label="Technologies"
                                 name="technologies"
