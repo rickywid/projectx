@@ -22,6 +22,7 @@ const UserProfile = ({ match }: IUserProfile) => {
     const username = match.params.username;
 
     const [user, setUser] = useState<any>({});
+    const [userAuth, setUserAuth] = useState<any>({});
     const [userProjects, setUserProjects] = useState([]);
     const [likedProjects, setLikedProjects] = useState([]);
     const [savedProjects, setSavedProjects] = useState([]);
@@ -34,9 +35,12 @@ const UserProfile = ({ match }: IUserProfile) => {
     useEffect(() => {
         const fetch = async () => {
 
+            const userFetch = await api.userAuth();
+            const userAuth = await userFetch.json();
             const userProfileFetch = await api.getUserProfile(username);
             const userProfile = await userProfileFetch.json();
-
+            
+            setUserAuth(userAuth);
             setUser(userProfile.data.user);
             setUserProjects(userProfile.data.userProjects);
             setLikedProjects(userProfile.data.likedProjects);
@@ -91,8 +95,8 @@ const UserProfile = ({ match }: IUserProfile) => {
                         <div className="user-profile-detail">
                             <h1 className="user-name">{user.username}</h1>
                             <Linkify><p style={{whiteSpace: "pre-line"}}>{user.description}</p></Linkify>
-                            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-                                {user.username === username ?
+                            <div className="user-profile-detail-bottom">
+                                {userAuth.username === username ?
                                     <div className="user-profile-options">
                                         <Link to={`/user/edit/${user.username}`}>
                                             <Button size="small" type="dashed">edit</Button>

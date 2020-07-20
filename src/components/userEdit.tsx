@@ -60,20 +60,21 @@ interface IUserProfile {
 const UserEdit = ({ match }: IUserProfile) => {
     const api = new ApiService();
     const auth = new AuthService();
-    const params = match.params.username;
+    const username = match.params.username;
 
     useEffect(() => {
 
         const fetch = async () => {
 
             const userFetch = await api.userAuth();
+            const userData = await userFetch.json();
 
-            if(userFetch.status === 401) { 
+            if(userData.username !== username) { 
                 setRedirect(true);
                 return;
-            };
+            }; 
 
-            const userData = await userFetch.json();
+            
             const userProfileFetch = await api.getUserProfile(userData.username);
             const userProfile = await userProfileFetch.json();
 
@@ -226,7 +227,7 @@ const UserEdit = ({ match }: IUserProfile) => {
         window.location.replace(process.env.REACT_APP_HOSTNAME as string);
     }
 
-    return ( redirect ? <Redirect to="/login" /> :
+    return ( redirect ? <Redirect to="/" /> :
         <div>
             {isLoading ? <Spinner /> :
                 <div className="container">

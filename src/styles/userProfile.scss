@@ -18,13 +18,19 @@
                     margin-right: 20px;
                 }
             }
+
+            .user-profile-detail-bottom {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                position: relative;
+            }
         }
     
         .user-avatar {
             height: 150px;
             border-radius: 100%;
             margin-right: 0; 
-            // float: left;
         }
     
         .user-name {
@@ -35,8 +41,6 @@
         }
 
         .user-profile-social-wrapper {
-            float: right;
-
             a {
                 color: $primary;
                 margin-left: 8px;
@@ -79,6 +83,13 @@
                         margin-right: 20px;
                     }
                 }
+
+                .user-profile-detail-bottom {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    position: relative;
+                }
             }
         
             .user-avatar {
@@ -97,6 +108,8 @@
     
             .user-profile-social-wrapper {
                 float: right;
+                position: absolute;
+                right: 0;
     
                 a {
                     color: $primary;
