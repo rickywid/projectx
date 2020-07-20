@@ -5,6 +5,8 @@
     margin: 0 auto;
 
     .user-profile-info {
+        text-align: center;
+        
         .user-profile-detail {       
             display: flex;
             flex-direction: column;
@@ -21,8 +23,8 @@
         .user-avatar {
             height: 150px;
             border-radius: 100%;
-            margin-right: 20px; 
-            float: left;
+            margin-right: 0; 
+            // float: left;
         }
     
         .user-name {
@@ -54,6 +56,68 @@
         .user-msg-no-projects {
             text-align: center;
             margin-top: 50px;
+        }
+    }
+}
+
+@media only screen and (min-width: $medium) { 
+    .user-profile-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+    
+        .user-profile-info {
+            text-align: initial;
+            
+            .user-profile-detail {       
+                display: flex;
+                flex-direction: column;
+        
+                .user-profile-options {
+                    display: flex;
+        
+                    a {
+                        margin-right: 20px;
+                    }
+                }
+            }
+        
+            .user-avatar {
+                height: 150px;
+                border-radius: 100%;
+                margin-right: 20px; 
+                float: left;
+            }
+        
+            .user-name {
+                display: inline-block;
+                margin-right: 20px;
+                margin-bottom: 0;
+                font-size: 36px;
+            }
+    
+            .user-profile-social-wrapper {
+                float: right;
+    
+                a {
+                    color: $primary;
+                    margin-left: 8px;
+                    font-size: 20px;
+    
+                    &:hover {
+                        color: $primaryDark;
+                    }
+                }
+            }
+        }
+    
+        .user-tabs {
+            margin-top: 50px;
+            clear: both;
+    
+            .user-msg-no-projects {
+                text-align: center;
+                margin-top: 50px;
+            }
         }
     }
 }

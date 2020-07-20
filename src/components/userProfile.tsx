@@ -91,26 +91,28 @@ const UserProfile = ({ match }: IUserProfile) => {
                         <div className="user-profile-detail">
                             <h1 className="user-name">{user.username}</h1>
                             <Linkify><p style={{whiteSpace: "pre-line"}}>{user.description}</p></Linkify>
-                            {user.username === username ?
-                                <div className="user-profile-options">
-                                    <Link to={`/user/edit/${user.username}`}>
-                                        <Button size="small" type="dashed">edit</Button>
-                                    </Link>
-                                    <Popover content={
-                                        <div>
-                                            <p className="popover-btn" onClick={() => showModal()}>Report</p>
-                                        </div>
-                                    } trigger="click">
-                                        <EllipsisOutlined style={{ fontSize: '20px' }} />
-                                    </Popover>
-                                </div> : 
-                                ""
-                            }
-                        </div>
-                        <div className="user-profile-social-wrapper">
-                            {user.user_profile_url ? <a href={user.user_profile_url} target="__blank"><HomeFilled /></a> : <></>}
-                            {user.gh_profile_url ? <a href={user.gh_profile_url} target="__blank"><GithubOutlined /></a> : <></>}
-                            {user.twitter_profile_url ? <a href={user.twitter_profile_url} target="__blank"><TwitterCircleFilled /></a> : <></>}
+                            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                                {user.username === username ?
+                                    <div className="user-profile-options">
+                                        <Link to={`/user/edit/${user.username}`}>
+                                            <Button size="small" type="dashed">edit</Button>
+                                        </Link>
+                                        <Popover content={
+                                            <div>
+                                                <p className="popover-btn" onClick={() => showModal()}>Report</p>
+                                            </div>
+                                        } trigger="click">
+                                            <EllipsisOutlined style={{ fontSize: '20px' }} />
+                                        </Popover>
+                                    </div> : 
+                                    ""
+                                }
+                                <div className="user-profile-social-wrapper">
+                                    {user.user_profile_url ? <a href={user.user_profile_url} target="__blank"><HomeFilled /></a> : <></>}
+                                    {user.gh_profile_url ? <a href={user.gh_profile_url} target="__blank"><GithubOutlined /></a> : <></>}
+                                    {user.twitter_profile_url ? <a href={user.twitter_profile_url} target="__blank"><TwitterCircleFilled /></a> : <></>}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <Tabs className="user-tabs" defaultActiveKey="1" onChange={callback}>
