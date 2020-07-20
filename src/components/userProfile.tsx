@@ -96,11 +96,13 @@ const UserProfile = ({ match }: IUserProfile) => {
                             <h1 className="user-name">{user.username}</h1>
                             <Linkify><p style={{whiteSpace: "pre-line"}}>{user.description}</p></Linkify>
                             <div className="user-profile-detail-bottom">
-                                {userAuth.username === username ?
-                                    <div className="user-profile-options">
+                                <div className="user-profile-options">
+                                    {userAuth.username === username &&
                                         <Link to={`/user/edit/${user.username}`}>
                                             <Button size="small" type="dashed">edit</Button>
                                         </Link>
+                                    }
+                                    {userAuth.isAuthenticated && 
                                         <Popover content={
                                             <div>
                                                 <p className="popover-btn" onClick={() => showModal()}>Report</p>
@@ -108,9 +110,8 @@ const UserProfile = ({ match }: IUserProfile) => {
                                         } trigger="click">
                                             <EllipsisOutlined style={{ fontSize: '20px' }} />
                                         </Popover>
-                                    </div> : 
-                                    ""
-                                }
+                                    }
+                                </div> 
                                 {user.gh_profile_url || user.user_profile_url || user.twitter_profile_url ? (
                                     <div className="user-profile-social-wrapper">
                                         {user.user_profile_url ? <a href={user.user_profile_url} target="__blank"><HomeFilled /></a> : <></>}
