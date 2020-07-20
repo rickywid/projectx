@@ -111,11 +111,13 @@ const UserProfile = ({ match }: IUserProfile) => {
                                     </div> : 
                                     ""
                                 }
-                                <div className="user-profile-social-wrapper">
-                                    {user.user_profile_url ? <a href={user.user_profile_url} target="__blank"><HomeFilled /></a> : <></>}
-                                    {user.gh_profile_url ? <a href={user.gh_profile_url} target="__blank"><GithubOutlined /></a> : <></>}
-                                    {user.twitter_profile_url ? <a href={user.twitter_profile_url} target="__blank"><TwitterCircleFilled /></a> : <></>}
-                                </div>
+                                {user.gh_profile_url || user.user_profile_url || user.twitter_profile_url ? (
+                                    <div className="user-profile-social-wrapper">
+                                        {user.user_profile_url ? <a href={user.user_profile_url} target="__blank"><HomeFilled /></a> : <></>}
+                                        {user.gh_profile_url ? <a href={user.gh_profile_url} target="__blank"><GithubOutlined /></a> : <></>}
+                                        {user.twitter_profile_url ? <a href={user.twitter_profile_url} target="__blank"><TwitterCircleFilled /></a> : <></>}
+                                    </div>
+                                ) : ""}
                             </div>
                         </div>
                     </div>

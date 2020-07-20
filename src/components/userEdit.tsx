@@ -299,9 +299,9 @@ const UserEdit = ({ match }: IUserProfile) => {
                                 onValuesChange={onFormLayoutChange as any}
                                 initialValues={{
                                     description: user.description,
-                                    github: user.gh_profile_url,
-                                    twitter: user.twitter_profile_url,
-                                    portfolio: user.user_profile_url
+                                    github: user.gh_profile_url || "",
+                                    twitter: user.twitter_profile_url || "",
+                                    portfolio: user.user_profile_url || ""
                                 }}
                             >
                                 <Form.Item
