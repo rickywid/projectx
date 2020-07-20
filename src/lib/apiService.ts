@@ -38,10 +38,10 @@ class ApiService{
         );
       }
 
-      public async getProject(id: string) {
+      public async getProject(id: string, userID?: number) {
         // this.headers['cookie'] = this.cookie;
         return await HttpClient.get(
-          `${this.apiEndpoint}/project/${id}`,
+          `${this.apiEndpoint}/project/${id}?userID=${userID}`,
           this.headers,
         );
       }

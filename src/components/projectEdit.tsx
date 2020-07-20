@@ -66,26 +66,33 @@ const ProjectEdit = () => {
         const tagArray: string[] = [];
 
         const fetch = async () => {
-            const userFetch = await api.userAuth();
+            setIsLoading(true);
 
+            /**
+             * Redirect to login page if user is not logged in
+             */
+            
+            const userFetch = await api.userAuth();
             if(userFetch.status === 401) { 
+                setRedirectPath("/login");
+                setRedirect(true);
+                return;
+            };
+
+            const user = await userFetch.json();
+            const project = await api.getProject(id, user.id);
+
+            /**
+             * Redirect to homepage if user is not the project owner
+             */
+
+            if(project.status === 401 ) { 
+                setRedirectPath("/");
                 setRedirect(true);
                 return;
             };
             
-            setIsLoading(true);
-
-            const user = userFetch.json();
-
-            const project = await api.getProject(id);
             const data = await project.json();
-
-            setFileList([{
-                uid: '-1',
-                url: data.project.images[0]
-            }]);
-
-            setFileListUpload([data.project.images[0]]);
 
             for (let key in technologies) {
                 if (data.project.technologies.includes(technologies[key].slug)) {
@@ -104,6 +111,11 @@ const ProjectEdit = () => {
             setTagSelect(tagArray);
             setProject(data.project);
             setIsLoading(false);
+            setFileList([{
+                uid: '-1',
+                url: data.project.images[0]
+            }]);
+            setFileListUpload([data.project.images[0]]);
 
             document.title = `${data.project.name} Edit | ${siteName}`
         }
@@ -126,6 +138,7 @@ const ProjectEdit = () => {
     const [project, setProject] = useState<any>({});
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [redirect, setRedirect] = useState<boolean>(false);
+    const [redirectPath, setRedirectPath] = useState<string>('');
 
     const { Option } = Select;
     const childrenTech = [];
@@ -281,7 +294,8 @@ const ProjectEdit = () => {
         // console.log(`selected ${value}`);
       }
 
-    return redirect ? <Redirect to="/login" /> : (
+    console.log(redirectPath)
+    return redirect ? <Redirect to={redirectPath} /> : (
         <div>
             {isLoading ? <Spinner /> :
                 <div className="container">
