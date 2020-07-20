@@ -234,7 +234,7 @@ const ProjectEdit = () => {
         const res = await api.updateProject(id, form);
 
         if (res.status === 200) {
-            history.push('/');
+            history.push(`/project/${id}`);
         }
 
         message.success('Project successfully updated');

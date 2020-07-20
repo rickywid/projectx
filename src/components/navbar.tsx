@@ -4,6 +4,7 @@ import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/
 import { Link } from "react-router-dom";
 import Search from './searchBar'
 import AuthService from '../lib/authService';
+import { subscriberUrl } from '../lib/const';
 import '../styles/navbar.scss';
 import Logo from '../assets/logo.png';
 const { Sider } = Layout;
@@ -61,7 +62,7 @@ const NavBar = ({
             </Link>
       </Menu.Item>
       <Menu.Item key="89">
-        <a href="https://cdn.forms-content.sg-form.com/78813c67-c591-11ea-a395-12612d9b4aa6" target="__blank">Subscribe</a>
+        <a href={subscriberUrl} target="__blank">Subscribe</a>
       </Menu.Item>
       <Menu.Item key="86">
         <Link to={`/feedback`}>

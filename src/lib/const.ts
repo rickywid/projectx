@@ -219,3 +219,4 @@ export let tags: technologies = {
 
 export const siteName = 'CodeComplex';
 export const pageTitle = `${siteName} - Discover new and exciting creative side projects`
+export const subscriberUrl = 'https://cdn.forms-content.sg-form.com/78813c67-c591-11ea-a395-12612d9b4aa6'
