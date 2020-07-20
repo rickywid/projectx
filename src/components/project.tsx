@@ -177,7 +177,7 @@ const Project = () => {
         
         const form = new FormData();
         form.append('comment_id', commentID!.toString());
-        form.append('comment', values.updateComment);
+        form.append('comment', ParseDom(values.updateComment));
         form.append('project_id', id);
         const res = await api.updateComment(commentID, form);
         const comments = await res.json();
