@@ -189,7 +189,7 @@ const ProjectUpload = () => {
                 content: 'Congratulations! Your project has been successfully uploaded.',
                 icon: <RocketTwoTone twoToneColor='#00d2dc' />,
                 duration: 5
-              });
+            });
         }
     }
 
@@ -227,6 +227,30 @@ const ProjectUpload = () => {
     const handleChange = (value: string) => {
         // console.log(`selected ${value}`);
       }
+
+    const handleBeforeUpload = (file: any, fileList: any) => {
+        const fileSize = file.size;
+        const fileType = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
+        const validFileExt = fileType.includes(file.type);
+
+        // check if file extension is valid
+        if (!validFileExt) {
+          message.error({
+            content: 'File type must be jpeg, jpg, png, gif',
+            duration: 10
+        });
+          return false;
+        }
+
+        // check file size
+        if (fileSize > 1000000) {
+          message.error({
+            content: 'File size must be smaller than 1MB',
+            duration: 10
+        });
+          return false;
+        }
+    }
 
     return redirect ? <Redirect to="/login" />: (
         <div>
@@ -377,11 +401,12 @@ const ProjectUpload = () => {
                         <Switch checkedChildren="Yes" unCheckedChildren="No" />
                     </Form.Item>
                     <Form.Item label={<span><strong>Add Image</strong></span>}>
-                        <p>Include a screenshot or logo of your application.</p>
+                        <p>Include a image, screenshot or logo of your application. Supported file types - jpeg, jpg, png, gif.</p>
                         <div className="clearfix">
                             <Upload
                                 listType="picture-card"
                                 fileList={fileList as any[]}
+                                beforeUpload={handleBeforeUpload as any}
                                 onPreview={handlePreview as any}
                                 onChange={handleUploadChange as any}
                                 onRemove={handleOnRemove as any}

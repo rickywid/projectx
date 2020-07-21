@@ -69,13 +69,20 @@ const NavBar = ({
                 </Link>
             </li>
             {isAuthenticated ? (
-              <li>
-                <Dropdown overlay={menu} trigger={['click']}>
-                  <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                    {user.username}
-                  </a>
-                </Dropdown>
-              </li>
+              <>
+                <li>
+                  <Link to={`/upload`}>
+                    <Button className="upload-btn" type="primary">UPLOAD</Button>
+                  </Link>
+                </li>
+                <li>
+                  <Dropdown overlay={menu} trigger={['click']}>
+                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                      {user.username}
+                    </a>
+                  </Dropdown>
+                </li>
+              </>
             ) : <>
                 <li>
                   <Link to={`/login`}>
