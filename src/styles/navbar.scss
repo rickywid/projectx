@@ -18,14 +18,14 @@ nav {
         }
     
         a.signup-btn {
-            background: $primary;
+            background: #000;
             padding: 10px;
             border-radius: 4px;
             color: white;
             font-weight: bold;
     
             &:hover {
-                background: $primaryDark;
+                background: #333;
             }
         }
     }
@@ -50,11 +50,11 @@ nav {
         padding: 10px 50px;
         border-bottom: 1px solid #e6e6e6;
         background: white;
-    }
-    
-    ul {
-        display: flex;
-        align-items: center;
-        margin: 0;
+
+        ul {
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
     }
 }
