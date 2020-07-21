@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 .technology-wrapper {
     max-width: 800px;
     margin: 0 auto;
@@ -9,8 +11,13 @@
             display: block;
             text-align: center;
 
-            svg {
-                width: 65px;
+            svg.category {
+                width: 120px;
+                height: auto;
+            }
+
+            svg.tech {
+                width: 80px;
                 height: auto;
             }
 
@@ -18,8 +25,8 @@
                 text-align: center;
             }
         
-            .lg-svg {
-                width: 115px;
+            svg.lg-svg {
+                width: 150px;
             }
         }
     }
@@ -28,5 +35,24 @@
         display: flex;
         align-items: center;
         padding: 10px 0;
+    }
+}
+
+
+@media only screen and (min-width: $medium) {
+    .technology-wrapper {
+        section {    
+            a {
+                svg.category,
+                svg.tech {
+                    width: 65px;
+                    height: auto;
+                }
+
+                svg.lg-svg {
+                    width: 150px;
+                }
+            }
+        }
     }
 }

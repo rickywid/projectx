@@ -34,25 +34,25 @@ const Category = () => {
         <Row>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/analytics`}>
-                <Analytics />
+                <Analytics className="category" />
                 <p>Analytics</p>
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/art-design`}>
-                <Design />
+                <Design className="category" />
                 <p>Art/Design</p>    
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/ecommerce`}>
-                <Ecommerce />
+                <Ecommerce className="category" />
                 <p>E-Commerce</p>
                 </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/finance`}>
-                <Finance />
+                <Finance className="category" />
                 <p>Finance</p>
             </Link>
           </Col>
@@ -60,25 +60,25 @@ const Category = () => {
         
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/framework`}>
-                <Framework />
+                <Framework className="category" />
                 <p>Framework</p>
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/gaming`}>
-                <Gaming />
+                <Gaming className="category" />
                 <p>Gaming</p>
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/music`}>
-                <Music />
+                <Music className="category" />
                 <p>Music</p>
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/personal`}>
-                <Personal />
+                <Personal className="category" />
                 <p>Personal</p>
             </Link>
           </Col>
@@ -86,44 +86,44 @@ const Category = () => {
         
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/productivity`}>
-                <Productivity />
+                <Productivity className="category" />
                 <p>Productivity</p>
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/real-time`}>
-                <Realtime />
+                <Realtime className="category" />
                 <p>Real Time</p>
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/sports`}>
-                <Sports />
+                <Sports className="category" />
                 <p>Sports</p>
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/travel`}>
-                <Travel />
+                <Travel className="category" />
                 <p>Travel</p>
             </Link>
           </Col>
         
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/ui-ux`}>
-                <Ui />
+                <Ui className="category" />
                 <p>UI/UX</p>
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/visualization`}>
-                <Visualization />
+                <Visualization className="category" />
                 <p>Visualization</p>
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/category/uncategorized`}>
-                <Uncategorized />
+                <Uncategorized className="category" />
                 <p>Uncategorized</p>
             </Link>
           </Col>
