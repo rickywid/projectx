@@ -50,7 +50,7 @@ function App() {
   return (
     <div className="login-wrapper">
       <div className="login-inner">
-        <img style={{height: '50px', marginBottom: '20px'}} src={Logo} alt="logo"/>
+        <img style={{height: '28px', marginBottom: '20px'}} src={Logo} alt="logo"/>
         <h2>Log In</h2>
         <Form
           name="normal_login"

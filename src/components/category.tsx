@@ -29,7 +29,7 @@ const Category = () => {
   return (
     <div className="technology-wrapper">
       <section className="categories">
-        <h1>Categories</h1>
+        <h2>Filter Projects By Category</h2>
         <Divider />
         <Row>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>

@@ -24,6 +24,7 @@ const SearchBar = () => {
           size="large"
           placeholder="Find a project"
           onSearch={onSearch}
+          width={50}
         />
       </div>
     </div>

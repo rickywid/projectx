@@ -26,8 +26,12 @@ const ProjectsCollaboration = () => {
             {isLoading ? <Spinner /> : 
                 <div>
                     <ProjectFilters />
-                    <h2>Projects interested in collaborating</h2>
-                    <ProjectsCard projects={projects} />
+                    {projects.length > 1 ? (
+                        <>
+                            <h2>Projects interested in collaborating</h2>
+                            <ProjectsCard projects={projects} />
+                        </>
+                    ) : <h2>No projects found</h2>}
                 </div>
             }
         </div>

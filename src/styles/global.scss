@@ -5,6 +5,14 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
 h1,h2,h3,h4,h5,h6 {
     font-weight: bold;
 }
@@ -58,7 +66,7 @@ a {
     &:hover {
         background: #fff;
         color: $primary;
-        border-color: $primaryDark;
+        border-color: $darkRed;
     }
 }
 
@@ -66,9 +74,9 @@ a {
     &:focus,
     &:active,
     &:hover {
-        background: $primaryDark;
+        background: $darkRed;
         color: white;
-        border-color: $primaryDark;
+        border-color: $darkRed;
     }
 }
 
@@ -78,7 +86,7 @@ a {
 }
 
 .like-project-btn {
-    background: $primary;
+    background: $red;
     color: #fff;
 }
 
@@ -112,7 +120,7 @@ a {
 }
 
 .ant-layout-content {
-    padding: 80px 20px;
+    padding: 95px 20px 20px 20px;
 }
 
 .ant-divider {
@@ -157,15 +165,20 @@ a {
     }
 }
 
-
 @media only screen and (min-width: $medium) {
     .ant-layout-content {
-        padding: 50px;
+        padding: 100px 50px;
     }
 
     .comment-btn,
     .upload-btn {
         width: auto;
         margin-right: 15px;
+    }
+}
+
+@media only screen and (min-width: $medPlus) {
+    .ant-layout-content {
+        padding: 50px;
     }
 }

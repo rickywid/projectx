@@ -27,8 +27,12 @@ const ProjectFullstack = () => {
             {isLoading ? <Spinner /> : 
                 <div>
                     <ProjectFilters />
-                    <h2>Full StackProjects</h2>
-                    <ProjectsCard projects={projects} />
+                    {projects.length > 1 ? (
+                        <>
+                            <h2>Full Stack Projects</h2>
+                            <ProjectsCard projects={projects} />
+                        </>
+                    ) : <h2>No projects found</h2>}
                 </div>
             }
         </div>

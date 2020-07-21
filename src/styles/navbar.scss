@@ -12,7 +12,7 @@ nav {
             color: $grey;
     
             .user-profile-badge-desktop {
-                width: 57px;
+                width: 50px;
                 border-radius: 50%;
             }
         }
@@ -36,16 +36,25 @@ nav {
 
     .ant-dropdown-menu {
         padding: 20px;
+        display: inherit;
     }
 }
 
 
 
-@media only screen and (min-width: $medium) {
+@media only screen and (min-width: 1110px) {
     nav {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 20px 50px;
+        padding: 10px 50px;
+        border-bottom: 1px solid #e6e6e6;
+        background: white;
+    }
+    
+    ul {
+        display: flex;
+        align-items: center;
+        margin: 0;
     }
 }

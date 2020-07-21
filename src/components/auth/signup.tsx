@@ -38,6 +38,7 @@ function App() {
 
         if (res.status === 200) {
             const user = await res.json();
+            localStorage.setItem('userID', user.id)
             window.location.replace(process.env.REACT_APP_HOSTNAME as string);
         } else {
             const err = await res.json();
@@ -48,7 +49,7 @@ function App() {
     return (
         <div className="login-wrapper">
             <div className="login-inner">
-                <img style={{height: '50px', marginBottom: '20px'}} src={Logo} alt="logo"/>
+                <img style={{height: '28px', marginBottom: '20px'}} src={Logo} alt="logo"/>
                 <h2>Sign Up</h2>
                 <Form
                     form={form}

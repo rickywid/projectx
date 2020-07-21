@@ -49,14 +49,15 @@ const NavBar = ({
 
   return loading ? <></> : (
     <nav>
-      {width > 768 ?
+      {width > 1110 ?
         <>
           <div>
             <Link to="/">
               <img style={{ width: '170px' }} src={Logo} alt="logo" />
             </Link>
           </div>
-          <ul>
+          <Search />
+          <ul className="nav-item-desktop">
             <li>
               <Link to="/tag/technology">
                 Technologies
@@ -71,7 +72,7 @@ const NavBar = ({
               <li>
                 <Dropdown overlay={menu} trigger={['click']}>
                   <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                    <img className="user-profile-badge-desktop" src={user.gh_avatar} alt="logo" />
+                    {user.username}
                   </a>
                 </Dropdown>
               </li>
@@ -115,9 +116,8 @@ const NavBar = ({
                 Feedback
             </Link>
               <button className="btn-signout" onClick={onSignout}>Sign Out</button>
-
             </MenuSlide> :
-
+            
             <MenuSlide>
               <Search />
               <Divider style={{ margin: 0 }} />

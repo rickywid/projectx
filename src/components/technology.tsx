@@ -50,7 +50,7 @@ const Technology = () => {
   return (
     <div className="technology-wrapper">
       <section className="frontend">
-        <h1>Front end</h1>
+        <h2>Front end</h2>
         <Divider />
         <Row>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
@@ -83,7 +83,7 @@ const Technology = () => {
       </section>
 
       <section className="backend">
-        <h1>Back end</h1>
+        <h2>Back end</h2>
         <Divider />
         <Row>
           <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
@@ -121,7 +121,7 @@ const Technology = () => {
       </section>
 
       <section className="databases">
-        <h1>Databases</h1>
+        <h2>Databases</h2>
         <Divider />
         <Row>
           <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
@@ -146,7 +146,7 @@ const Technology = () => {
       </section>
 
       <section className="devops">
-        <h1>DevOps</h1>
+        <h2>DevOps</h2>
         <Divider />
         <Row>
           <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>

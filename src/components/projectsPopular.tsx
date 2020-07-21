@@ -27,8 +27,12 @@ const ProjectsPopular = () => {
             {isLoading ? <Spinner /> : 
                 <div>
                     <ProjectFilters />
-                    <h2>Popular Projects</h2>
-                    <ProjectsCard projects={projects} />
+                    {projects.length > 1 ? (
+                        <>
+                            <h2>Popular Projects</h2>
+                            <ProjectsCard projects={projects} />
+                        </>
+                    ) : <h2>No projects found</h2>}
                 </div>
             }
         </div>

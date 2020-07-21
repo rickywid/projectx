@@ -51,6 +51,7 @@
         h2 {
             margin: 0;
             font-weight: bold;
+            font-size: 26px;
         }
 
         .project-owner {
@@ -205,6 +206,10 @@
         
         .project-view-title {
             margin-bottom: 30px;
+
+            h2 {
+                font-size: 30px;
+            }
             
             .project-view-title-info {
                 flex-basis: auto;

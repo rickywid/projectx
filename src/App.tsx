@@ -30,6 +30,8 @@ function App() {
 
       const res = await api.getUser(userID as string)
       const json = await res.json();
+      localStorage.removeItem('userID')
+
       isLoading(false);
       if (json.data.isAuthenticated) {
         setUser(json.data);
@@ -46,12 +48,12 @@ function App() {
         isAuthenticated={user.isAuthenticated}
         loading={loading}
       />
-      {width < 768 && (
-        <div className="wrapper">
+      {width < 1110 && (
+        <div className="nav-mobile-wrapper">
           <Link to="/"><img className="logo-mobile" src={Logo} alt="logo" /></Link>
           {user.isAuthenticated && 
           <Link className="nav-user-profile-mobile" to={`/user/${user.username}`}>
-            <img className="user-profile-badge" src={user.gh_avatar} alt="logo" />
+            <span>{user.username[0]}</span>
           </Link>}
         </div>
       )}
