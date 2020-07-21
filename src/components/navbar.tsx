@@ -1,24 +1,32 @@
 import React from 'react';
-import { Layout, Menu, Button, Divider } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { Button, Divider, Menu, Dropdown } from 'antd';
 import { Link } from "react-router-dom";
 import Search from './searchBar'
+import useWindowDimensions from '../hooks/windowSize';
 import AuthService from '../lib/authService';
 import { subscriberUrl } from '../lib/const';
+import '../App.scss';
 import '../styles/navbar.scss';
+import '../styles/mobileNav.scss';
+import { slide as MenuSlide } from 'react-burger-menu'
+
 import Logo from '../assets/logo.png';
-const { Sider } = Layout;
-const { SubMenu } = Menu;
 
 interface Props {
-  user: {username: string};
+  user: {
+    username: string,
+    gh_avatar: string
+  };
   isAuthenticated: boolean;
+  loading: boolean;
 }
 
 const NavBar = ({
-  user, isAuthenticated
+  user, isAuthenticated, loading
 }: Props) => {
   const api = new AuthService();
+  const { height, width } = useWindowDimensions();
+
 
   const onSignout = async () => {
     await api.signout(new FormData());
@@ -26,122 +34,120 @@ const NavBar = ({
 
   }
 
-  const authMenu = () => (
-    <Menu theme="light" mode="inline">    
-    <Menu.Item key="49">
-        <Search />
-      </Menu.Item>  
-      <Divider style={{margin: 0}} />
-      <Menu.Item key="2" style={{marginTop: '8px'}}>
-      <Link to={`/upload`}>
-        <Button className="upload-btn" type="primary">Upload</Button>
-      </Link>
-    </Menu.Item>
-    <Menu.Item key="1">
-      <Link className="user-nav-link" to={`/user/${user.username}`}>
-        <span>
-          {user.username}
-        </span>
-      </Link>
-    </Menu.Item>
-    <SubMenu key="sub1" title="Tags">
-      <Menu.Item key="34">
-        <Link to={`/tag/technology`}>
-            <span>Technology</span>
+  const menu = (
+    <Menu>
+      <li>
+        <Link className="nav-user-profile-mobile" to={`/user/${user.username}`}>
+          Profile
           </Link>
-      </Menu.Item>
-      <Menu.Item key="64">
-        <Link to={`/tag/category`}>
-              <span>Category</span>
-            </Link>
-      </Menu.Item>
-    </SubMenu>
-      <Menu.Item key="23">
-        <Link to={`/guidelines`}>
-              <span>Guidelines</span>
-            </Link>
-      </Menu.Item>
-      <Menu.Item key="89">
-        <a href={subscriberUrl} target="__blank">Subscribe</a>
-      </Menu.Item>
-      <Menu.Item key="86">
-        <Link to={`/feedback`}>
-              <span>Feedback</span>
-            </Link>
-      </Menu.Item>
-    <Menu.Item key="11">
-      <button className="btn-signout" onClick={onSignout}>Sign Out</button>
-    </Menu.Item>
-  </Menu>  
-  )
-  
-  const unAuthMenu = () => (
-    <Menu theme="light" mode="inline">
-            <Menu.Item key="45">
-        <Search />
-      </Menu.Item>
-      <Divider style={{margin: 0}} />
-      <Menu.Item key="2" style={{marginTop: '8px'}}>
-      <Link to={`/upload`}>
-        <Button className="upload-btn" type="primary">Upload</Button>
-      </Link>
-    </Menu.Item>
-      <Menu.Item key="5">
-        <Link to={`/signup`}>
-          <span>Sign Up</span>
-        </Link>
-      </Menu.Item>
-      <Menu.Item key="6">
-        <Link to={`/login`}>
-          <span>Log In</span>
-        </Link>
-      </Menu.Item>
-    <SubMenu key="sub1" title="Tags">
-      <Menu.Item key="76">
-        <Link to={`/tag/technology`}>
-            <span>Technology</span>
-          </Link>
-      </Menu.Item>
-      <Menu.Item key="57">
-        <Link to={`/tag/category`}>
-              <span>Category</span>
-            </Link>
-      </Menu.Item>
-    </SubMenu>
-      <Menu.Item key="23">
-        <Link to={`/guidelines`}>
-              <span>Guidelines</span>
-            </Link>
-      </Menu.Item>
-      <Menu.Item key="89">
-        <a href="https://cdn.forms-content.sg-form.com/78813c67-c591-11ea-a395-12612d9b4aa6" target="__blank">Subscribe</a>
-      </Menu.Item>
-      <Menu.Item key="86">
-        <Link to={`/feedback`}>
-              <span>Feedback</span>
-            </Link>
-      </Menu.Item>
-    </Menu>  
-  )
+      </li>
+      <li>
+        <button className="btn-signout" onClick={onSignout}>Sign Out</button>
+      </li>
+    </Menu>
+  );
 
-  return (
-    <Sider
-    breakpoint="lg"
-    collapsedWidth="0"
-    onBreakpoint={(broken) => {
-      console.log(broken);
-    }}
-    onCollapse={(collapsed, type) => {
-      console.log(collapsed, type);
-    }}
-    >
-    <div className="logo">
-      <Link to="/">
-        <img src={Logo} alt="logo"/>
-      </Link>
-    </div>
-    {isAuthenticated ? authMenu() : unAuthMenu()}
-  </Sider>
+  return loading ? <></> : (
+    <nav>
+      {width > 768 ?
+        <>
+          <div>
+            <Link to="/">
+              <img style={{ width: '170px' }} src={Logo} alt="logo" />
+            </Link>
+          </div>
+          <ul>
+            <li>
+              <Link to="/tag/technology">
+                Technologies
+                </Link>
+            </li>
+            <li>
+              <Link to="/tag/category">
+                Categories
+                </Link>
+            </li>
+            {isAuthenticated ? (
+              <li>
+                <Dropdown overlay={menu} trigger={['click']}>
+                  <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    <img className="user-profile-badge-desktop" src={user.gh_avatar} alt="logo" />
+                  </a>
+                </Dropdown>
+              </li>
+            ) : <>
+                <li>
+                  <Link to={`/login`}>
+                    Log In
+                </Link>
+                </li>
+                <li>
+                  <Link className="signup-btn" to={`/signup`}>
+                    Sign Up
+                </Link>
+                </li>
+              </>
+            }
+
+          </ul>
+        </> :
+        <div>
+          {isAuthenticated ?
+            <MenuSlide>
+              <Link to={`/upload`}>
+                <Button className="upload-btn" type="primary">UPLOAD</Button>
+              </Link>
+              <Link className="user-nav-link" to={`/user/${user.username}`}>
+                {user.username}
+              </Link>
+              <Link to={`/tag/technology`}>
+                Technology
+            </Link>
+              <Link to={`/tag/category`}>
+                Category
+            </Link>
+              <Link to={`/guidelines`}>
+                Guidelines
+            </Link>
+              <a href={subscriberUrl} target="__blank">Subscribe</a>
+
+              <Link to={`/feedback`}>
+                Feedback
+            </Link>
+              <button className="btn-signout" onClick={onSignout}>Sign Out</button>
+
+            </MenuSlide> :
+
+            <MenuSlide>
+              <Search />
+              <Divider style={{ margin: 0 }} />
+              <Link to={`/upload`}>
+                <Button className="upload-btn" type="primary">UPLOAD</Button>
+              </Link>
+              <Link to={`/signup`}>
+                Sign Up
+            </Link>
+              <Link to={`/login`}>
+                Log In
+            </Link>
+              <Link to={`/tag/technology`}>
+                Technology
+            </Link>
+              <Link to={`/tag/category`}>
+                Category
+            </Link>
+              <Link to={`/guidelines`}>
+                Guidelines
+            </Link>
+              <a href={subscriberUrl} target="__blank">Subscribe</a>
+              <Link to={`/feedback`}>
+                Feedback
+            </Link>
+            </MenuSlide>
+          }
+        </div>
+      }
+    </nav>
   )
 };
 

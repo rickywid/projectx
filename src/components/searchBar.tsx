@@ -21,6 +21,7 @@ const SearchBar = () => {
     <div className="search-wrapper">
       <div className="search-input">
         <Search
+          size="large"
           placeholder="Find a project"
           onSearch={onSearch}
         />

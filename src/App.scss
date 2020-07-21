@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    border-bottom: 1px solid #e6e6e6;
+
+    .logo-mobile {
+        padding: 20px 0;
+        width: 110px;
+        margin: 0 auto;
+    }
+
+    a.nav-user-profile-mobile {
+        position: absolute;
+        right: 16px;
+        top: 12px;
+
+        .user-profile-badge {
+            width: 45px;
+            border-radius: 100%;
+        }
+    }
+}

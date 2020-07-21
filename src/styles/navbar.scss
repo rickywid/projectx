@@ -1,83 +1,51 @@
 @import './variables.scss';
 
-.ant-layout-sider {
-    background:$bg;
+nav {
+    display: initial;
+    padding: 0;
 
-    .logo {
-        padding: 24px;
+    li {
+        display: inline-block;
+        margin: 0 17px;
 
-        img {
-            height: 55px;
-        }
-    }
-
-    .ant-menu {
-        background:$bg;
-        border-right: none;
-            
-        .btn-signout {
-            background: none;
-            border: none;
-            outline: none;
-            padding: 0;
-            font-weight: 300;
-
-            &:hover {
-                cursor: pointer;
-                color: $primaryDark;
+        a {
+            color: $grey;
+    
+            .user-profile-badge-desktop {
+                width: 57px;
+                border-radius: 50%;
             }
-        }
-
-        .ant-menu-inline {
-            border-right: none;
         }
     
-        .ant-menu-item-selected {
-            background-color: $bg !important;
-            
-            a {
-                color: $primary;
-            }
-        }
-
-        .ant-menu-submenu-title,
-        .ant-menu-item {
-            font-weight: 300;
-            color: $navLinks;
-
-            &:after {
-                border-right: none;
-            }
-
-            a {
-                &:hover {
-                    color: $primary;
-                }
-            }
-
-            .anticon {
-                margin-right: 0;
-            }
-
-            .upload-btn {
-                width: 100%;
-                background: rgb(65,164,169);
-                background: linear-gradient(43deg, #115570 0%, #32b0b4 100%); 
-
-                &:hover {
-                    background: #2f7d81;
-                    background: linear-gradient(43deg, #115570 0%,#43ccd1 100%);
-                }
-            }
-        }
-
-        .ant-menu-submenu-title {
+        a.signup-btn {
+            background: $primary;
+            padding: 10px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+    
             &:hover {
-                .ant-menu-submenu-arrow::before,
-                .ant-menu-submenu-arrow::after {
-                    background: linear-gradient(to right, $primary, $primary);
-                }   
+                background: $primaryDark;
             }
         }
+    }
+}
+
+.ant-dropdown {
+    font-size: 18px;
+
+    .ant-dropdown-menu {
+        padding: 20px;
+    }
+}
+
+
+
+@media only screen and (min-width: $medium) {
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 50px;
     }
 }
