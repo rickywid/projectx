@@ -95,6 +95,7 @@ const NavBar = ({
         <div>
           {isAuthenticated ?
             <MenuSlide>
+              <Search />
               <Link to={`/upload`}>
                 <Button className="upload-btn" type="primary">UPLOAD</Button>
               </Link>
