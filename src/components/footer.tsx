@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
           onCancel={handleCancel}
           className="subscribe-modal"
         >
-          <iframe style={{border: 0, width: '100%', height: '410px'}} src="https://cdn.forms-content.sg-form.com/78813c67-c591-11ea-a395-12612d9b4aa6"/>
+          <iframe style={{border: 0, width: '100%', height: '410px'}} src={subscriberUrl}/>
         </Modal>
   </Layout.Footer>
   )

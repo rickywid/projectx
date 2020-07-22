@@ -4,6 +4,10 @@ nav {
     display: initial;
     padding: 0;
 
+    .nav-logo {
+        width: 150px;
+    }
+
     li {
         display: inline-block;
         margin: 0 17px;
