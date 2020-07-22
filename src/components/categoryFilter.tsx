@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ProjectFilter from './projectFilters';
 import ProjectsCard from './projectCard';
 import ResultsHeader from './resultsHeader';
 import Spinner from './spinner';
@@ -40,16 +41,28 @@ const TechnologyFilter = ({ match }: ITechnologyFilter) => {
     }, []);
 
   return (
-        <div>
-            {loading ? <Spinner />  : 
-            <>
-                <div className="tags-wrapper">
-                    <ResultsHeader count={resultsCount} name={params} />
-                    <ProjectsCard projects={projects}/>
-                </div>
-            </>
-            }
-        </div>
+    <div>
+        {loading ? <Spinner /> :
+            <div>
+                <ProjectFilter />
+                {projects.length > 1 ? (
+                    <>
+                        <div className="tags-wrapper">
+                            <ResultsHeader count={resultsCount} name={params} />
+                            <ProjectsCard projects={projects} />
+                        </div>
+                    </>
+                ) : (
+                    <div className="noMatch">
+                        <div className="noMatch-inner">
+                            <h1 className="noResults">No results found</h1>
+                            <p>We couldn't find any projects. Try searching for something different.</p>
+                        </div>
+                    </div>
+                    )}
+            </div>
+        }
+    </div>
   );
 };
 

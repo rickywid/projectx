@@ -9,7 +9,7 @@ const ResultsHeader = ({count, name}: Props) => {
     
     return (
         <p>
-            <strong>{count} {count > 1 ? 'results' : 'result'} found for "{name}"</strong></p>
+            <strong>{count} {count > 1 ? 'results' : 'result'} for "{name}"</strong></p>
     )
 }
 

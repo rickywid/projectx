@@ -77,9 +77,9 @@ const Category = () => {
             </Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
-            <Link to={`/tag/category/personal`}>
+            <Link to={`/tag/category/portfolio`}>
                 <Personal className="category" />
-                <p>Personal</p>
+                <p>Portfolio</p>
             </Link>
           </Col>
         
