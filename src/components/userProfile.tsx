@@ -88,14 +88,13 @@ const UserProfile = ({ match }: IUserProfile) => {
 
     const onChange2 = (e: any) => {
         setValue2(e.target.value);
-        console.log('asdf')
     };
 
     const handleCancel2 = () => {
         setVisible2(false);
     }
 
-    return user ? <NotFound 
+    return !user ? <NotFound 
                     header="404!"
                     subHeader="The page you are looking for does not exist."
                     cta="Return to Homepage"
