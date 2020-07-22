@@ -9,6 +9,7 @@ import Spinner from './spinner';
 import Comment from './comment';
 import moment from 'moment';
 import history from '../lib/history';
+import { checkHttp } from '../lib/urlValidation';
 import '../styles/global.scss'
 import '../styles/project.scss'
 import ParseDom from '../lib/domParser';
@@ -222,8 +223,8 @@ const Project = () => {
                     </div>
                     <img className="project-view-screenshot" src={project.images[0]} alt="screenshot" />
                     <div  className="project-actions-wrapper">
-                        <a className="project-links-btn" href={project.url}><DesktopOutlined /> WEBSITE</a>
-                        {project.repo ? <a className="project-links-btn" href={project.repo}><CodeOutlined /> REPOSITORY</a> : '' }
+                        <a className="project-links-btn" href={checkHttp(project.url)}><DesktopOutlined /> WEBSITE</a>
+                        {project.repo ? <a className="project-links-btn" href={checkHttp(project.repo)}><CodeOutlined /> REPOSITORY</a> : '' }
                         {isSaved ? <a className="save-project-btn" style={{border: 'none', background: 'none'}} onClick={() => handleSaveProject(false)}><strong><StarTwoTone twoToneColor="#dea703" /> ADDED TO FAVOURITES</strong></a> :<a style={{border: 'none', background: 'none'}} onClick={() => handleSaveProject(true)}><strong><StarOutlined /> ADD TO FAVOURITES</strong></a>}
                     </div>
                     <div className="project-view-content">

@@ -5,6 +5,7 @@ import { EllipsisOutlined, GithubOutlined, TwitterCircleFilled, HomeFilled } fro
 import { Input, Modal, Button, Tabs, message, Popover } from 'antd';
 import ApiService from '../lib/apiService';
 import { siteName } from '../lib/const';
+import { checkHttp } from '../lib/urlValidation';
 import ProjectsCard from '../components/projectCard';
 import Spinner from './spinner';
 import '../styles/userProfile.scss';
@@ -114,9 +115,9 @@ const UserProfile = ({ match }: IUserProfile) => {
                                 </div> 
                                 {user.gh_profile_url || user.user_profile_url || user.twitter_profile_url ? (
                                     <div className="user-profile-social-wrapper">
-                                        {user.user_profile_url ? <a href={user.user_profile_url} target="__blank"><HomeFilled /></a> : <></>}
-                                        {user.gh_profile_url ? <a href={user.gh_profile_url} target="__blank"><GithubOutlined /></a> : <></>}
-                                        {user.twitter_profile_url ? <a href={user.twitter_profile_url} target="__blank"><TwitterCircleFilled /></a> : <></>}
+                                        {user.user_profile_url ? <a href={checkHttp(user.user_profile_url)} target="__blank"><HomeFilled /></a> : <></>}
+                                        {user.gh_profile_url ? <a href={checkHttp(user.gh_profile_url)} target="__blank"><GithubOutlined /></a> : <></>}
+                                        {user.twitter_profile_url ? <a href={checkHttp(user.twitter_profile_url)} target="__blank"><TwitterCircleFilled /></a> : <></>}
                                     </div>
                                 ) : ""}
                             </div>

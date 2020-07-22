@@ -20,7 +20,7 @@ import Placeholder from '../lib/placeholders';
 import { technologies, tags } from '../lib/const';
 import { siteName } from '../lib/const';
 import ParseDOM from '../lib/domParser';
-import UrlValidation from '../lib/urlValidation';
+import { urlValidation } from '../lib/urlValidation';
 import { Redirect } from 'react-router-dom';
 
 import '../styles/form.scss';
@@ -349,7 +349,7 @@ const ProjectEdit = () => {
                     rules={[{ required: true, message: 'Required' },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
-                                if (UrlValidation(value)) {
+                                if (urlValidation(value)) {
                                     return Promise.resolve();
                                 }
 
@@ -373,7 +373,7 @@ const ProjectEdit = () => {
                     rules={[{ required: false, message: 'Required' },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
-                                if (UrlValidation(value) || value === '') {
+                                if (urlValidation(value) || value === '') {
                                     return Promise.resolve();
                                 }
 

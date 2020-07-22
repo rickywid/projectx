@@ -15,7 +15,7 @@ import AuthService from '../lib/authService';
 import history from '../lib/history';
 import Placeholder from '../lib/placeholders';
 import { siteName } from '../lib/const';
-import UrlValidation from '../lib/urlValidation';
+import { urlValidation } from '../lib/urlValidation';
 import '../styles/form.scss';
 import '../styles/global.scss';
 import { Redirect } from 'react-router-dom';
@@ -318,7 +318,7 @@ const UserEdit = ({ match }: IUserProfile) => {
                                     rules={[{ required: false, message: 'Required' },
                                     ({ getFieldValue }) => ({
                                         validator(rule, value) {
-                                            if (UrlValidation(value) || value === '') {
+                                            if (urlValidation(value) || value === '') {
                                                 return Promise.resolve();
                                             }
 
@@ -337,7 +337,7 @@ const UserEdit = ({ match }: IUserProfile) => {
                                     rules={[{ required: false, message: 'Required' },
                                     ({ getFieldValue }) => ({
                                         validator(rule, value) {
-                                            if (UrlValidation(value) || value === '') {
+                                            if (urlValidation(value) || value === '') {
                                                 return Promise.resolve();
                                             }
 
@@ -356,7 +356,7 @@ const UserEdit = ({ match }: IUserProfile) => {
                                     rules={[{ required: false, message: 'Required' },
                                     ({ getFieldValue }) => ({
                                         validator(rule, value) {
-                                            if (UrlValidation(value) || value === '') {
+                                            if (urlValidation(value) || value === '') {
                                                 return Promise.resolve();
                                             }
 

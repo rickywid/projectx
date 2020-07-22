@@ -19,7 +19,7 @@ import Placeholder from '../lib/placeholders';
 import { technologies, tags } from '../lib/const';
 import { siteName } from '../lib/const';
 import ParseDOM from '../lib/domParser';
-import UrlValidation from '../lib/urlValidation';
+import { urlValidation } from '../lib/urlValidation';
 import '../styles/form.scss';
 import '../styles/global.scss';
 
@@ -315,7 +315,7 @@ const ProjectUpload = () => {
                         rules={[{ required: true, message: 'Required' },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
-                                if (UrlValidation(value)) {
+                                if (urlValidation(value)) {
                                     return Promise.resolve();
                                 }
 
@@ -339,7 +339,7 @@ const ProjectUpload = () => {
                         rules={[{ required: false, message: 'Required' },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
-                                if (UrlValidation(value) || value === '') {
+                                if (urlValidation(value) || value === '') {
                                     return Promise.resolve();
                                 }
 
