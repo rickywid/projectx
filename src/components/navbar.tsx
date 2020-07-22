@@ -53,7 +53,7 @@ const NavBar = ({
         <>
           <div>
             <Link to="/">
-              <img style={{ width: '170px' }} src={Logo} alt="logo" />
+              <img className="nav-logo" src={Logo} alt="logo" />
             </Link>
           </div>
           <Search />

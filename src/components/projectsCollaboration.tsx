@@ -3,6 +3,8 @@ import ProjectFilters from './projectFilters';
 import ProjectsCard from './projectCard';
 import ResultsHeader from './resultsHeader';
 import Spinner from './spinner';
+import NotFound from './notFound';
+
 import ApiService from '../lib/apiService';
 
 const ProjectsCollaboration = () => {
@@ -37,12 +39,10 @@ const ProjectsCollaboration = () => {
                         </div>
                     </>
                 ) : (
-                    <div className="noMatch">
-                        <div className="noMatch-inner">
-                            <h1 className="noResults">No results found</h1>
-                            <p>We couldn't find any projects. Try searching for something different.</p>
-                        </div>
-                    </div>
+                    <NotFound 
+                        header="No results found"
+                        subHeader="We couldn't find any projects. Try another search."
+                    />
                     )}
             </div>
         }

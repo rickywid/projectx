@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 .noMatch {
     text-align: center;
     display: flex;
@@ -7,20 +9,10 @@
     .noMatch-inner {
         margin: auto;
 
-        h1.error {
-            font-size: 10rem;
-            margin: 0px;
+        h1 {
+            font-size: 34px;
             line-height: 1;
-            text-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
-            color: white;
-            -webkit-text-stroke-width: 1px;
-            -webkit-text-stroke-color: black;
-        }
-
-        h1.noResults {
-            font-size: 4rem;
-            line-height: 1;
-            text-shadow: 4px 4px 0px black;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 1);
             color: white;
             -webkit-text-stroke-width: 1px;
             -webkit-text-stroke-color: black;
@@ -30,6 +22,17 @@
             font-weight: bold;
             height: 50px;
             margin-top: 50px;
+        }
+    }
+}
+
+@media only screen and (min-width: $medium) {
+    .noMatch {    
+        .noMatch-inner {    
+            h1 {
+                font-size: 7rem;
+                text-shadow: 4px 4px 0px rgba(0, 0, 0, 1);
+            }
         }
     }
 }

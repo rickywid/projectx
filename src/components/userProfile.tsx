@@ -8,6 +8,7 @@ import { siteName } from '../lib/const';
 import { checkHttp } from '../lib/urlValidation';
 import ProjectsCard from '../components/projectCard';
 import Spinner from './spinner';
+import NotFound from './notFound';
 import '../styles/userProfile.scss';
 import { ReactComponent as CodeSVG } from '../assets/code.svg';
 
@@ -37,9 +38,16 @@ const UserProfile = ({ match }: IUserProfile) => {
         const fetch = async () => {
 
             const userFetch = await api.userAuth();
+
+            if(userFetch.status === 404) {
+                setUser(null);
+            }
+
             const userAuth = await userFetch.json();
             const userProfileFetch = await api.getUserProfile(username);
             const userProfile = await userProfileFetch.json();
+
+
             
             setUserAuth(userAuth);
             setUser(userProfile.data.user);
@@ -87,7 +95,11 @@ const UserProfile = ({ match }: IUserProfile) => {
         setVisible2(false);
     }
 
-    return (
+    return user ? <NotFound 
+                    header="404!"
+                    subHeader="The page you are looking for does not exist."
+                    cta="Return to Homepage"
+                  />: (
         <div>
             {isLoading ? <Spinner /> :
                 <div className="user-profile-wrapper">

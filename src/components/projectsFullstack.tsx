@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ProjectFilters from './projectFilters';
 import ProjectsCard from './projectCard';
 import ResultsHeader from './resultsHeader';
+import NotFound from './notFound';
 import Spinner from './spinner';
 import ApiService from '../lib/apiService';
 
@@ -38,12 +39,10 @@ const ProjectsFullstack = () => {
                         </div>
                     </>
                 ) : (
-                    <div className="noMatch">
-                        <div className="noMatch-inner">
-                            <h1 className="noResults">No results found</h1>
-                            <p>We couldn't find any projects. Try searching for something different.</p>
-                        </div>
-                    </div>
+                    <NotFound 
+                        header="No results found"
+                        subHeader="We couldn't find any projects. Try another search."
+                    />
                     )}
             </div>
         }

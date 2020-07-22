@@ -12,7 +12,7 @@
             flex-direction: column;
     
             .user-profile-options {
-                display: flex;
+                // display: flex;
     
                 a {
                     margin-right: 20px;
@@ -20,10 +20,10 @@
             }
 
             .user-profile-detail-bottom {
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
-                position: relative;
+                // display: flex;
+                // align-items: center;
+                // justify-content: space-around;
+                // position: relative;
             }
         }
     
@@ -42,7 +42,7 @@
 
         .user-profile-social-wrapper {
             a {
-                color: $primary;
+                color: #000;
                 margin-left: 8px;
                 font-size: 20px;
 

@@ -7,6 +7,7 @@ import { Select, Radio, Modal, Form, Input, Button, Divider, message } from 'ant
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Spinner from './spinner';
 import Comment from './comment';
+import NotFound from './notFound';
 import moment from 'moment';
 import history from '../lib/history';
 import { checkHttp } from '../lib/urlValidation';
@@ -32,6 +33,12 @@ const Project = () => {
             setIsLoading(true);
 
             const projectFetch = await api.getProject(id);
+console.log(projectFetch.status)
+            if(projectFetch.status === 404) {
+                setProjectFound(false);
+                return;
+            }
+
             const userFetch = await api.userAuth();
             const savedProjectsFetch = await api.isProjectSaved(id);
 
@@ -57,6 +64,7 @@ const Project = () => {
 
     const [user, setUser] = useState<any>({});
     const [project, setProject] = useState<any>({});
+    const [projectFound, setProjectFound] = useState(true);
     const [c, setC] = useState<any>([]);
     const [isSaved, setisSaved] = useState<boolean>(false);
     const [isLiked, setisLiked] = useState<boolean>(false);
@@ -210,9 +218,13 @@ const Project = () => {
         setC(comments.data);
     }
 
-    return (
+    
+    return !projectFound ? <NotFound 
+                        header="404!"
+                        subHeader="The page you are looking for does not exist."
+                        cta="Return to Homepage"
+                    />:(
         <div className="project-view">
-
             {isLoading ? <Spinner /> :
                 <>
                     <div className="project-view-title">

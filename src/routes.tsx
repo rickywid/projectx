@@ -40,7 +40,7 @@ const Routes = (
     <Route exact path="/tag/category" component={Category} />
     <Route exact path="/tag/category/:category"  render={({ match }) => <CategoryFilter key={match.params.category} match={match} />}  />
     <Route exact path="/project/:id" component={Project} />
-    <Route exact path="/user/:username" render={({ match }) => <UserProfile key={match.params.id} match={match} /> } />
+    <Route exact path="/user/:username" render={({ match }) => <UserProfile key={match.params.username} match={match} /> } />
     <Route exact path="/user/edit/:username" component={UserEdit} />
     <Route exact path="/project/edit/:username" render={({ match }) => <ProjectEdit key={match.params.username} />} />
     <Route exact path="/search"  render={({ location }) => <SearchResults key={location.search} /> } />
