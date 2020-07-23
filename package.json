@@ -31,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint": "node_modules/eslint/bin/eslint.js src/**/*.tsx && node_modules/eslint/bin/eslint.js src/**/*.ts"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,5 +48,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{ts,tsx}": [
+        "prettier --write",
+        "npm run eslint",
+        "git add"
+      ]
+    }
   }
 }

@@ -237,7 +237,7 @@ const Project = () => {
                     <div  className="project-actions-wrapper">
                         <a className="project-links-btn" href={checkHttp(project.url)}><DesktopOutlined /> WEBSITE</a>
                         {project.repo ? <a className="project-links-btn" href={checkHttp(project.repo)}><CodeOutlined /> REPOSITORY</a> : '' }
-                        {isSaved ? <a className="project-links-btn" onClick={() => handleSaveProject(false)}><strong><StarTwoTone twoToneColor="#dea703" /> ADDED TO FAVOURITES</strong></a> :<a style={{border: 'none', background: 'none'}} onClick={() => handleSaveProject(true)}><strong><StarOutlined /> ADD TO FAVOURITES</strong></a>}
+                        {isSaved ? <a className="project-links-btn" onClick={() => handleSaveProject(false)}><strong><StarTwoTone twoToneColor="#dea703" /> ADDED TO FAVOURITES</strong></a> :<a className="project-links-btn" onClick={() => handleSaveProject(true)}><strong><StarOutlined /> ADD TO FAVOURITES</strong></a>}
                     </div>
                     <div className="project-view-content">
                         <div className="project-view-left-col">
