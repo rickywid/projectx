@@ -104,6 +104,7 @@ const UserEdit = ({ match }: IUserProfile) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
   const [redirect, setRedirect] = useState<boolean>(false);
+  const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
 
   const onFormLayoutChange = ({ size }: IFormLayoutChange) => {
     setComponentSize(size);
@@ -212,6 +213,7 @@ const UserEdit = ({ match }: IUserProfile) => {
         file.onSuccess((e) => console.log(e));
 
         setFileListUpload([...fileListUpload, data.secure_url]);
+        setSubmitDisabled(false);
       })
       .catch((err: Error) => {
         console.log(err);
@@ -253,6 +255,7 @@ const UserEdit = ({ match }: IUserProfile) => {
         content: "File type must be jpeg, jpg, png, gif",
         duration: 10,
       });
+      setSubmitDisabled(true);
       return false;
     }
 
@@ -262,6 +265,7 @@ const UserEdit = ({ match }: IUserProfile) => {
         content: "File size must be smaller than 800KB",
         duration: 10,
       });
+      setSubmitDisabled(true);
       return false;
     }
   };
@@ -476,9 +480,24 @@ const UserEdit = ({ match }: IUserProfile) => {
                   </div>
                 </Form.Item>
                 <div className="form-btn-wrap">
-                  <Button type="primary" htmlType="submit">
-                    Update
-                  </Button>
+                  {submitDisabled ? (
+                    <Button
+                      className="upload-btn"
+                      type="primary"
+                      htmlType="submit"
+                      disabled
+                    >
+                      Submit
+                    </Button>
+                  ) : (
+                    <Button
+                      className="upload-btn"
+                      type="primary"
+                      htmlType="submit"
+                    >
+                      Submit
+                    </Button>
+                  )}
                 </div>
               </Form>
             </div>

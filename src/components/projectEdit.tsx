@@ -139,6 +139,7 @@ const ProjectEdit = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [redirect, setRedirect] = useState<boolean>(false);
   const [redirectPath, setRedirectPath] = useState<string>("");
+  const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
 
   const { Option } = Select;
   const childrenTech = [];
@@ -289,6 +290,7 @@ const ProjectEdit = () => {
         file.onSuccess((e) => console.log(e));
 
         setFileListUpload([...fileListUpload, data.secure_url]);
+        setSubmitDisabled(false);
 
         document.title = `Project Settings | ${siteName}`;
       })
@@ -336,6 +338,7 @@ const ProjectEdit = () => {
         content: "File type must be jpeg, jpg, png, gif",
         duration: 10,
       });
+      setSubmitDisabled(true);
       return false;
     }
 
@@ -345,6 +348,7 @@ const ProjectEdit = () => {
         content: "File size must be smaller than 800KB",
         duration: 10,
       });
+      setSubmitDisabled(true);
       return false;
     }
   };
@@ -579,9 +583,24 @@ const ProjectEdit = () => {
                 </div>
               </Form.Item>
               <div className="form-btn-wrap">
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
+                {submitDisabled ? (
+                  <Button
+                    className="upload-btn"
+                    type="primary"
+                    htmlType="submit"
+                    disabled
+                  >
+                    Submit
+                  </Button>
+                ) : (
+                  <Button
+                    className="upload-btn"
+                    type="primary"
+                    htmlType="submit"
+                  >
+                    Submit
+                  </Button>
+                )}
               </div>
             </Form>
           </div>

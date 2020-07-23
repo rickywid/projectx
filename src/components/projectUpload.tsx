@@ -72,6 +72,7 @@ const ProjectUpload = () => {
   const [fileListUpload, setFileListUpload] = useState<any>([]); // list of files uploaded to cloduinary
   const [redirect, setRedirect] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
 
   const { Option } = Select;
 
@@ -246,6 +247,7 @@ const ProjectUpload = () => {
         file.onSuccess((e) => console.log(e));
 
         setFileListUpload([...fileListUpload, data.secure_url]);
+        setSubmitDisabled(false);
       })
       .catch((err: Error) => {
         console.log(err);
@@ -274,6 +276,7 @@ const ProjectUpload = () => {
         content: "File type must be jpeg, jpg, png, gif",
         duration: 10,
       });
+      setSubmitDisabled(true);
       return false;
     }
 
@@ -283,6 +286,7 @@ const ProjectUpload = () => {
         content: "File size must be smaller than 800KB",
         duration: 10,
       });
+      setSubmitDisabled(true);
       return false;
     }
   };
@@ -499,9 +503,24 @@ const ProjectUpload = () => {
                 </div>
               </Form.Item>
               <div className="form-btn-wrap">
-                <Button className="upload-btn" type="primary" htmlType="submit">
-                  Submit
-                </Button>
+                {submitDisabled ? (
+                  <Button
+                    className="upload-btn"
+                    type="primary"
+                    htmlType="submit"
+                    disabled
+                  >
+                    Submit
+                  </Button>
+                ) : (
+                  <Button
+                    className="upload-btn"
+                    type="primary"
+                    htmlType="submit"
+                  >
+                    Submit
+                  </Button>
+                )}
               </div>
             </Form>
           </div>
