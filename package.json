@@ -50,6 +50,8 @@
     ]
   },
   "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
     "prettier": "2.0.5"
   },
   "husky": {
@@ -58,12 +60,9 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "*.{ts,tsx}": [
-        "prettier --write",
-        "npm run eslint",
-        "git add"
-      ]
-    }
+    "*.{ts,tsx}": [
+      "npm run eslint",
+      "prettier --write"
+    ]
   }
 }
