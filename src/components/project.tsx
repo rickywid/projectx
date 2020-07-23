@@ -309,7 +309,7 @@ const Project = () => {
                             <div className="project-info">
                                 <div className="project-view-tags">
                                     <TagFilled className="svg-filled" />
-                                    <ul>{project.technologies.map((technology: string, i: number) => <Link key={i} to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}><Tag color="gold">{technology}</Tag></li></Link>)}</ul>
+                                    <ul>{project.technologies.map((technology: string, i: number) => <Link key={i} to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}><Tag color="blue">{technology}</Tag></li></Link>)}</ul>
                                 </div>
                                 <div className="project-view-tags">
                                     <TagsFilled className="svg-filled"  />

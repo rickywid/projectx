@@ -20,12 +20,12 @@
                 }
             }
 
-            .user-profile-detail-bottom {
-                // display: flex;
-                // align-items: center;
-                // justify-content: space-around;
-                // position: relative;
-            }
+            // .user-profile-detail-bottom {
+            //     // display: flex;
+            //     // align-items: center;
+            //     // justify-content: space-around;
+            //     // position: relative;
+            // }
         }
     
         .user-avatar {
@@ -36,7 +36,6 @@
     
         .user-name {
             display: inline-block;
-            margin-right: 20px;
             margin-bottom: 0;
             font-size: 36px;
         }
@@ -72,10 +71,16 @@
     
         .user-profile-info {
             text-align: initial;
+            max-width: 800px;
             
             .user-profile-detail {       
                 display: flex;
                 flex-direction: column;
+
+                .user-profile-header {
+                    display: flex;
+                    align-items: center;
+                }
         
                 .user-profile-options {
                     display: flex;
@@ -108,9 +113,9 @@
             }
     
             .user-profile-social-wrapper {
-                float: right;
-                position: absolute;
-                right: 0;
+                // float: right;
+                // position: absolute;
+                // right: 0;
     
                 a {
                     color: #000;

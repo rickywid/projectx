@@ -104,7 +104,8 @@ const NavBar = ({
             <MenuSlide>
               <Link to="/">
                 <img className="nav-logo" src={Logo} alt="logo" />
-              </Link>              <Search />
+              </Link>
+              <Search />
               <Link to={`/upload`}>
                 <Button className="upload-btn" type="primary">UPLOAD</Button>
               </Link>
@@ -127,7 +128,7 @@ const NavBar = ({
             </Link>
               <button className="btn-signout" onClick={onSignout}>Sign Out</button>
             </MenuSlide> :
-            
+
             <MenuSlide>
               <Link to="/">
                 <img className="nav-logo" src={Logo} alt="logo" />
