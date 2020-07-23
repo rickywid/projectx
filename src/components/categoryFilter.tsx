@@ -4,6 +4,7 @@ import ProjectsCard from './projectCard';
 import ResultsHeader from './resultsHeader';
 import NotFound from './notFound';
 import Spinner from './spinner';
+import Masthead from './masthead';
 import ApiService from '../lib/apiService';
 import { tags } from '../lib/const';
 
@@ -20,6 +21,7 @@ const TechnologyFilter = ({ match }: ITechnologyFilter) => {
     const [projects, setProjects] = useState<[]>([]);
     const [resultsCount, setResultsCount] = useState<number>(0);
     const [loading, isLoading] = useState<boolean>(true);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
     useEffect(() => {
         for(let key in tags) {
@@ -31,7 +33,9 @@ const TechnologyFilter = ({ match }: ITechnologyFilter) => {
         const fetch = async () => {
             const res = await api.filterCategory(value);
             const projects = await res.json();
-            
+            const userFetch = await api.userAuth();
+const user = await userFetch.json();
+setIsAuthenticated(user.isAuthenticated);
             setProjects(projects.data);
             setResultsCount(projects.data.length);
             isLoading(false);
@@ -45,6 +49,7 @@ const TechnologyFilter = ({ match }: ITechnologyFilter) => {
     <div>
         {loading ? <Spinner /> :
             <div>
+                {!isAuthenticated ? <Masthead /> : ""}
                 <ProjectFilter />
                 {projects.length >= 1 ? (
                     <>

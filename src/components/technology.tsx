@@ -107,7 +107,7 @@ const Technology = () => {
             <Link to={`/tag/tech/node`}><Node className="tech lg-svg" /></Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
-            <Link to={`/tag/tech/rails`}><Rails className="tech lg-svg" /></Link>
+            <Link to={`/tag/tech/rubyonrails`}><Rails className="tech lg-svg" /></Link>
           </Col>
           <Col className="pb-20" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
             <Link to={`/tag/tech/spring`}><Spring className="tech" /></Link>

@@ -3,6 +3,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -23,6 +24,10 @@ a {
     &:hover {
         color: #777;
     }
+}
+
+img, svg, button {
+    outline: none;
 }
 
 .container {
@@ -101,6 +106,7 @@ a {
     background: none;
     border: none;
     font-weight: bold;
+    color: black;
 }
 
 .comment-btn,
@@ -113,6 +119,15 @@ a {
     font-weight: bold;
 }
 
+
+.full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
 
 
 
@@ -180,7 +195,7 @@ a {
     }
 }
 
-@media only screen and (min-width: $medPlus) {
+@media only screen and (min-width: $largePlus) {
     .ant-layout-content {
         padding: 50px;
     }

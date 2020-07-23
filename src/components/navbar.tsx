@@ -102,7 +102,9 @@ const NavBar = ({
         <div>
           {isAuthenticated ?
             <MenuSlide>
-              <Search />
+              <Link to="/">
+                <img className="nav-logo" src={Logo} alt="logo" />
+              </Link>              <Search />
               <Link to={`/upload`}>
                 <Button className="upload-btn" type="primary">UPLOAD</Button>
               </Link>
@@ -127,6 +129,9 @@ const NavBar = ({
             </MenuSlide> :
             
             <MenuSlide>
+              <Link to="/">
+                <img className="nav-logo" src={Logo} alt="logo" />
+              </Link>
               <Search />
               <Divider style={{ margin: 0 }} />
               <Link to={`/upload`}>

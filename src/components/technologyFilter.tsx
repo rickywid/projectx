@@ -7,6 +7,7 @@ import NotFound from './notFound';
 import ApiService from '../lib/apiService';
 import { technologies } from '../lib/const';
 import '../styles/noMatch.scss';
+import Masthead from './masthead';
 
 interface ITechnologyFilter {
     children?: React.ReactNode;
@@ -21,6 +22,7 @@ const TechnologyFilter = ({ match }: ITechnologyFilter) => {
     const [projects, setProjects] = useState<[]>([]);
     const [resultsCount, setResultsCount] = useState<number>(0);
     const [loading, isLoading] = useState<boolean>(true);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
     useEffect(() => {
         for (let key in technologies) {
@@ -32,7 +34,9 @@ const TechnologyFilter = ({ match }: ITechnologyFilter) => {
         const fetch = async () => {
             const res = await api.filterTechnology(value);
             const projects = await res.json();
-
+            const userFetch = await api.userAuth();
+            const user = await userFetch.json();
+            setIsAuthenticated(user.isAuthenticated);
             setProjects(projects.data);
             setResultsCount(projects.data.length);
             isLoading(false);
@@ -46,6 +50,7 @@ const TechnologyFilter = ({ match }: ITechnologyFilter) => {
         <div>
             {loading ? <Spinner /> :
                 <div>
+                    {!isAuthenticated ? <Masthead /> : ""}
                     <ProjectFilters />
                     {projects.length >= 1 ? (
                         <>

@@ -237,11 +237,11 @@ const Project = () => {
                     <div  className="project-actions-wrapper">
                         <a className="project-links-btn" href={checkHttp(project.url)}><DesktopOutlined /> WEBSITE</a>
                         {project.repo ? <a className="project-links-btn" href={checkHttp(project.repo)}><CodeOutlined /> REPOSITORY</a> : '' }
-                        {isSaved ? <a className="save-project-btn" style={{border: 'none', background: 'none'}} onClick={() => handleSaveProject(false)}><strong><StarTwoTone twoToneColor="#dea703" /> ADDED TO FAVOURITES</strong></a> :<a style={{border: 'none', background: 'none'}} onClick={() => handleSaveProject(true)}><strong><StarOutlined /> ADD TO FAVOURITES</strong></a>}
+                        {isSaved ? <a className="project-links-btn" onClick={() => handleSaveProject(false)}><strong><StarTwoTone twoToneColor="#dea703" /> ADDED TO FAVOURITES</strong></a> :<a style={{border: 'none', background: 'none'}} onClick={() => handleSaveProject(true)}><strong><StarOutlined /> ADD TO FAVOURITES</strong></a>}
                     </div>
                     <div className="project-view-content">
                         <div className="project-view-left-col">
-                            <h3 className="project-tagline">{project.tagline}</h3>
+                            <p className="project-tagline">{project.tagline}</p>
                             <Linkify><p className="project-description">{project.description}</p></Linkify>
                             <Divider />
                             {user.isAuthenticated ?
@@ -309,11 +309,11 @@ const Project = () => {
                             <div className="project-info">
                                 <div className="project-view-tags">
                                     <TagFilled className="svg-filled" />
-                                    <ul>{project.technologies.map((technology: string, i: number) => <Link key={i} to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}><Tag>{technology}</Tag></li></Link>)}</ul>
+                                    <ul>{project.technologies.map((technology: string, i: number) => <Link key={i} to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}><Tag color="gold">{technology}</Tag></li></Link>)}</ul>
                                 </div>
                                 <div className="project-view-tags">
                                     <TagsFilled className="svg-filled"  />
-                                    <ul>{project.tags.map((category: string) => <Link to={`/tag/category/${category}`}><li style={{ listStyle: 'none' }}><Tag>{category}</Tag></li></Link>)}</ul>
+                                    <ul>{project.tags.map((category: string) => <Link to={`/tag/category/${category}`}><li style={{ listStyle: 'none' }}><Tag color="cyan">{category}</Tag></li></Link>)}</ul>
                                 </div>
                                 <div className="project-view-details">
                                     <ul>

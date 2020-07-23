@@ -4,20 +4,25 @@ import ProjectsCard from './projectCard';
 import ResultsHeader from './resultsHeader';
 import Spinner from './spinner';
 import NotFound from './notFound';
+import Masthead from './masthead';
 
 import ApiService from '../lib/apiService';
 
 const ProjectsCollaboration = () => {
     const api = new ApiService();
     const [projects, setProjects] = useState([]);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [resultsCount, setResultsCount] = useState<number>(0);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetch = async () => {
             setIsLoading(true);
+            const userFetch = await api.userAuth();
+            const user = await userFetch.json();
             const projectsFetch = await api.getProjectsByType('collaboration');
             const projects = await projectsFetch.json();
+            setIsAuthenticated(user.isAuthenticated);
             setIsLoading(false);
             setProjects(projects.data);
             setResultsCount(projects.data.length);
@@ -30,6 +35,7 @@ const ProjectsCollaboration = () => {
         <div>
         {isLoading ? <Spinner /> :
             <div>
+                {!isAuthenticated ? <Masthead /> : ""}
                 <ProjectFilters />
                 {projects.length > 0 ? (
                     <>

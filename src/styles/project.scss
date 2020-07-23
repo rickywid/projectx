@@ -90,6 +90,8 @@
 
                 .project-view-tags {
                     display: flex;
+                    margin-bottom: 10px;
+                    
                     svg {
                         margin-right: 15px;
                     }
@@ -124,14 +126,14 @@
                 background: rgba(246, 246, 246, 0.59);
                 padding: 10px 30px;
                 font-weight: bold;
-                width: 300px;
+                max-width: 300px;
                 margin: 0 auto;
                 margin-bottom: 30px;
             }
 
-            .project-tagline {
-                font-weight: bold;
-            }
+            // .project-tagline {
+            //     font-weight: bold;
+            // }
 
             .project-description {
                 white-space: pre-line;

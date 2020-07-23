@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Tag } from 'antd';
-import { MessageFilled, UpCircleOutlined } from '@ant-design/icons';
+import { MessageFilled, UpCircleFilled } from '@ant-design/icons';
 import ApiService from '../lib/apiService';
 import truncate from '../lib/truncate';
 import { motion } from "framer-motion"
@@ -92,7 +92,7 @@ const ProjectCard = (props: any) => {
               <MessageFilled className="svg-filled" /> {project.comment_count}
             </span>
             <span>
-                <UpCircleOutlined className="svg-filled" /> {project.likes_count}    
+                <UpCircleFilled className="svg-filled" /> {project.likes_count}    
             </span>
           </div>
         </div>

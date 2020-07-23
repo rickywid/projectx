@@ -1,0 +1,64 @@
+@import './variables.scss';
+
+.masthead {
+    border: 1px solid black;
+    color: white;
+    background: black;
+    height: 495px;
+    display: flex;
+    margin-top: -34px;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 50px;
+
+    .masthead-inner {
+        display: flex;
+        flex-direction: column;
+
+        .masthead-text {
+            max-width: 555px;
+            order: 2;
+            padding: 0 30px;
+
+            h1 { 
+                color: white;
+                font-size: 26px;
+                line-height: 1.2;
+            }
+        }
+
+        figure {
+            img {
+                width: 308px;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: $largePlus) {
+    .masthead {
+        margin-top: -50px;
+
+        .masthead-inner {
+            align-items: center;
+            flex-direction: row;
+            text-align: initial;
+    
+            .masthead-text {
+                order: 1;
+    
+                h1 { 
+                    font-size: 48px;
+                }
+            }
+    
+            figure {
+                order: 1;
+                
+                img {
+                    width: 500px;
+                }
+            }
+        }
+    }
+}
