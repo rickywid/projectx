@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ApiService from '../lib/apiService';
 import { Link } from 'react-router-dom';
 import Linkify from 'react-linkify';
-import { CodeOutlined, DesktopOutlined, TagFilled, TagsFilled, CalendarFilled, CheckCircleFilled, FlagFilled, BlockOutlined, StarOutlined, StarTwoTone, LikeTwoTone, LikeOutlined, LikeFilled } from '@ant-design/icons';
-import { Select, Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
+import { CodeOutlined, DesktopOutlined, TagFilled, TagsFilled, CalendarFilled, CheckCircleFilled, FlagFilled, BlockOutlined, StarOutlined, StarTwoTone, LikeTwoTone, LikeOutlined, UpCircleOutlined } from '@ant-design/icons';
+import { Tag, Select, Radio, Modal, Form, Input, Button, Divider, message } from 'antd';
 import { TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Spinner from './spinner';
 import Comment from './comment';
@@ -33,7 +33,7 @@ const Project = () => {
             setIsLoading(true);
 
             const projectFetch = await api.getProject(id);
-console.log(projectFetch.status)
+
             if(projectFetch.status === 404) {
                 setProjectFound(false);
                 return;
@@ -262,7 +262,7 @@ console.log(projectFetch.status)
                                     </Form>
                                     <Divider />
                                 </>
-                                : <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Please <Link to={`/login`}>Log In</Link> to write a comment</p>
+                                : <p className="comment-login-header">Please <Link to={`/login`}>Log In</Link> to write a comment</p>
                             }
 
                             <div className="project-view-comments">
@@ -285,7 +285,17 @@ console.log(projectFetch.status)
                         </div>
                         <div className="project-view-right-col">
                             <div style={{marginBottom: '20px'}}>
-                                {isLiked ? <Button className="like-project-btn-default" onClick={() => handleLike(false)} icon={<LikeTwoTone twoToneColor="#5fc2c7" />}><strong style={{marginLeft: '7px'}}>YOU LIKED THIS PROJECT</strong></Button> : <Button className="like-project-btn"  onClick={() => handleLike(true)} icon={<LikeFilled />}><strong style={{marginLeft: '7px'}}>LIKE</strong></Button>}
+                                {isLiked ? (
+                                    <Button className="like-project-btn-default" onClick={() => handleLike(false)}>
+                                        <UpCircleOutlined style={{fontSize: '1.5rem'}} />
+                                        <span style={{marginRight: '10px'}}>UPVOTED</span>
+                                        <span>{likeCount}</span>
+                                    </Button>
+                                ) : <Button className="like-project-btn" onClick={() => handleLike(true)}>
+                                        <UpCircleOutlined style={{fontSize: '1.5rem'}} />
+                                        <span style={{marginRight: '10px'}}>UPVOTE</span>
+                                        {parseInt(likeCount) ? <span>{likeCount}</span> : '' }
+                                    </Button>}
                             </div>
                             <div className="project-share-wrapper">
                                 <FacebookShareButton url={process.env.REACT_APP_HOSTNAME as string}>
@@ -299,15 +309,14 @@ console.log(projectFetch.status)
                             <div className="project-info">
                                 <div className="project-view-tags">
                                     <TagFilled className="svg-filled" />
-                                    <ul>{project.technologies.map((technology: string, i: number) => <Link key={i} to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}>{technology}</li></Link>)}</ul>
+                                    <ul>{project.technologies.map((technology: string, i: number) => <Link key={i} to={`/tag/tech/${technology}`}><li style={{ listStyle: 'none' }}><Tag>{technology}</Tag></li></Link>)}</ul>
                                 </div>
                                 <div className="project-view-tags">
                                     <TagsFilled className="svg-filled"  />
-                                    <ul>{project.tags.map((category: string) => <Link to={`/tag/category/${category}`}><li style={{ listStyle: 'none' }}>{category}</li></Link>)}</ul>
+                                    <ul>{project.tags.map((category: string) => <Link to={`/tag/category/${category}`}><li style={{ listStyle: 'none' }}><Tag>{category}</Tag></li></Link>)}</ul>
                                 </div>
                                 <div className="project-view-details">
                                     <ul>
-                                    <li><LikeFilled className="svg-filled" /> {likeCount}</li>
                                         {project.collaboration && <li><CheckCircleFilled className="svg-filled" /> Interested in collaborating</li>}
                                         <li><CalendarFilled className="svg-filled" /> {moment(project.created_on).format('MMM Do YYYY')}</li>
                                         <li><FlagFilled className="svg-filled" /> <button className="project-report-btn" onClick={showReportProjectModal}>Report</button></li>
@@ -327,7 +336,7 @@ console.log(projectFetch.status)
                 >
                 <Radio.Group onChange={onChange} value={value}>
                     <Radio style={radioStyle} value={'1'}>
-                        Offensive
+                        Website is down
                     </Radio>
                     <Radio style={radioStyle} value={'2'}>
                         Sexual/NSFW

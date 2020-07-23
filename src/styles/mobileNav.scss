@@ -78,14 +78,11 @@
 
   .upload-btn {
     width: 100%;
-    height: 40px;
-    font-weight: bold;
     background: $primary;
-    // background: linear-gradient(43deg, #115570 0%, #32b0b4 100%); 
+
 
     &:hover {
         background: $primaryDark;
-        // background: linear-gradient(43deg, #115570 0%,#43ccd1 100%);
     }
 }
 

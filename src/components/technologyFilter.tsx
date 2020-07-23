@@ -47,7 +47,7 @@ const TechnologyFilter = ({ match }: ITechnologyFilter) => {
             {loading ? <Spinner /> :
                 <div>
                     <ProjectFilters />
-                    {projects.length > 1 ? (
+                    {projects.length >= 1 ? (
                         <>
                             <div className="tags-wrapper">
                                 <ResultsHeader count={resultsCount} name={params} />
