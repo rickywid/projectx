@@ -565,8 +565,8 @@ const ProjectEdit = () => {
                     {fileList.length >= 1 ? null : uploadButton}
                   </Upload>
                   <p className="form-tooltip">
-                    Include a image, screenshot or logo. Supported file types -
-                    jpeg, jpg, png, gif.
+                    Include a image, screenshot or logo. JPG, GIF or PNG. Max
+                    size of 800K
                   </p>
                   <Modal
                     visible={previewVisible}

@@ -465,6 +465,9 @@ const UserEdit = ({ match }: IUserProfile) => {
                     >
                       {fileList.length >= 1 ? null : uploadButton}
                     </Upload>
+                    <p className="form-tooltip">
+                      JPG, GIF or PNG. Max size of 800K
+                    </p>
                     <Modal
                       visible={previewVisible}
                       title={previewTitle}
