@@ -370,19 +370,22 @@ const UserEdit = ({ match }: IUserProfile) => {
                   label={
                     <span>
                       <strong>Bio</strong>
+                      <p className="form-tooltip">
+                        Short description for your profile.
+                      </p>
                     </span>
                   }
                   name="description"
                 >
                   <TextArea rows={2} />
-                  <p className="form-tooltip">
-                    Short description for your profile.
-                  </p>
                 </Form.Item>
                 <Form.Item
                   label={
                     <span>
                       <strong>Portfolio Url</strong>
+                      <p className="form-tooltip">
+                        Your portfolio or blog site.
+                      </p>
                     </span>
                   }
                   name="portfolio"
@@ -400,7 +403,6 @@ const UserEdit = ({ match }: IUserProfile) => {
                   ]}
                 >
                   <Input />
-                  <p className="form-tooltip">Your portfolio or blog site.</p>
                 </Form.Item>
                 <Form.Item
                   label={
@@ -450,6 +452,9 @@ const UserEdit = ({ match }: IUserProfile) => {
                   label={
                     <span>
                       <strong>Profile Picture</strong>
+                      <p className="form-tooltip">
+                        JPG, GIF or PNG. Max size of 800K
+                      </p>
                     </span>
                   }
                 >
@@ -465,9 +470,6 @@ const UserEdit = ({ match }: IUserProfile) => {
                     >
                       {fileList.length >= 1 ? null : uploadButton}
                     </Upload>
-                    <p className="form-tooltip">
-                      JPG, GIF or PNG. Max size of 800K
-                    </p>
                     <Modal
                       visible={previewVisible}
                       title={previewTitle}

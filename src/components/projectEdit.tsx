@@ -320,7 +320,7 @@ const ProjectEdit = () => {
     form.append("project_id", id);
     await api.deleteProject(id, form);
 
-    history.push(`/user/${user.id}`);
+    history.push(`/user/${user.username}`);
   };
 
   const handleChange = (value: string) => {
@@ -394,29 +394,29 @@ const ProjectEdit = () => {
                 label={
                   <span>
                     <strong>Tagline</strong>
+                    <p className="form-tooltip">
+                      A short description about your project
+                    </p>
                   </span>
                 }
                 name="tagline"
                 rules={[{ required: true, message: "Required" }]}
               >
                 <Input />
-                <p className="form-tooltip">
-                  A short description about your project
-                </p>
               </Form.Item>
               <Form.Item
                 name="description"
                 label={
                   <span>
                     <strong>Description</strong>
+                    <p className="form-tooltip">
+                      Share your motivations, challenges and experience.
+                    </p>
                   </span>
                 }
                 rules={[{ required: true, message: "Required" }]}
               >
                 <Input.TextArea />
-                <p className="form-tooltip">
-                  Share your motivations, challenges and experience.
-                </p>
               </Form.Item>
               <Form.Item
                 label={
@@ -532,6 +532,9 @@ const ProjectEdit = () => {
                 label={
                   <span>
                     <strong>Collaboration</strong>
+                    <p className="form-tooltip">
+                      Are you interested in collaborating with other developers?
+                    </p>
                   </span>
                 }
                 name="collaboration"
@@ -541,14 +544,15 @@ const ProjectEdit = () => {
                   unCheckedChildren="No"
                   defaultChecked={project.collaboration}
                 />
-                <p className="form-tooltip">
-                  Are you interested in collaborating with other developers?
-                </p>
               </Form.Item>
               <Form.Item
                 label={
                   <span>
                     <strong>Add Image</strong>
+                    <p className="form-tooltip">
+                      Include a image, screenshot or logo. JPG, GIF or PNG. Max
+                      size of 800K
+                    </p>
                   </span>
                 }
               >
@@ -564,10 +568,6 @@ const ProjectEdit = () => {
                   >
                     {fileList.length >= 1 ? null : uploadButton}
                   </Upload>
-                  <p className="form-tooltip">
-                    Include a image, screenshot or logo. JPG, GIF or PNG. Max
-                    size of 800K
-                  </p>
                   <Modal
                     visible={previewVisible}
                     title={previewTitle}
@@ -606,7 +606,7 @@ const ProjectEdit = () => {
           </div>
           <Divider />
           <div>
-            <h1>Delete Account</h1>
+            <h1>Delete Project</h1>
             <div className="form-wrapper">
               <p>
                 Once you delete this project, there is no going back. Please be

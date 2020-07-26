@@ -330,27 +330,27 @@ const ProjectUpload = () => {
                 label={
                   <span>
                     <strong>Tagline</strong>
+                    <p className="form-tooltip">
+                      A short description about your project
+                    </p>
                   </span>
                 }
               >
                 <Input />
-                <p className="form-tooltip">
-                  A short description about your project
-                </p>
               </Form.Item>
               <Form.Item
                 name="description"
                 label={
                   <span>
                     <strong>Description</strong>
+                    <p className="form-tooltip">
+                      Share your motivations, challenges and experience.
+                    </p>
                   </span>
                 }
                 rules={[{ required: true, message: "Required" }]}
               >
-                <Input.TextArea placeholder="Tell us about your project..." />
-                <p className="form-tooltip">
-                  Share your motivations, challenges and experience.
-                </p>
+                <Input.TextArea />
               </Form.Item>
               <Form.Item
                 label={
@@ -456,19 +456,23 @@ const ProjectUpload = () => {
                 label={
                   <span>
                     <strong>Collaboration</strong>
+                    <p className="form-tooltip">
+                      Are you interested in collaborating with other developers?
+                    </p>
                   </span>
                 }
                 name="collaboration"
               >
                 <Switch checkedChildren="Yes" unCheckedChildren="No" />
-                <p className="form-tooltip">
-                  Are you interested in collaborating with other developers?
-                </p>
               </Form.Item>
               <Form.Item
                 label={
                   <span>
                     <strong>Add Image</strong>
+                    <p className="form-tooltip">
+                      Include a image, screenshot or logo. JPG, GIF or PNG. Max
+                      size of 800K
+                    </p>
                   </span>
                 }
               >
@@ -484,10 +488,6 @@ const ProjectUpload = () => {
                   >
                     {fileList.length >= 1 ? null : uploadButton}
                   </Upload>
-                  <p className="form-tooltip">
-                    Include a image, screenshot or logo. JPG, GIF or PNG. Max
-                    size of 800K
-                  </p>
                   <Modal
                     visible={previewVisible}
                     title={previewTitle}
