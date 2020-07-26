@@ -4,6 +4,7 @@ class ApiService {
   constructor(cookie?: string) {
     this.apiEndpoint = `${process.env.REACT_APP_SERVER}` as string;
   }
+
   private apiEndpoint: string;
 
   private headers: any = {
