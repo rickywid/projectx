@@ -55,11 +55,7 @@ function App() {
         <div className="nav-mobile-wrapper">
           <Link to="/">
             <img className="logo-mobile" src={Logo} alt="logo" />
-            {process.env.REACT_APP_BETA === "true" ? (
-              <strong style={{ position: "absolute", top: 0 }}>beta</strong>
-            ) : (
-              ""
-            )}
+            <strong style={{ position: "absolute", top: 0 }}>beta</strong>
           </Link>
           {user.isAuthenticated && (
             <Link

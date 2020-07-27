@@ -54,11 +54,7 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
           <div>
             <Link to="/">
               <img className="nav-logo" src={Logo} alt="logo" />
-              {process.env.REACT_APP_BETA === "true" ? (
-                <strong style={{ position: "absolute", top: 0 }}>beta</strong>
-              ) : (
-                ""
-              )}
+              <strong style={{ position: "absolute", top: 0 }}>beta</strong>
             </Link>
           </div>
           <Search />
@@ -109,21 +105,17 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
             <MenuSlide>
               <Link to="/" style={{ position: "relative" }}>
                 <img className="nav-logo" src={Logo} alt="logo" />
-                {process.env.REACT_APP_BETA === "true" ? (
-                  <strong
-                    style={{
-                      position: "absolute",
-                      top: "-16px",
-                      fontSize: "12px",
-                      color: "#00b2a0",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    beta
-                  </strong>
-                ) : (
-                  ""
-                )}
+                <strong
+                  style={{
+                    position: "absolute",
+                    top: "-16px",
+                    fontSize: "12px",
+                    color: "#00b2a0",
+                    fontWeight: "bold",
+                  }}
+                >
+                  beta
+                </strong>
               </Link>
               <Search />
               <Link to={`/upload`}>
@@ -150,21 +142,17 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
             <MenuSlide>
               <Link to="/" style={{ position: "relative" }}>
                 <img className="nav-logo" src={Logo} alt="logo" />
-                {process.env.REACT_APP_BETA === "true" ? (
-                  <strong
-                    style={{
-                      position: "absolute",
-                      top: "-16px",
-                      fontSize: "12px",
-                      color: "#00b2a0",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    beta
-                  </strong>
-                ) : (
-                  ""
-                )}
+                <strong
+                  style={{
+                    position: "absolute",
+                    top: "-16px",
+                    fontSize: "12px",
+                    color: "#00b2a0",
+                    fontWeight: "bold",
+                  }}
+                >
+                  beta
+                </strong>
               </Link>
               <Search />
               <Divider style={{ margin: 0 }} />
