@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Divider, Menu, Dropdown } from "antd";
 import { Link } from "react-router-dom";
 import Search from "./searchBar";
@@ -24,6 +24,7 @@ interface Props {
 const NavBar = ({ user, isAuthenticated, loading }: Props) => {
   const api = new AuthService();
   const { height, width } = useWindowDimensions();
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const onSignout = async () => {
     await api.signout(new FormData());
@@ -44,6 +45,14 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
       </li>
     </Menu>
   );
+
+  const handleStateChange = (state: any) => {
+    setMenuOpen(state.isOpen);
+  };
+
+  const handleMenuClose = () => {
+    setMenuOpen(false);
+  };
 
   return loading ? (
     <></>
@@ -102,8 +111,15 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
       ) : (
         <div>
           {isAuthenticated ? (
-            <MenuSlide>
-              <Link to="/" style={{ position: "relative" }}>
+            <MenuSlide
+              isOpen={menuOpen}
+              onStateChange={(state) => handleStateChange(state)}
+            >
+              <Link
+                to="/"
+                onClick={handleMenuClose}
+                style={{ position: "relative" }}
+              >
                 <img className="nav-logo" src={Logo} alt="logo" />
                 <strong
                   style={{
@@ -118,29 +134,48 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
                 </strong>
               </Link>
               <Search />
-              <Link to={`/upload`}>
+              <Link to={`/upload`} onClick={handleMenuClose}>
                 <Button className="upload-btn" type="primary">
                   UPLOAD
                 </Button>
               </Link>
-              <Link className="user-nav-link" to={`/user/${user.username}`}>
+              <Link
+                className="user-nav-link"
+                onClick={handleMenuClose}
+                to={`/user/${user.username}`}
+              >
                 {user.username}
               </Link>
-              <Link to={`/tag/technology`}>Technology</Link>
-              <Link to={`/tag/category`}>Category</Link>
-              <Link to={`/guidelines`}>Guidelines</Link>
+              <Link to={`/tag/technology`} onClick={handleMenuClose}>
+                Technology
+              </Link>
+              <Link to={`/tag/category`} onClick={handleMenuClose}>
+                Category
+              </Link>
+              <Link to={`/guidelines`} onClick={handleMenuClose}>
+                Guidelines
+              </Link>
               <a href={subscriberUrl} target="__blank">
                 Subscribe
               </a>
 
-              <Link to={`/feedback`}>Feedback</Link>
+              <Link to={`/feedback`} onClick={handleMenuClose}>
+                Feedback
+              </Link>
               <button className="btn-signout" onClick={onSignout}>
                 Sign Out
               </button>
             </MenuSlide>
           ) : (
-            <MenuSlide>
-              <Link to="/" style={{ position: "relative" }}>
+            <MenuSlide
+              isOpen={menuOpen}
+              onStateChange={(state) => handleStateChange(state)}
+            >
+              <Link
+                to="/"
+                style={{ position: "relative" }}
+                onClick={handleMenuClose}
+              >
                 <img className="nav-logo" src={Logo} alt="logo" />
                 <strong
                   style={{
@@ -156,20 +191,32 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
               </Link>
               <Search />
               <Divider style={{ margin: 0 }} />
-              <Link to={`/upload`}>
+              <Link to={`/upload`} onClick={handleMenuClose}>
                 <Button className="upload-btn" type="primary">
                   UPLOAD
                 </Button>
               </Link>
-              <Link to={`/signup`}>Sign Up</Link>
-              <Link to={`/login`}>Log In</Link>
-              <Link to={`/tag/technology`}>Technology</Link>
-              <Link to={`/tag/category`}>Category</Link>
-              <Link to={`/guidelines`}>Guidelines</Link>
+              <Link to={`/signup`} onClick={handleMenuClose}>
+                Sign Up
+              </Link>
+              <Link to={`/login`} onClick={handleMenuClose}>
+                Log In
+              </Link>
+              <Link to={`/tag/technology`} onClick={handleMenuClose}>
+                Technology
+              </Link>
+              <Link to={`/tag/category`} onClick={handleMenuClose}>
+                Category
+              </Link>
+              <Link to={`/guidelines`} onClick={handleMenuClose}>
+                Guidelines
+              </Link>
               <a href={subscriberUrl} target="__blank">
                 Subscribe
               </a>
-              <Link to={`/feedback`}>Feedback</Link>
+              <Link to={`/feedback`} onClick={handleStateChange}>
+                Feedback
+              </Link>
             </MenuSlide>
           )}
         </div>
