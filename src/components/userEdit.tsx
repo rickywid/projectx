@@ -231,9 +231,7 @@ const UserEdit = ({ match }: IUserProfile) => {
     handleOnDelete();
   };
 
-  const cancel = () => {
-    //console.log(e);
-  };
+  const cancel = () => {};
 
   const handleOnDelete = async () => {
     const form = new FormData();
