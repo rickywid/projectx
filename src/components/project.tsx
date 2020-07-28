@@ -39,6 +39,7 @@ import Comment from "./comment";
 import NotFound from "./notFound";
 import moment from "moment";
 import history from "../lib/history";
+import { HOSTNAME } from "../lib/env";
 import { checkHttp } from "../lib/urlValidation";
 import "../styles/global.scss";
 import "../styles/project.scss";
@@ -402,13 +403,11 @@ const Project = () => {
                 )}
               </div>
               <div className="project-share-wrapper">
-                <FacebookShareButton
-                  url={process.env.REACT_APP_HOSTNAME as string}
-                >
+                <FacebookShareButton url={HOSTNAME as string}>
                   <FacebookIcon size={32} />
                 </FacebookShareButton>
                 <TwitterShareButton
-                  url={process.env.REACT_APP_HOSTNAME as string}
+                  url={HOSTNAME as string}
                   title={project.name}
                 >
                   <TwitterIcon size={32} />

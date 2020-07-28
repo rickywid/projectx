@@ -17,6 +17,7 @@ import history from "../lib/history";
 import Placeholder from "../lib/placeholders";
 import { siteName } from "../lib/const";
 import { urlValidation } from "../lib/urlValidation";
+import { SERVER, HOSTNAME } from "../lib/env";
 import "../styles/form.scss";
 import "../styles/global.scss";
 import { Redirect } from "react-router-dom";
@@ -204,7 +205,7 @@ const UserEdit = ({ match }: IUserProfile) => {
       body: data,
     };
 
-    fetch(`${process.env.REACT_APP_SERVER}/image/upload`, config)
+    fetch(`${SERVER}/image/upload`, config)
       .then((res: any) => {
         return res.json();
       })
@@ -239,7 +240,7 @@ const UserEdit = ({ match }: IUserProfile) => {
     form.append("user_id", user.id);
     await auth.signout(new FormData());
     await api.deleteUser(user.id, form);
-    window.location.replace(process.env.REACT_APP_HOSTNAME as string);
+    window.location.replace(HOSTNAME as string);
   };
 
   const handleBeforeUpload = (file: any, fileList: any) => {

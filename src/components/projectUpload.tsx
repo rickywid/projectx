@@ -22,6 +22,7 @@ import history from "../lib/history";
 import Placeholder from "../lib/placeholders";
 import { technologies, tags } from "../lib/const";
 import { siteName } from "../lib/const";
+import { SERVER } from "../lib/env";
 import ParseDOM from "../lib/domParser";
 import { urlValidation } from "../lib/urlValidation";
 import "../styles/form.scss";
@@ -238,7 +239,7 @@ const ProjectUpload = () => {
       body: data,
     };
 
-    fetch(`${process.env.REACT_APP_SERVER}/image/upload`, config)
+    fetch(`${SERVER}/image/upload`, config)
       .then((res: any) => {
         return res.json();
       })

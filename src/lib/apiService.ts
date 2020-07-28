@@ -1,8 +1,9 @@
 import { HttpClient } from "./httpClient";
+import { SERVER } from "../lib/env";
 
 class ApiService {
   constructor(cookie?: string) {
-    this.apiEndpoint = `${process.env.REACT_APP_SERVER}` as string;
+    this.apiEndpoint = `${SERVER}` as string;
   }
 
   private apiEndpoint: string;

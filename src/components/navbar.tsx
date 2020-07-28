@@ -5,7 +5,7 @@ import Search from "./searchBar";
 import useWindowDimensions from "../hooks/windowSize";
 import AuthService from "../lib/authService";
 import { subscriberUrl } from "../lib/const";
-import { NODE_ENV } from "../lib/env";
+import { NODE_ENV, HOSTNAME } from "../lib/env";
 import "../App.scss";
 import "../styles/navbar.scss";
 import "../styles/mobileNav.scss";
@@ -28,7 +28,7 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
 
   const onSignout = async () => {
     await api.signout(new FormData());
-    window.location.replace(process.env.REACT_APP_HOSTNAME as string);
+    window.location.replace(HOSTNAME as string);
   };
 
   const menu = (

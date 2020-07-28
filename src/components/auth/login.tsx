@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Form,
-  Input,
-  Button,
-  Divider
-} from 'antd';
-import { UserOutlined, LockOutlined, GithubOutlined } from '@ant-design/icons';
-import AuthService from '../../lib/authService';
-import { siteName } from '../../lib/const';
-import '../../styles/login.scss';
-import Logo from  '../../assets/logo.png';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Form, Input, Button, Divider } from "antd";
+import { UserOutlined, LockOutlined, GithubOutlined } from "@ant-design/icons";
+import AuthService from "../../lib/authService";
+import { siteName } from "../../lib/const";
+import { SERVER, HOSTNAME } from "../../lib/env";
+import "../../styles/login.scss";
+import Logo from "../../assets/logo.png";
 
 interface IFormValues {
   username: string;
@@ -18,39 +14,41 @@ interface IFormValues {
 }
 
 function App() {
-
   useEffect(() => {
     document.title = `${siteName} - Log In`;
   });
 
   const [form] = Form.useForm();
-  const [error, setError] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false);
 
   const onFinish = async (values: IFormValues) => {
     const api = new AuthService();
     const form = new FormData();
     const { username, password }: IFormValues = values;
 
-    form.append('username', username);
-    form.append('password', password);
+    form.append("username", username);
+    form.append("password", password);
 
     const res = await api.login(form);
 
     if (res.status === 200) {
       const user = await res.json();
-      window.location.replace(process.env.REACT_APP_HOSTNAME as string);
+      window.location.replace(HOSTNAME as string);
 
       return;
     }
 
     setError(true);
-
   };
 
   return (
     <div className="login-wrapper">
       <div className="login-inner">
-        <img style={{height: '28px', marginBottom: '20px'}} src={Logo} alt="logo"/>
+        <img
+          style={{ height: "28px", marginBottom: "20px" }}
+          src={Logo}
+          alt="logo"
+        />
         <h2>Log In</h2>
         <Form
           name="normal_login"
@@ -65,36 +63,40 @@ function App() {
             rules={[
               {
                 required: true,
-                message: 'Please input your Username!',
+                message: "Please input your Username!",
               },
             ]}
           >
-            <Input
-              size="large"
-              placeholder="Username"
-            />
+            <Input size="large" placeholder="Username" />
           </Form.Item>
           <Form.Item
             name="password"
             rules={[
               {
                 required: true,
-                message: 'Please input your Password!',
+                message: "Please input your Password!",
               },
             ]}
           >
-            <Input
-              type="password"
-              placeholder="Password"
-              size="large"
-            />
+            <Input type="password" placeholder="Password" size="large" />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-form-button">
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
               Log in
             </Button>
-            <p className="error-msg">{error ? 'Username or password is incorrect' : ''}</p>
-            <small className="helper-link">Don't have an account? <Link to="/signup"><strong>Sign Up</strong></Link></small>
+            <p className="error-msg">
+              {error ? "Username or password is incorrect" : ""}
+            </p>
+            <small className="helper-link">
+              Don't have an account?{" "}
+              <Link to="/signup">
+                <strong>Sign Up</strong>
+              </Link>
+            </small>
           </Form.Item>
         </Form>
         <Divider />
@@ -102,16 +104,13 @@ function App() {
           type="primary"
           icon={<GithubOutlined />}
           className="github-login-btn"
-          onClick={() => window.open(`${process.env.REACT_APP_SERVER}/auth/github`, '_self')}
+          onClick={() => window.open(`${SERVER}/auth/github`, "_self")}
         >
           Log In with Github
-            </Button>
+        </Button>
       </div>
     </div>
   );
 }
 
 export default App;
-
-
-

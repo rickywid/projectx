@@ -16,6 +16,7 @@ import { PlusOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import Spinner from "./spinner";
 import ApiService from "../lib/apiService";
 import history from "../lib/history";
+import { SERVER } from "../lib/env";
 import Placeholder from "../lib/placeholders";
 import { technologies, tags } from "../lib/const";
 import { siteName } from "../lib/const";
@@ -281,7 +282,7 @@ const ProjectEdit = () => {
       body: data,
     };
 
-    fetch(`${process.env.REACT_APP_SERVER}/image/upload`, config)
+    fetch(`${SERVER}/image/upload`, config)
       .then((res: any) => {
         return res.json();
       })
