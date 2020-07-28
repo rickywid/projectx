@@ -5,11 +5,11 @@ import Search from "./searchBar";
 import useWindowDimensions from "../hooks/windowSize";
 import AuthService from "../lib/authService";
 import { subscriberUrl } from "../lib/const";
+import { NODE_ENV } from "../lib/env";
 import "../App.scss";
 import "../styles/navbar.scss";
 import "../styles/mobileNav.scss";
 import { slide as MenuSlide } from "react-burger-menu";
-
 import Logo from "../assets/logo.png";
 
 interface Props {
@@ -63,7 +63,9 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
           <div>
             <Link to="/">
               <img className="nav-logo" src={Logo} alt="logo" />
-              <strong style={{ position: "absolute", top: 0 }}>beta</strong>
+              {NODE_ENV === "development" && (
+                <strong style={{ position: "absolute", top: 0 }}>beta</strong>
+              )}
             </Link>
           </div>
           <Search />
@@ -121,17 +123,19 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
                 style={{ position: "relative" }}
               >
                 <img className="nav-logo" src={Logo} alt="logo" />
-                <strong
-                  style={{
-                    position: "absolute",
-                    top: "-16px",
-                    fontSize: "12px",
-                    color: "#00b2a0",
-                    fontWeight: "bold",
-                  }}
-                >
-                  beta
-                </strong>
+                {NODE_ENV === "development" && (
+                  <strong
+                    style={{
+                      position: "absolute",
+                      top: "-16px",
+                      fontSize: "12px",
+                      color: "#00b2a0",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    beta
+                  </strong>
+                )}
               </Link>
               <Search />
               <Link to={`/upload`} onClick={handleMenuClose}>
@@ -177,17 +181,19 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
                 onClick={handleMenuClose}
               >
                 <img className="nav-logo" src={Logo} alt="logo" />
-                <strong
-                  style={{
-                    position: "absolute",
-                    top: "-16px",
-                    fontSize: "12px",
-                    color: "#00b2a0",
-                    fontWeight: "bold",
-                  }}
-                >
-                  beta
-                </strong>
+                {NODE_ENV === "development" && (
+                  <strong
+                    style={{
+                      position: "absolute",
+                      top: "-16px",
+                      fontSize: "12px",
+                      color: "#00b2a0",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    beta
+                  </strong>
+                )}
               </Link>
               <Search />
               <Divider style={{ margin: 0 }} />

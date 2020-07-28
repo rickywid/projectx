@@ -6,9 +6,6 @@ import "./styles/global.scss";
 import App from "./App";
 import history from "./lib/history";
 
-const env = process.env.REACT_APP_NODE_ENV;
-console.log(env);
-
 ReactDOM.render(
   <React.StrictMode>
     <Router history={history}>
