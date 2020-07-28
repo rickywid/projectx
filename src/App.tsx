@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "antd";
 import ApiService from "./lib/apiService";
+import { NODE_ENV } from "./lib/env";
 import useWindowDimensions from "./hooks/windowSize";
 import Routes from "./routes";
 import NavBar from "./components/navbar";
@@ -55,7 +56,9 @@ function App() {
         <div className="nav-mobile-wrapper">
           <Link to="/">
             <img className="logo-mobile" src={Logo} alt="logo" />
-            <strong style={{ position: "absolute", top: 0 }}>beta</strong>
+            {NODE_ENV === "development" && (
+              <strong style={{ position: "absolute", top: 0 }}>beta</strong>
+            )}
           </Link>
           {user.isAuthenticated && (
             <Link
