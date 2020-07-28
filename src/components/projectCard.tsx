@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
-import { Tag } from 'antd';
-import { MessageFilled, UpCircleFilled } from '@ant-design/icons';
-import ApiService from '../lib/apiService';
-import truncate from '../lib/truncate';
-import { motion } from "framer-motion"
-import '../styles/projectCard.scss';
-import '../styles/global.scss';
+import { Tag } from "antd";
+import { MessageFilled, UpCircleFilled } from "@ant-design/icons";
+import ApiService from "../lib/apiService";
+import truncate from "../lib/truncate";
+import { motion } from "framer-motion";
+import "../styles/projectCard.scss";
+import "../styles/global.scss";
 
 const animate1 = {
   rest: {
@@ -15,31 +15,30 @@ const animate1 = {
   },
   hover: {
     opacity: 1,
-  }
-}
+  },
+};
 
 const animate2 = {
   rest: { opacity: 0 },
   hover: {
-    opacity: 1
-  }
-}
+    opacity: 1,
+  },
+};
 
 const animate3 = {
   rest: {
-    background: 'none'
+    background: "none",
   },
   hover: {
-    background: 'linear-gradient(0deg, rgba(0,0,0,0.5471054632790616) 0%, rgba(255,255,255,0) 100%)' 
-  }
-}
+    background:
+      "linear-gradient(0deg, rgba(0,0,0,0.5471054632790616) 0%, rgba(255,255,255,0) 100%)",
+  },
+};
 
 const ProjectCard = (props: any) => {
   const api = new ApiService();
 
-
   const renderProjects = () => {
-
     return props.projects.map((project: any, index: number) => (
       <li key={index} className="project-item">
         <Link to={`/project/${project.uuid}`}>
@@ -50,62 +49,61 @@ const ProjectCard = (props: any) => {
             className="project-card"
             style={{
               backgroundImage: `url(${project.images[0]}`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover'
+              backgroundPosition: "center",
+              backgroundSize: "cover",
             }}
           >
-            <motion.div
-              className="project-tag"
-              variants={animate2}
-            >
-              {project.tags.length > 1 ? 
+            <motion.div className="project-tag" variants={animate2}>
+              {project.tags.length > 1 ? (
                 <span>
                   <Tag>{project.tags[0]}</Tag>
                   <Tag>+{project.tags.slice(1).length}</Tag>
-                </span> 
-                : 
+                </span>
+              ) : (
                 <Tag>{project.tags[0]}</Tag>
-              }
+              )}
             </motion.div>
             <motion.div className="project-name-wrapper" variants={animate3}>
-              <motion.p 
-                className="project-name"
-                variants={animate1}
-              >
-                {project.name.length > 30 ? truncate(project.name, 23) : project.name}
+              <motion.p className="project-name" variants={animate1}>
+                {project.name.length > 30
+                  ? truncate(project.name, 23)
+                  : project.name}
               </motion.p>
             </motion.div>
           </motion.div>
         </Link>
         <div className="project-icons">
-          <Link 
-            className="project-owner" 
-            to={`/user/${project.username}`}>
-              <img 
-                className="project-user-avatar"
-                src={project.gh_avatar} 
-                alt="avatar" /> {project.username}
+          <Link className="project-owner" to={`/user/${project.username}`}>
+            <img
+              className="user-avatar-img"
+              src={project.gh_avatar}
+              alt="avatar"
+            />{" "}
+            {project.username}
           </Link>
-          {props.isOwner ? <small className="project-edit"><Link to={`/project/edit/${project.uuid}`}>EDIT</Link></small> : ''}
+          {props.isOwner ? (
+            <small className="project-edit">
+              <Link to={`/project/edit/${project.uuid}`}>EDIT</Link>
+            </small>
+          ) : (
+            ""
+          )}
           <div>
             <span className="project-comments">
               <MessageFilled className="svg-filled" /> {project.comment_count}
             </span>
             <span>
-                <UpCircleFilled className="svg-filled" /> {project.likes_count}    
+              <UpCircleFilled className="svg-filled" /> {project.likes_count}
             </span>
           </div>
         </div>
       </li>
     ));
-  }
+  };
 
   return (
     <div>
-      <ul className="list-wrapper">
-        {renderProjects()}
-      </ul>
-
+      <ul className="list-wrapper">{renderProjects()}</ul>
     </div>
   );
 };

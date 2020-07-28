@@ -76,22 +76,22 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
             </li>
             {isAuthenticated ? (
               <>
+                <li className="user-profile-badge-desktop">
+                  <Dropdown overlay={menu} trigger={["click"]}>
+                    <a
+                      className="ant-dropdown-link"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      {user.username[0]}
+                    </a>
+                  </Dropdown>
+                </li>
                 <li>
                   <Link to={`/upload`}>
                     <Button className="upload-btn" type="primary">
                       UPLOAD
                     </Button>
                   </Link>
-                </li>
-                <li>
-                  <Dropdown overlay={menu} trigger={["click"]}>
-                    <a
-                      className="ant-dropdown-link"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      {user.username}
-                    </a>
-                  </Dropdown>
                 </li>
               </>
             ) : (

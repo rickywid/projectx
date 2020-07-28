@@ -147,7 +147,7 @@ const UserProfile = ({ match }: IUserProfile) => {
                 )}
               </div>
               <Linkify>
-                <p>{user.description}</p>
+                <p className="user-profile-bio">{user.description}</p>
               </Linkify>
               <div className="user-profile-detail-bottom">
                 <div className="user-profile-options">

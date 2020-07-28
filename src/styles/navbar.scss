@@ -10,15 +10,10 @@ nav {
 
     li {
         display: inline-block;
-        margin: 0 17px;
+        margin: 0 10px;
 
         a {
             color: $grey;
-    
-            .user-profile-badge-desktop {
-                width: 50px;
-                border-radius: 50%;
-            }
         }
     
         a.signup-btn {
@@ -30,6 +25,19 @@ nav {
             &:hover {
                 background: $primaryDark;
             }
+        }
+    }
+
+    li.user-profile-badge-desktop {
+        background: black;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+
+        a {
+            margin: auto;
+            color: white;
         }
     }
 }

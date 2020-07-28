@@ -16,17 +16,17 @@
     a.nav-user-profile-mobile {
         position: absolute;
         right: 37px;
-        top: 12px;
+        top: 17px;
         background: black;
         color: white;
-        padding: 10px;
         border-radius: 50%;
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         display: flex;
 
         span {
             margin: auto;
+            line-height: 1.5;
         }
 
         .user-profile-badge {

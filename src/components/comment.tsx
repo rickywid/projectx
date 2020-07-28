@@ -90,7 +90,7 @@ const Comment = ({
     <div className="project-view-comment" key={comment.comment_id}>
       <div className="project-view-comment-top-wrapper">
         <img
-          style={{ width: "25px", height: "25px" }}
+          className="user-avatar-img"
           src={comment.gh_avatar}
           alt={`${comment.username}'s profile`}
         />

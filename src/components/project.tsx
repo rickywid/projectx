@@ -262,11 +262,7 @@ const Project = () => {
                   to={`/user/${project.username}`}
                 >
                   <img
-                    style={{
-                      height: "20px",
-                      borderRadius: "100%",
-                      margin: "0 3px",
-                    }}
+                    className="user-avatar-img"
                     src={project.gh_avatar}
                     alt="avatar"
                   />{" "}
