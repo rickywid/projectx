@@ -1,12 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router } from 'react-router-dom';
-import 'antd/dist/antd.css';
-import './styles/global.scss';
-import App from './App';
-import history from './lib/history';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Router } from "react-router-dom";
+import "antd/dist/antd.css";
+import "./styles/global.scss";
+import App from "./App";
+import history from "./lib/history";
 
-// dotenv.config();
+console.log(process.env.NODE_ENV);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +14,7 @@ ReactDOM.render(
       <App />
     </Router>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
