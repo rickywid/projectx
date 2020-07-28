@@ -13,8 +13,6 @@ import {
   BlockOutlined,
   StarOutlined,
   StarTwoTone,
-  LikeTwoTone,
-  LikeOutlined,
   UpCircleOutlined,
 } from "@ant-design/icons";
 import {
