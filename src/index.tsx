@@ -6,7 +6,8 @@ import "./styles/global.scss";
 import App from "./App";
 import history from "./lib/history";
 
-console.log(process.env.NODE_ENV);
+const env = process.env.REACT_APP_NODE_ENV;
+console.log(env);
 
 ReactDOM.render(
   <React.StrictMode>
