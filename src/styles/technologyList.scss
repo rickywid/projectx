@@ -4,29 +4,38 @@
     max-width: 800px;
     margin: 0 auto;
 
-    section {
-        padding-bottom: 50px;
-
-        a {
-            display: block;
-            text-align: center;
-
-            svg.category {
-                width: 120px;
-                height: auto;
-            }
-
-            svg.tech {
-                width: 80px;
-                height: auto;
-            }
-
-            p {
-                text-align: center;
-            }
+    section {    
+        .pb-20 {
+            padding-bottom: 20px;
+            display: flex;
         
-            svg.lg-svg {
-                width: 150px;
+            a {
+                background: white;
+                display: block;
+                border: 1px solid gainsboro;
+                text-align: center;
+                flex: 1;
+                display: flex;
+                padding: 18px;
+                margin: 0 15px;
+                height: 150px;
+                display: flex;
+                flex-direction: column;
+
+                svg.category,
+                svg.tech {
+                    width: 65px;
+                    height: auto;
+                    margin: auto;
+                }
+
+                svg.lg-svg {
+                    width: 130px;
+                }
+
+                &:hover {
+                    box-shadow: 0px 0px 5px 3px rgba(242,242,242,1);
+                }
             }
         }
     }
@@ -39,20 +48,12 @@
 }
 
 
-@media only screen and (min-width: $medium) {
-    .technology-wrapper {
-        section {    
-            a {
-                svg.category,
-                svg.tech {
-                    width: 65px;
-                    height: auto;
-                }
+// .technology-wrapper {
 
-                svg.lg-svg {
-                    width: 150px;
-                }
-            }
-        }
-    }
-}
+
+//     .ant-row {
+//         display: flex;
+//         align-items: center;
+//         padding: 10px 0;
+//     }
+// }
