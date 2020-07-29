@@ -50,7 +50,7 @@ const Technology = () => {
     <div className="technology-wrapper">
       <section className="frontend">
         <h2>Front end</h2>
-        <Divider />
+
         <Row>
           <Col
             className="pb-20"
@@ -139,7 +139,7 @@ const Technology = () => {
 
       <section className="backend">
         <h2>Back end</h2>
-        <Divider />
+
         <Row>
           <Col
             className="pb-20"
@@ -240,7 +240,7 @@ const Technology = () => {
 
       <section className="databases">
         <h2>Databases</h2>
-        <Divider />
+
         <Row>
           <Col
             className="pb-20"
@@ -269,7 +269,7 @@ const Technology = () => {
             lg={{ span: 6 }}
           >
             <Link to={`/tag/tech/mongo`}>
-              <Mongo className="tech lg-svg" />
+              <Mongo className="tech lg-svg mongo" />
             </Link>
           </Col>
           <Col
@@ -292,7 +292,7 @@ const Technology = () => {
             lg={{ span: 6 }}
           >
             <Link to={`/tag/tech/firebase`}>
-              <Firebase className="tech" />
+              <Firebase className="tech firebase" />
             </Link>
           </Col>
         </Row>
@@ -300,7 +300,7 @@ const Technology = () => {
 
       <section className="devops">
         <h2>DevOps</h2>
-        <Divider />
+
         <Row>
           <Col
             className="pb-20"
@@ -393,7 +393,7 @@ const Technology = () => {
             lg={{ span: 6 }}
           >
             <Link to={`/tag/tech/heroku`}>
-              <Heroku className="tech" />
+              <Heroku className="tech heroku" />
             </Link>
           </Col>
         </Row>
@@ -401,7 +401,7 @@ const Technology = () => {
 
       <section className="frameworks">
         <h2>Frameworks</h2>
-        <Divider />
+
         <Row>
           <Col
             className="pb-20"
@@ -410,7 +410,7 @@ const Technology = () => {
             lg={{ span: 6 }}
           >
             <Link to={`/tag/tech/nextjs`}>
-              <Next className="tech lg-svg" />
+              <Next className="tech lg-svg next" />
             </Link>
           </Col>
 
@@ -441,7 +441,7 @@ const Technology = () => {
             lg={{ span: 6 }}
           >
             <Link to={`/tag/tech/electron`}>
-              <Electron className="tech lg-svg" />
+              <Electron className="tech lg-svg electron" />
             </Link>
           </Col>
         </Row>

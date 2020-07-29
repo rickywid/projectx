@@ -6,7 +6,7 @@
 
     section {    
         .pb-20 {
-            padding-bottom: 20px;
+            padding-bottom: 22px;
             display: flex;
         
             a {
@@ -17,7 +17,7 @@
                 flex: 1;
                 display: flex;
                 padding: 18px;
-                margin: 0 15px;
+                margin: 0 10px;
                 height: 150px;
                 display: flex;
                 flex-direction: column;
@@ -29,8 +29,25 @@
                     margin: auto;
                 }
 
+                svg.tech.heroku,
+                svg.tech.firebase {
+                    width: 45px;
+                }
+
+                svg.tech.next {
+                    width: 75px;
+                }
+
+                svg.tech.electron {
+                    width: 115px;
+                }
+
+                svg.tech.mongo {
+                    width: 120px;
+                }
+
                 svg.lg-svg {
-                    width: 130px;
+                    width: 95px;
                 }
 
                 &:hover {
@@ -43,17 +60,5 @@
     .ant-row {
         display: flex;
         align-items: center;
-        padding: 10px 0;
     }
 }
-
-
-// .technology-wrapper {
-
-
-//     .ant-row {
-//         display: flex;
-//         align-items: center;
-//         padding: 10px 0;
-//     }
-// }
