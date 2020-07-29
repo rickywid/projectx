@@ -200,6 +200,8 @@ const UserEdit = ({ match }: IUserProfile) => {
   }) => {
     const data = new FormData();
     data.append("file", file.file);
+    data.append("fileType", "user");
+
     const config = {
       method: "POST",
       body: data,

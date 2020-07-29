@@ -3,15 +3,18 @@
 .project-view {
     max-width: 950px;
     margin: 0 auto;
-    // background: white;
-    // padding: 20px;
 
-    img.project-view-screenshot {
-        height: auto;
-        width: 100%;
-        margin: 0 auto;
-        display: block;
-        border-radius: 2px;
+    .project-view-screenshot-wrapper {
+        background-color: $bg;
+        background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.33' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    
+        img.project-view-screenshot {
+            height: auto;
+            width: 100%;
+            margin: 0 auto;
+            display: block;
+            border-radius: 2px;
+        }
     }
     
     ul {
@@ -202,10 +205,12 @@
     .project-view {
         padding: 0;
     
-        img.project-view-screenshot {
-            height: 500px;
-            width: auto;
-            margin: 0 auto;
+        .project-view-screenshot-wrapper {
+            img.project-view-screenshot {
+                height: 500px;
+                width: auto;
+                margin: 0 auto;
+            }
         }
     
         .project-view-content {

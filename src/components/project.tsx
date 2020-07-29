@@ -294,11 +294,13 @@ const Project = () => {
               </p>
             </div>
           </div>
-          <img
-            className="project-view-screenshot"
-            src={project.images[0]}
-            alt="screenshot"
-          />
+          <div className="project-view-screenshot-wrapper">
+            <img
+              className="project-view-screenshot"
+              src={project.images[0]}
+              alt="screenshot"
+            />
+          </div>
           <div className="project-actions-wrapper">
             <a className="project-links-btn" href={checkHttp(project.url)}>
               <DesktopOutlined /> WEBSITE
