@@ -74,6 +74,7 @@ const ProjectUpload = () => {
   const [redirect, setRedirect] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
+  const [formSubmit, setFormSubmit] = useState<boolean>(false);
 
   const { Option } = Select;
 
@@ -210,9 +211,11 @@ const ProjectUpload = () => {
     );
     form.append("user_id", user.id);
 
+    setFormSubmit(true);
     const res = await api.createProject(form);
 
     if (res.status === 200) {
+      setFormSubmit(false);
       history.push("/");
       message.success({
         content:
@@ -504,7 +507,7 @@ const ProjectUpload = () => {
                 </div>
               </Form.Item>
               <div className="form-btn-wrap">
-                {submitDisabled ? (
+                {submitDisabled || formSubmit ? (
                   <Button
                     className="upload-btn"
                     type="primary"

@@ -117,7 +117,7 @@
             flex: 2;
             margin-right: 0;
             margin-bottom: 20px;
-            padding: 40px 20px 20px 20px;
+            padding: 40px 50px;
             background: white;
             order: 2;
 
@@ -145,13 +145,17 @@
                     margin-bottom: 50px;
                 }
 
-                .project-view-comments-select {
-                    float: right;
-                    width: 120px;
+                .project-view-comments-filter-wrapper {
+                    text-align: right;
+
+                    .project-view-comments-select {
+                        width: 120px;
+                    }
                 }
 
                 .project-view-comment {
                     clear: both;
+                    margin-bottom: 30px;
                     
                     .project-view-comment-top-wrapper {
                         .project-view-comment-user {

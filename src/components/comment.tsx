@@ -3,16 +3,7 @@ import ApiService from "../lib/apiService";
 import { Link } from "react-router-dom";
 import Linkify from "react-linkify";
 import { EllipsisOutlined } from "@ant-design/icons";
-import {
-  Radio,
-  Modal,
-  Form,
-  Input,
-  Button,
-  Divider,
-  message,
-  Popover,
-} from "antd";
+import { Radio, Modal, Form, Input, Button, message, Popover } from "antd";
 import moment from "moment";
 import "../styles/global.scss";
 import "../styles/project.scss";
@@ -184,8 +175,6 @@ const Comment = ({
           </div>
         </div>
       )}
-
-      <Divider />
 
       <Modal
         title="Report Comment"

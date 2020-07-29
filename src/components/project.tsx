@@ -42,6 +42,7 @@ import { checkHttp } from "../lib/urlValidation";
 import "../styles/global.scss";
 import "../styles/project.scss";
 import ParseDom from "../lib/domParser";
+import { ReactComponent as CommentSVG } from "../assets/comment.svg";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -239,6 +240,29 @@ const Project = () => {
     setC(comments.data);
   };
 
+  const commentHeader = (length: number) => {
+    if (length === 0) {
+      return (
+        <div style={{ textAlign: "center" }}>
+          <CommentSVG
+            style={{ fill: "#ababab", height: "50px", width: "auto" }}
+          />
+          <p>Be the first to leave a comment</p>
+        </div>
+      );
+    } else {
+      return length === 1 ? (
+        <p>
+          <strong>1 comment</strong>
+        </p>
+      ) : (
+        <p>
+          <strong>{`${length} comments`}</strong>
+        </p>
+      );
+    }
+  };
+
   return !projectFound ? (
     <NotFound
       header="404!"
@@ -346,7 +370,6 @@ const Project = () => {
                       )}
                     </div>
                   </Form>
-                  <Divider />
                 </>
               ) : (
                 <p className="comment-login-header">
@@ -355,18 +378,19 @@ const Project = () => {
               )}
 
               <div className="project-view-comments">
-                <h4 className="project-view-comments-header">
-                  {c.length}{" "}
-                  {c.length > 1 || c.length === 0 ? "comments" : "comment"}{" "}
-                </h4>
-                <Select
-                  className="project-view-comments-select"
-                  defaultValue="oldest"
-                  onChange={handleCommentSort}
-                >
-                  <Option value="oldest">Oldest</Option>
-                  <Option value="newest">Newest</Option>
-                </Select>
+                <div className="project-view-comments-filter-wrapper">
+                  <Select
+                    className="project-view-comments-select"
+                    defaultValue="oldest"
+                    onChange={handleCommentSort}
+                  >
+                    <Option value="oldest">Oldest</Option>
+                    <Option value="newest">Newest</Option>
+                  </Select>
+                </div>
+                <div style={{ margin: "25px 0" }}>
+                  {commentHeader(c.length)}
+                </div>
                 {c?.map((c: any, i: number) => (
                   <Comment
                     key={i}
