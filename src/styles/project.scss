@@ -120,7 +120,7 @@
             flex: 2;
             margin-right: 0;
             margin-bottom: 20px;
-            padding: 40px 50px;
+            padding: 40px 20px;
             background: white;
             order: 2;
 
@@ -143,6 +143,8 @@
             }
 
             .project-view-comments {
+                margin-top: 30px;
+
                 .project-view-comments-header {
                     float: left;
                     margin-bottom: 50px;
@@ -217,6 +219,7 @@
             flex-direction: row;
 
             .project-view-left-col {
+                padding: 40px 50px;
                 margin-right: 50px;
                 margin-bottom: 0;
                 order: initial;

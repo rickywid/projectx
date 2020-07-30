@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Layout, Modal, Button } from 'antd';
-import { Link } from 'react-router-dom';
-import { subscriberUrl } from '../lib/const';
-import '../styles/footer.scss';
+import React, { useState } from "react";
+import { Layout, Button } from "antd";
+import { Link } from "react-router-dom";
+import SubscribeForm from "./subscribeForm";
+import "../styles/footer.scss";
 
 const Footer: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -20,34 +20,28 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <Layout.Footer style={{ background: 'none' }}>
+    <Layout.Footer style={{ background: "none" }}>
       <ul>
         <li>
-          <Link to={`/guidelines`}>
-            Guidelines
-          </Link>
+          <Link to={`/guidelines`}>Guidelines</Link>
         </li>
         <li>
-          <Link to={`/feedback`}>
-            Feedback
-          </Link>
+          <Link to={`/feedback`}>Feedback</Link>
         </li>
         <li>
-          <Button type="primary" onClick={showModal}>Subscribe</Button>
+          <Button type="primary" onClick={showModal}>
+            Subscribe
+          </Button>
         </li>
       </ul>
-  <p className="copyright">CodeComplex &copy;	{new Date().getFullYear()}</p>
-
-    <Modal
-          visible={visible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          className="subscribe-modal"
-        >
-          <iframe style={{border: 0, width: '100%', height: '410px'}} src={subscriberUrl}/>
-        </Modal>
-  </Layout.Footer>
-  )
+      <p className="copyright">CodeComplex &copy; {new Date().getFullYear()}</p>
+      <SubscribeForm
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+        isVisible={visible}
+      />
+    </Layout.Footer>
+  );
 };
 
 export default Footer;

@@ -1,3 +1,43 @@
+.beta-notification {
+    display: block;
+    padding: 10px;
+    z-index: 1;
+    position: sticky;
+    top: 0;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 100%);
+    text-align: center;
+    color: white;
+
+    .anticon {
+        margin-left: 10px;
+
+        svg.close {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    span,
+    a {
+        color: white;
+        font-weight: bold;
+        text-decoration: underline;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.beta-notification.mobile {
+    top: 66px;
+}
+
+.beta-notification.close {
+    display: none;
+}
+
 .nav-mobile-wrapper {
     display: flex;
     position: fixed;
