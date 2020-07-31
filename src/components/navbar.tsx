@@ -64,7 +64,9 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
             <Link to="/">
               <img className="nav-logo" src={Logo} alt="logo" />
               {NODE_ENV === "development" && (
-                <strong style={{ position: "absolute", top: 0 }}>beta</strong>
+                <strong style={{ position: "absolute", top: "43px" }}>
+                  beta
+                </strong>
               )}
             </Link>
           </div>

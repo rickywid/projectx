@@ -93,7 +93,7 @@ function App() {
               <img className="logo-mobile" src={Logo} alt="logo" />
               {NODE_ENV === "development" && (
                 <strong
-                  style={{ position: "absolute", top: "6px", fontSize: "9px" }}
+                  style={{ position: "absolute", top: "6px", fontSize: "12px" }}
                 >
                   beta
                 </strong>
