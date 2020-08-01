@@ -8,14 +8,9 @@ import {
   Upload,
   Modal,
   Button,
-  Tooltip,
   message,
 } from "antd";
-import {
-  PlusOutlined,
-  QuestionCircleOutlined,
-  RocketTwoTone,
-} from "@ant-design/icons";
+import { PlusOutlined, RocketTwoTone } from "@ant-design/icons";
 import Spinner from "./spinner";
 import ApiService from "../lib/apiService";
 import history from "../lib/history";

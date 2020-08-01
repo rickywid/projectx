@@ -43,8 +43,10 @@ const Comment = ({
   };
 
   const handleSubmit = (values: any, id: any) => {
+    setIsCommentSubmitting(true);
     handleUpdateComment(values, id);
     setIsCommentEditing(false);
+    setIsCommentSubmitting(false);
     form.resetFields();
   };
 

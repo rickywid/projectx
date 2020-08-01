@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Divider } from "antd";
+import { Row, Col } from "antd";
 import { ReactComponent as Analytics } from "../assets/category/analytics.svg";
 import { ReactComponent as Design } from "../assets/category/design.svg";
 import { ReactComponent as Ecommerce } from "../assets/category/ecommerce.svg";

@@ -23,7 +23,7 @@ interface Props {
 
 const NavBar = ({ user, isAuthenticated, loading }: Props) => {
   const api = new AuthService();
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const onSignout = async () => {

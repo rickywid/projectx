@@ -27,7 +27,7 @@ function App() {
   });
   const [loading, isLoading] = useState<boolean>(true);
   const [isNotificationOpen, setIsNotificationOpen] = useState<boolean>(true);
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   useEffect(() => {
     const api = new ApiService();

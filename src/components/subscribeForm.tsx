@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal } from "antd";
 import { subscriberUrl } from "../lib/const";
 
@@ -17,6 +17,7 @@ const SubscribeForm = ({ isVisible, handleOk, handleCancel }: Props) => {
       className="subscribe-modal"
     >
       <iframe
+        title="Subscribe Form"
         style={{ border: 0, width: "100%", height: "410px" }}
         src={subscriberUrl}
       />

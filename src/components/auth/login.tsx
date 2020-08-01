@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Input, Button, Divider } from "antd";
-import { UserOutlined, LockOutlined, GithubOutlined } from "@ant-design/icons";
+import { GithubOutlined } from "@ant-design/icons";
 import AuthService from "../../lib/authService";
 import { siteName } from "../../lib/const";
 import { SERVER, HOSTNAME } from "../../lib/env";
@@ -18,7 +18,6 @@ function App() {
     document.title = `${siteName} - Log In`;
   });
 
-  const [form] = Form.useForm();
   const [error, setError] = useState<boolean>(false);
 
   const onFinish = async (values: IFormValues) => {
@@ -32,7 +31,6 @@ function App() {
     const res = await api.login(form);
 
     if (res.status === 200) {
-      const user = await res.json();
       window.location.replace(HOSTNAME as string);
 
       return;

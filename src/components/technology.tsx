@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Divider } from "antd";
+import { Row, Col } from "antd";
 import { ReactComponent as Angular } from "../assets/tech/angular.svg";
 import { ReactComponent as AWS } from "../assets/tech/aws.svg";
 import { ReactComponent as Azure } from "../assets/tech/azure.svg";

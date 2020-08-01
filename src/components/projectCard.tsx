@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Tag } from "antd";
 import { MessageFilled, UpCircleFilled } from "@ant-design/icons";
-import ApiService from "../lib/apiService";
 import truncate from "../lib/truncate";
 import { motion } from "framer-motion";
 import "../styles/projectCard.scss";
@@ -36,8 +35,6 @@ const animate3 = {
 };
 
 const ProjectCard = (props: any) => {
-  const api = new ApiService();
-
   const renderProjects = () => {
     return props.projects.map((project: any, index: number) => (
       <li key={index} className="project-item">

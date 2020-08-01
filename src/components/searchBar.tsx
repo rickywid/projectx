@@ -1,21 +1,18 @@
-import React from 'react';
-import { Input } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-import history from '../lib/history';
-import '../styles/searchBar.scss';
+import React from "react";
+import { Input } from "antd";
+import history from "../lib/history";
+import "../styles/searchBar.scss";
 const { Search } = Input;
 
 const SearchBar = () => {
-
-  const onSearch = (v:string) => {
-
-    if(v === '') {
+  const onSearch = (v: string) => {
+    if (v === "") {
       history.push(`/`);
       return;
     }
-    
-      history.push(`/search?q=${v}`);
-  }
+
+    history.push(`/search?q=${v}`);
+  };
 
   return (
     <div className="search-wrapper">
@@ -32,5 +29,3 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
-
-
