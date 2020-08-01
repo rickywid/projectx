@@ -26,7 +26,8 @@ const animate2 = {
 
 const animate3 = {
   rest: {
-    background: "none",
+    background:
+      "linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(255,255,255,0) 100%)",
   },
   hover: {
     background:
