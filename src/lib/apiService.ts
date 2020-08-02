@@ -70,8 +70,8 @@ class ApiService {
     );
   }
 
-  public async getUser(id: string) {
-    return await HttpClient.get(`${this.apiEndpoint}/user/${id}`, this.headers);
+  public async getUser() {
+    return await HttpClient.get(`${this.apiEndpoint}/user`, this.headers);
   }
 
   public async getUserProfile(username: string) {

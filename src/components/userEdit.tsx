@@ -80,12 +80,12 @@ const UserEdit = ({ match }: IUserProfile) => {
       setFileList([
         {
           uid: "-1",
-          url: userProfile.data.user.gh_avatar,
+          url: userProfile.user.gh_avatar,
         },
       ]);
 
-      setFileListUpload([userProfile.data.user.gh_avatar]);
-      setUser(userProfile.data.user);
+      setFileListUpload([userProfile.user.gh_avatar]);
+      setUser(userProfile.user);
       setIsLoading(false);
 
       document.title = `Settings | ${siteName}`;

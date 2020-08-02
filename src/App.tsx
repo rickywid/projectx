@@ -32,13 +32,8 @@ function App() {
   useEffect(() => {
     const api = new ApiService();
     const fetchData = async () => {
-      // userID if user logged in via username/password
-      // this can also be userID of a new user account (signup)
-      const userID = localStorage.getItem("userID") || 0;
-
-      const res = await api.getUser(userID as string);
+      const res = await api.getUser();
       const json = await res.json();
-      localStorage.removeItem("userID");
 
       isLoading(false);
       if (json.data.isAuthenticated) {
