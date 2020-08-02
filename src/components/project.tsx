@@ -419,7 +419,7 @@ const Project = () => {
                   hasMore={hasMore}
                   loader={
                     <h4 style={{ textAlign: "center", gridColumnStart: 2 }}>
-                      Loading...
+                      Loading More...
                     </h4>
                   }
                 >

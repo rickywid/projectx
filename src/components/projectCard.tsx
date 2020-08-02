@@ -52,13 +52,8 @@ const ProjectCard = ({ projects, fetchData, hasMore, isOwner }: Props) => {
         hasMore={hasMore}
         loader={
           <h4 style={{ textAlign: "center", gridColumnStart: 2 }}>
-            Loading...
+            Loading more...
           </h4>
-        }
-        endMessage={
-          <p style={{ textAlign: "center", gridColumnStart: 2 }}>
-            <b>Yay! You have seen it all. What are you going to build next?</b>
-          </p>
         }
       >
         <div className="list-wrapper">
