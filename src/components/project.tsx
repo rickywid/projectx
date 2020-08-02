@@ -11,8 +11,8 @@ import {
   CheckCircleFilled,
   FlagFilled,
   BlockOutlined,
-  StarOutlined,
-  StarTwoTone,
+  HeartOutlined,
+  HeartTwoTone,
   UpCircleOutlined,
 } from "@ant-design/icons";
 import {
@@ -338,7 +338,7 @@ const Project = () => {
                 onClick={() => handleSaveProject(false)}
               >
                 <strong>
-                  <StarTwoTone twoToneColor="#dea703" /> SAVED TO FAVOURITES
+                  <HeartTwoTone twoToneColor="#eb2f96" /> SAVED TO FAVOURITES
                 </strong>
               </a>
             ) : (
@@ -347,7 +347,7 @@ const Project = () => {
                 onClick={() => handleSaveProject(true)}
               >
                 <strong>
-                  <StarOutlined /> ADD TO FAVOURITES
+                  <HeartOutlined /> ADD TO FAVOURITES
                 </strong>
               </a>
             )}

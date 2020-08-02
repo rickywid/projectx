@@ -103,6 +103,10 @@ img, svg, button {
     border: none;
     font-weight: bold;
     color: black;
+
+    span {
+        margin-right: 5px;
+    }
 }
 
 .comment-btn,
