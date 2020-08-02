@@ -25,8 +25,11 @@ class ApiService {
     );
   }
 
-  public async getProjects() {
-    return await HttpClient.get(`${this.apiEndpoint}/projects`, this.headers);
+  public async getProjects(page: number, offset: number) {
+    return await HttpClient.get(
+      `${this.apiEndpoint}/projects?page=${page}&offset=${offset}`,
+      this.headers
+    );
   }
 
   public async getProject(id: string, userID?: number) {
@@ -117,9 +120,9 @@ class ApiService {
     );
   }
 
-  public async search(value: string) {
+  public async search(value: string, page: number, offset: number) {
     return await HttpClient.get(
-      `${this.apiEndpoint}/search?project=${value}`,
+      `${this.apiEndpoint}/search?project=${value}&page=${page}&offset=${offset}`,
       this.headers
     );
   }
@@ -148,16 +151,16 @@ class ApiService {
     );
   }
 
-  public async filterTechnology(value: string) {
+  public async filterTechnology(value: string, page: number, offset: number) {
     return await HttpClient.get(
-      `${this.apiEndpoint}/technology/${value}`,
+      `${this.apiEndpoint}/technology/${value}?page=${page}&offset=${offset}`,
       this.headers
     );
   }
 
-  public async filterCategory(value: string) {
+  public async filterCategory(value: string, page: number, offset: number) {
     return await HttpClient.get(
-      `${this.apiEndpoint}/category/${value}`,
+      `${this.apiEndpoint}/category/${value}?page=${page}&offset=${offset}`,
       this.headers
     );
   }
@@ -206,16 +209,25 @@ class ApiService {
     return await HttpClient.get(`${this.apiEndpoint}/userAuth`, this.headers);
   }
 
-  public async getProjectsByType(filterName: string) {
+  public async getProjectsByType(
+    filterName: string,
+    page: number,
+    offset: number
+  ) {
     return await HttpClient.get(
-      `${this.apiEndpoint}/projects/${filterName}`,
+      `${this.apiEndpoint}/projects/${filterName}?page=${page}&offset=${offset}`,
       this.headers
     );
   }
 
-  public async commentSort(projectId: string, type: string) {
+  public async commentSort(
+    projectId: string,
+    type: string,
+    page: number,
+    offset: number
+  ) {
     return await HttpClient.get(
-      `${this.apiEndpoint}/project/${projectId}/comments?comments_sort=${type}`,
+      `${this.apiEndpoint}/project/${projectId}/comments?comments_sort=${type}&page=${page}&offset=${offset}`,
       this.headers
     );
   }

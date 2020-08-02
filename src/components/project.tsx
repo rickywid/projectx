@@ -43,6 +43,7 @@ import "../styles/global.scss";
 import "../styles/project.scss";
 import ParseDom from "../lib/domParser";
 import { ReactComponent as CommentSVG } from "../assets/comment.svg";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -68,16 +69,17 @@ const Project = () => {
 
       const userFetch = await api.userAuth();
       const savedProjectsFetch = await api.isProjectSaved(id);
-
+      const commentsFetch = await api.commentSort(id, "oldest", 1, 20);
+      const comments = await commentsFetch.json();
       const project = await projectFetch.json();
       const user = await userFetch.json();
       const savedProjects = await savedProjectsFetch.json();
-
       setisSaved(savedProjects.data);
       setUser(user);
       setProject(project.project);
-      setC(project.comments);
+      setC(comments.data);
       setLikeCount(project.likes.count);
+      setHasMore(comments.data);
       setisLiked(project.likes.users.includes(parseInt(user.id as string)));
       setIsLoading(false);
 
@@ -91,6 +93,7 @@ const Project = () => {
   const [project, setProject] = useState<any>({});
   const [projectFound, setProjectFound] = useState(true);
   const [c, setC] = useState<any>([]);
+  const [commentSort, setCommentSort] = useState<string>("oldest");
   const [isSaved, setisSaved] = useState<boolean>(false);
   const [isLiked, setisLiked] = useState<boolean>(false);
   const [likeCount, setLikeCount] = useState<string>("0");
@@ -100,8 +103,24 @@ const Project = () => {
   );
   const [visible, setVisible] = useState<boolean>(false);
   const [value, setValue] = useState<string>("1");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [hasMore, setHasMore] = useState<boolean>(true);
 
   const [form] = Form.useForm();
+
+  const fetchData = async () => {
+    const commentsFetch = await api.commentSort(
+      id,
+      commentSort,
+      currentPage + 1,
+      20
+    );
+    const comments = await commentsFetch.json();
+
+    setCurrentPage(currentPage + 1);
+    setHasMore(comments.hasMore);
+    setC(c.concat(comments.data));
+  };
 
   const handleLike = async (like?: boolean) => {
     const id = window.location.pathname.split("/")[2];
@@ -235,9 +254,10 @@ const Project = () => {
   };
 
   const handleCommentSort = async (value: string) => {
-    const commentsFetch = await api.commentSort(id, value);
+    const commentsFetch = await api.commentSort(id, value, 1, 20);
     const comments = await commentsFetch.json();
     setC(comments.data);
+    setCommentSort(value);
   };
 
   const commentHeader = (length: number) => {
@@ -393,15 +413,26 @@ const Project = () => {
                 <div style={{ margin: "25px 0" }}>
                   {commentHeader(c.length)}
                 </div>
-                {c?.map((c: any, i: number) => (
-                  <Comment
-                    key={i}
-                    userId={user.id}
-                    comment={c}
-                    handleUpdateComment={handleUpdateComment}
-                    handleDeleteComment={handleDeleteComment}
-                  />
-                ))}
+                <InfiniteScroll
+                  dataLength={c.length}
+                  next={fetchData}
+                  hasMore={hasMore}
+                  loader={
+                    <h4 style={{ textAlign: "center", gridColumnStart: 2 }}>
+                      Loading...
+                    </h4>
+                  }
+                >
+                  {c.map((c: any, i: number) => (
+                    <Comment
+                      key={i}
+                      userId={user.id}
+                      comment={c}
+                      handleUpdateComment={handleUpdateComment}
+                      handleDeleteComment={handleDeleteComment}
+                    />
+                  ))}
+                </InfiniteScroll>
               </div>
             </div>
             <div className="project-view-right-col">
