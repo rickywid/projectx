@@ -153,7 +153,6 @@ const UserProfile = ({ match }: IUserProfile) => {
 
   const fetchData = async () => {
     if (activeTab === "1") {
-      console.log("fetch more user projects");
       // fetch user projects
       const userProjectsFetch = await api.getUserProjects(
         username,
@@ -167,7 +166,6 @@ const UserProfile = ({ match }: IUserProfile) => {
     }
 
     if (activeTab === "2") {
-      console.log("fetch more liked projects");
       // fetch user liked projects
       const userLikedProjectsFetch = await api.getUserLikedProjects(
         username,
@@ -182,7 +180,6 @@ const UserProfile = ({ match }: IUserProfile) => {
     }
 
     if (activeTab === "3") {
-      console.log("fetch more saved projects");
       // fetch user saved projects
       const userSavedProjectsFetch = await api.getUserSavedProjects(
         username,

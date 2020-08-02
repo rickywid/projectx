@@ -28,7 +28,6 @@ const ProjectsFullstack = () => {
       setHasMore(projects.hasMore);
       setResultsCount(projects.total);
       setIsLoading(false);
-      console.log(projects);
     };
 
     fetch();
