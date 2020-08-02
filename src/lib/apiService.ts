@@ -81,6 +81,35 @@ class ApiService {
     );
   }
 
+  public async getUserProjects(username: string, page: number, offset: number) {
+    return await HttpClient.get(
+      `${this.apiEndpoint}/user/${username}/projects?page=${page}&offset=${offset}`,
+      this.headers
+    );
+  }
+
+  public async getUserLikedProjects(
+    username: string,
+    page: number,
+    offset: number
+  ) {
+    return await HttpClient.get(
+      `${this.apiEndpoint}/user/${username}/projects/liked?page=${page}&offset=${offset}`,
+      this.headers
+    );
+  }
+
+  public async getUserSavedProjects(
+    username: string,
+    page: number,
+    offset: number
+  ) {
+    return await HttpClient.get(
+      `${this.apiEndpoint}/user/${username}/projects/saved?page=${page}&offset=${offset}`,
+      this.headers
+    );
+  }
+
   public async isProjectSaved(id: string) {
     return await HttpClient.get(
       `${this.apiEndpoint}/project/save/${id}`,

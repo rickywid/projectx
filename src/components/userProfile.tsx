@@ -30,13 +30,39 @@ const UserProfile = ({ match }: IUserProfile) => {
 
   const [user, setUser] = useState<any>({});
   const [userAuth, setUserAuth] = useState<any>({});
-  const [userProjects, setUserProjects] = useState([]);
-  const [likedProjects, setLikedProjects] = useState([]);
-  const [savedProjects, setSavedProjects] = useState([]);
+  const [userProjects, setUserProjects] = useState<any>([]);
+  const [userLikedProjects, setUserLikedProjects] = useState([]);
+  const [userSavedProjects, setUserSavedProjects] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [visible2, setVisible2] = useState<boolean>(false);
   const [value2, setValue2] = useState("");
   const [error, showError] = useState(false);
+  const [currentPageUserProject, setCurrentPageUserProjects] = useState<number>(
+    1
+  );
+  const [
+    currentPageUserLikedProject,
+    setCurrentPageUserLikedProjects,
+  ] = useState<number>(1);
+  const [
+    currentPageUserSavedProject,
+    setCurrentPageUserSavedProjects,
+  ] = useState<number>(1);
+  const [hasMoreUserProjects, setHasMoreUserProjects] = useState<boolean>(true);
+  const [hasMoreUserLikedProjects, setHasMoreUserLikedProjects] = useState<
+    boolean
+  >(true);
+  const [hasMoreUserSavedProjects, setHasMoreUserSavedProjects] = useState<
+    boolean
+  >(true);
+  const [userProjectsCount, setUserProjectsCount] = useState<number>(0);
+  const [userProjectsLikedCount, setUserProjectsLikedCount] = useState<number>(
+    0
+  );
+  const [userProjectsSavedCount, setUserProjectsSavedCount] = useState<number>(
+    0
+  );
+  const [activeTab, setActiveTab] = useState<string>("1");
 
   useEffect(() => {
     const fetch = async () => {
@@ -50,20 +76,52 @@ const UserProfile = ({ match }: IUserProfile) => {
       const userProfileFetch = await api.getUserProfile(username);
       const userProfile = await userProfileFetch.json();
 
+      const userLikedProjectsFetch = await api.getUserLikedProjects(
+        username,
+        currentPageUserProject,
+        20
+      );
+      const userSavedProjectsFetch = await api.getUserSavedProjects(
+        username,
+        currentPageUserProject,
+        20
+      );
+      const userProjectsFetch = await api.getUserProjects(
+        username,
+        currentPageUserProject,
+        20
+      );
+
+      const userLikedProjects = await userLikedProjectsFetch.json();
+      const userSavedProjects = await userSavedProjectsFetch.json();
+      const userProjects = await userProjectsFetch.json();
+
       setUserAuth(userAuth);
-      setUser(userProfile.data.user);
-      setUserProjects(userProfile.data.userProjects);
-      setLikedProjects(userProfile.data.likedProjects);
-      setSavedProjects(userProfile.data.savedProjects);
+      setUser(userProfile.user);
+
+      setUserProjects(userProjects.data);
+      setUserProjectsCount(userProjects.total);
+      setHasMoreUserProjects(userProjects.hasMore);
+
+      setUserSavedProjects(userSavedProjects.data);
+      setUserProjectsSavedCount(userSavedProjects.total);
+      setHasMoreUserSavedProjects(userSavedProjects.hasMore);
+
+      setUserLikedProjects(userLikedProjects.data);
+      setUserProjectsLikedCount(userLikedProjects.total);
+      setHasMoreUserLikedProjects(userLikedProjects.hasMore);
+
       setIsLoading(false);
 
-      document.title = `${userProfile.data.user.username}'s Profile - ${siteName}`;
+      document.title = `${userProfile.user.username}'s Profile - ${siteName}`;
     };
 
     fetch();
   }, []);
 
-  const callback = (key: string) => {};
+  const callback = (key: string) => {
+    setActiveTab(key);
+  };
 
   const showModal = () => {
     setVisible2(true);
@@ -91,6 +149,52 @@ const UserProfile = ({ match }: IUserProfile) => {
 
   const handleCancel2 = () => {
     setVisible2(false);
+  };
+
+  const fetchData = async () => {
+    if (activeTab === "1") {
+      console.log("fetch more user projects");
+      // fetch user projects
+      const userProjectsFetch = await api.getUserProjects(
+        username,
+        currentPageUserProject + 1,
+        20
+      );
+      const projects = await userProjectsFetch.json();
+      setCurrentPageUserProjects(currentPageUserProject + 1);
+      setHasMoreUserProjects(projects.hasMore);
+      setUserProjects(userProjects.concat(projects.data));
+    }
+
+    if (activeTab === "2") {
+      console.log("fetch more liked projects");
+      // fetch user liked projects
+      const userLikedProjectsFetch = await api.getUserLikedProjects(
+        username,
+        currentPageUserLikedProject + 1,
+        20
+      );
+      const likedProjects = await userLikedProjectsFetch.json();
+
+      setCurrentPageUserLikedProjects(currentPageUserLikedProject + 1);
+      setHasMoreUserLikedProjects(likedProjects.hasMore);
+      setUserLikedProjects(userLikedProjects.concat(likedProjects.data));
+    }
+
+    if (activeTab === "3") {
+      console.log("fetch more saved projects");
+      // fetch user saved projects
+      const userSavedProjectsFetch = await api.getUserSavedProjects(
+        username,
+        currentPageUserSavedProject + 1,
+        20
+      );
+      const savedProjects = await userSavedProjectsFetch.json();
+
+      setCurrentPageUserSavedProjects(currentPageUserSavedProject + 1);
+      setHasMoreUserSavedProjects(savedProjects.hasMore);
+      setUserSavedProjects(userSavedProjects.concat(savedProjects.data));
+    }
   };
 
   return !user ? (
@@ -179,12 +283,16 @@ const UserProfile = ({ match }: IUserProfile) => {
               </div>
             </div>
           </div>
-          <Tabs className="user-tabs" defaultActiveKey="1" onChange={callback}>
+          <Tabs
+            className="user-tabs"
+            defaultActiveKey={activeTab}
+            onChange={callback}
+          >
             <TabPane
               tab={
                 <span>
                   <strong>My Projects </strong>
-                  <span style={{ color: "grey" }}>{userProjects.length}</span>
+                  <span style={{ color: "grey" }}>{userProjectsCount}</span>
                 </span>
               }
               key="1"
@@ -193,6 +301,8 @@ const UserProfile = ({ match }: IUserProfile) => {
                 <ProjectsCard
                   isOwner={user.selfProfile}
                   projects={userProjects}
+                  fetchData={fetchData}
+                  hasMore={hasMoreUserProjects}
                 />
               ) : (
                 <div className="user-msg-no-projects">
@@ -210,23 +320,35 @@ const UserProfile = ({ match }: IUserProfile) => {
               tab={
                 <span>
                   <strong> Liked Projects </strong>
-                  <span style={{ color: "grey" }}>{likedProjects.length}</span>
+                  <span style={{ color: "grey" }}>
+                    {userProjectsLikedCount}
+                  </span>
                 </span>
               }
               key="2"
             >
-              <ProjectsCard projects={likedProjects} />
+              <ProjectsCard
+                projects={userLikedProjects}
+                fetchData={fetchData}
+                hasMore={hasMoreUserLikedProjects}
+              />
             </TabPane>
             <TabPane
               tab={
                 <span>
                   <strong> Saved Projects </strong>
-                  <span style={{ color: "grey" }}>{savedProjects.length}</span>
+                  <span style={{ color: "grey" }}>
+                    {userProjectsSavedCount}
+                  </span>
                 </span>
               }
               key="3"
             >
-              <ProjectsCard projects={savedProjects} />
+              <ProjectsCard
+                projects={userSavedProjects}
+                fetchData={fetchData}
+                hasMore={hasMoreUserSavedProjects}
+              />
             </TabPane>
           </Tabs>
         </div>

@@ -36,7 +36,14 @@ const animate3 = {
   },
 };
 
-const ProjectCard = ({ projects, fetchData, hasMore, isOwner }: any) => {
+interface Props {
+  projects: Array<any>;
+  fetchData: () => void;
+  hasMore: boolean;
+  isOwner?: boolean;
+}
+
+const ProjectCard = ({ projects, fetchData, hasMore, isOwner }: Props) => {
   return (
     <ul style={{ padding: 0 }}>
       <InfiniteScroll
