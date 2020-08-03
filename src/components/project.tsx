@@ -322,11 +322,19 @@ const Project = () => {
             />
           </div>
           <div className="project-actions-wrapper">
-            <a className="project-links-btn" href={checkHttp(project.url)}>
+            <a
+              className="project-links-btn"
+              href={checkHttp(project.url)}
+              target="__blank"
+            >
               <DesktopOutlined /> WEBSITE
             </a>
             {project.repo ? (
-              <a className="project-links-btn" href={checkHttp(project.repo)}>
+              <a
+                className="project-links-btn"
+                href={checkHttp(project.repo)}
+                target="__blank"
+              >
                 <CodeOutlined /> REPOSITORY
               </a>
             ) : (
