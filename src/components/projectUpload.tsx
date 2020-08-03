@@ -210,8 +210,9 @@ const ProjectUpload = () => {
     const res = await api.createProject(form);
 
     if (res.status === 200) {
+      const project = await res.json();
       setFormSubmit(false);
-      history.push("/");
+      history.push(`/project/${project.uuid}`);
       message.success({
         content:
           "Congratulations! Your project has been successfully uploaded.",

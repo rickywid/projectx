@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Layout, Button } from "antd";
 import { Link } from "react-router-dom";
 import SubscribeForm from "./subscribeForm";
+import { siteName } from "../lib/const";
 import "../styles/footer.scss";
 
 const Footer: React.FC = () => {
@@ -34,7 +35,9 @@ const Footer: React.FC = () => {
           </Button>
         </li>
       </ul>
-      <p className="copyright">CodeComplex &copy; {new Date().getFullYear()}</p>
+      <p className="copyright">
+        {siteName} &copy; {new Date().getFullYear()}
+      </p>
       <SubscribeForm
         handleOk={handleOk}
         handleCancel={handleCancel}
