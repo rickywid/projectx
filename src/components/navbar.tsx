@@ -61,10 +61,10 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
       {width > 1110 ? (
         <>
           <div>
-            <Link to="/">
+            <Link to="/" style={{ position: "relative" }}>
               <img className="nav-logo" src={Logo} alt="logo" />
               {NODE_ENV === "development" && (
-                <strong style={{ position: "absolute", top: "43px" }}>
+                <strong style={{ position: "absolute", top: "-15px" }}>
                   beta
                 </strong>
               )}
