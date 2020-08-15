@@ -95,6 +95,9 @@ function App() {
                 <strong>Sign Up</strong>
               </Link>
             </small>
+            <small className="helper-link">
+              <Link to="/faq">Experiencing login issues?</Link>
+            </small>
           </Form.Item>
         </Form>
         <Divider />

@@ -30,6 +30,9 @@ const Footer: React.FC = () => {
           <Link to={`/feedback`}>Feedback</Link>
         </li>
         <li>
+          <Link to={`/faq`}>FAQ</Link>
+        </li>
+        <li>
           <Button type="primary" onClick={showModal}>
             Subscribe
           </Button>

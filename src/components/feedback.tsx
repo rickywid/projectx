@@ -16,7 +16,11 @@ const Feedback = () => {
       </p>
       <p>
         If you have any feedback/suggestions or you would like to contribute,
-        send me an email at codeconcept.contact@gmail.com.
+        send me an email at{" "}
+        <a href="mailto: codeconcept.contact@gmail.com">
+          codeconcept.contact@gmail.com
+        </a>
+        .
       </p>
     </div>
   );
