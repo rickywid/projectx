@@ -83,10 +83,11 @@ function App() {
               type="primary"
               htmlType="submit"
               className="login-form-button"
+              data-testid="login-btn"
             >
               Log in
             </Button>
-            <p className="error-msg">
+            <p className="error-msg" data-testid="login-error">
               {error ? "Username or password is incorrect" : ""}
             </p>
             <small className="helper-link">
