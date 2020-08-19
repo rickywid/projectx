@@ -18,7 +18,7 @@ function App() {
     document.title = `${siteName} - Log In`;
   });
 
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const onFinish = async (values: IFormValues) => {
     const api = new AuthService();
@@ -28,15 +28,18 @@ function App() {
     form.append("username", username);
     form.append("password", password);
 
-    const res = await api.login(form);
+    try {
+      const res = await api.login(form);
+      const data = await res.json();
 
-    if (res.status === 200) {
-      window.location.replace(HOSTNAME as string);
+      if (data.authenticated) {
+        window.location.replace(HOSTNAME as string);
+      }
 
-      return;
+      setError(data.message);
+    } catch (e) {
+      console.log("called");
     }
-
-    setError(true);
   };
 
   return (
@@ -88,7 +91,7 @@ function App() {
               Log in
             </Button>
             <p className="error-msg" data-testid="login-error">
-              {error ? "Username or password is incorrect" : ""}
+              {error ? error : ""}
             </p>
             <small className="helper-link">
               Don't have an account?{" "}

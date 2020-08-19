@@ -1,10 +1,16 @@
 import * as React from "react";
 import { Router } from "react-router-dom";
-import { render, fireEvent, wait, cleanup } from "@testing-library/react";
+import {
+  render,
+  fireEvent,
+  waitFor,
+  cleanup,
+  screen,
+} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import "./matchmedia.mock";
 import history from "../lib/history";
 import Login from "../components/auth/login";
-import AuthService from "../lib/authService";
 
 /**
  * https://kentcdodds.com/blog/test-isolation-with-react
@@ -14,9 +20,6 @@ import AuthService from "../lib/authService";
 let usernameInput: HTMLElement;
 let passwordInput: HTMLElement;
 let buttonElement: HTMLElement;
-let usernameErrorText: Promise<HTMLElement>;
-let passwordErrorText: Promise<HTMLElement>;
-let signinErrorText: Promise<HTMLElement>;
 
 describe("Signup component specs", () => {
   afterEach(cleanup);
@@ -33,45 +36,43 @@ describe("Signup component specs", () => {
     usernameInput = utils.getByPlaceholderText("Username");
     passwordInput = utils.getByPlaceholderText("Password");
     buttonElement = utils.getByTestId("login-btn");
-    usernameErrorText = utils.findByText("Please input your Username!");
-    passwordErrorText = utils.findByText("Please input your Password!");
-    signinErrorText = utils.findByTestId("login-error");
   });
 
-  it("check that username and password fields are empty", async () => {
-    expect(usernameInput.innerHTML).toBeFalsy();
-    expect(passwordInput.innerHTML).toBeFalsy();
+  it("check that username and password fields are empty", () => {
+    expect(usernameInput).toHaveTextContent("");
+    expect(passwordInput).toHaveTextContent("");
   });
 
   it("show login error if email/password is blank when logging in", async () => {
     fireEvent.click(buttonElement);
-    await wait(() => {
-      expect(usernameErrorText).toBeTruthy();
-      expect(passwordErrorText).toBeTruthy();
+    await waitFor(() => {
+      expect(
+        screen.getByText("Please input your Username!")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("Please input your Password!")
+      ).toBeInTheDocument();
     });
   });
 
   it("show login error if email/password credentials is incorrect", async () => {
-    const api = new AuthService();
     const username = "bob";
     const password = "someverywrongpassword";
-    const form = new FormData();
 
-    fireEvent.change(usernameInput, { target: { value: username } });
-    fireEvent.change(passwordInput, { target: { value: password } });
+    userEvent.type(usernameInput, username);
+    userEvent.type(passwordInput, password);
+    userEvent.click(buttonElement);
 
-    form.append("username", username);
-    form.append("password", password);
-    fireEvent.click(buttonElement);
-
-    // Most Response
-    fetchMock.mockResponseOnce(JSON.stringify({ status: 200 }));
-
-    const loginFetch = await api.login(form);
-    const login = await loginFetch.json();
-
-    if (login.status !== 200) {
-      expect(signinErrorText).toBe("Username or password is incorrect");
-    }
+    fetchMock.mockResponseOnce(
+      JSON.stringify({
+        authenticated: false,
+        message: "Incorrect username or password",
+      })
+    );
+    await waitFor(() =>
+      expect(screen.getByTestId("login-error")).toHaveTextContent(
+        "Incorrect username or password"
+      )
+    );
   });
 });

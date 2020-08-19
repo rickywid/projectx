@@ -14,7 +14,7 @@ function App() {
   });
 
   const [form] = Form.useForm();
-  const [displayError, setDisplayError] = useState(false);
+  const [displayError, setDisplayError] = useState<string>("");
 
   const onFinish = async (values: any) => {
     const api = new AuthService();
@@ -27,15 +27,18 @@ function App() {
     form.append("email", email);
     form.append("profile_img", placeholder.user());
 
-    const res = await api.signup(form);
+    try {
+      const res = await api.signup(form);
+      const data = await res.json();
 
-    if (res.status === 200) {
-      const user = await res.json();
-      localStorage.setItem("userID", user.id);
-      window.location.replace(HOSTNAME as string);
-    } else {
-      const err = await res.json();
-      setDisplayError(err.message);
+      if (data.status === "ok") {
+        localStorage.setItem("userID", data.id);
+        window.location.replace(HOSTNAME as string);
+      } else {
+        setDisplayError(data.message);
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -51,7 +54,7 @@ function App() {
         <Form
           form={form}
           name="register"
-          onFinish={onFinish}
+          onFinish={onFinish as any}
           layout="vertical"
           scrollToFirstError
         >
@@ -143,7 +146,7 @@ function App() {
               },
             ]}
           >
-            <Checkbox>
+            <Checkbox data-testid="signup-checkbox">
               I have read and understand the
               <Link to="/guidelines"> rules</Link>
             </Checkbox>
@@ -153,10 +156,13 @@ function App() {
               type="primary"
               htmlType="submit"
               className="login-form-button"
+              data-testid="signup-btn"
             >
               Sign up
             </Button>
-            <p className="error-msg">{displayError}</p>
+            <p data-testid="error-msg" className="error-msg">
+              {displayError ? displayError : ""}
+            </p>
             <small className="helper-link">
               Already have an account?{" "}
               <Link to="/login">
