@@ -67,12 +67,5 @@
       "npm run eslint",
       "prettier --write"
     ]
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "<rootDir>/build/",
-      "<rootDir>/node_modules/",
-      "<rootDir>/application/"
-    ]
   }
 }
