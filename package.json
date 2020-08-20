@@ -15,6 +15,7 @@
     "@types/react-infinite-scroll-component": "^4.2.5",
     "@types/react-linkify": "^1.0.0",
     "@types/react-router-dom": "^5.1.5",
+    "@testing-library/react": "^10.4.8",
     "antd": "^4.3.3",
     "framer-motion": "^1.11.1",
     "jest-fetch-mock": "^3.0.3",
@@ -52,7 +53,6 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/react": "^10.4.8",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "prettier": "2.0.5"
