@@ -5,9 +5,7 @@
 version: 2
 jobs:
   build:
-    context: PROJECTX
     docker:
-      # specify the version you desire here
       - image: circleci/node:13.7.0
 
     steps:
@@ -27,17 +25,15 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+  test:
+    docker:
+      - image: circleci/node:13.7.0
+
+    steps:
+      - checkout    
+
+      - run: npm install
       - run: npm test
-
-  # test:
-  #   docker:
-  #     - image: circleci/node:13.7.0
-
-  #   steps:
-  #     - checkout    
-
-  #     - run: npm install
-  #     - run: npm test
        
   deploy:
     docker:
@@ -56,9 +52,11 @@ workflows:
   build-deploy:
     jobs:
       - build
+      - test
       - deploy:
           requires:
             - build
+            - test
           filters:
             branches:
               only: master
