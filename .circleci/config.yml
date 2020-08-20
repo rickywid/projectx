@@ -19,8 +19,7 @@ jobs:
           - v1-dependencies-
           
       - run: npm install
-      # - run: npm run eslint
-      # - run: npm run stylelint
+      - run: npm test
 
       # Download and cache dependencies
       - save_cache:
@@ -28,15 +27,15 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-  test:
-    docker:
-      - image: circleci/node:current
+  # test:
+  #   docker:
+  #     - image: circleci/node:current
 
-    steps:
-      - checkout    
+  #   steps:
+  #     - checkout    
 
-      - run: npm install
-      - run: npm test
+  #     - run: npm install
+  #     - run: npm test
        
   deploy:
     docker:
@@ -55,7 +54,6 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - test
       - deploy:
           requires:
             - build
