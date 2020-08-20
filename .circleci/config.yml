@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:8.15
+      - image: circleci/node:13.7.0
 
     steps:
       - checkout
@@ -26,11 +26,11 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm test
+        - run: npm test
 
   # test:
   #   docker:
-  #     - image: circleci/node:8.15
+  #     - image: circleci/node:13.7.0
 
   #   steps:
   #     - checkout    
@@ -40,7 +40,7 @@ jobs:
        
   deploy:
     docker:
-      - image: circleci/node:8.15
+      - image: circleci/node:13.7.0
 
     steps:
       - checkout
