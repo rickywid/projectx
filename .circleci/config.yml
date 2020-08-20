@@ -5,6 +5,7 @@
 version: 2
 jobs:
   build:
+    context: PROJECTX
     docker:
       # specify the version you desire here
       - image: circleci/node:13.7.0
