@@ -67,14 +67,5 @@
       "npm run eslint",
       "prettier --write"
     ]
-  },
-  "jest": {
-    "moduleFileExtensions": [        
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json"
-    ]
   }
 }
