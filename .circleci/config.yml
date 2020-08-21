@@ -31,8 +31,6 @@ jobs:
 
     steps:
       - checkout    
-
-      - run: echo $NODE_ENV
       - run: npm install
       - run: npm test
        
