@@ -6,7 +6,6 @@ import {
   waitFor,
   cleanup,
   screen,
-  getByTestId,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "./matchmedia.mock";
@@ -20,12 +19,14 @@ import Login from "../components/auth/login";
 
 describe("Signup component specs", () => {
   it("check that username and password fields are empty", () => {
-    const { getByTestId } = render(
-      <div>
-        <p data-testid="hello">hello world</p>
-      </div>
+    const { getByPlaceholderText } = render(
+      <React.StrictMode>
+        <Router history={history}>
+          <Login />
+        </Router>
+      </React.StrictMode>
     );
-
-    expect(getByTestId("hello")).toHaveTextContent("hello world");
+    expect(getByPlaceholderText("Username")).toHaveTextContent("");
+    expect(getByPlaceholderText("Password")).toHaveTextContent("");
   });
 });
