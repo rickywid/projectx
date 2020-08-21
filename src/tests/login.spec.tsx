@@ -16,7 +16,6 @@ import Login from "../components/auth/login";
  * https://kentcdodds.com/blog/test-isolation-with-react
  * youtube.com/watch?time_continue=3&v=yhUep7E9O20&feature=emb_logo
  */
-
 let usernameInput: HTMLElement;
 let passwordInput: HTMLElement;
 let buttonElement: HTMLElement;
