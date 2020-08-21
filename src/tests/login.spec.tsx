@@ -24,23 +24,30 @@ let buttonElement: HTMLElement;
 describe("Signup component specs", () => {
   afterEach(cleanup);
 
-  beforeEach(() => {
-    const utils = render(
+  // beforeEach(() => {
+  //   const utils = render(
+  //     <React.StrictMode>
+  //       <Router history={history}>
+  //         <Login />
+  //       </Router>
+  //     </React.StrictMode>
+  //   );
+
+  //   usernameInput = utils.getByPlaceholderText("Username");
+  //   passwordInput = utils.getByPlaceholderText("Password");
+  //   buttonElement = utils.getByTestId("login-btn");
+  // });
+
+  it("check that username and password fields are empty", () => {
+    const { getByPlaceholderText } = render(
       <React.StrictMode>
         <Router history={history}>
           <Login />
         </Router>
       </React.StrictMode>
     );
-
-    usernameInput = utils.getByPlaceholderText("Username");
-    passwordInput = utils.getByPlaceholderText("Password");
-    buttonElement = utils.getByTestId("login-btn");
-  });
-
-  it("check that username and password fields are empty", () => {
-    // expect(usernameInput).toHaveTextContent("");
-    // expect(passwordInput).toHaveTextContent("");
+    expect(getByPlaceholderText("Username")).toHaveTextContent("");
+    expect(getByPlaceholderText("Password")).toHaveTextContent("");
   });
 
   // it("show login error if email/password is blank when logging in", async () => {
