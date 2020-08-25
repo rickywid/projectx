@@ -80,12 +80,12 @@ const ProjectUpload = () => {
     const fetch = async () => {
       setIsLoading(true);
       const userFetch = await api.userAuth();
-      if (userFetch.status === 401) {
+      const user = await userFetch.json();
+
+      if (!user.isAuthenticated) {
         setRedirect(true);
         return;
       }
-
-      const user = await userFetch.json();
 
       setUser(user);
       setIsLoading(false);
@@ -299,7 +299,7 @@ const ProjectUpload = () => {
         <Spinner />
       ) : (
         <div className="container">
-          <h1>Share Your Project</h1>
+          <h1 data-testid="project-header">Share Your Project</h1>
 
           <div className="form-wrapper">
             <Form
@@ -320,12 +320,14 @@ const ProjectUpload = () => {
                   </span>
                 }
                 name="name"
+                data-testid="label-title"
                 rules={[{ required: true, message: "Required" }]}
               >
                 <Input />
               </Form.Item>
               <Form.Item
                 name="tagline"
+                data-testid="label-tagline"
                 rules={[{ required: true, message: "Required" }]}
                 label={
                   <span>
@@ -348,6 +350,7 @@ const ProjectUpload = () => {
                     </p>
                   </span>
                 }
+                data-testid="label-description"
                 rules={[{ required: true, message: "Required" }]}
               >
                 <Input.TextArea />
@@ -359,6 +362,7 @@ const ProjectUpload = () => {
                   </span>
                 }
                 name="url"
+                data-testid="label-website"
                 rules={[
                   { required: true, message: "Required" },
                   ({ getFieldValue }) => ({
@@ -372,7 +376,10 @@ const ProjectUpload = () => {
                   }),
                 ]}
               >
-                <Input placeholder="https://mysite.com" />
+                <Input
+                  data-testid="website-input"
+                  placeholder="https://mysite.com"
+                />
               </Form.Item>
               <Form.Item
                 label={
@@ -381,6 +388,7 @@ const ProjectUpload = () => {
                   </span>
                 }
                 name="repourl"
+                data-testid="label-repo"
                 rules={[
                   { required: false, message: "Required" },
                   ({ getFieldValue }) => ({
@@ -394,7 +402,10 @@ const ProjectUpload = () => {
                   }),
                 ]}
               >
-                <Input placeholder="https://mysite.com" />
+                <Input
+                  data-testid="repo-input"
+                  placeholder="https://mysite.com"
+                />
               </Form.Item>
               <Form.Item
                 label={
@@ -403,6 +414,7 @@ const ProjectUpload = () => {
                   </span>
                 }
                 name="type"
+                data-testid="label-type"
                 rules={[
                   { required: true, message: "Must select at least one" },
                 ]}
