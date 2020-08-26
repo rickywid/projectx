@@ -7,7 +7,6 @@ import {
   waitForElementToBeRemoved,
   cleanup,
   screen,
-  getByText,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "./matchmedia.mock";
@@ -26,8 +25,12 @@ let projectDescriptionEl: HTMLElement;
 let projectWebsiteEl: HTMLElement;
 let projectRepoEl: HTMLElement;
 let projectTypeEl: HTMLElement;
+let projectTechnologiesEl: HTMLElement;
+let projectTagsEl: HTMLElement;
 let projectWebsiteInputEl: HTMLElement;
 let projectRepoInputEl: HTMLElement;
+let projectFileUploadEl: HTMLElement;
+let projectSubmitBtn: HTMLElement;
 
 describe("Project Upload component specs", () => {
   afterEach(cleanup);
@@ -50,9 +53,13 @@ describe("Project Upload component specs", () => {
       projectWebsiteEl = utils.getByTestId("label-website");
       projectRepoEl = utils.getByTestId("label-repo");
       projectTypeEl = utils.getByTestId("label-type");
+      projectTechnologiesEl = utils.getByTestId("label-technologies");
+      projectTagsEl = utils.getByTestId("label-tags");
       projectHeaderEl = utils.getByTestId("project-header");
       projectWebsiteInputEl = utils.getByTestId("website-input");
       projectRepoInputEl = utils.getByTestId("repo-input");
+      projectFileUploadEl = utils.getByTestId("file-upload");
+      projectSubmitBtn = utils.getByTestId("submit-btn");
     });
   });
 
@@ -75,6 +82,12 @@ describe("Project Upload component specs", () => {
     ).toBeTruthy();
     expect(
       projectTypeEl.getElementsByClassName("ant-form-item-required")
+    ).toBeTruthy();
+    expect(
+      projectTechnologiesEl.getElementsByClassName("ant-form-item-required")
+    ).toBeTruthy();
+    expect(
+      projectTagsEl.getElementsByClassName("ant-form-item-required")
     ).toBeTruthy();
   });
 
@@ -106,5 +119,75 @@ describe("Project Upload component specs", () => {
     expect(
       projectRepoEl.classList.contains("ant-form-item-has-error")
     ).toBeFalsy();
+  });
+
+  it("check that project submits successfully ", async () => {
+    userEvent.type(
+      projectTitleEl.getElementsByTagName("input")[0],
+      "CodeConcept"
+    );
+    userEvent.type(
+      projectTaglineEl.getElementsByTagName("input")[0],
+      "Discover side projects built by the dev community"
+    );
+    userEvent.type(
+      projectDescriptionEl.getElementsByTagName("textarea")[0],
+      "Some project description"
+    );
+    userEvent.type(projectWebsiteInputEl, "https://beta.codeconcept.io");
+    userEvent.type(projectRepoInputEl, "https://beta.codeconcept.io");
+
+    fireEvent.mouseDown(projectTypeEl.getElementsByTagName("input")[0]);
+    await waitFor(() =>
+      expect(screen.getByText("Front End")).toBeInTheDocument()
+    );
+    fireEvent.click(screen.getByText("Front End"));
+
+    fireEvent.mouseDown(projectTechnologiesEl.getElementsByTagName("input")[0]);
+    await waitFor(() => expect(screen.getByText("JQuery")).toBeInTheDocument());
+    fireEvent.click(screen.getByText("JQuery"));
+
+    fireEvent.mouseDown(projectTagsEl.getElementsByTagName("input")[0]);
+    await waitFor(() =>
+      expect(screen.getByText("Analytics")).toBeInTheDocument()
+    );
+    fireEvent.click(screen.getByText("Analytics"));
+
+    // Submit Project Mock Response
+    fetchMock.mockResponseOnce(
+      JSON.stringify({
+        status: "ok",
+        uuid: "fd5ceacc-e05a-464b-9010-093f09e01e43",
+      })
+    );
+
+    userEvent.click(projectSubmitBtn);
+
+    await waitFor(() =>
+      screen.getByText(
+        "Congratulations! Your project has been successfully uploaded."
+      )
+    );
+    expect(
+      screen.getByText(
+        "Congratulations! Your project has been successfully uploaded."
+      )
+    ).toBeInTheDocument();
+  });
+
+  it("check that upload image is jpeg, jpg, png, gif file type", async () => {
+    // TODO
+  });
+
+  it("check that upload image is less than or equal to 800kb", async () => {
+    // TODO
+  });
+
+  it("check that placeholder image is used if user did not upload an image", async () => {
+    // TODO
+  });
+
+  it("check that project submit button is disabled if upload image fails and is enabled when upload is successful on re-upload ", async () => {
+    // TODO
   });
 });

@@ -208,9 +208,9 @@ const ProjectUpload = () => {
 
     setFormSubmit(true);
     const res = await api.createProject(form);
+    const project = await res.json();
 
-    if (res.status === 200) {
-      const project = await res.json();
+    if (project.status === "ok") {
       setFormSubmit(false);
       history.push(`/project/${project.uuid}`);
       message.success({
@@ -431,6 +431,7 @@ const ProjectUpload = () => {
                   </span>
                 }
                 name="technologies"
+                data-testid="label-technologies"
                 rules={[
                   { required: true, message: "Must select at least one" },
                 ]}
@@ -451,6 +452,7 @@ const ProjectUpload = () => {
                   </span>
                 }
                 name="tags"
+                data-testid="label-tags"
                 rules={[
                   { required: true, message: "Must select at least one" },
                 ]}
@@ -497,6 +499,7 @@ const ProjectUpload = () => {
                     onChange={handleUploadChange as any}
                     onRemove={handleOnRemove as any}
                     customRequest={customRequest as any}
+                    data-testid="file-upload"
                   >
                     {fileList.length >= 1 ? null : uploadButton}
                   </Upload>
@@ -529,6 +532,7 @@ const ProjectUpload = () => {
                     className="upload-btn"
                     type="primary"
                     htmlType="submit"
+                    data-testid="submit-btn"
                   >
                     Submit
                   </Button>
