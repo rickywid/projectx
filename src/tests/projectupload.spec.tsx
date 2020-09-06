@@ -164,15 +164,12 @@ describe("Project Upload component specs", () => {
     userEvent.click(projectSubmitBtn);
 
     await waitFor(() =>
-      screen.getByText(
-        "Congratulations! Your project has been successfully uploaded."
-      )
+      expect(
+        screen.getByText(
+          "Congratulations! Your project has been successfully uploaded."
+        )
+      ).toBeInTheDocument()
     );
-    expect(
-      screen.getByText(
-        "Congratulations! Your project has been successfully uploaded."
-      )
-    ).toBeInTheDocument();
   });
 
   it("check that upload image is jpeg, jpg, png, gif file type", async () => {

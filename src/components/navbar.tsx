@@ -34,12 +34,20 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
   const menu = (
     <Menu>
       <li>
-        <Link className="nav-user-profile-mobile" to={`/user/${user.username}`}>
+        <Link
+          data-testid="profile-btn"
+          className="nav-user-profile-mobile"
+          to={`/user/${user.username}`}
+        >
           Profile
         </Link>
       </li>
       <li>
-        <button className="btn-signout" onClick={onSignout}>
+        <button
+          data-testid="signout-btn"
+          className="btn-signout"
+          onClick={onSignout}
+        >
           Sign Out
         </button>
       </li>
@@ -73,15 +81,22 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
           <Search />
           <ul className="nav-item-desktop">
             <li>
-              <Link to="/tag/technology">Technologies</Link>
+              <Link data-testid="technologies" to="/tag/technology">
+                Technologies
+              </Link>
             </li>
             <li>
-              <Link to="/tag/category">Categories</Link>
+              <Link data-testid="categories" to="/tag/category">
+                Categories
+              </Link>
             </li>
             {isAuthenticated ? (
               <>
                 <Dropdown overlay={menu} trigger={["click"]}>
-                  <li className="user-profile-badge-desktop">
+                  <li
+                    data-testid="profile-badge"
+                    className="user-profile-badge-desktop"
+                  >
                     <a
                       className="ant-dropdown-link"
                       onClick={(e) => e.preventDefault()}
@@ -92,7 +107,11 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
                 </Dropdown>
                 <li>
                   <Link to={`/upload`}>
-                    <Button className="upload-btn" type="primary">
+                    <Button
+                      data-testid="upload-btn"
+                      className="upload-btn"
+                      type="primary"
+                    >
                       UPLOAD
                     </Button>
                   </Link>
@@ -101,10 +120,16 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
             ) : (
               <>
                 <li>
-                  <Link to={`/login`}>Log In</Link>
+                  <Link data-testid="login-btn" to={`/login`}>
+                    Log In
+                  </Link>
                 </li>
                 <li>
-                  <Link className="signup-btn" to={`/signup`}>
+                  <Link
+                    data-testid="signup-btn"
+                    className="signup-btn"
+                    to={`/signup`}
+                  >
                     Sign Up
                   </Link>
                 </li>
@@ -140,7 +165,11 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
                 )}
               </Link>
               <Search />
-              <Link to={`/upload`} onClick={handleMenuClose}>
+              <Link
+                data-testid="upload-btn-slide"
+                to={`/upload`}
+                onClick={handleMenuClose}
+              >
                 <Button className="upload-btn" type="primary">
                   UPLOAD
                 </Button>
@@ -162,13 +191,13 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
                 Guidelines
               </Link>
               <a href={subscriberUrl} target="__blank">
-                Subscribe
+                Subscribedd
               </a>
 
               <Link to={`/feedback`} onClick={handleMenuClose}>
                 Feedback
               </Link>
-              <button className="btn-signout" onClick={onSignout}>
+              <button className="signout-btn-slide" onClick={onSignout}>
                 Sign Out
               </button>
             </MenuSlide>
@@ -200,14 +229,26 @@ const NavBar = ({ user, isAuthenticated, loading }: Props) => {
               <Search />
               <Divider style={{ margin: 0 }} />
               <Link to={`/upload`} onClick={handleMenuClose}>
-                <Button className="upload-btn" type="primary">
+                <Button
+                  data-testid="upload-btn-mobile"
+                  className="upload-btn"
+                  type="primary"
+                >
                   UPLOAD
                 </Button>
               </Link>
-              <Link to={`/signup`} onClick={handleMenuClose}>
+              <Link
+                data-testid="signup-btn-mobile"
+                to={`/signup`}
+                onClick={handleMenuClose}
+              >
                 Sign Up
               </Link>
-              <Link to={`/login`} onClick={handleMenuClose}>
+              <Link
+                data-testid="login-btn-mobile"
+                to={`/login`}
+                onClick={handleMenuClose}
+              >
                 Log In
               </Link>
               <Link to={`/tag/technology`} onClick={handleMenuClose}>

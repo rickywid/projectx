@@ -98,6 +98,7 @@ function App() {
               <Link
                 className="nav-user-profile-mobile"
                 to={`/user/${user.username}`}
+                data-testid="profile-badge"
               >
                 <span>{user.username[0]}</span>
               </Link>
