@@ -65,6 +65,7 @@ const ProjectCard = ({ projects, fetchData, hasMore, isOwner }: Props) => {
                   animate="rest"
                   whileHover="hover"
                   className="project-card"
+                  data-testid="card"
                   style={{
                     backgroundImage: `url(${project.images[0]}`,
                     backgroundPosition: "center",
@@ -74,18 +75,24 @@ const ProjectCard = ({ projects, fetchData, hasMore, isOwner }: Props) => {
                   <motion.div className="project-tag" variants={animate2}>
                     {project.tags.length > 1 ? (
                       <span>
-                        <Tag>{project.tags[0]}</Tag>
-                        <Tag>+{project.tags.slice(1).length}</Tag>
+                        <Tag data-testid="tag-lead">{project.tags[0]}</Tag>
+                        <Tag data-testid="tag-count">
+                          +{project.tags.slice(1).length}
+                        </Tag>
                       </span>
                     ) : (
-                      <Tag>{project.tags[0]}</Tag>
+                      <Tag data-testid="tag">{project.tags[0]}</Tag>
                     )}
                   </motion.div>
                   <motion.div
                     className="project-name-wrapper"
                     variants={animate3}
                   >
-                    <motion.p className="project-name" variants={animate1}>
+                    <motion.p
+                      className="project-name"
+                      variants={animate1}
+                      data-testid="title"
+                    >
                       {project.name.length > 30
                         ? truncate(project.name, 23)
                         : project.name}
@@ -95,6 +102,7 @@ const ProjectCard = ({ projects, fetchData, hasMore, isOwner }: Props) => {
               </Link>
               <div className="project-icons">
                 <Link
+                  data-testid="owner"
                   className="project-owner"
                   to={`/user/${project.username}`}
                 >
@@ -102,6 +110,7 @@ const ProjectCard = ({ projects, fetchData, hasMore, isOwner }: Props) => {
                     className="user-avatar-img"
                     src={project.gh_avatar}
                     alt="avatar"
+                    data-testid="profile-image"
                   />{" "}
                   {project.username}
                 </Link>
@@ -113,11 +122,14 @@ const ProjectCard = ({ projects, fetchData, hasMore, isOwner }: Props) => {
                   ""
                 )}
                 <div>
-                  <span className="project-comments">
+                  <span
+                    className="project-comments"
+                    data-testid="comment-count"
+                  >
                     <MessageFilled className="svg-filled" />{" "}
                     {project.comment_count}
                   </span>
-                  <span>
+                  <span data-testid="like-count">
                     <UpCircleFilled className="svg-filled" />{" "}
                     {project.likes_count}
                   </span>
